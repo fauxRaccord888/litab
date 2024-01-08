@@ -1,0 +1,50 @@
+@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+
+body {
+    margin: 0px;
+}
+
+button {
+    font-family: "Wanted Sans Variable";
+}
+
+.main-container {
+    min-height: 100vh;
+    min-width: 90vw;
+    display: flex;
+    font-family: "Wanted Sans Variable";
+
+    .left-sidebar-section {
+        display: none;
+        @media only screen and (min-width: 500px) {
+            display: inline;
+            background-color: #666;
+            min-width: 100px;
+        }
+        @media only screen and (min-width: 1200px) {
+            display: inline;
+            background-color: #666;
+            min-width: 250px;
+       }
+    }
+
+    .main-section {
+        flex-grow: 1;
+        background-color: #aaa;
+        @media only screen and (min-width: 500px) {
+            display: inline;
+            background-color: #aaa;
+            width: 400px;
+            flex-grow: 1;
+        }
+    }
+    
+    .right-sidebar-section {
+        display: none;
+        @media only screen and (min-width: 1200px) {
+            display: inline;
+            background-color: #666;
+            min-width: 250px;
+       }
+   }
+}
