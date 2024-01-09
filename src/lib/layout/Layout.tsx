@@ -1,10 +1,15 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react"
 
-export default function Layout(props: PropsWithChildren) {
+interface LayoutProps extends PropsWithChildren{
+    left?: ReactNode
+    right?: ReactNode
+}
+
+export default function Layout(props: LayoutProps) {
     return (
         <div className="main-container">
             <div className="left-sidebar-section">
-                left side bar
+                {props.left}
             </div>
 
             <div className="main-section">
@@ -12,7 +17,7 @@ export default function Layout(props: PropsWithChildren) {
             </div>
 
             <div className="right-sidebar-section">
-                right side bar
+                {props.right}
             </div>
         </div>
     )
