@@ -1,14 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import { RouterProvider } from '@tanstack/react-router'
 
 import { Provider } from 'react-redux'
 import { store } from "./lib/stores/store.ts"
+import { router } from '$lib/router'
+
+import './App.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <RouterProvider router={router}/>
     </React.StrictMode>
   </Provider>
 )
