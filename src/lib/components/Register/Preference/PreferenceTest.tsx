@@ -40,7 +40,7 @@ function PreferenceTestItem(props: {data: {key: string, content: [string, string
 
     return (
         <div className="preference-main-container">
-            <div className="preference-title">{message[lang].preference}</div>
+            <div className="preference-title">{message.preference[lang]}</div>
 
             <div className="preference-mid-container">
                 {preferenceValues.map((val, idx) => (
