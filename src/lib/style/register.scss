@@ -107,4 +107,8 @@
         padding: 0.5rem;
         border-radius: 8px;
     } 
+
+    .disabled {
+        background-color: hsla(var(--primary), 0.4);
+    }
 }
