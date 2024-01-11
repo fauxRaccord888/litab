@@ -11,6 +11,13 @@ button {
     font-family: "Wanted Sans Variable";
 }
 
+:root {
+    --dark-gray: #333;
+    --red: #e44;
+    --dark-red: #d11;
+    --primary: #ff4438;
+}
+
 .main-container {
     min-height: 100vh;
     min-width: 90vw;

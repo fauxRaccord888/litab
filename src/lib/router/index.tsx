@@ -1,6 +1,8 @@
 import Layout from '$lib/layout/Layout'
 import LeftSideBar from "$lib/components/NavigationBar/LeftSideBar"
 
+import Register from '$lib/components/Register';
+import Preference from '$lib/components/Preference';
 
 import {
   Outlet,
@@ -36,10 +38,16 @@ const indexRoute = new Route({
 const registerRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/register',
-  component: () => <div>가입</div>,
+  component: Register,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, registerRoute])
+const preferenceRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/preference',
+  component: Preference,
+})
+
+const routeTree = rootRoute.addChildren([indexRoute, registerRoute, preferenceRoute])
 export const router = new Router({ routeTree })
 
 declare module '@tanstack/react-router' {
