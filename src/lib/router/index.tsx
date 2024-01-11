@@ -1,4 +1,6 @@
 import Layout from '$lib/layout/Layout'
+import LeftSideBar from "$lib/components/NavigationBar/LeftSideBar"
+
 
 import {
   Outlet,
@@ -10,7 +12,9 @@ import {
 const rootRoute = new RootRoute({
   component: () => (
     <>
-      <Layout>
+      <Layout 
+        left={<LeftSideBar />}
+      >
         <Outlet />
       </Layout>
     </>
