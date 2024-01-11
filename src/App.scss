@@ -12,10 +12,10 @@ button {
 }
 
 :root {
-    --dark-gray: #333;
-    --red: #e44;
-    --dark-red: #d11;
-    --primary: #ff4438;
+    --dark-gray: 0, 0%, 20%;
+    --red: 0, 83%, 60%;
+    --dark-red: 0, 86%, 47%;
+    --primary: 4, 100%, 61%;
 }
 
 .main-container {

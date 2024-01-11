@@ -28,7 +28,7 @@
             top: 0;
             bottom: 0;
             content: '';
-            border: 2px solid var(--dark-gray);
+            border: 2px solid hsl(var(--dark-gray));
             border-radius: 8px;
         }
     }
@@ -46,9 +46,8 @@
             top: 0;
             bottom: 0;
             content: '';
-            border: 1px solid var(--dark-gray);
+            border: 1px solid hsl(var(--dark-gray));
             border-radius: inherit;
-
         }
 
         &:first-of-type {
@@ -65,7 +64,7 @@
     .invalid {
         &::after {
             z-index: 1;
-            border: 2px solid var(--red);
+            border: 2px solid hsl(var(--red));
         }
     }
 
@@ -86,7 +85,7 @@
     .register-validation-message-container {
         display: flex;
         flex-direction: column;
-        color: var(--dark-red);
+        color: hsl(var(--dark-red));
         padding: 0.5rem;
         font-size: 0.9rem;
 
@@ -100,7 +99,7 @@
     }
 
     .register-button {
-        background-color: var(--primary);
+        background-color: hsl(var(--primary));
         font-size: 1.2rem;
         border: 0;
         color: #eee;
