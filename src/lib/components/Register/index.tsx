@@ -1,5 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { toast } from "react-hot-toast"
+import { router } from "$lib/router"
 
 import { AppDispatch, AppRootState } from "$lib/stores/store"
 import { requestRegister, resetResult } from "$lib/stores/registerSlice"
@@ -17,7 +19,21 @@ interface HydratedInputProps extends InputProps {
 export default function Register() {
   const state = useSelector((state: AppRootState) => state.register)
   const dispatch = useDispatch<AppDispatch>()
-  
+
+  const { registerResult, errorMessage } = state
+  useEffect(() => {
+    if (registerResult === 'succeeded') {
+      toast.success('가입을 축하합니다')
+      dispatch(resetResult())
+      
+      // TODO store에 토큰 추가
+      router.history.push('/preference')
+    }
+    if (registerResult === 'failed') {
+      toast.error(errorMessage)
+      dispatch(resetResult())
+    }
+  }, [registerResult, errorMessage, dispatch])
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault()
