@@ -1,15 +1,22 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setPreference } from "$lib/stores/registerSlice"
-import { AppRootState } from "$lib/stores/store"
+import { fetchPreferenceData, setPreference } from "$lib/stores/preferenceSlice"
+import { AppDispatch, AppRootState } from "$lib/stores/store"
 
 import Carousel from "$lib/components/common/Carousel"
 import { message } from "$lib/constants/components/Register"
+import { useEffect } from "react"
 
 
-export default function PreferenceTest() {
-    const { loading, data } = useSelector((state: AppRootState) => state.register.preferenceData)
+export default function Preference() {
+    const { loading, data } = useSelector((state: AppRootState) => state.preference.preferenceData)
+    const dispatch = useDispatch<AppDispatch>()
+
+    useEffect(() => {
+        dispatch(fetchPreferenceData())
+    }, [dispatch])
+
     return (
-        <>
+        <div className="preference-outer-container">
             {(loading === 'idle' || loading === 'pending') && <div>로딩 중...</div>} {/* TODO 스피너 컴포넌트로 대체*/}
             {loading === 'failed' && <div>무언가 잘못되었나봐요. 다시 시도해주세요.</div>} {/* TODO error 컴포넌트로 대체 */}
             {loading === 'succeeded' && 
@@ -19,7 +26,7 @@ export default function PreferenceTest() {
                     )}
                 </Carousel>
             }
-        </>
+        </div>
     )
 }
 
@@ -29,7 +36,7 @@ function PreferenceTestItem(props: {data: {key: string, content: [string, string
     const lang = 'kr'
 
     const { data } = props
-    const { userPreference } = useSelector((state: AppRootState) => state.register)
+    const { userPreference } = useSelector((state: AppRootState) => state.preference)
     const dispatch = useDispatch()
     
     const preferenceValues = [true, false]
