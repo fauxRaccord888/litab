@@ -1,7 +1,10 @@
-import { getHashed } from '$lib/utils/register'
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import type { AppRootState } from '$lib/stores/store';
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
+import { getHashed } from '$lib/utils/register'
+import { requestUserRegistration_SERVER } from '$lib/supabase';
+import { parseErrorMessage } from './../utils/supabaseError';
 
 type StringWithValidation = {
   value: string
@@ -10,6 +13,7 @@ type StringWithValidation = {
 
 interface RegisterState {
   registerResult: 'idle' | 'pending' | 'succeeded' | 'failed',
+  errorMessage: string;
 
   id: StringWithValidation,
   password: StringWithValidation,
@@ -25,6 +29,7 @@ const initialState = {
   nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
 
   registerResult: 'idle',
+  errorMessage: ''
 } as RegisterState
 
 const registerSlice = createSlice({
@@ -43,13 +48,18 @@ const registerSlice = createSlice({
     setEmail(state, action: PayloadAction<string>) {
       state.email.value = action.payload
     },
+    resetResult(state) {
+      state.registerResult = 'idle'
+      state.errorMessage = ''
+    }
   },
   extraReducers(builder) {
     builder
       .addCase(requestRegister.pending, (state) => {
         state.registerResult = 'pending'
       })
-      .addCase(requestRegister.rejected, (state) => {
+      .addCase(requestRegister.rejected, (state, action) => {
+        state.errorMessage = parseErrorMessage(action.error)
         state.registerResult = 'failed'
       })
       .addCase(requestRegister.fulfilled, (state)  => {
@@ -70,13 +80,17 @@ export const requestRegister = createAsyncThunk(
     })
     if (!isAllValid) throw new Error()
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const result = await getHashed(register.password.value)
-    // TODO - request
+    const hashedPassword = await getHashed(register.password.value)
+    const response = requestUserRegistration_SERVER({
+      public_id: id.value,
+      nickname: nickname.value,
+      email: email.value,
+      password: hashedPassword
+    })
 
-    return new Promise((resolve) => setTimeout(resolve, 5000));
+    return response;
   }
 )
 
-export const { setId, setPassowrd, setEmail, setNickname } = registerSlice.actions
+export const { setId, setPassowrd, setEmail, setNickname, resetResult } = registerSlice.actions
 export default registerSlice.reducer
