@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerReducer from "./registerSlice"
+import preferenceReducer from "./preferenceSlice"
 
 export const store = configureStore({
     reducer: {
-        register: registerReducer
+        register: registerReducer,
+        preference: preferenceReducer
     }
 })
 

@@ -1,76 +1,82 @@
+import { getHashed } from '$lib/utils/register'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import type { AppRootState } from '$lib/stores/store';
 
-interface RegisterState {
-  preferenceData: {
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed'
-    data: {key: string, content: [string, string]}[]
-  }  
-
-  id: string,
-  nickname: string,
-  hashedPassword: string,
-  email: string,
-  userPreference: Record<string, boolean>
+type StringWithValidation = {
+  value: string
+  regex: string
 }
 
-interface PreferencePayload {
-    key: string,
-    value: boolean
+interface RegisterState {
+  registerResult: 'idle' | 'pending' | 'succeeded' | 'failed',
+
+  id: StringWithValidation,
+  password: StringWithValidation,
+  nickname: StringWithValidation,
+  email: StringWithValidation,
 }
 
 const initialState = { 
-  id: '',
-  nickname: '',
-  hashedPassword: '',
-  email: '',
-  userPreference: {}, 
+  id: {value: '', regex: '^(?=.*[a-z0-9])[a-z0-9]{4,16}$'},
+  password: {value: '', regex: '^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{8,16}$'},
+  // eslint-disable-next-line no-useless-escape
+  email: {value: '', regex: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$',},
+  nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
 
-  preferenceData: {
-    loading: 'idle',
-    data: []
-  }
+  registerResult: 'idle',
 } as RegisterState
 
 const registerSlice = createSlice({
   name: 'register',
   initialState,
   reducers: {
-    setPreference(state, action: PayloadAction<PreferencePayload>) {
-        const { key, value } = action.payload
-        state.userPreference[key] = value
-    }
+    setId(state, action: PayloadAction<string>) {
+      state.id.value = action.payload
+    },
+    setPassowrd(state, action: PayloadAction<string>) {
+      state.password.value = action.payload
+    },
+    setNickname(state, action: PayloadAction<string>) {
+      state.nickname.value = action.payload
+    },
+    setEmail(state, action: PayloadAction<string>) {
+      state.email.value = action.payload
+    },
   },
   extraReducers(builder) {
-    builder.addCase(fetchPreferenceData.pending, (state) => {
-      state.preferenceData.loading = 'pending'
-    })
-    builder.addCase(fetchPreferenceData.fulfilled, (state, action) => {
-      state.preferenceData.data = action.payload
-      state.preferenceData.loading = 'succeeded'
-    })
-    builder.addCase(fetchPreferenceData.rejected, (state) => {
-      state.preferenceData.loading = 'failed'
-    })
-
+    builder
+      .addCase(requestRegister.pending, (state) => {
+        state.registerResult = 'pending'
+      })
+      .addCase(requestRegister.rejected, (state) => {
+        state.registerResult = 'failed'
+      })
+      .addCase(requestRegister.fulfilled, (state)  => {
+        state.registerResult = 'succeeded'
+      })
   }
 })
 
-export const fetchPreferenceData = createAsyncThunk(
-  'register/fetchPreferenceData',
-  // TODO fetch 수정
-  async () => {
-    const response = fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => response.json())
-      .then((response) => response.slice(0, 10).map((o: {id: string, title: string, body: string}) => (
-        {
-          key: o.id,
-          content: [o.title, o.body]
-        }
-      )))
-    return response
+export const requestRegister = createAsyncThunk(
+  'register/requestRegister',
+  async (_, { getState }) => {
+    // TODO Type assertion
+    const { register } = getState() as AppRootState
+    const { id, nickname, password, email} = register;
+    
+    const isAllValid = [id, nickname, password, email].every((target) => {
+      return new RegExp(target.regex).test(target.value)
+    })
+    if (!isAllValid) throw new Error()
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const result = await getHashed(register.password.value)
+    // TODO - request
+
+    return new Promise((resolve) => setTimeout(resolve, 5000));
   }
 )
 
-export const { setPreference } = registerSlice.actions
+export const { setId, setPassowrd, setEmail, setNickname } = registerSlice.actions
 export default registerSlice.reducer
