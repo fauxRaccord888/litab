@@ -2,9 +2,7 @@ import type { AppRootState } from '$lib/stores/store';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getHashed } from '$lib/utils/register'
-import { requestUserRegistration_SERVER } from '$lib/supabase';
-import { parseErrorMessage } from './../utils/supabaseError';
+import { requestUserRegistration } from '$lib/api/register';
 
 type StringWithValidation = {
   value: string
@@ -22,11 +20,10 @@ interface RegisterState {
 }
 
 const initialState = { 
-  id: {value: '', regex: '^(?=.*[a-z0-9])[a-z0-9]{4,16}$'},
+  nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
   password: {value: '', regex: '^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{8,16}$'},
   // eslint-disable-next-line no-useless-escape
   email: {value: '', regex: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$',},
-  nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
 
   registerResult: 'idle',
   errorMessage: ''
@@ -59,7 +56,7 @@ const registerSlice = createSlice({
         state.registerResult = 'pending'
       })
       .addCase(requestRegister.rejected, (state, action) => {
-        state.errorMessage = parseErrorMessage(action.error)
+        state.errorMessage = action.error.message || '알 수 없는 에러가 발생했어요.'
         state.registerResult = 'failed'
       })
       .addCase(requestRegister.fulfilled, (state)  => {
@@ -80,12 +77,10 @@ export const requestRegister = createAsyncThunk(
     })
     if (!isAllValid) throw new Error()
 
-    const hashedPassword = await getHashed(register.password.value)
-    const response = requestUserRegistration_SERVER({
-      public_id: id.value,
-      nickname: nickname.value,
+    const response = requestUserRegistration({
+      display_name: nickname.value,
       email: email.value,
-      password: hashedPassword
+      password: password.value
     })
 
     return response;
