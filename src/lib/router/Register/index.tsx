@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast"
 
 import type { AppDispatch, AppRootState } from "$lib/stores/store"
 import type { HydratedInputProps } from "$lib/components/common/Form"
+import type { RegisterState } from "$lib/stores/registerSlice"
 
 import { router } from "$lib/router"
 import { requestRegister, resetResult } from "$lib/stores/registerSlice"
@@ -11,6 +12,7 @@ import { requestRegister, resetResult } from "$lib/stores/registerSlice"
 import { inputFields } from "./fields"
 import Form from "$lib/components/common/Form"
 
+type RegisterKey = keyof RegisterState
 export default function Register() {
   const state = useSelector((state: AppRootState) => state.register)
   const dispatch = useDispatch<AppDispatch>()
@@ -39,7 +41,7 @@ export default function Register() {
   })
   const disabled = !submitable || state.registerResult === 'pending'
 
-  const hydratedInputFields: HydratedInputProps[] = inputFields.map((item) => ({
+  const hydratedInputFields: HydratedInputProps<RegisterKey>[] = inputFields.map((item) => ({
     ...item,
     value: state[item.key].value,
     regex: state[item.key].regex,

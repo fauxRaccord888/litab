@@ -1,12 +1,14 @@
 import { setEmail, setNickname, setPassowrd } from "$lib/stores/registerSlice"
 
+import type { RegisterState } from "$lib/stores/registerSlice"
 import type { InputProps } from "$lib/components/common/Form"
 
 import UserIcon from "$lib/components/icons/UserIcon"
 import LockIcon from "$lib/components/icons/LockIcon"
 import MailIcon from "$lib/components/icons/MailIcon"
 
-export const inputFields: InputProps[] = [
+type RegisterKey = keyof RegisterState
+export const inputFields: InputProps<RegisterKey>[] = [
   {
     key: 'email', 
     label: '이메일',

@@ -1,8 +1,8 @@
 import type { ChangeEventHandler, FormEventHandler } from "react"
 import type { ActionCreatorWithPayload } from "@reduxjs/toolkit"
 
-export interface InputProps {
-    key: 'password' | 'email' | 'nickname'
+export interface InputProps<K extends string> {
+    key: K
     label: string
     icon: () => JSX.Element
     type?: "password"
@@ -10,20 +10,20 @@ export interface InputProps {
     action: ActionCreatorWithPayload<string>
 }
 
-export interface HydratedInputProps extends InputProps {
+export interface HydratedInputProps<K extends string> extends InputProps<K> {
     value: string
     onChange: ChangeEventHandler<HTMLInputElement>
     regex?: string
     className?: string
 }
 
-interface FormProps {
+interface FormProps<Key extends string> {
   handleSubmit: FormEventHandler<HTMLFormElement>
-  hydratedInputFields: HydratedInputProps[]
+  hydratedInputFields: HydratedInputProps<Key>[]
   disabled?: boolean
 }
 
-export default function Form (props: FormProps) {
+export default function Form<Key extends string> (props: FormProps<Key>) {
   const { handleSubmit, hydratedInputFields, disabled } = props
   return (
     <div className="input-form-outer-container">
@@ -33,13 +33,13 @@ export default function Form (props: FormProps) {
             const isValid = props.regex ? new RegExp(props.regex).test(props.value) : true
             const isEmpty = props.value === ''
             const className = (isValid || isEmpty) ? '' : 'invalid'
-            return <InputWithIcon {...props} className={className}/>
+            return <InputWithIcon<Key> {...props} className={className}/>
           })}
         </div>
 
         <div className="validation-message-container">
           {hydratedInputFields.map((props) => (
-            <ValidationMessage {...props} />      
+            <ValidationMessage<Key> {...props} />      
           ))}
         </div>
 
@@ -54,7 +54,7 @@ export default function Form (props: FormProps) {
   )
 }
 
-function InputWithIcon(props: HydratedInputProps) {
+function InputWithIcon<K extends string>(props: HydratedInputProps<K>) {
   return (
     <div className={`input-with-icon-container ${props.className}`}>
       <div className="icon">
@@ -71,7 +71,7 @@ function InputWithIcon(props: HydratedInputProps) {
 }
   
 
-function ValidationMessage(props: HydratedInputProps) {
+function ValidationMessage<K extends string>(props: HydratedInputProps<K>) {
   const isValid = props.regex ? new RegExp(props.regex).test(props.value) : true
   const isEmpty = Boolean(props.value === '')
   if (isValid || isEmpty) return null
