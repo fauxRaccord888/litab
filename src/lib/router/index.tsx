@@ -1,8 +1,10 @@
 import Layout from '$lib/layout/Layout'
+import AuthLayout from '$lib/layout/AuthLayout';
 import LeftSideBar from "$lib/components/NavigationBar/LeftSideBar"
 
 import Register from '$lib/router/Register';
 import SignIn from '$lib/router/SignIn';
+import Home from '$lib/router/Home';
 import Preference from '$lib/components/Preference';
 
 import {
@@ -14,26 +16,20 @@ import {
 
 const rootRoute = new RootRoute({
   component: () => (
-    <>
+    <AuthLayout>
       <Layout 
         left={<LeftSideBar />}
       >
         <Outlet />
       </Layout>
-    </>
+    </AuthLayout>
   ),
 })
 
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: function Index() {
-    return (
-      <div>
-        <h3>인덱스 페이지</h3>
-      </div>
-    )
-  },
+  component: Home
 })
 
 const registerRoute = new Route({

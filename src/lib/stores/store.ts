@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./authSlice";
+import networkRequestReducer from "./networkRequestSlice";
 import registerReducer from "./registerSlice"
 import signInSliceReducer from "./signInSlice";
 import preferenceReducer from "./preferenceSlice"
-import networkRequestReducer from "./networkRequestSlice";
 
 export const store = configureStore({
     reducer: {
+        auth: authReducer,
         networkRequest: networkRequestReducer,
         register: registerReducer,
         signIn: signInSliceReducer,
