@@ -1,17 +1,10 @@
 import { setEmail, setNickname, setPassowrd } from "$lib/stores/registerSlice"
 
+import type { InputProps } from "$lib/components/common/Form"
+
 import UserIcon from "$lib/components/icons/UserIcon"
 import LockIcon from "$lib/components/icons/LockIcon"
 import MailIcon from "$lib/components/icons/MailIcon"
-
-export interface InputProps {
-  key: 'password' | 'email' | 'nickname', 
-  label: string,
-  icon: () => JSX.Element,
-  type?: "password"
-  errorMessage: string,
-  action: ActionCreatorWithPayload<string>,
-}  
 
 export const inputFields: InputProps[] = [
   {

@@ -1,7 +1,7 @@
 import Layout from '$lib/layout/Layout'
 import LeftSideBar from "$lib/components/NavigationBar/LeftSideBar"
 
-import Register from '$lib/components/Register';
+import Register from '$lib/router/Register';
 import Preference from '$lib/components/Preference';
 
 import {
