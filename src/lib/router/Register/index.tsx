@@ -14,7 +14,9 @@ import Form from "$lib/components/common/Form"
 
 type RegisterKey = keyof RegisterState
 export default function Register() {
-  const { register: state, networkRequest } = useSelector((state: AppRootState) => state)
+  const state = useSelector((state: AppRootState) => state.register)
+  const networkRequest = useSelector((state: AppRootState) => state.networkRequest)
+
   const dispatch = useDispatch<AppDispatch>()
 
   const { status, errorMessage } = networkRequest
