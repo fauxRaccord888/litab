@@ -20,6 +20,13 @@ export default function LeftSideBar() {
                 register
             </h2>
         </Link>
+
+        <Link to="/signin">
+            <h2>
+                signIn
+            </h2>
+        </Link>
+
     </>
   )
 }

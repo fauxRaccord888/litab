@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { register_SERVER } from '$lib/api/register';
+import { supabaseClient } from '$lib/utils/supabase/client';
 
 type StringWithValidation = {
   value: string
@@ -53,11 +54,13 @@ export const requestRegister = createAsyncThunk(
     })
     if (!isAllValid) throw new Error()
 
-    const response = register_SERVER({
+    const payload = {
       display_name: nickname.value,
       email: email.value,
       password: password.value
-    })
+    }
+
+    const response = register_SERVER(payload, supabaseClient)
 
     return response;
   }

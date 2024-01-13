@@ -1,5 +1,5 @@
-import { SupabaseClient } from "@supabase/supabase-js"
-import { RegisterPayload } from "../register"
+import type { SupabaseClient } from "@supabase/supabase-js"
+import type { RegisterPayload } from "../register"
 
 export const register_DB = async (
     payload: RegisterPayload,
