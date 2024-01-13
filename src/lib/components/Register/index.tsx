@@ -25,8 +25,6 @@ export default function Register() {
     if (registerResult === 'succeeded') {
       toast.success('가입을 축하합니다')
       dispatch(resetResult())
-      
-      // TODO store에 토큰 추가
       router.history.push('/preference')
     }
     if (registerResult === 'failed') {

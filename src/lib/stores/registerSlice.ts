@@ -2,7 +2,7 @@ import type { AppRootState } from '$lib/stores/store';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { requestUserRegistration } from '$lib/api/register';
+import { register_SERVER } from '$lib/api/register';
 
 type StringWithValidation = {
   value: string
@@ -13,28 +13,27 @@ interface RegisterState {
   registerResult: 'idle' | 'pending' | 'succeeded' | 'failed',
   errorMessage: string;
 
-  id: StringWithValidation,
+  email: StringWithValidation,
   password: StringWithValidation,
   nickname: StringWithValidation,
-  email: StringWithValidation,
 }
 
-const initialState = { 
-  nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
-  password: {value: '', regex: '^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{8,16}$'},
+const initialState: RegisterState = { 
   // eslint-disable-next-line no-useless-escape
   email: {value: '', regex: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$',},
+  nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
+  password: {value: '', regex: '^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{8,16}$'},
 
   registerResult: 'idle',
   errorMessage: ''
-} as RegisterState
+}
 
 const registerSlice = createSlice({
   name: 'register',
   initialState,
   reducers: {
-    setId(state, action: PayloadAction<string>) {
-      state.id.value = action.payload
+    setEmail(state, action: PayloadAction<string>) {
+      state.email.value = action.payload
     },
     setPassowrd(state, action: PayloadAction<string>) {
       state.password.value = action.payload
@@ -42,12 +41,8 @@ const registerSlice = createSlice({
     setNickname(state, action: PayloadAction<string>) {
       state.nickname.value = action.payload
     },
-    setEmail(state, action: PayloadAction<string>) {
-      state.email.value = action.payload
-    },
-    resetResult(state) {
-      state.registerResult = 'idle'
-      state.errorMessage = ''
+    resetResult() {
+      return {...initialState}
     }
   },
   extraReducers(builder) {
@@ -70,14 +65,14 @@ export const requestRegister = createAsyncThunk(
   async (_, { getState }) => {
     // TODO Type assertion
     const { register } = getState() as AppRootState
-    const { id, nickname, password, email} = register;
+    const { nickname, password, email} = register;
     
-    const isAllValid = [id, nickname, password, email].every((target) => {
+    const isAllValid = [nickname, password, email].every((target) => {
       return new RegExp(target.regex).test(target.value)
     })
     if (!isAllValid) throw new Error()
 
-    const response = requestUserRegistration({
+    const response = register_SERVER({
       display_name: nickname.value,
       email: email.value,
       password: password.value
@@ -87,5 +82,5 @@ export const requestRegister = createAsyncThunk(
   }
 )
 
-export const { setId, setPassowrd, setEmail, setNickname, resetResult } = registerSlice.actions
+export const { setPassowrd, setEmail, setNickname, resetResult } = registerSlice.actions
 export default registerSlice.reducer

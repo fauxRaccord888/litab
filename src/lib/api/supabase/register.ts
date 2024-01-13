@@ -1,8 +1,8 @@
 import { SupabaseClient } from "@supabase/supabase-js"
-import { UserRegistrationPayload } from "../register"
+import { RegisterPayload } from "../register"
 
-export const registerUser_DB = async (
-    payload: UserRegistrationPayload,
+export const register_DB = async (
+    payload: RegisterPayload,
     supabaseClient: SupabaseClient
 ) => {
     const res = await supabaseClient.auth.signUp({

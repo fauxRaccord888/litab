@@ -1,28 +1,26 @@
 import { createSupabaseClient } from "./supabase/client"
-import { registerUser_DB } from "./supabase/register"
+import { register_DB } from "./supabase/register"
 
 import { parseErrorMessage } from "./utils/error"
 
-export interface UserRegistrationPayload {
+export interface RegisterPayload {
     email: string,
     password: string,
     display_name: string,
 }
 
 
-export const requestUserRegistration = async (payload: UserRegistrationPayload) => {
+export const register_SERVER = async (payload: RegisterPayload) => {
     try {
         const client = createSupabaseClient()
-        const { data: registerData, error: registerError} = await registerUser_DB({
-            ...payload,
-        }, client)
+        const { data, error } = await register_DB(payload, client)
 
-        if (registerError) {
-            const msg = parseErrorMessage(registerError.message)
+        if (error) {
+            const msg = parseErrorMessage(error.message)
             throw new Error(msg)
         }
 
-        return registerData
+        return data
 
     } catch (err) {
         if (err instanceof Error) throw err
