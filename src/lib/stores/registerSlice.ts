@@ -9,10 +9,7 @@ type StringWithValidation = {
   regex: string
 }
 
-interface RegisterState {
-  registerResult: 'idle' | 'pending' | 'succeeded' | 'failed',
-  errorMessage: string;
-
+export interface RegisterState {
   email: StringWithValidation,
   password: StringWithValidation,
   nickname: StringWithValidation,
@@ -23,9 +20,6 @@ const initialState: RegisterState = {
   email: {value: '', regex: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$',},
   nickname: {value: '', regex: '^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$'},
   password: {value: '', regex: '^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{8,16}$'},
-
-  registerResult: 'idle',
-  errorMessage: ''
 }
 
 const registerSlice = createSlice({
@@ -44,19 +38,6 @@ const registerSlice = createSlice({
     resetResult() {
       return {...initialState}
     }
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(requestRegister.pending, (state) => {
-        state.registerResult = 'pending'
-      })
-      .addCase(requestRegister.rejected, (state, action) => {
-        state.errorMessage = action.error.message || '알 수 없는 에러가 발생했어요.'
-        state.registerResult = 'failed'
-      })
-      .addCase(requestRegister.fulfilled, (state)  => {
-        state.registerResult = 'succeeded'
-      })
   }
 })
 

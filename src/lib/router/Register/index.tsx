@@ -14,21 +14,21 @@ import Form from "$lib/components/common/Form"
 
 type RegisterKey = keyof RegisterState
 export default function Register() {
-  const state = useSelector((state: AppRootState) => state.register)
+  const { register: state, networkRequest } = useSelector((state: AppRootState) => state)
   const dispatch = useDispatch<AppDispatch>()
 
-  const { registerResult, errorMessage } = state
+  const { status, errorMessage } = networkRequest
   useEffect(() => {
-    if (registerResult === 'succeeded') {
+    if (status === 'succeeded') {
       toast.success('가입을 축하합니다')
       dispatch(resetResult())
       router.history.push('/preference')
     }
-    if (registerResult === 'failed') {
+    if (status === 'failed') {
       toast.error(errorMessage)
       dispatch(resetResult())
     }
-  }, [registerResult, errorMessage, dispatch])
+  }, [status, errorMessage, dispatch])
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault()
@@ -39,7 +39,7 @@ export default function Register() {
     const regex = new RegExp(state[item.key].regex)
     return regex.test(state[item.key].value)
   })
-  const disabled = !submitable || state.registerResult === 'pending'
+  const disabled = !submitable || status === 'pending'
 
   const hydratedInputFields: HydratedInputProps<RegisterKey>[] = inputFields.map((item) => ({
     ...item,
