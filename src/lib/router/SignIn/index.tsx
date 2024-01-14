@@ -8,6 +8,7 @@ import type { SignInState } from "$lib/stores/signInSlice"
 
 import { router } from "$lib/router"
 import { requestSignIn, resetResult } from "$lib/stores/signInSlice"
+import { resetStatus } from "$lib/stores/networkRequestSlice"
 
 import { inputFields } from "./fields"
 import Form from "$lib/components/common/Form"
@@ -23,9 +24,11 @@ export default function SignIn() {
   useEffect(() => {
     if (status === 'succeeded') {
       dispatch(resetResult())
+      dispatch(resetStatus())
       router.history.push('/')
     }
     if (status === 'failed') {
+      dispatch(resetStatus())
       toast.error(errorMessage)
     }
   }, [status, errorMessage, dispatch])

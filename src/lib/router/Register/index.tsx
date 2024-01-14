@@ -8,6 +8,7 @@ import type { RegisterState } from "$lib/stores/registerSlice"
 
 import { router } from "$lib/router"
 import { requestRegister, resetResult } from "$lib/stores/registerSlice"
+import { resetStatus } from "$lib/stores/networkRequestSlice"
 
 import { inputFields } from "./fields"
 import Form from "$lib/components/common/Form"
@@ -24,11 +25,13 @@ export default function Register() {
     if (status === 'succeeded') {
       toast.success('가입을 축하합니다')
       dispatch(resetResult())
+      dispatch(resetStatus())
       router.history.push('/preference')
     }
     if (status === 'failed') {
       toast.error(errorMessage)
       dispatch(resetResult())
+      dispatch(resetStatus())
     }
   }, [status, errorMessage, dispatch])
 
