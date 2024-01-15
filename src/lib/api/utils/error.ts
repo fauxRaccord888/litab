@@ -6,7 +6,7 @@ const supabaseErrors = [
     }
 ]
 
-export const parseErrorMessage = (errorMessage: string) => {
+export const parseErrorMessage = (errorMessage?: string) => {
     const target = supabaseErrors.find((e) => errorMessage?.includes(e.targetString))
     return target?.message || '알 수 없는 에러가 발생했어요'
 }

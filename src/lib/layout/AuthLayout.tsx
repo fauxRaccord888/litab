@@ -1,16 +1,23 @@
-import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
-import { useEffect, type PropsWithChildren } from "react"
-import type { AppDispatch } from "$lib/stores/store"
+import type { PropsWithChildren } from "react"
+import type { AppDispatch, AppRootState } from "$lib/stores/store"
 
-import { checkLocalStorage } from "$lib/stores/authSlice"
+import { getSessionUser, getTableUser } from "$lib/stores/authSlice"
 
 export default function AuthLayout (props: PropsWithChildren) {
+    const { sessionUser } = useSelector((state: AppRootState) => state.auth)
     const dispatch = useDispatch<AppDispatch>()
+
     useEffect(() => {
-        dispatch(checkLocalStorage())
+        dispatch((getSessionUser()))
     }, [dispatch])
-    
+
+    useEffect(() => {
+        dispatch(getTableUser(sessionUser))
+    }, [dispatch, sessionUser])
+
     return (
         <>
             {props.children}

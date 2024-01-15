@@ -1,17 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import type { User } from '@supabase/supabase-js';
+import type { User as SessionUser } from '@supabase/supabase-js';
 
+import { getProfile_SERVER } from '$lib/api/getProfile';
 import { supabaseClient } from '$lib/utils/supabase/client';
+
 import { requestRegister } from './registerSlice';
 import { requestSignIn } from './signInSlice';
+import { Tables } from '$lib/api/supabase/types';
+import { registerTableOnly_SERVER } from '$lib/api/registerTableOnly';
 
 export interface AuthState {
-    user: User | null
+    sessionUser: SessionUser | null
+    user: Tables<'profiles'> | null
 }
 
 const initialState: AuthState = { 
-    user: null
+  sessionUser: null,
+  user: null
 }
 
 const authSlice = createSlice({
@@ -19,32 +25,53 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signOut(state) {
+      state.sessionUser = null
       state.user = null
       supabaseClient.auth.signOut({scope: 'local'})
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(checkLocalStorage.fulfilled, (state, action) => {
+      .addCase(getSessionUser.fulfilled, (state, action) => {
+        state.sessionUser = action.payload
+      })
+      .addCase(getTableUser.fulfilled, (state, action) => {
         state.user = action.payload
       })
     builder
       .addCase(requestRegister.fulfilled, (state, action) => {
+        state.sessionUser = action.payload.sessionUser
         state.user = action.payload.user
       })
       .addCase(requestSignIn.fulfilled, (state, action) => {
-        state.user = action.payload.user
+        state.sessionUser = action.payload.user
       })
   }
 })
 
-export const checkLocalStorage = createAsyncThunk(
-    'auth/checkLocalStorage',
+export const getSessionUser = createAsyncThunk(
+    'auth/getSessionUser',
     async () => {
       const { data } = await supabaseClient.auth.getSession()
-      if (data?.session?.user) return data.session.user
-      return null
+      const sessionUser = data?.session?.user || null
+      return sessionUser
     }
+)
+
+export const getTableUser = createAsyncThunk(
+  'auth/getTableUser',
+  async (payload: SessionUser | null) => {
+    if (!payload) return null
+
+    let user: Tables<'profiles'> | null
+    try {
+      user = await getProfile_SERVER(payload, supabaseClient) 
+    } catch (err) {
+      user = await registerTableOnly_SERVER(payload, supabaseClient)
+    }
+
+    return user ?? null
+  }
 )
 
 export const { signOut } = authSlice.actions
