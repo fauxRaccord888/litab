@@ -1,65 +1,66 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 
+import type { PayloadAction } from '@reduxjs/toolkit'
+import type { Tables } from '$lib/api/supabase/types';
+import type { AppRootState } from './store';
+
+import { getPreferenceTest_SERVER } from '$lib/api/getPreferenceTest';
+import { updatePreference_SERVER } from '$lib/api/updateUserPreference';
+import { getPreferencePayload } from '$lib/utils/getPreferencePayload';
+import { supabaseClient } from '$lib/utils/supabase/client';
+
+type PreferenceTest = Tables<'preference_test'>
 
 interface PreferenceState {
-  preferenceData: {
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed'
-    data: {key: string, content: [string, string]}[]
-  }
-  userPreference: Record<string, boolean>
+  preferenceData: PreferenceTest[];
+  userPreference: Record<string, boolean>;
 }
 
 interface PreferencePayload {
-    key: string,
-    value: boolean
+  item: PreferenceTest
+  userValue: boolean
 }
 
-const initialState = { 
-  preferenceData: {
-    loading: 'idle',
-    data: []
-  },
-  userPreference: {}, 
-} as PreferenceState
+const initialState: PreferenceState = { 
+  preferenceData: [],
+  userPreference: {}
+} 
 
 const preferenceSlice = createSlice({
   name: 'preference',
   initialState,
   reducers: {
+    // TODO - Redux 페이로드 전달 방식에 따른 오버헤드 가능성(값, 주소 확인 필요)
     setPreference(state, action: PayloadAction<PreferencePayload>) {
-        const { key, value } = action.payload
-        state.userPreference[key] = value
+      const { item, userValue } = action.payload
+      state.userPreference[item.id] = userValue
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchPreferenceData.pending, (state) => {
-        state.preferenceData.loading = 'pending'
-      })
       .addCase(fetchPreferenceData.fulfilled, (state, action) => {
-        state.preferenceData.data = action.payload
-        state.preferenceData.loading = 'succeeded'
-      })
-      .addCase(fetchPreferenceData.rejected, (state) => {
-        state.preferenceData.loading = 'failed'
+        state.preferenceData = action.payload
       })
   }
 })
 
 export const fetchPreferenceData = createAsyncThunk(
   'register/fetchPreferenceData',
-  // TODO fetch 수정
-  async () => {
-    const response = fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => response.json())
-      .then((response) => response.slice(0, 10).map((o: {id: string, title: string, body: string}) => (
-        {
-          key: o.id,
-          content: [o.title, o.body]
-        }
-      )))
-    return response
+  async() => {
+    const data = await getPreferenceTest_SERVER(supabaseClient)
+    return data
+  }
+)
+
+export const requestUpdatePreference = createAsyncThunk(
+  'register/updateUserPreference',
+  async (_, { getState }) => {
+    const { auth, preference } = getState() as AppRootState
+    if (!auth.sessionUser) return null
+
+    const payload = getPreferencePayload(preference.preferenceData, preference.userPreference)
+    const data = await updatePreference_SERVER(payload, supabaseClient, auth.sessionUser.id)
+    return data
   }
 )
 
