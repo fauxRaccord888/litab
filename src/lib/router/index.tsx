@@ -5,7 +5,7 @@ import LeftSideBar from "$lib/components/NavigationBar/LeftSideBar"
 import Register from '$lib/router/Register';
 import SignIn from '$lib/router/SignIn';
 import Home from '$lib/router/Home';
-import Preference from '$lib/components/Preference';
+import Preference from '$lib/router/Preference';
 
 import {
   Outlet,
