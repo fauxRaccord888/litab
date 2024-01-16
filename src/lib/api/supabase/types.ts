@@ -39,24 +39,54 @@ export interface Database {
           }
         ]
       }
+      preference_test: {
+        Row: {
+          id: number
+          is_blue: boolean
+          is_green: boolean
+          is_red: boolean
+          test_a: string
+          test_b: string
+        }
+        Insert: {
+          id?: number
+          is_blue?: boolean
+          is_green?: boolean
+          is_red?: boolean
+          test_a: string
+          test_b: string
+        }
+        Update: {
+          id?: number
+          is_blue?: boolean
+          is_green?: boolean
+          is_red?: boolean
+          test_a?: string
+          test_b?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           approved: boolean | null
           id: string
           mutable_id: string | null
           nickname: string | null
+          preference: number[] | null
         }
         Insert: {
           approved?: boolean | null
           id: string
           mutable_id?: string | null
           nickname?: string | null
+          preference?: number[] | null
         }
         Update: {
           approved?: boolean | null
           id?: string
           mutable_id?: string | null
           nickname?: string | null
+          preference?: number[] | null
         }
         Relationships: [
           {
