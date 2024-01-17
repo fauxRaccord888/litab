@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
-import type { SignInReqeustPayload } from "../signIn"
+import type { SignInReqeustPayload } from "$lib/api/auth/signIn"
 
 export const signIn_DB = async (
     payload: SignInReqeustPayload,

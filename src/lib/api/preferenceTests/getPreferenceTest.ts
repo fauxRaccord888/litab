@@ -1,8 +1,8 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
-import type { Database } from "./supabase/types";
+import type { Database } from "../supabase/types";
 
-import { parseErrorMessage } from "./utils/error"
-import { getPreferenceTest_DB } from './supabase/getPreferenceTest';
+import { parseErrorMessage } from "$lib/api/utils"
+import { getPreferenceTest_DB } from '$lib/api/supabase/preferenceTests';
 
 
 export const getPreferenceTest_SERVER = async (

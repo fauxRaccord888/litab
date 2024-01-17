@@ -39,7 +39,7 @@ export interface Database {
           }
         ]
       }
-      preference_test: {
+      preference_tests: {
         Row: {
           id: number
           is_blue: boolean

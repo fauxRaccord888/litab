@@ -3,7 +3,7 @@ import type { Tables } from "$lib/api/supabase/types";
 type PreferenceKey = 'is_red' | 'is_green' | 'is_blue'
 
 export const getPreferencePayload = (
-    data: Tables<'preference_test'>[],
+    data: Tables<'preference_tests'>[],
     preference: Record<string, boolean>
 ) => {
     const preferenceKeys: PreferenceKey[] = ['is_red', 'is_green',  'is_blue']

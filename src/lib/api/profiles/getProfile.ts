@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 
-import { parseErrorMessage } from "./utils/error"
-import { getProfile_DB } from "./supabase/getProfile"
+import { parseErrorMessage } from "$lib/api/utils"
+import { getProfile_DB } from "$lib/api/supabase/profiles"
 
 export interface GetProfilePayload {
     id: string

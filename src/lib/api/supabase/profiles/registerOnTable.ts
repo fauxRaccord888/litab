@@ -1,5 +1,5 @@
 import type { SupabaseClient, User } from "@supabase/supabase-js"
-import type { Database } from "./types"
+import type { Database } from "$lib/api/supabase/types"
 
 export const registerOnTable_DB = async (
     user: User,

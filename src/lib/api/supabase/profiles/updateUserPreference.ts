@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
-import type { Database } from "./types"
+import type { Database } from "$lib/api/supabase/types"
 
 export const updatePreference_DB = async (
     payload: [number, number, number],

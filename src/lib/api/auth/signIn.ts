@@ -1,7 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-import { signIn_DB } from './supabase/signIn';
-import { parseErrorMessage } from "./utils/error"
+import { signIn_DB } from '$lib/api/supabase/auth';
+import { parseErrorMessage } from "$lib/api/utils"
 
 export interface SignInReqeustPayload {
     email: string,

@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 
-import { parseErrorMessage } from "./utils/error"
-import { updatePreference_DB } from "$lib/api/supabase/updateUserPreference"
+import { parseErrorMessage } from "$lib/api/utils"
+import { updatePreference_DB } from "$lib/api/supabase/profiles"
 
 
 export const updatePreference_SERVER = async (

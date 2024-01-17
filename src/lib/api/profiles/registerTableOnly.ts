@@ -1,7 +1,7 @@
 import type { SupabaseClient, User } from "@supabase/supabase-js"
 
-import { registerOnTable_DB } from "./supabase/registerOnTable"
-import { parseErrorMessage } from "./utils/error"
+import { registerOnTable_DB } from "$lib/api/supabase/profiles"
+import { parseErrorMessage } from "$lib/api/utils"
 
 export const registerTableOnly_SERVER = async (
     payload: User, 

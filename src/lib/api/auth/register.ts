@@ -1,16 +1,16 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
 
-import { registerOnAuth_DB } from "./supabase/registerOnAuth"
-import { registerOnTable_DB } from "./supabase/registerOnTable"
-import { parseErrorMessage } from "./utils/error"
+import { registerOnAuth_DB } from "$lib/api/supabase/auth"
+import { registerOnTable_DB } from "$lib/api/supabase/profiles"
+import { parseErrorMessage } from "$lib/api/utils"
 
-export interface RegisterPayload {
+export interface RegisterRequestPayload {
     email: string,
     password: string,
 }
 
 export const register_SERVER = async (
-    payload: RegisterPayload, 
+    payload: RegisterRequestPayload, 
     client: SupabaseClient
 ) => {
     try {

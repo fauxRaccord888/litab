@@ -4,12 +4,13 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Tables } from '$lib/api/supabase/types';
 import type { AppRootState } from './store';
 
-import { getPreferenceTest_SERVER } from '$lib/api/getPreferenceTest';
-import { updatePreference_SERVER } from '$lib/api/updateUserPreference';
+import { getPreferenceTest_SERVER } from '$lib/api/preferenceTests';
+import { updatePreference_SERVER } from '$lib/api/profiles';
+
 import { getPreferencePayload } from '$lib/utils/getPreferencePayload';
 import { supabaseClient } from '$lib/utils/supabase/client';
 
-type PreferenceTest = Tables<'preference_test'>
+type PreferenceTest = Tables<'preference_tests'>
 
 interface PreferenceState {
   preferenceData: PreferenceTest[];

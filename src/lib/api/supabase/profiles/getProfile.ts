@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
-import type { GetProfilePayload } from "../getProfile"
-import type { Database } from "./types"
+
+import type { GetProfilePayload } from "$lib/api/profiles"
+import type { Database } from "$lib/api/supabase/types"
 
 
 export const getProfile_DB = async (

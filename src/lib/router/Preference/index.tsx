@@ -39,7 +39,7 @@ export default function Preference() {
 }
 
 //TODO 단순 렌더링 로직을 담당해야 할 컴포넌트임 - 상위 컴포넌트 구조 개선 필요
-function PreferenceTestItem(props: {data: Tables<"preference_test">}) {
+function PreferenceTestItem(props: {data: Tables<"preference_tests">}) {
     const lang = 'kr'
 
     const { data } = props

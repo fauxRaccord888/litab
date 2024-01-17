@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import type { User as SessionUser } from '@supabase/supabase-js';
+import type { Tables } from '$lib/api/supabase/types';
 
-import { getProfile_SERVER } from '$lib/api/getProfile';
-import { supabaseClient } from '$lib/utils/supabase/client';
+import { getProfile_SERVER, registerTableOnly_SERVER } from '$lib/api/profiles';
 
 import { requestRegister } from './registerSlice';
 import { requestSignIn } from './signInSlice';
-import { Tables } from '$lib/api/supabase/types';
-import { registerTableOnly_SERVER } from '$lib/api/registerTableOnly';
+import { supabaseClient } from '$lib/utils/supabase/client';
 
 export interface AuthState {
     sessionUser: SessionUser | null

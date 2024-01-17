@@ -2,7 +2,8 @@ import type { AppRootState } from '$lib/stores/store';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { register_SERVER } from '$lib/api/register';
+import { register_SERVER } from '$lib/api/auth';
+
 import { supabaseClient } from '$lib/utils/supabase/client';
 
 type StringWithValidation = {

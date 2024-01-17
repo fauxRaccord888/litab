@@ -13,6 +13,9 @@ const initialState: NetworkRequestState = {
     errorMessage: ''
 }
 
+// TODO network request를 하나로 관리하는 것은 안 좋음
+// 하나의 페이지에서 복수의 리퀘스트를 할 경우 병렬처리 어려움
+
 const networkRequestSlice = createSlice({
   name: 'networkRequest',
   initialState,
