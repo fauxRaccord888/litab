@@ -13,6 +13,8 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@supabase/supabase-js": "^2.39.2",
     "@tanstack/react-router": "^1.2.0",
+    "@tanstack/router-vite-plugin": "^1.5.4",
+    "@tanstack/router-devtools": "^1.5.4",
     "jose": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

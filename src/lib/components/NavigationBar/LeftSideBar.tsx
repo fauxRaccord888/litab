@@ -3,25 +3,25 @@ import { Link } from '@tanstack/react-router'
 export default function LeftSideBar() {
   return (
     <>
-        <Link to="/">
+        <Link to="/hello/">
             <h2>
-                /
+                /hello
             </h2>
         </Link>
 
-        <Link to="/preference">
+        <Link to="/preference/">
             <h2>
                 preference
             </h2>
         </Link>
 
-        <Link to="/register">
+        <Link to="/account/register/">
             <h2>
                 register
             </h2>
         </Link>
 
-        <Link to="/signin">
+        <Link to="/account/signin/">
             <h2>
                 signIn
             </h2>

@@ -1,39 +1,25 @@
-import { FormEventHandler, useEffect } from "react"
+import { FormEventHandler } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { toast } from "react-hot-toast"
+import { FileRoute } from "@tanstack/react-router"
 
 import type { AppDispatch, AppRootState } from "$lib/stores/store"
 import type { HydratedInputProps } from "$lib/components/common/Form"
 import type { RegisterState } from "$lib/stores/registerSlice"
 
-import { router } from "$lib/router"
-import { requestRegister, resetResult } from "$lib/stores/registerSlice"
-import { resetStatus } from "$lib/stores/networkRequestSlice"
+import { requestRegister } from "$lib/stores/registerSlice"
 
-import { inputFields } from "./fields"
+import { inputFields } from "./-fields"
 import Form from "$lib/components/common/Form"
+
+export const Route = new FileRoute('/_guest/account/register/').createRoute({
+  component: Register
+})
 
 type RegisterKey = keyof RegisterState
 export default function Register() {
   const state = useSelector((state: AppRootState) => state.register)
-  const networkRequest = useSelector((state: AppRootState) => state.networkRequest)
 
   const dispatch = useDispatch<AppDispatch>()
-
-  const { status, errorMessage } = networkRequest
-  useEffect(() => {
-    if (status === 'succeeded') {
-      toast.success('가입을 축하합니다')
-      dispatch(resetResult())
-      dispatch(resetStatus())
-      router.history.push('/preference')
-    }
-    if (status === 'failed') {
-      toast.error(errorMessage)
-      dispatch(resetResult())
-      dispatch(resetStatus())
-    }
-  }, [status, errorMessage, dispatch])
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault()

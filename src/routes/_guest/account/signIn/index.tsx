@@ -1,37 +1,25 @@
-import { FormEventHandler, useEffect } from "react"
+import { FormEventHandler } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { toast } from "react-hot-toast"
+import { FileRoute } from "@tanstack/react-router"
 
 import type { AppDispatch, AppRootState } from "$lib/stores/store"
 import type { HydratedInputProps } from "$lib/components/common/Form"
 import type { SignInState } from "$lib/stores/signInSlice"
 
-import { router } from "$lib/router"
-import { requestSignIn, resetResult } from "$lib/stores/signInSlice"
-import { resetStatus } from "$lib/stores/networkRequestSlice"
+import { requestSignIn } from "$lib/stores/signInSlice"
 
-import { inputFields } from "./fields"
+import { inputFields } from "./-fields"
 import Form from "$lib/components/common/Form"
+
+export const Route = new FileRoute('/_guest/account/signIn/').createRoute({
+  component: SignIn
+})
 
 type SignInKey = keyof SignInState
 export default function SignIn() {
   const state = useSelector((state: AppRootState) => state.signIn)
-  const networkRequest = useSelector((state: AppRootState) => state.networkRequest)
 
   const dispatch = useDispatch<AppDispatch>()
-
-  const { status, errorMessage } = networkRequest
-  useEffect(() => {
-    if (status === 'succeeded') {
-      dispatch(resetResult())
-      dispatch(resetStatus())
-      router.history.push('/')
-    }
-    if (status === 'failed') {
-      dispatch(resetStatus())
-      toast.error(errorMessage)
-    }
-  }, [status, errorMessage, dispatch])
 
   const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault()

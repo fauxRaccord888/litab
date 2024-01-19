@@ -1,16 +1,18 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, AppRootState } from "$lib/stores/store"
+import { FileRoute } from "@tanstack/react-router"
 
 import type { Tables } from "$lib/api/supabase/types"
 
 import { fetchPreferenceData, requestUpdatePreference, setPreference } from "$lib/stores/preferenceSlice"
-import { router } from '$lib/router';
 import { message } from "$lib/constants/components/Register"
 
 import Carousel from "$lib/components/common/Carousel"
-import Button from "$lib/components/common/Button"
 
+export const Route = new FileRoute('/_auth/preference/').createRoute({
+    component: Preference
+  })  
 
 export default function Preference() {
     const { preferenceData } = useSelector((state: AppRootState) => state.preference)
@@ -22,7 +24,6 @@ export default function Preference() {
 
     const handleUpdatePreference = () => {
         dispatch(requestUpdatePreference())
-        router.history.push('/')
     }
 
     // TODO 서스펜스 추가
@@ -32,7 +33,7 @@ export default function Preference() {
                 {...preferenceData.map((d) => 
                     <PreferenceTestItem key={d.id} data={d} />
                 )}
-                <Button onClick={handleUpdatePreference}>제출 완료</Button>
+                <button onClick={handleUpdatePreference}>제출 완료</button>
             </Carousel>
         </div>
     )
