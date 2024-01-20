@@ -1,22 +1,35 @@
+/* hooks */
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-
+import { useSelector } from "react-redux"
+import { useSessionUser, useUser } from './../hooks/auth/user';
+import { useRegisterOnTableHandler } from "$lib/hooks/mutation";
+/* types */
 import type { PropsWithChildren } from "react"
-import type { AppDispatch, AppRootState } from "$lib/stores/store"
-
-import { getSessionUser, getTableUser } from "$lib/stores/authSlice"
+import type { AppRootState } from "$lib/stores/store"
 
 export default function AuthLayout (props: PropsWithChildren) {
-    const { sessionUser } = useSelector((state: AppRootState) => state.auth)
-    const dispatch = useDispatch<AppDispatch>()
+    const { user, sessionUser } = useSelector((state: AppRootState) => state.auth)
+    const { query: querySessionUser } = useSessionUser()
+    const { query: queryTableUser } = useUser(sessionUser)
+    const registerOnTableHandler = useRegisterOnTableHandler()
 
     useEffect(() => {
-        dispatch((getSessionUser()))
-    }, [dispatch])
+        if (!sessionUser) {
+            querySessionUser()
+        }
+    }, [sessionUser, querySessionUser])
 
     useEffect(() => {
-        dispatch(getTableUser(sessionUser))
-    }, [dispatch, sessionUser])
+        const fetchUser = async () => {
+            if (sessionUser && !user) {
+                const response = await queryTableUser()
+                if (!response || response.length === 0) {
+                    registerOnTableHandler(sessionUser.id)
+                }
+            }
+        }
+        fetchUser()
+    }, [sessionUser, user, queryTableUser, registerOnTableHandler])
 
     return (
         <>
