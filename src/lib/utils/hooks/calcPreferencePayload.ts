@@ -1,8 +1,8 @@
-import type { Tables } from "$lib/api/supabase/types";
+import type { Tables } from '$lib/database/types';
 
 type PreferenceKey = 'is_red' | 'is_green' | 'is_blue'
 
-export const getPreferencePayload = (
+export const calcPreferencePayload = (
     data: Tables<'preference_tests'>[],
     preference: Record<string, boolean>
 ) => {
