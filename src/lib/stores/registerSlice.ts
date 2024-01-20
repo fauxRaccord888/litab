@@ -1,10 +1,5 @@
-import type { AppRootState } from '$lib/stores/store';
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-
-import { register_SERVER } from '$lib/api/auth';
-
-import { supabaseClient } from '$lib/utils/supabase/client';
+import { createSlice } from '@reduxjs/toolkit'
 
 type StringWithValidation = {
   value: string
@@ -37,29 +32,6 @@ const registerSlice = createSlice({
     }
   }
 })
-
-export const requestRegister = createAsyncThunk(
-  'register/requestRegister',
-  async (_, { getState }) => {
-    // TODO Type assertion
-    const { register } = getState() as AppRootState
-    const { password, email} = register;
-    
-    const isAllValid = [password, email].every((target) => {
-      return new RegExp(target.regex).test(target.value)
-    })
-    if (!isAllValid) throw new Error()
-
-    const payload = {
-      email: email.value,
-      password: password.value
-    }
-
-    const response = register_SERVER(payload, supabaseClient)
-
-    return response;
-  }
-)
 
 export const { setPassowrd, setEmail, resetResult } = registerSlice.actions
 export default registerSlice.reducer
