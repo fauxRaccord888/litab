@@ -14,10 +14,19 @@ button {
 }
 
 :root {
-    --dark-gray: 0, 0%, 20%;
-    --red: 0, 83%, 60%;
-    --dark-red: 0, 86%, 47%;
-    --primary: 4, 100%, 61%;
+    --font-color: 255, 255, 255;
+    --weak-font-color: 168, 168, 168;
+
+    --background-color: 24, 28, 24;
+
+    --dark-gray: 51, 51, 51;
+    --true-gray: 128, 128, 128;
+
+    --red: 238, 68, 68;
+    --dark-red: 223, 17, 17;
+    --primary: 255, 69, 56;
+
+    color: rgb(var(--font-color))
 }
 
 .main-container {
@@ -28,24 +37,22 @@ button {
 
     .left-sidebar-section {
         display: none;
+        background-color: rgb(var(--background-color));
         @media only screen and (min-width: 500px) {
             display: inline;
-            background-color: #666;
             min-width: 100px;
         }
         @media only screen and (min-width: 1200px) {
             display: inline;
-            background-color: #666;
             min-width: 250px;
        }
     }
 
     .main-section {
         flex-grow: 1;
-        background-color: #aaa;
+        background-color: rgb(var(--background-color));
         @media only screen and (min-width: 500px) {
             display: inline;
-            background-color: #aaa;
             width: 400px;
             flex-grow: 1;
         }
@@ -53,9 +60,9 @@ button {
     
     .right-sidebar-section {
         display: none;
+        background-color: rgb(var(--background-color));
         @media only screen and (min-width: 1200px) {
             display: inline;
-            background-color: #666;
             min-width: 250px;
        }
    }
