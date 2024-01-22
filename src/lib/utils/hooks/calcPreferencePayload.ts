@@ -1,4 +1,4 @@
-import type { Tables } from '$lib/database/types';
+import type { Tables } from '$lib/types/supabase';
 
 type PreferenceKey = 'is_red' | 'is_green' | 'is_blue'
 

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { User as SessionUser } from '@supabase/supabase-js';
-import type { Tables } from '$lib/database/types';
+import type { Tables } from '$lib/types/supabase';
 
 type User = Tables<'profiles'>
 export interface AuthState {

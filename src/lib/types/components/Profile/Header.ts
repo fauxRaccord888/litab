@@ -1,4 +1,4 @@
-import type { Tables } from '$lib/database/types';
+import type { Tables } from '$lib/types/supabase';
 import type { SettingsLangOption } from '$lib/types/settings';
 
 // TODO extends하는 것을 재검토 (두 테이블 이상의 결과를 관리하면 중복? )

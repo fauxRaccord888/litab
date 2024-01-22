@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useUpdateUserPreference } from "$lib/hooks/mutation"
 /* types */
 import type { AppRootState } from "$lib/stores/store"
-import type { Tables } from "$lib/database/types"
+import type { Tables } from "$lib/types/supabase"
 /* stores */
 import { setPreference, setPreferenceTest } from "$lib/stores/preferenceSlice"
 /* database */

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Tables } from '$lib/database/types';
+import type { Tables } from '$lib/types/supabase';
 
 type PreferenceTest = Tables<'preference_tests'>
 
