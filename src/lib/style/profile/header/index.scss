@@ -1,0 +1,57 @@
+.profile-header-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: fit-content(50%) fit-content(50%);
+    
+    .profile-image-container {
+        grid-row: 1 / span 1;
+        grid-column: 1 / span 1;
+
+        margin-left: 30px;
+        margin-right: 30px;
+
+        display: flex;
+        align-items: center;
+        justify-self: center;
+
+        @media only screen and (min-width: 500px) {
+            grid-row: 1 / span 2;
+            grid-column: 1 / span 1;
+        }
+    }
+
+    .account-info-container {
+        grid-row: 1 / span 1;
+        grid-column: 2 / span 2;
+
+        padding-right: 30px;
+        display: flex;
+        justify-content: center;
+
+        @media only screen and (min-width: 500px) {
+            grid-row: 1 / span 1;
+            grid-column: 2 / span 2;
+            justify-content: flex-start;
+        }
+    }
+
+    .profile-info-container {
+        grid-row: 2 / span 1;
+        grid-column: 1 / span 3;
+
+        margin-top: 1rem;
+        padding-left: 30px;
+        padding-right: 30px;
+        justify-content: flex-start;
+
+        >:not(:first-child) {
+            margin-top: 1rem;
+        }
+
+        @media only screen and (min-width: 500px) {
+            padding-left: 0px;
+            grid-row: 2 / span 1;
+            grid-column: 2 / span 2;
+        }
+    }
+}

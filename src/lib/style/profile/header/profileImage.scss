@@ -1,0 +1,23 @@
+.profile-image-container {
+    --image-size: 88px;
+    @media only screen and (min-width: 500px) {
+        --image-size: 150px;
+    }
+
+    width: fit-content;
+    .profile-image {
+        width: var(--image-size);
+        height: var(--image-size);
+        border-radius: 50%;
+    }
+
+    .fallback-image {
+        width: var(--image-size);
+        height: var(--image-size);
+        border-radius: 50%;
+        border: 2px solid rgb(var(--font-color));
+
+        stroke: rgb(var(--font-color));
+        stroke-width: 0.5px;
+    }
+}

@@ -1,0 +1,27 @@
+.description-info-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    >:not(:first-child) {
+        margin-top: 0.25rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .mutual-follower {
+        font-size: 0.8rem;
+        color: rgb(var(--weak-font-color));
+        cursor: pointer;
+        
+        span {
+            color: rgb(var(--font-color));
+            &:not(:last-child)::after {
+                content: ',';
+                padding-right: 0.25rem;
+            }
+        }
+    }
+}
+

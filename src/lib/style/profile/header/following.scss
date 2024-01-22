@@ -1,0 +1,14 @@
+.following-info-container {
+    font-size: 0.9rem;
+    display:flex;
+    >:not(:first-child) {
+        margin-left: 1rem;
+    }
+
+    .following-info {
+        cursor: pointer;
+        :not(:first-child) {
+            margin-left: 0.25rem;
+        }
+    }
+}
