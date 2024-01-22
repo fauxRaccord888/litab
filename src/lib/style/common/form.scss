@@ -10,6 +10,11 @@
         flex-direction: column;
     }
 
+    svg {
+        stroke: rgb(var(--font-color));
+        stroke-width: 2px;
+    }
+
     .field-container {
         position: relative;
         display: flex;
