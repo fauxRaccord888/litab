@@ -4,7 +4,7 @@ import type { AuthState } from '$lib/stores/authSlice'
 import { useDispatch } from 'react-redux';
 import { useStatus } from '$lib/utils/hooks';
 /* database */
-import { getProfile_DB } from '$lib/database/profiles';
+import { getProfileById_DB } from '$lib/database/profiles';
 /* actions */
 import { setSessionUser, setUser } from '$lib/stores/authSlice';
 /* utils */
@@ -39,7 +39,7 @@ export function useUser(sessionUser: User) {
     const query = useCallback(
         async () => queryHelper({
             setStatus,
-            fn: () => getProfile_DB({id: sessionUser?.id}),
+            fn: () => getProfileById_DB({id: sessionUser?.id}),
             beforeQuery: Boolean(sessionUser?.id),
             errorCondition: (data) => (!data || data.length === 0),
             onSuccess: (data) => dispatch(setUser(data?.[0]))
