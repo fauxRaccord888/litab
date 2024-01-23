@@ -31,10 +31,60 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "followings_follower_id_fkey"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "followings_following_id_fkey"
             columns: ["following_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "followings_following_id_fkey"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      posts: {
+        Row: {
+          author: string
+          content: string
+          created_at: string
+          id: number
+        }
+        Insert: {
+          author: string
+          content: string
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          author?: string
+          content?: string
+          created_at?: string
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
@@ -66,7 +116,7 @@ export interface Database {
         }
         Relationships: []
       }
-      profiles: {
+      users: {
         Row: {
           approved: boolean | null
           description: string | null
@@ -93,7 +143,7 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
+            foreignKeyName: "users_id_fkey"
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "users"
@@ -103,7 +153,47 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          description: string | null
+          follower: string[] | null
+          following: string[] | null
+          id: string | null
+          mutable_id: string | null
+          nickname: string | null
+          posts: number[] | null
+          preference: number[] | null
+        }
+        Insert: {
+          description?: string | null
+          follower?: never
+          following?: never
+          id?: string | null
+          mutable_id?: string | null
+          nickname?: string | null
+          posts?: never
+          preference?: number[] | null
+        }
+        Update: {
+          description?: string | null
+          follower?: never
+          following?: never
+          id?: string | null
+          mutable_id?: string | null
+          nickname?: string | null
+          posts?: never
+          preference?: number[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
       [_ in never]: never
