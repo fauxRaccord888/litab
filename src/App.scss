@@ -9,8 +9,13 @@ body {
     margin: 0px;
 }
 
-button {
+button, button:disabled {
     font-family: "Wanted Sans Variable";
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    padding-block: 0;
+    padding-inline: 0;
 }
 
 :root {

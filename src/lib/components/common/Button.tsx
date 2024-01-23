@@ -17,10 +17,11 @@ export default function Button(props: ButtonProps) {
     const { children, icon, lg, ...restProps } = props
     return (
         <button 
-            className={`
-                ${icon ? 'icon ' : ''}
-                ${lg ? 'lg ' : ''}
-            `} 
+            className={[
+                'button',
+                (icon ? 'icon' : ''),
+                (lg ? 'lg' : '')
+            ].join(' ')} 
             {...restProps}
         >
             {children}
