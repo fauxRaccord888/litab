@@ -23,17 +23,21 @@ export default function AccountInfo(props: IHeaderProfileProps) {
     return (
         <div className="account-info-container">
             <span className="header-mutable-id">{profile.mutable_id}</span>
-            <Button 
-                style={buttonStyle} 
-                onClick={action.handleFollow}
-            >
-                {PROFILE.BUTTON_LABEL.follow[settings.lang]}
-            </Button>
-            <div className="more-action-icon-container">
-                <Button icon onClick={action.handleShowMore ?? voidFunction}>
-                    <MoreIcon />
+            {action.handleFollow && 
+                <Button 
+                    style={buttonStyle} 
+                    onClick={action.handleFollow}
+                >
+                    {PROFILE.BUTTON_LABEL.follow[settings.lang]}
                 </Button>
-            </div>
+            }
+            {action.handleShowMore && 
+                <div className="more-action-icon-container">
+                    <Button icon onClick={action.handleShowMore ?? voidFunction}>
+                        <MoreIcon />
+                    </Button>
+                </div>
+            }
         </div>
     )
 }

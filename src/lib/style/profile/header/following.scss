@@ -6,9 +6,11 @@
     }
 
     .following-info {
-        cursor: pointer;
         :not(:first-child) {
             margin-left: 0.25rem;
         }
-    }
+        button:not(:disabled) {
+            cursor: pointer;
+        }
+    }  
 }

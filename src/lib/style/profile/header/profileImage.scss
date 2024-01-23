@@ -5,9 +5,13 @@
     }
 
     width: fit-content;
+    width: var(--image-size);
+    height: var(--image-size);
+    border-radius: 50%;
+
     .profile-image {
-        width: var(--image-size);
-        height: var(--image-size);
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
     }
 

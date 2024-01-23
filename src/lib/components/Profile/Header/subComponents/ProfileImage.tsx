@@ -4,6 +4,8 @@ import { useState } from "react"
 import type { IHeaderProfileProps } from "$lib/types/components/Profile/Header"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
+/* utils */
+import { imageSourceHelper } from "$lib/utils/images/imageSourceHelper"
 /* style */
 import "$lib/style/profile/header/profileImage.scss"
 
@@ -11,24 +13,18 @@ import "$lib/style/profile/header/profileImage.scss"
 export default function ProfileImage(props: IHeaderProfileProps) {
     const { profile } = props
     const [error, setError] = useState(false)
-    const handleImageError = () => {
-        setError(true)
-    }
+    const handleImageError = () => setError(true)
+    const imgSrc = imageSourceHelper({bucket: 'profiles', userId: profile.id})
+
     return (
         <div className="profile-image-container">
             {!error
-                ? (
-                    <img
+                ? (<img
                         className="profile-image" 
-                        src={profile.img_src}
+                        src={imgSrc}
                         onError={handleImageError}
-                    />
-                )
-                : (
-                    <UserIcon 
-                        className="fallback-image"
-                    />
-                )
+                    />)
+                : (<UserIcon className="fallback-image"/>)
             }
         </div>
     )

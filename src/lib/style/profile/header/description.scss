@@ -13,7 +13,10 @@
     .mutual-follower {
         font-size: 0.8rem;
         color: rgb(var(--weak-font-color));
-        cursor: pointer;
+
+        button {
+            cursor: pointer;
+        }
         
         span {
             color: rgb(var(--font-color));
