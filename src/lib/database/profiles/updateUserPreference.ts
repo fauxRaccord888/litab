@@ -1,4 +1,4 @@
-import { supabaseClient } from "$lib/utils/database/client"
+import { supabaseClient } from "$lib/graphql/supabaseClient"
 
 export const updatePreference_DB = async (
     payload: [number, number, number],

@@ -3,16 +3,19 @@ import ReactDOM from 'react-dom/client'
 import { Router, RouterProvider } from '@tanstack/react-router'
 import { Provider } from 'react-redux'
 import { Toaster } from "react-hot-toast"
+import { ApolloProvider } from '@apollo/client'
 
 import { store } from "./lib/stores/store.ts"
 import { routeTree } from './routeTree.gen.ts'
+import apolloClient from '$lib/graphql/apolloClient.ts'
 
 import './App.scss'
 
 const router = new Router({
   routeTree,
   context: {
-    store: store
+    apolloClient,
+    store: store,
   },
   defaultPreload: 'intent',
 })
@@ -25,9 +28,11 @@ declare module '@tanstack/react-router' {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Toaster />
-      <RouterProvider router={router} />
-    </Provider>
+    <ApolloProvider client={apolloClient}>
+      <Provider store={store}>
+        <Toaster />
+        <RouterProvider router={router} />
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 )

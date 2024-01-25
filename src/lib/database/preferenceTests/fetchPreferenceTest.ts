@@ -1,4 +1,4 @@
-import { supabaseClient } from "$lib/utils/database/client"
+import { supabaseClient } from "$lib/graphql/supabaseClient"
 
 export const fetchPreferenceTest_DB = async () => {
     const res = await supabaseClient

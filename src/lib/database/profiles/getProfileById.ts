@@ -1,4 +1,4 @@
-import { supabaseClient } from "$lib/utils/database/client"
+import { supabaseClient } from "$lib/graphql/supabaseClient"
 
 export const getProfileById_DB = async (
     payload: { id?: string },
