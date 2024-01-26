@@ -59,18 +59,21 @@ export interface Database {
           content: string
           created_at: string
           id: number
+          title: string
         }
         Insert: {
           author: string
           content: string
           created_at?: string
           id?: number
+          title?: string
         }
         Update: {
           author?: string
           content?: string
           created_at?: string
           id?: number
+          title?: string
         }
         Relationships: [
           {
@@ -156,8 +159,6 @@ export interface Database {
       profiles: {
         Row: {
           description: string | null
-          follower: string[] | null
-          following: string[] | null
           id: string | null
           mutable_id: string | null
           nickname: string | null
@@ -166,8 +167,6 @@ export interface Database {
         }
         Insert: {
           description?: string | null
-          follower?: never
-          following?: never
           id?: string | null
           mutable_id?: string | null
           nickname?: string | null
@@ -176,8 +175,6 @@ export interface Database {
         }
         Update: {
           description?: string | null
-          follower?: never
-          following?: never
           id?: string | null
           mutable_id?: string | null
           nickname?: string | null
