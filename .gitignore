@@ -12,6 +12,7 @@ pnpm-lock.yaml
 dist
 dist-ssr
 *.local
+.env
 
 # Editor directories and files
 .vscode/*
@@ -23,6 +24,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# supabase
+src/lib/types/supabase.ts
 
 # @tanstack/router
 routeTree.gen.ts

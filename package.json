@@ -28,18 +28,20 @@
     "@tanstack/router-cli": "^1.8.2",
     "@tanstack/router-devtools": "^1.5.4",
     "@tanstack/router-vite-plugin": "^1.5.4",
+    "@types/node": "^20.11.6",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "dotenv": "^16.4.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "sass": "^1.69.7",
     "supabase": "^1.131.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8",
+    "vite": "^5.0.12",
     "vite-plugin-graphql-codegen": "^3.3.6"
   }
 }
