@@ -5,6 +5,8 @@
 @import "./lib/style/register.scss";
 @import "./lib/style/preference.scss";
 
+@import "./lib//style/atomic.scss";
+
 body {
     margin: 0px;
 }
@@ -16,6 +18,11 @@ button, button:disabled {
     color: inherit;
     padding-block: 0;
     padding-inline: 0;
+    font-size: inherit;
+}
+
+input {
+    color: rgb(var(--font-color));
 }
 
 :root {
