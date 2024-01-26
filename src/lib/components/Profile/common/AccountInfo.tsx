@@ -13,7 +13,7 @@ import "$lib/style/profile/header/account.scss"
 interface AccountInfoProps extends DBProfiles {
     id: string
     mutable_id?: string | null
-    preference?: (string | null)[] | null
+    preference?: (number | null)[] | null
 }
 
 export default function AccountInfo(props: IHeaderProfileProps<AccountInfoProps>) {

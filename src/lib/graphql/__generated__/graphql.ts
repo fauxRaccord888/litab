@@ -131,8 +131,6 @@ export type Mutation = {
   deleteFrompostsCollection: PostsDeleteResponse;
   /** Deletes zero or more records from the `preference_tests` collection */
   deleteFrompreference_testsCollection: Preference_TestsDeleteResponse;
-  /** Deletes zero or more records from the `profiles` collection */
-  deleteFromprofilesCollection: ProfilesDeleteResponse;
   /** Deletes zero or more records from the `users` collection */
   deleteFromusersCollection: UsersDeleteResponse;
   /** Adds one or more `followings` records to the collection */
@@ -141,8 +139,6 @@ export type Mutation = {
   insertIntopostsCollection?: Maybe<PostsInsertResponse>;
   /** Adds one or more `preference_tests` records to the collection */
   insertIntopreference_testsCollection?: Maybe<Preference_TestsInsertResponse>;
-  /** Adds one or more `profiles` records to the collection */
-  insertIntoprofilesCollection?: Maybe<ProfilesInsertResponse>;
   /** Adds one or more `users` records to the collection */
   insertIntousersCollection?: Maybe<UsersInsertResponse>;
   /** Updates zero or more records in the `followings` collection */
@@ -151,8 +147,6 @@ export type Mutation = {
   updatepostsCollection: PostsUpdateResponse;
   /** Updates zero or more records in the `preference_tests` collection */
   updatepreference_testsCollection: Preference_TestsUpdateResponse;
-  /** Updates zero or more records in the `profiles` collection */
-  updateprofilesCollection: ProfilesUpdateResponse;
   /** Updates zero or more records in the `users` collection */
   updateusersCollection: UsersUpdateResponse;
 };
@@ -180,13 +174,6 @@ export type MutationDeleteFrompreference_TestsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFromprofilesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<ProfilesFilter>;
-};
-
-
-/** The root type for creating and mutating data */
 export type MutationDeleteFromusersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<UsersFilter>;
@@ -208,12 +195,6 @@ export type MutationInsertIntopostsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntopreference_TestsCollectionArgs = {
   objects: Array<Preference_TestsInsertInput>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationInsertIntoprofilesCollectionArgs = {
-  objects: Array<ProfilesInsertInput>;
 };
 
 
@@ -244,14 +225,6 @@ export type MutationUpdatepreference_TestsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<Preference_TestsFilter>;
   set: Preference_TestsUpdateInput;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationUpdateprofilesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<ProfilesFilter>;
-  set: ProfilesUpdateInput;
 };
 
 
@@ -304,8 +277,6 @@ export type Query = {
   postsCollection?: Maybe<PostsConnection>;
   /** A pagable collection of type `preference_tests` */
   preference_testsCollection?: Maybe<Preference_TestsConnection>;
-  /** A pagable collection of type `profiles` */
-  profilesCollection?: Maybe<ProfilesConnection>;
   /** A pagable collection of type `users` */
   usersCollection?: Maybe<UsersConnection>;
 };
@@ -347,17 +318,6 @@ export type QueryPreference_TestsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<Preference_TestsOrderBy>>;
-};
-
-
-/** The root type for querying data */
-export type QueryProfilesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<ProfilesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
 };
 
 
@@ -654,93 +614,6 @@ export type Preference_TestsUpdateResponse = {
   records: Array<Preference_Tests>;
 };
 
-export type Profiles = Node & {
-  __typename?: 'profiles';
-  description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['UUID']['output']>;
-  mutable_id?: Maybe<Scalars['String']['output']>;
-  nickname?: Maybe<Scalars['String']['output']>;
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-  posts?: Maybe<Array<Maybe<Scalars['BigInt']['output']>>>;
-  preference?: Maybe<Array<Maybe<Scalars['BigInt']['output']>>>;
-};
-
-export type ProfilesConnection = {
-  __typename?: 'profilesConnection';
-  edges: Array<ProfilesEdge>;
-  pageInfo: PageInfo;
-};
-
-export type ProfilesDeleteResponse = {
-  __typename?: 'profilesDeleteResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Profiles>;
-};
-
-export type ProfilesEdge = {
-  __typename?: 'profilesEdge';
-  cursor: Scalars['String']['output'];
-  node: Profiles;
-};
-
-export type ProfilesFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<ProfilesFilter>>;
-  description?: InputMaybe<StringFilter>;
-  id?: InputMaybe<UuidFilter>;
-  mutable_id?: InputMaybe<StringFilter>;
-  nickname?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<ProfilesFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<ProfilesFilter>>;
-};
-
-export type ProfilesInsertInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  mutable_id?: InputMaybe<Scalars['String']['input']>;
-  nickname?: InputMaybe<Scalars['String']['input']>;
-  posts?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  preference?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-};
-
-export type ProfilesInsertResponse = {
-  __typename?: 'profilesInsertResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Profiles>;
-};
-
-export type ProfilesOrderBy = {
-  description?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  mutable_id?: InputMaybe<OrderByDirection>;
-  nickname?: InputMaybe<OrderByDirection>;
-};
-
-export type ProfilesUpdateInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  mutable_id?: InputMaybe<Scalars['String']['input']>;
-  nickname?: InputMaybe<Scalars['String']['input']>;
-  posts?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  preference?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-};
-
-export type ProfilesUpdateResponse = {
-  __typename?: 'profilesUpdateResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Profiles>;
-};
-
 export type Users = Node & {
   __typename?: 'users';
   approved?: Maybe<Scalars['Boolean']['output']>;
@@ -755,7 +628,7 @@ export type Users = Node & {
   nodeId: Scalars['ID']['output'];
   posts?: Maybe<PostsConnection>;
   postsCollection?: Maybe<PostsConnection>;
-  preference?: Maybe<Array<Maybe<Scalars['BigInt']['output']>>>;
+  preference?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
 };
 
 
@@ -849,7 +722,7 @@ export type UsersInsertInput = {
   id?: InputMaybe<Scalars['UUID']['input']>;
   mutable_id?: InputMaybe<Scalars['String']['input']>;
   nickname?: InputMaybe<Scalars['String']['input']>;
-  preference?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  preference?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type UsersInsertResponse = {
@@ -874,7 +747,7 @@ export type UsersUpdateInput = {
   id?: InputMaybe<Scalars['UUID']['input']>;
   mutable_id?: InputMaybe<Scalars['String']['input']>;
   nickname?: InputMaybe<Scalars['String']['input']>;
-  preference?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  preference?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type UsersUpdateResponse = {
@@ -896,7 +769,7 @@ export type GetProfileByMutableIdQueryVariables = Exact<{
 }>;
 
 
-export type GetProfileByMutableIdQuery = { __typename: 'Query', usersCollection?: { __typename: 'usersConnection', edges: Array<{ __typename: 'usersEdge', node: { __typename: 'users', description?: string | null, nickname?: string | null, preference?: Array<string | null> | null, mutable_id?: string | null, id: string, followers?: { __typename: 'followingsConnection', edges: Array<{ __typename: 'followingsEdge', node: { __typename: 'followings', users: { __typename: 'users', mutable_id?: string | null, id: string } } }> } | null, followings?: { __typename: 'followingsConnection', edges: Array<{ __typename: 'followingsEdge', node: { __typename: 'followings', users: { __typename: 'users', mutable_id?: string | null, id: string } } }> } | null, posts?: { __typename: 'postsConnection', edges: Array<{ __typename: 'postsEdge', node: { __typename: 'posts', id: string, title: string } }> } | null } }> } | null };
+export type GetProfileByMutableIdQuery = { __typename: 'Query', usersCollection?: { __typename: 'usersConnection', edges: Array<{ __typename: 'usersEdge', node: { __typename: 'users', description?: string | null, nickname?: string | null, preference?: Array<number | null> | null, mutable_id?: string | null, id: string, followers?: { __typename: 'followingsConnection', edges: Array<{ __typename: 'followingsEdge', node: { __typename: 'followings', users: { __typename: 'users', mutable_id?: string | null, id: string } } }> } | null, followings?: { __typename: 'followingsConnection', edges: Array<{ __typename: 'followingsEdge', node: { __typename: 'followings', users: { __typename: 'users', mutable_id?: string | null, id: string } } }> } | null, posts?: { __typename: 'postsConnection', edges: Array<{ __typename: 'postsEdge', node: { __typename: 'posts', id: string, title: string } }> } | null } }> } | null };
 
 export const MiniProfileFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MiniProfile"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"mutable_id"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]} as unknown as DocumentNode<MiniProfileFragment, unknown>;
 export const FollowingsMiniProfileFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FollowingsMiniProfile"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"followingsConnection"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MiniProfile"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MiniProfile"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"mutable_id"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]} as unknown as DocumentNode<FollowingsMiniProfileFragment, unknown>;
