@@ -1,4 +1,4 @@
-import { graphql } from "../__generated__"
+import { graphql } from "../../lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
     fragment MiniProfile on users {

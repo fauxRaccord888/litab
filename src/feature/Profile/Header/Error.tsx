@@ -1,4 +1,4 @@
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 import Main from "./Main"
 
 const errorProfile = (errorMessage: string): DBProfiles =>  ({

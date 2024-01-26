@@ -1,13 +1,13 @@
 /* hooks */
 import { useState } from "react"
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
 /* utils */
 import { imageSourceHelper } from "$lib/utils/images/imageSourceHelper"
 /* style */
-import "$lib/style/profile/header/profileImage.scss"
+import "./style/profileImage.scss"
 
 interface ProfileImageProps extends DBProfiles{
     id: string 

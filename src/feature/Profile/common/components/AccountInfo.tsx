@@ -1,14 +1,14 @@
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 /* components */
 import Button from "$lib/components/common/Button";
 import MoreIcon from "$lib/components/icons/More";
 /* constants */
-import PROFILE from '$lib/constants/components/Profile';
+import PROFILE from '$feature/Profile/common/constants';
 /* utils */
 import { calcFontColorByBG, getFontColorArray } from "$lib/utils/luminance";
 /* styles */
-import "$lib/style/profile/header/account.scss"
+import "./style/account.scss"
 
 interface AccountInfoProps extends DBProfiles {
     id: string

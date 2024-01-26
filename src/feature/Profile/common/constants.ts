@@ -1,4 +1,4 @@
-import type { ProfileForeignTableKeys } from '$lib/types/components/Profile/Header';
+import type { ProfileForeignTableKeys } from '$feature/Profile/types';
 import type { SettingsLangOption } from '$lib/types/settings'
 import type { ReactElement } from 'react';
 

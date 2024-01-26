@@ -1,9 +1,9 @@
-import type { IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { IHeaderProfileProps } from "$feature/Profile/types"
 
-import ProfileImage from "../common/ProfileImage";
-import AccountInfo from "../common/AccountInfo";
-import FollowingInfo from "../common/FollowingInfo";
-import DescriptionInfo from "../common/DescriptionInfo";
+import ProfileImage from "../common/components/ProfileImage";
+import AccountInfo from "../common/components/AccountInfo";
+import FollowingInfo from "../common/components/FollowingInfo";
+import DescriptionInfo from "../common/components/DescriptionInfo";
 
 export default function Main(props: IHeaderProfileProps) {
     return (

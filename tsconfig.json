@@ -25,6 +25,7 @@
     "baseUrl": "src",
     "paths": {
       "$lib/*": ["lib/*"],
+      "$feature/*": ["feature/*"],
     }
   },
   "include": ["src", "src/vite-env.d.ts"],

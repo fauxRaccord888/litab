@@ -1,0 +1,12 @@
+.mini-profile-container {
+    display: flex;
+    align-items: center;
+
+    > :not(:first-child) {
+        margin-left: 0.5rem;
+    }
+    .profile-image-outer-container {
+        width: 2rem;
+        height: 2rem;
+    }
+}

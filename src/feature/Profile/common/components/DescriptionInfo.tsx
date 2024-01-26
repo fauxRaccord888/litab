@@ -1,9 +1,9 @@
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 /* constants */
-import PROFILE from "$lib/constants/components/Profile"
+import PROFILE from "$feature/Profile/common/constants"
 /* styles */
-import "$lib/style/profile/header/description.scss"
+import "./style/description.scss"
 
 interface DescriptionInfoProps extends DBProfiles {
     id: string,
