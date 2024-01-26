@@ -1,30 +1,35 @@
 /* route */
-import { FileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 /* types */
 import type { PropsWithStatus } from "$lib/types/components";
-import type { IHeaderProfileProps } from "$lib/types/components/Profile/Header";
+import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header";
+import type { GetProfileByMutableIdQuery } from "$lib/graphql/__generated__/graphql";
 /* fetch */
-import { getProfileByMutableId_DB } from "$lib/database/profiles";
+import { getProfileByMutableId_QUERY } from "$lib/graphql/Profile";
 /* components */
 import ProfileHeader from "$lib/components/Profile/Header";
 
-export const Route = new FileRoute('/profile/$mutableId').createRoute({
+export const Route = createFileRoute('/profile/$mutableId')({
     parseParams: (params) => ({
         mutableId: params.mutableId,
     }),
-    loader: async ({ params }) => {
-        const { data } = await getProfileByMutableId_DB({ mutableId: params.mutableId })
-        if (data?.[0]) return data[0]
+    loader: async ({ context, params }) => {
+        const queryOption = { query: getProfileByMutableId_QUERY, variables: { mutableId: params.mutableId } }
+        const { data } = await context.apolloClient.query<GetProfileByMutableIdQuery>(queryOption)
+
+        const firstNode = data.usersCollection?.edges[0]?.node
+        if (firstNode !== undefined) return firstNode
+
         else throw new Error('profile not found')
     },
-    errorComponent: ({error}) => <ProfileComponent status="error" error={error}/>,
+    errorComponent: ({ error }) => <ProfileComponent status="error" error={error}/>,
     pendingComponent: () => <ProfileComponent status="pending" />,
     component: Profile
 })
 
 function Profile() {
     const data  = Route.useLoaderData()
-    const profileProps: IHeaderProfileProps = {
+    const profileProps: IHeaderProfileProps<DBProfiles> = {
         profile: data,
         mutualFollower: ['foo', 'bar', 'baz'],
         settings: {
@@ -35,9 +40,9 @@ function Profile() {
             handleFollow: () => {},
             handleShowMore: () => {},
             handleShowMutualFollowing: () => {},
-            followings: {
-                follower: () => {},
-                following: () => {}
+            handleShowFollowingsInfo: {
+                followers: () => {},
+                followings: () => {}
             }
         }
     }
