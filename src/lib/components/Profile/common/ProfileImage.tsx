@@ -1,7 +1,7 @@
 /* hooks */
 import { useState } from "react"
 /* types */
-import type { IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
 /* utils */
@@ -9,9 +9,12 @@ import { imageSourceHelper } from "$lib/utils/images/imageSourceHelper"
 /* style */
 import "$lib/style/profile/header/profileImage.scss"
 
+interface ProfileImageProps extends DBProfiles{
+    id: string 
+}
 
-export default function ProfileImage(props: IHeaderProfileProps) {
-    const { profile } = props
+export default function ProfileImage(props: IHeaderProfileProps<ProfileImageProps>) {
+    const { profile, action } = props
     const [error, setError] = useState(false)
     const handleImageError = () => setError(true)
     const imgSrc = imageSourceHelper({bucket: 'profiles', userId: profile.id})
@@ -20,7 +23,11 @@ export default function ProfileImage(props: IHeaderProfileProps) {
         <div className="profile-image-container">
             {!error
                 ? (<img
-                        className="profile-image" 
+                        onClick={action?.handleClickProfile}
+                        className={[
+                            'profile-image',
+                            (action?.handleClickProfile ? 'pointer' : '')
+                        ].join(' ')}
                         src={imgSrc}
                         onError={handleImageError}
                     />)

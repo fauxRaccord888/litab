@@ -1,4 +1,4 @@
-import type { DBProfiles } from '$lib/types/components/Profile/Header';
+import type { ProfileForeignTableKeys } from '$lib/types/components/Profile/Header';
 import type { SettingsLangOption } from '$lib/types/settings'
 import type { ReactElement } from 'react';
 
@@ -6,17 +6,17 @@ import type { ReactElement } from 'react';
 
 // 테이블에 키로 조회해서 카운트를 봐야하므로 타입 세이프티 필요
 // TODO 이중역할 - 팔로잉 정보 TABLE에서 조회하는 KEY의 역할과 로컬라이징 역할을 함께 수행하는 문제
-type IFollowingInfoConstants = Partial<Record<keyof DBProfiles, SettingsLangOption>>
+type IFollowingInfoConstants = Partial<Record<ProfileForeignTableKeys, SettingsLangOption>>
 const FOLLOWING_INFO: IFollowingInfoConstants= {
     posts: {
         kr: '게시물',
         en: 'posts'
     },
-    following: {
+    followings: {
         kr: '팔로우',
         en: 'following'
     },
-    follower: {
+    followers: {
         kr: '팔로워',
         en: 'followers'
     }

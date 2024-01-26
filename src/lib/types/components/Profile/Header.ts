@@ -1,19 +1,22 @@
+import { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 import type { SettingsLangOption } from '$lib/types/settings';
-import type { DBTypes } from '$lib/types/supabaseDBTypes';
+import type { FirstNodeOfCollection } from '$lib/types/graphql';
 
-export type DBProfiles = DBTypes['profiles'];
+export type DBProfiles = FirstNodeOfCollection<GetProfileByMutableIdQuery["usersCollection"]>
+export type ProfileForeignTableKeys = 'followings' | 'followers' | 'posts';
 
-type ShowFollowingDetailsActions = Record<keyof DBProfiles, () => void>
+type ShowFollowingDetailsActions = Record<ProfileForeignTableKeys, () => void>
 
-export interface IHeaderProfileProps {
-    profile: DBProfiles
-    mutualFollower: string[]
-    action: {
+export type IHeaderProfileProps<T=DBProfiles> = {
+    profile: T,
+    mutualFollower?: string[],
+    action?: {
+        handleClickProfile?: () => void
         handleFollow?: () => void
         handleShowMore?: () => void
         handleShowMutualFollowing?: () => void
-        followings?: Partial<ShowFollowingDetailsActions>
-    }
+        handleShowFollowingsInfo?: Partial<ShowFollowingDetailsActions>
+    },
     settings: {
         lang: keyof SettingsLangOption
     }
