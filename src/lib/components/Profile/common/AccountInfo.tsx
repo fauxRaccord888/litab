@@ -6,7 +6,7 @@ import MoreIcon from "$lib/components/icons/More";
 /* constants */
 import PROFILE from '$lib/constants/components/Profile';
 /* utils */
-import { calcFontColorByBG } from "$lib/utils/luminance";
+import { calcFontColorByBG, getFontColorArray } from "$lib/utils/luminance";
 /* styles */
 import "$lib/style/profile/header/account.scss"
 
@@ -18,10 +18,10 @@ interface AccountInfoProps extends DBProfiles {
 
 export default function AccountInfo(props: IHeaderProfileProps<AccountInfoProps>) {
     const { profile, settings, action } = props
-    const preference = profile.preference ?? PROFILE.DEFAULT_VALUES.buttonColor
-    const fontColor = calcFontColorByBG(profile.preference)
+    const buttonBackground = getFontColorArray(profile.preference, PROFILE.DEFAULT_VALUES.buttonColor) 
+    const fontColor = calcFontColorByBG(buttonBackground)
     const buttonStyle = {
-        '--bg-color': String([...preference]), 
+        '--bg-color': String([...buttonBackground]), 
         '--font-color': fontColor
     }
 
