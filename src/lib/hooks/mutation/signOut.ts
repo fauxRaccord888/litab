@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 /* stores */
 import { resetUserInfo } from "$lib/stores/authSlice";
 /* utils */
-import { supabaseClient } from "$lib/utils/database/client";
+import { supabaseClient } from "$lib/graphql/supabaseClient"
 
 export function useSignOutHandler() {
     const dispatch = useDispatch()

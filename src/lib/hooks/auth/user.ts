@@ -8,7 +8,7 @@ import { getProfileById_DB } from '$lib/database/profiles';
 /* actions */
 import { setSessionUser, setUser } from '$lib/stores/authSlice';
 /* utils */
-import { supabaseClient } from '$lib/utils/database/client';
+import { supabaseClient } from "$lib/graphql/supabaseClient"
 import { queryHelper } from '$lib/utils/hooks/queryHelper';
 import { useCallback } from 'react';
 
