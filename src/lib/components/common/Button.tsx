@@ -7,20 +7,24 @@ interface ButtonStyle extends CSSProperties {
 }
 
 interface ButtonProps extends PropsWithChildren {
-    onClick: MouseEventHandler<HTMLButtonElement>
+    onClick?: MouseEventHandler<HTMLButtonElement>
     style?: ButtonStyle
     lg?: boolean
     icon?: boolean
+    disabled?: boolean
+    className?: string
 }
 
 export default function Button(props: ButtonProps) {
-    const { children, icon, lg, ...restProps } = props
+    const { children, icon, lg, disabled, className, ...restProps } = props
     return (
         <button 
             className={[
                 'button',
+                className,
                 (icon ? 'icon' : ''),
-                (lg ? 'lg' : '')
+                (lg ? 'lg' : ''),
+                (disabled ? 'disabled' : '')
             ].join(' ')} 
             {...restProps}
         >

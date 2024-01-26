@@ -51,15 +51,8 @@
         }
     }
 
-    button {
+    .button {
         background-color: rgb(var(--primary));
-        font-size: 1.2rem;
-        border: 0;
-        color: #eee;
-        margin-top: 1rem;
-        padding: 0.5rem;
-        border-radius: 8px;
-
         &.disabled {
             background-color: rgb(var(--primary), 0.4);
         }

@@ -1,5 +1,6 @@
 import type { ChangeEventHandler, FormEventHandler } from "react"
 import type { ActionCreatorWithPayload } from "@reduxjs/toolkit"
+import Button from "$lib/components/common/Button"
 
 export interface InputProps<K extends string> {
     key: K
@@ -43,12 +44,9 @@ export default function Form<Key extends string> (props: FormProps<Key>) {
           ))}
         </div>
 
-        <button 
-          className={`${disabled ? 'disabled': ''}`}
-          disabled={disabled}
-        >
+        <Button lg disabled={disabled}>
           제출
-        </button>
+        </Button>
       </form>
     </div>
   )
