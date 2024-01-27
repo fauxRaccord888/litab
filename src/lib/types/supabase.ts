@@ -27,21 +27,7 @@ export interface Database {
             foreignKeyName: "followings_follower_id_fkey"
             columns: ["follower_id"]
             isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "followings_follower_id_fkey"
-            columns: ["follower_id"]
-            isOneToOne: false
             referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "followings_following_id_fkey"
-            columns: ["following_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
@@ -76,13 +62,6 @@ export interface Database {
           title?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "posts_author_fkey"
-            columns: ["author"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "posts_author_fkey"
             columns: ["author"]
@@ -127,6 +106,8 @@ export interface Database {
           mutable_id: string | null
           nickname: string | null
           preference: number[] | null
+          followers: unknown | null
+          followings: unknown | null
         }
         Insert: {
           approved?: boolean | null
@@ -156,44 +137,35 @@ export interface Database {
       }
     }
     Views: {
-      profiles: {
-        Row: {
-          description: string | null
-          id: string | null
-          mutable_id: string | null
-          nickname: string | null
-          posts: number[] | null
-          preference: number[] | null
-        }
-        Insert: {
-          description?: string | null
-          id?: string | null
-          mutable_id?: string | null
-          nickname?: string | null
-          posts?: never
-          preference?: number[] | null
-        }
-        Update: {
-          description?: string | null
-          id?: string | null
-          mutable_id?: string | null
-          nickname?: string | null
-          posts?: never
-          preference?: number[] | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "users_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
+      [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      followers: {
+        Args: {
+          "": unknown
+        }
+        Returns: {
+          approved: boolean | null
+          description: string | null
+          id: string
+          mutable_id: string | null
+          nickname: string | null
+          preference: number[] | null
+        }[]
+      }
+      followings: {
+        Args: {
+          "": unknown
+        }
+        Returns: {
+          approved: boolean | null
+          description: string | null
+          id: string
+          mutable_id: string | null
+          nickname: string | null
+          preference: number[] | null
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
