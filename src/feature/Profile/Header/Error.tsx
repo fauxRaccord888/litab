@@ -26,7 +26,6 @@ export default function ErrorComponent(props: {error: unknown}) {
         id: profile.id,
         mutualFollowers: [],
         action: {},
-        settings: {lang: 'kr'}
     }
     
     return <Main {...errorProps}/>

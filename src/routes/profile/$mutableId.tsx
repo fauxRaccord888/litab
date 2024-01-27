@@ -33,9 +33,6 @@ function Profile() {
         id: data.id,
         profile: data,
         mutualFollowers: ['foo', 'bar', 'baz'],
-        settings: {
-            lang: 'kr'
-        },
         // TODO action 추가 hooks으로
         action: {
             handleFollow: () => {},
