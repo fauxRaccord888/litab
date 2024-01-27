@@ -2,12 +2,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 /* types */
 import type { PropsWithStatus } from "$lib/types/components";
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header";
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types";
 import type { GetProfileByMutableIdQuery } from "$lib/graphql/__generated__/graphql";
 /* fetch */
-import { getProfileByMutableId_QUERY } from "$lib/graphql/Profile";
+import { getProfileByMutableId_QUERY } from "$feature/Profile/graphql";
 /* components */
-import ProfileHeader from "$lib/components/Profile/Header";
+import ProfileHeader from "$feature/Profile/Header";
 
 export const Route = createFileRoute('/profile/$mutableId')({
     parseParams: (params) => ({
@@ -30,8 +30,9 @@ export const Route = createFileRoute('/profile/$mutableId')({
 function Profile() {
     const data  = Route.useLoaderData()
     const profileProps: IHeaderProfileProps<DBProfiles> = {
+        id: data.id,
         profile: data,
-        mutualFollower: ['foo', 'bar', 'baz'],
+        mutualFollowers: ['foo', 'bar', 'baz'],
         settings: {
             lang: 'kr'
         },

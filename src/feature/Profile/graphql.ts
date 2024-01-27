@@ -1,4 +1,4 @@
-import { graphql } from "../__generated__"
+import { graphql } from "../../lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
     fragment MiniProfile on users {
@@ -8,12 +8,10 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment FollowingsMiniProfile on followingsConnection {
+    fragment FollowingsMiniProfile on usersConnection {
         edges {
             node {
-                users {
-                    ...MiniProfile
-                }
+              ...MiniProfile
             }
         }
     }

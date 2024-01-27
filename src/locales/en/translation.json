@@ -1,0 +1,13 @@
+{
+    "header": {
+        "count": {
+            "followings": "following",
+            "followers": "follower",
+            "posts": "post"
+        },
+        "followButtonLabel": "follow",
+    
+        "followedBy_one": "Followed By <0>{{ mutualFollowers }}</0>",
+        "followedBy_other": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
+    }
+}

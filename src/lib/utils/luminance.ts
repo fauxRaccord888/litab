@@ -10,23 +10,23 @@ export function calcLuminance([red, green, blue]: number[]) {
     )
 }
 
-function isValidHexArray(numberStrings: (string | null)[] | undefined | null): asserts numberStrings is string[] {
-    if (!numberStrings) throw new Error()
-    if (numberStrings.length !== 3) throw new Error()
-    numberStrings.forEach((numberString) => isValidHexNumber(numberString))
+type RGBColorInput = (number | null)[] | undefined | null
+
+function isValidHexArray(colorValues: RGBColorInput): asserts colorValues is number[] {
+    if (!colorValues) throw new Error()
+    if (colorValues.length !== 3) throw new Error()
+    colorValues.forEach((numberString) => isValidHexNumber(numberString))
 }
 
-function isValidHexNumber(numberString: string | null): asserts numberString is string{
-    if (!numberString) throw new Error()
-    const parsed = parseInt(numberString, 10)
-    if (parsed.toString() !== numberString) throw new Error()
-    if (parsed < 0 || 255 < parsed) throw new Error()
+function isValidHexNumber(colorValue: number | null): asserts colorValue is number{
+    if (!colorValue) throw new Error()
+    if (colorValue < 0 || 255 < colorValue) throw new Error()
 }
 
-export function getFontColorArray(numberStrings: (string | null)[] | undefined | null, fallbackColor: number[]) {
+export function getFontColorArray(colorValues: RGBColorInput, fallbackColor: number[]) {
     try {
-        isValidHexArray(numberStrings)
-        return numberStrings.map((numberString) => Number(numberString))
+        isValidHexArray(colorValues)
+        return colorValues
     } catch (e: unknown) {
         return fallbackColor
     }

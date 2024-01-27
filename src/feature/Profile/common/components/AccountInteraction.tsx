@@ -1,23 +1,26 @@
+/* hooks */
+import { useTranslation } from "react-i18next";
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 /* components */
 import Button from "$lib/components/common/Button";
 import MoreIcon from "$lib/components/icons/More";
 /* constants */
-import PROFILE from '$lib/constants/components/Profile';
+import PROFILE from '$feature/Profile/common/constants';
 /* utils */
 import { calcFontColorByBG, getFontColorArray } from "$lib/utils/luminance";
 /* styles */
-import "$lib/style/profile/header/account.scss"
+import "./style/accountIneraction.scss"
 
-interface AccountInfoProps extends DBProfiles {
+interface AccountInteractionButtonsProps extends DBProfiles {
     id: string
-    mutable_id?: string | null
-    preference?: (string | null)[] | null
+    preference?: (number | null)[] | null
 }
 
-export default function AccountInfo(props: IHeaderProfileProps<AccountInfoProps>) {
-    const { profile, settings, action } = props
+export default function AccountInteraction(props: IHeaderProfileProps<AccountInteractionButtonsProps>) {
+    const { t } = useTranslation();
+    const { profile, action } = props
+    
     const buttonBackground = getFontColorArray(profile.preference, PROFILE.DEFAULT_VALUES.buttonColor) 
     const fontColor = calcFontColorByBG(buttonBackground)
     const buttonStyle = {
@@ -26,21 +29,13 @@ export default function AccountInfo(props: IHeaderProfileProps<AccountInfoProps>
     }
 
     return (
-        <div className="account-info-container">
-            <span className="header-mutable-id">
-                <button 
-                    className={`${action?.handleClickProfile ? 'pointer' : ''}`}
-                    onClick={action?.handleClickProfile}
-                >
-                    {profile?.mutable_id || profile.id?.slice(0, 6)}
-                </button>
-            </span>
+        <div className="account-interaction-container">
             {action && action.handleFollow && 
                 <Button 
                     style={buttonStyle} 
                     onClick={action.handleFollow}
                 >
-                    {PROFILE.BUTTON_LABEL.follow[settings.lang]}
+                    {t('header.followButtonLabel')}
                 </Button>
             }
             {action && action.handleShowMore && 

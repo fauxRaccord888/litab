@@ -1,13 +1,14 @@
+/* hooks */
+import { useTranslation } from "react-i18next"
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 import type { FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/graphql/__generated__/graphql"
 /* constants */
-import PROFILE from "$lib/constants/components/Profile"
+import PROFILE from "$feature/Profile/common/constants"
 /* utils */
-import { objectKeys } from "$lib/utils/objectKeys"
 import { calcCollectionLength } from "$lib/utils/graphql"
 /* styles */
-import '$lib/style/profile/header/following.scss'
+import "./style/following.scss"
 
 interface FollowingInfoProps extends DBProfiles {
     followings?: FollowingsMiniProfileFragment | null,
@@ -16,8 +17,10 @@ interface FollowingInfoProps extends DBProfiles {
 }
 
 export default function FollowingInfo(props: IHeaderProfileProps<FollowingInfoProps>) {
-    const { profile, action, settings } = props
-    const keys = objectKeys(PROFILE.FOLLOWING_INFO) // ['followings', 'followers', 'posts']
+    const { t } = useTranslation()
+    const { profile, action } = props
+
+    const keys = PROFILE.FOLLOWING_INFO // ['followings', 'followers', 'posts']
     return (
         <div className="following-info-container">
             {keys.map((key) => {
@@ -26,7 +29,7 @@ export default function FollowingInfo(props: IHeaderProfileProps<FollowingInfoPr
 
                 return (
                     <div key={key} className="following-info" >
-                        <span>{PROFILE.FOLLOWING_INFO[key]?.[settings.lang]}</span>
+                        <span>{t(`header.count.${key}`)}</span>
                         <button 
                             className={`${disabled ? '' : 'pointer'}`}
                             disabled={disabled}

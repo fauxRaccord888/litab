@@ -1,4 +1,4 @@
-import type { DBProfiles, IHeaderProfileProps } from "$lib/types/components/Profile/Header"
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 import Main from "./Main"
 
 const errorProfile = (errorMessage: string): DBProfiles =>  ({
@@ -23,7 +23,8 @@ export default function ErrorComponent(props: {error: unknown}) {
 
     const errorProps: IHeaderProfileProps = {
         profile,
-        mutualFollower: [],
+        id: profile.id,
+        mutualFollowers: [],
         action: {},
         settings: {lang: 'kr'}
     }
