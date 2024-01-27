@@ -1,0 +1,13 @@
+{
+    "header": {
+        "count": {
+            "followings": "팔로우",
+            "followers": "팔로워",
+            "posts": "게시물"
+        },
+        "followButtonLabel": "팔로우",
+        
+        "followedBy_one": "<0>{{ mutualFollowers }}</0>이 팔로우하고 있습니다",
+        "followedBy_other": "<0>{{ mutualFollowers }}</0> 외 {{ count }}명이 팔로우하고 있습니다."
+    }
+}

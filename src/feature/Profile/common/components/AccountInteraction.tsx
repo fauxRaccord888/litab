@@ -1,3 +1,5 @@
+/* hooks */
+import { useTranslation } from "react-i18next";
 /* types */
 import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 /* components */
@@ -16,8 +18,9 @@ interface AccountInteractionButtonsProps extends DBProfiles {
 }
 
 export default function AccountInteraction(props: IHeaderProfileProps<AccountInteractionButtonsProps>) {
-
-    const { profile, action, settings } = props
+    const { t } = useTranslation();
+    const { profile, action } = props
+    
     const buttonBackground = getFontColorArray(profile.preference, PROFILE.DEFAULT_VALUES.buttonColor) 
     const fontColor = calcFontColorByBG(buttonBackground)
     const buttonStyle = {
@@ -32,7 +35,7 @@ export default function AccountInteraction(props: IHeaderProfileProps<AccountInt
                     style={buttonStyle} 
                     onClick={action.handleFollow}
                 >
-                    {PROFILE.BUTTON_LABEL.follow[settings.lang]}
+                    {t('header.followButtonLabel')}
                 </Button>
             }
             {action && action.handleShowMore && 

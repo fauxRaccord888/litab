@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Router, RouterProvider } from '@tanstack/react-router'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { Provider } from 'react-redux'
 import { Toaster } from "react-hot-toast"
 import { ApolloProvider } from '@apollo/client'
@@ -10,8 +10,9 @@ import { routeTree } from './routeTree.gen.ts'
 import apolloClient from '$lib/graphql/apolloClient.ts'
 
 import './App.scss'
+import './locales/i18n.ts'
 
-const router = new Router({
+const router = createRouter({
   routeTree,
   context: {
     apolloClient,
