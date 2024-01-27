@@ -1,19 +1,26 @@
-import type { IHeaderProfileProps } from "$feature/Profile/types";
-import type { PropsWithStatus } from "$lib/types/components";
+import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types";
 
-import AccountInfo from "$feature/Profile/common/components/AccountInfo";
-import ProfileImage from "$feature/Profile/common/components/ProfileImage";
+import ProfileImage from "../common/components/ProfileImage";
+import AccountInfo from "../common/components/AccountInfo";
+import AccountInteraction from "../common/components/AccountInteraction";
+
 import "./style/index.scss"
 
-export default function MiniProfile(props: PropsWithStatus<IHeaderProfileProps>) {
-    if (props.status === 'error') return null
-    if (props.status === 'pending') return null
+interface MiniProfileProps extends DBProfiles {
+    id: string,
+    mutable_id?: string | null,
+}
+
+export default function MiniProfile(props: IHeaderProfileProps<MiniProfileProps>) {
     return (
         <div className="mini-profile-container">
-            <div className="profile-image-outer-container">
+            <div className="profile-container">
                 <ProfileImage {...props}/>
+                <AccountInfo {...props}/>
             </div>
-            <AccountInfo {...props}/>
+            <div className="interaction-container">
+                <AccountInteraction {...props}/>
+            </div>
         </div>
     )
 }
