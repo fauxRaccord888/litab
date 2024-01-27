@@ -1,5 +1,5 @@
 /* routes */
-import { FileRoute } from "@tanstack/react-router"
+import { createFileRoute } from "@tanstack/react-router"
 /* hooks */
 import { useDispatch, useSelector } from "react-redux"
 import { useRegisterOnAuthHandler } from "$lib/hooks/mutation"
@@ -12,7 +12,7 @@ import type { RegisterState } from "$lib/stores/registerSlice"
 import { inputFields } from "./-fields"
 import Form from "$lib/components/common/Form"
 
-export const Route = new FileRoute('/_guest/account/register/').createRoute({
+export const Route = createFileRoute('/_guest/account/register/')({
   component: Register
 })
 

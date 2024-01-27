@@ -1,5 +1,5 @@
 /* routes */
-import { FileRoute } from "@tanstack/react-router"
+import { createFileRoute } from "@tanstack/react-router"
 /* hooks */
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -16,7 +16,7 @@ import Carousel from "$lib/components/common/Carousel"
 /* utils */
 import { message } from "$lib/constants/components/Register"
 
-export const Route = new FileRoute('/_auth/preference/').createRoute({
+export const Route = createFileRoute('/_auth/preference/')({
     loader: () => fetchPreferenceTest_DB(),
     component: Preference
   })  

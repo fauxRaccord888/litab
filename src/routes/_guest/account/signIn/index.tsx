@@ -1,5 +1,5 @@
 /* routes */
-import { FileRoute } from "@tanstack/react-router"
+import { createFileRoute } from "@tanstack/react-router"
 /* hooks */
 import { useDispatch, useSelector } from "react-redux"
 import { useSignInHandler } from "$lib/hooks/mutation"
@@ -12,8 +12,8 @@ import type { SignInState } from "$lib/stores/signInSlice"
 import { inputFields } from "./-fields"
 import Form from "$lib/components/common/Form"
 
-export const Route = new FileRoute('/_guest/account/signIn/').createRoute({
-  component: SignIn
+export const Route = createFileRoute('/_guest/account/signIn/')({
+    component: SignIn
 })
 
 type SignInKey = keyof SignInState

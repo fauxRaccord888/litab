@@ -1,5 +1,5 @@
 /* routes */
-import { FileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 /* hooks */
 import { useSelector } from "react-redux";
 import { useSignOutHandler } from "$lib/hooks/mutation";
@@ -10,7 +10,7 @@ import Button from "$lib/components/common/Button";
 /* utils */
 import { rgba } from "$lib/utils/rgba";
 
-export const Route = new FileRoute('/').createRoute({
+export const Route = createFileRoute('/')({
     component: Home
 })
 
