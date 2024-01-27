@@ -1,0 +1,8 @@
+.user-collection-list-container {
+    display: flex;
+    flex-direction: column;
+    
+    > :not(:first-child) {
+        padding-top: 0.5rem;
+    }
+}
