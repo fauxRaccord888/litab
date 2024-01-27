@@ -23,7 +23,8 @@ export default function ErrorComponent(props: {error: unknown}) {
 
     const errorProps: IHeaderProfileProps = {
         profile,
-        mutualFollower: [],
+        id: profile.id,
+        mutualFollowers: [],
         action: {},
         settings: {lang: 'kr'}
     }

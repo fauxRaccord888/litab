@@ -30,8 +30,9 @@ export const Route = createFileRoute('/profile/$mutableId')({
 function Profile() {
     const data  = Route.useLoaderData()
     const profileProps: IHeaderProfileProps<DBProfiles> = {
+        id: data.id,
         profile: data,
-        mutualFollower: ['foo', 'bar', 'baz'],
+        mutualFollowers: ['foo', 'bar', 'baz'],
         settings: {
             lang: 'kr'
         },

@@ -8,8 +8,9 @@ export type ProfileForeignTableKeys = 'followings' | 'followers' | 'posts';
 type ShowFollowingDetailsActions = Record<ProfileForeignTableKeys, () => void>
 
 export type IHeaderProfileProps<T=DBProfiles> = {
+    id: string,
     profile: T,
-    mutualFollower?: string[],
+    mutualFollowers?: string[],
     action?: {
         handleClickProfile?: () => void
         handleFollow?: () => void

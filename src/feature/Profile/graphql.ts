@@ -8,12 +8,10 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment FollowingsMiniProfile on followingsConnection {
+    fragment FollowingsMiniProfile on usersConnection {
         edges {
             node {
-                users {
-                    ...MiniProfile
-                }
+              ...MiniProfile
             }
         }
     }
