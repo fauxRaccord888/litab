@@ -19,7 +19,7 @@ interface AccountInteractionButtonsProps extends DBProfiles {
 
 export default function AccountInteraction(props: IHeaderProfileProps<AccountInteractionButtonsProps>) {
     const { t } = useTranslation();
-    const { profile, action } = props
+    const { id, profile, action } = props
     
     const buttonBackground = getFontColorArray(profile.preference, PROFILE.DEFAULT_VALUES.buttonColor) 
     const fontColor = calcFontColorByBG(buttonBackground)
@@ -28,19 +28,29 @@ export default function AccountInteraction(props: IHeaderProfileProps<AccountInt
         '--font-color': fontColor
     }
 
+    const handleFollow = () => {
+        if (!action?.handleFollow) return
+        action.handleFollow(id)
+    }
+
+    const handleShowMore = () => {
+        if (!action?.handleShowMore) return
+        action.handleShowMore(id)
+    }
+
     return (
         <div className="account-interaction-container">
             {action && action.handleFollow && 
                 <Button 
                     style={buttonStyle} 
-                    onClick={action.handleFollow}
+                    onClick={handleFollow}
                 >
                     {t('header.followButtonLabel')}
                 </Button>
             }
             {action && action.handleShowMore && 
                 <div className="more-action-icon-container">
-                    <Button icon onClick={action.handleShowMore}>
+                    <Button icon onClick={handleShowMore}>
                         <MoreIcon />
                     </Button>
                 </div>

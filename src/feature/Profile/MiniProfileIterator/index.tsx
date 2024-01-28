@@ -10,7 +10,7 @@ interface MiniProfileIteratorProps {
     items : FollowingsMiniProfileFragment,
     action: {
         handleFollow?: (id: string) => void,
-        handleClickProfile?: (id: string) => void
+        handleShowProfile?: (id: string) => void
     },
 }
 
@@ -24,7 +24,7 @@ export default function MiniProfileIterator(props: PropsWithStatus<MiniProfileIt
         profile: edge.node,
         action: {
             handleFollow: props.action?.handleFollow,
-            handleClickProfile: props.action?.handleClickProfile
+            handleShowProfile: props.action?.handleShowProfile
         }
     }))
 
