@@ -2,7 +2,7 @@ import type { IHeaderProfileProps } from "$feature/Profile/types";
 import type { PropsWithStatus } from "$lib/types/components";
 import type { FollowingsMiniProfileFragment } from "$lib/graphql/__generated__/graphql";
 
-import MiniProfile from "$feature/Profile/MiniProfile";
+import MiniProfile from "../MiniProfile";
 import ItemIterator from "$lib/components/common/ItemIterator";
 import './style/miniProfileIterator.scss'
 

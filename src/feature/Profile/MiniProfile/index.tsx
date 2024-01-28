@@ -1,8 +1,8 @@
 import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types";
 
-import ProfileImage from "../common/components/ProfileImage";
-import AccountInfo from "../common/components/AccountInfo";
-import AccountInteraction from "../common/components/AccountInteraction";
+import ProfileImage from "../components/ProfileImage";
+import AccountInfo from "../components/AccountInfo";
+import AccountInteraction from "../components/AccountInteraction";
 
 import "./style/index.scss"
 
