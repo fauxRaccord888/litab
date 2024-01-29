@@ -8,11 +8,11 @@ import { checkSessionUser, checkTableUser } from '$feature/auth/function'
 
 import Layout from '$lib/layout/Layout'
 import LeftSideBar from '$lib/components/NavigationBar/LeftSideBar'
-import AuthLayout from '$lib/layout/AuthLayout'
+import Modal from '$feature/Modal'
 
 export const Route = rootRouteWithContext<{
-  store: AppStore
-  apolloClient: ApolloClient<NormalizedCacheObject>
+    store: AppStore
+    apolloClient: ApolloClient<NormalizedCacheObject>
 }>()({
     beforeLoad: async ({ context }) => {
         const { store, apolloClient } = context
@@ -23,12 +23,11 @@ export const Route = rootRouteWithContext<{
 })
 
 function RootComponent() {
-  return (
-    <Layout
-      left={<LeftSideBar />}
-    >
-      <Outlet />
-      <TanStackRouterDevtools />
-    </Layout>
+    return (
+        <Layout left={<LeftSideBar />} >
+            <Modal />
+            <Outlet />
+            <TanStackRouterDevtools />
+        </Layout>
   )
 }
