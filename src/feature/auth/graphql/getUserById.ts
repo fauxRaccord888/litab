@@ -5,7 +5,10 @@ export const getUserById_GRAPHQL = graphql(/* GraphQL */ `
         usersCollection(filter: { id: {eq: $id } }) {
             edges {
                 node {
-                    ...MiniProfile,
+                    id,
+                    mutable_id,
+                    nickname,
+                    preference,
                 }
             }
         }
