@@ -18,14 +18,19 @@ interface FollowingInfoProps extends DBProfiles {
 
 export default function FollowingInfo(props: IHeaderProfileProps<FollowingInfoProps>) {
     const { t } = useTranslation()
-    const { profile, action } = props
+    const { id, profile, action } = props
 
     const keys = PROFILE.FOLLOWING_INFO // ['followings', 'followers', 'posts']
     return (
         <div className="following-info-container">
             {keys.map((key) => {
-                const showDetail = action?.handleShowFollowingsInfo?.[key]
+
                 const disabled = !(action?.handleShowFollowingsInfo?.[key]) || !(profile?.[key]) 
+                const handleShowDetail = () => {
+                    const handler = action?.handleShowFollowingsInfo?.[key]
+                    if (!handler) return
+                    handler(id)
+                }
 
                 return (
                     <div key={key} className="following-info" >
@@ -33,7 +38,7 @@ export default function FollowingInfo(props: IHeaderProfileProps<FollowingInfoPr
                         <button 
                             className={`${disabled ? '' : 'pointer'}`}
                             disabled={disabled}
-                            onClick={showDetail}
+                            onClick={handleShowDetail}
                         >
                             <span><em>{calcCollectionLength(profile[key])}</em></span>
                         </button>

@@ -10,14 +10,19 @@ interface AccountInfoProps extends DBProfiles {
 }
 
 export default function AccountInfo(props: IHeaderProfileProps<AccountInfoProps>) {
-    const { profile, action } = props
+    const { id, profile, action } = props
+
+    const handleShowProfile = () => {
+        if (!action?.handleShowProfile) return
+        action?.handleShowProfile(id)
+    }
 
     return (
         <div className="account-info-container">
             <span className="header-mutable-id">
                 <button 
-                    className={`${action?.handleClickProfile ? 'pointer' : ''}`}
-                    onClick={action?.handleClickProfile}
+                    className={`${action?.handleShowProfile ? 'pointer' : ''}`}
+                    onClick={handleShowProfile}
                 >
                     {profile?.mutable_id || profile.id?.slice(0, 6)}
                 </button>

@@ -15,12 +15,17 @@ interface DescriptionInfoProps extends DBProfiles {
 }
 
 export default function DescriptionInfo(props: IHeaderProfileProps<DescriptionInfoProps>) {
-    const { profile, action, mutualFollowers } = props
+    const { id, profile, action, mutualFollowers } = props
     const mutualFollowerDisplayCount = PROFILE.DEFAULT_VALUES.mutualFollowerDisplayCount
 
     const totalMutualFollowerCount = mutualFollowers?.length ?? 0
     const displayedMutualFollowers = mutualFollowers?.slice(0, mutualFollowerDisplayCount)
     const additionalCount = Math.max(totalMutualFollowerCount - mutualFollowerDisplayCount, 0)
+
+    const handleShowMutualFollowing = () => {
+        if (!action?.handleShowMutualFollowing) return
+        action?.handleShowMutualFollowing(id)
+    }
 
     return (
         <div className="description-info-container">
@@ -32,7 +37,7 @@ export default function DescriptionInfo(props: IHeaderProfileProps<DescriptionIn
             }
             {mutualFollowers && !!mutualFollowers?.length && action?.handleShowMutualFollowing &&
                 <span className="mutual-follower">
-                    <button onClick={action.handleShowMutualFollowing}>
+                    <button onClick={handleShowMutualFollowing}>
                         <Trans
                             i18nKey="header.followedBy" 
                             values={{ 
