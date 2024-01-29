@@ -2,12 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { User as SessionUser } from '@supabase/supabase-js';
-import type { Tables } from '$lib/types/supabase';
+import type { GetUserByIdQuery } from '$lib/graphql/__generated__/graphql';
+import type { FirstNodeOfCollection } from '$lib/types/graphql';
 
-type User = Tables<'profiles'>
+type UserNode = FirstNodeOfCollection<GetUserByIdQuery["usersCollection"]>
 export interface AuthState {
-    sessionUser: SessionUser | null | undefined
-    user: User | null | undefined
+    sessionUser: SessionUser | null
+    user: UserNode | null
 }
 
 const initialState: AuthState = { 
@@ -19,10 +20,10 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<User | undefined>) {
+    setUser(state, action: PayloadAction<UserNode | null>) {
       state.user = action.payload
     },
-    setSessionUser(state, action: PayloadAction<SessionUser | undefined>) {
+    setSessionUser(state, action: PayloadAction<SessionUser | null>) {
       state.sessionUser = action.payload
     },
     resetUserInfo(state) {
