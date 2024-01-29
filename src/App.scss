@@ -1,9 +1,4 @@
 @import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
-
-@import "./lib/style/common/carousel.scss";
-@import "./lib/style//common/form.scss";
-@import "./lib/style/register.scss";
-
 @import "./lib//style/atomic.scss";
 
 body {
@@ -41,43 +36,4 @@ input {
     --primary: 255, 69, 56;
 
     color: rgb(var(--font-color))
-}
-
-.main-container {
-    min-height: 100vh;
-    min-width: 90vw;
-    display: flex;
-    font-family: "Wanted Sans Variable";
-
-    .left-sidebar-section {
-        display: none;
-        background-color: rgb(var(--background-color));
-        @media only screen and (min-width: 500px) {
-            display: inline;
-            min-width: 100px;
-        }
-        @media only screen and (min-width: 1200px) {
-            display: inline;
-            min-width: 250px;
-       }
-    }
-
-    .main-section {
-        flex-grow: 1;
-        background-color: rgb(var(--background-color));
-        @media only screen and (min-width: 500px) {
-            display: inline;
-            width: 400px;
-            flex-grow: 1;
-        }
-    }
-    
-    .right-sidebar-section {
-        display: none;
-        background-color: rgb(var(--background-color));
-        @media only screen and (min-width: 1200px) {
-            display: inline;
-            min-width: 250px;
-       }
-   }
 }

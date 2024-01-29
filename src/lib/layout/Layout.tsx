@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactNode } from "react"
+import './style/layout.scss'
 
 interface LayoutProps extends PropsWithChildren{
     left?: ReactNode

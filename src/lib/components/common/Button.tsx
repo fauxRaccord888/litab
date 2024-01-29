@@ -1,5 +1,5 @@
 import type { CSSProperties, MouseEventHandler, PropsWithChildren } from "react";
-import '$lib/style/common/button.scss'
+import './style/button.scss'
 
 interface ButtonStyle extends CSSProperties {
     '--bg-color'?: string

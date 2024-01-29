@@ -1,4 +1,4 @@
-import "$lib/style/common/pendingImage.scss"
+import "./style/pendingImage.scss"
 
 export default function PendingImage(props: {className?: string}) {
     return (

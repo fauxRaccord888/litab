@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PropsWithChildrenNode } from "$lib/types/components";
+import './style/carousel.scss'
 
 export default function Carousel(props: PropsWithChildrenNode) {
     const [selected, setSelected] = useState(0)
