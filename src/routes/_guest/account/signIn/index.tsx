@@ -1,50 +1,54 @@
-/* routes */
-import { createFileRoute } from "@tanstack/react-router"
+/* route */
+import { createFileRoute } from '@tanstack/react-router'
 /* hooks */
-import { useDispatch, useSelector } from "react-redux"
-import { useSignInHandler } from "$lib/hooks/mutation"
+import { useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import { useLazyQuery } from "@apollo/client"
+/* Mutation (hooks)*/
+import { useSignInOnAuthMutation } from '$feature/auth/hooks'
+import { getUserById_GRAPHQL } from "$feature/auth/graphql"
+/* store */
+import { setSessionUser, setUser } from "$lib/stores/authSlice"
 /* types */
-import type { FormEventHandler } from "react"
-import type { AppDispatch, AppRootState } from "$lib/stores/store"
-import type { HydratedInputProps } from "$lib/components/common/Form"
-import type { SignInState } from "$lib/stores/signInSlice"
-/* components & data */
-import { inputFields } from "./-fields"
-import Form from "$lib/components/common/Form"
+import type { AppDispatch } from "$lib/stores/store"
+import type { GetUserByIdQuery } from "$lib/graphql/__generated__/graphql"
+/* utils */
+import { getFirstNodeOfCollection } from "$lib/utils/graphql"
+/* components */
+import SignInComponent from "$feature/SignIn"
 
 export const Route = createFileRoute('/_guest/account/signIn/')({
     component: SignIn
 })
 
-type SignInKey = keyof SignInState
 export default function SignIn() {
-  const state = useSelector((state: AppRootState) => state.signIn)
-  const dispatch = useDispatch<AppDispatch>()
-  const signInHandler = useSignInHandler()
+    const dispatch = useDispatch<AppDispatch>()
+    const [authMutation, authStatus] = useSignInOnAuthMutation()
+    const [tableQuery, tableStatus] = useLazyQuery<GetUserByIdQuery>(getUserById_GRAPHQL)
 
-  const handleSubmit: FormEventHandler = (e) => {
-    e.preventDefault()
-    signInHandler()
-  }
+    const { loading: authLoading, error: authError, data: authData } = authStatus 
+    const { loading: tableLoading, error: tableError, data: tableData } = tableStatus
 
-  const disabled = inputFields.some((item) => state[item.key] === '')
+    useEffect(() => {
+        if (authData?.id) {
+            tableQuery({ variables: { id: authData.id } })
+            dispatch(setSessionUser(authData))
+        }
+    }, [authData, dispatch, tableQuery])
 
-  const hydratedInputFields: HydratedInputProps<SignInKey>[] = inputFields.map((item) => ({
-    ...item,
-    value: state[item.key],
-    onChange: (e) => dispatch(item.action(e.target.value))
-  }))
+    useEffect(() => {
+        const firstNode = getFirstNodeOfCollection(tableData?.usersCollection)
+        if (tableData && firstNode) {
+            dispatch(setUser(firstNode))
+            //TODO ROUTER PUSH
+        }
+    }, [tableData, dispatch])
+        
 
-  return (
-    <div className="register-outer-container">
-      <div className="register-inner-container">
-        <h2>로그인</h2>
-        <Form 
-          handleSubmit={handleSubmit}
-          hydratedInputFields={hydratedInputFields}
-          disabled={disabled}
-        />
-      </div>
-    </div>
-  )
+    if (authLoading || tableLoading) return null
+    if (authError || tableError) return null
+
+    return (
+        <SignInComponent authMutation={authMutation}/>
+    )
 }
