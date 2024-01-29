@@ -2,14 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import registerReducer from "./registerSlice"
 import signInSliceReducer from "./signInSlice";
-import preferenceReducer from "./preferenceSlice"
+import modalReducer from "./modalSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
         register: registerReducer,
         signIn: signInSliceReducer,
-        preference: preferenceReducer
+        modal: modalReducer
     }
 })
 

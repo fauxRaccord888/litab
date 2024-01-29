@@ -1,6 +1,6 @@
-import { FileRoute, redirect } from "@tanstack/react-router"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 
-export const Route = new FileRoute('/_guest').createRoute({
+export const Route = createFileRoute('/_guest')({
     beforeLoad: ({ context }) => {
       const { auth } = context.store.getState()
       if (auth.sessionUser) {

@@ -1,4 +1,9 @@
-import { LUMINANCE } from "$lib/types/utils"
+const LUMINANCE = {
+    RED_MULTIPLIER: 0.299,
+    GREEN_MULTIPLIER: 0.587,
+    BLUE_MULTIPLIER: 0.114,
+    FONT_COLOR_THRESHOLD: 186
+}
 
 // by Mark Ransom
 // https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color

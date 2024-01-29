@@ -2,7 +2,7 @@
 import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 import type { PropsWithChildren } from "react";
 /* constants */
-import PROFILE from "$feature/Profile/common/constants"
+import PROFILE from "$feature/Profile/constants"
 /* styles */
 import "./style/description.scss"
 /* locale */

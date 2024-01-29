@@ -6,7 +6,7 @@ import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 import Button from "$lib/components/common/Button";
 import MoreIcon from "$lib/components/icons/More";
 /* constants */
-import PROFILE from '$feature/Profile/common/constants';
+import PROFILE from '$feature/Profile/constants';
 /* utils */
 import { calcFontColorByBG, getFontColorArray } from "$lib/utils/luminance";
 /* styles */

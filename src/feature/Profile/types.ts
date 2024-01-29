@@ -1,5 +1,4 @@
 import { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
-import type { SettingsLangOption } from '$lib/types/settings';
 import type { FirstNodeOfCollection } from '$lib/types/graphql';
 
 export type DBProfiles = FirstNodeOfCollection<GetProfileByMutableIdQuery["usersCollection"]>
@@ -17,8 +16,5 @@ export type IHeaderProfileProps<T=DBProfiles> = {
         handleShowMore?: (id: string) => void
         handleShowMutualFollowing?: (id: string) => void
         handleShowFollowingsInfo?: Partial<ShowFollowingDetailsActions>
-    },
-    settings: {
-        lang: keyof SettingsLangOption
     }
 }

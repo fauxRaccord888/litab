@@ -17,13 +17,11 @@ export const Route = rootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <AuthLayout>
-      <Layout
-        left={<LeftSideBar />}
-      >
-        <Outlet />
-        <TanStackRouterDevtools />
-      </Layout>
-    </AuthLayout>
+    <Layout
+      left={<LeftSideBar />}
+    >
+      <Outlet />
+      <TanStackRouterDevtools />
+    </Layout>
   )
 }

@@ -9,12 +9,6 @@ export default function LeftSideBar() {
             </h2>
         </Link>
 
-        <Link to="/preference">
-            <h2>
-                preference
-            </h2>
-        </Link>
-
         <Link to="/account/register">
             <h2>
                 register

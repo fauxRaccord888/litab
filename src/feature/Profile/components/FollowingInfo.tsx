@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
 import type { FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/graphql/__generated__/graphql"
 /* constants */
-import PROFILE from "$feature/Profile/common/constants"
+import PROFILE from "$feature/Profile/constants"
 /* utils */
 import { calcCollectionLength } from "$lib/utils/graphql"
 /* styles */

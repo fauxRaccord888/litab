@@ -7,7 +7,7 @@
         },
         "followButtonLabel": "follow",
     
-        "followedBy_one": "Followed By <0>{{ mutualFollowers }}</0>",
-        "followedBy_other": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
+        "followedBy_zero": "Followed By <0>{{ mutualFollowers }}</0>",
+        "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
     }
 }
