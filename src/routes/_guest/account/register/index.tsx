@@ -1,56 +1,54 @@
-/* routes */
-import { createFileRoute } from "@tanstack/react-router"
+/* route */
+import { createFileRoute } from '@tanstack/react-router'
 /* hooks */
-import { useDispatch, useSelector } from "react-redux"
-import { useRegisterOnAuthHandler } from "$lib/hooks/mutation"
+import { useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import { useMutation } from "@apollo/client"
+/* Mutation (hooks)*/
+import { useRegisterOnAuthMutation } from "$feature/auth/hooks"
+import { registerUser_GRAPHQL } from "$feature/auth/graphql"
+/* store */
+import { setSessionUser, setUser } from "$lib/stores/authSlice"
 /* types */
-import type { FormEventHandler } from "react"
-import type { AppDispatch, AppRootState } from "$lib/stores/store"
-import type { HydratedInputProps } from "$lib/components/common/Form"
-import type { RegisterState } from "$lib/stores/registerSlice"
-/* components & data */
-import { inputFields } from "./-fields"
-import Form from "$lib/components/common/Form"
+import type { AppDispatch } from "$lib/stores/store"
+import type { RegisterUserMutation } from "$lib/graphql/__generated__/graphql"
+/* utils */
+import { getFirstRecordOfResponse } from "$lib/utils/graphql"
+/* components */
+import RegisterComponent from "$feature/Register"
 
 export const Route = createFileRoute('/_guest/account/register/')({
-  component: Register
+    component: Register
 })
 
-type RegisterKey = keyof RegisterState
 export default function Register() {
-  const state = useSelector((state: AppRootState) => state.register)
-  const dispatch = useDispatch<AppDispatch>()
-  const registerHandler = useRegisterOnAuthHandler()
+    const dispatch = useDispatch<AppDispatch>()
+    const [authMutation, authStatus] = useRegisterOnAuthMutation()
+    const [tableMutation, tableStatus] = useMutation<RegisterUserMutation>(registerUser_GRAPHQL)
 
-  const handleSubmit: FormEventHandler = (e) => {
-    e.preventDefault()
-    registerHandler()
-  }
+    const { loading: authLoading, error: authError, data: authData } = authStatus 
+    const { loading: tableLoading, error: tableError, data: tableData } = tableStatus
 
-  const submitable = inputFields.every((item) => {
-    const regex = new RegExp(state[item.key].regex)
-    return regex.test(state[item.key].value)
-  })
-  //TODO register pending일 떄 disable? registerHook에 status 추가?
-  const disabled = !submitable
+    useEffect(() => {
+        if (authData?.id) {
+            tableMutation({ variables: { id: authData.id } })
+            dispatch(setSessionUser(authData))
+        }
+    }, [authData, dispatch, tableMutation])
 
-  const hydratedInputFields: HydratedInputProps<RegisterKey>[] = inputFields.map((item) => ({
-    ...item,
-    value: state[item.key].value,
-    regex: state[item.key].regex,
-    onChange: (e) => dispatch(item.action(e.target.value))
-  }))
+    useEffect(() => {
+        const firstRecord = getFirstRecordOfResponse(tableData?.insertIntousersCollection)
+        if (tableData && firstRecord) {
+            dispatch(setUser(firstRecord))
+            //TODO ROUTER PUSH
+        }
+    }, [tableData, dispatch])
+        
 
-  return (
-    <div className="register-outer-container">
-      <div className="register-inner-container">
-        <h2>회원가입</h2>
-        <Form 
-          handleSubmit={handleSubmit}
-          hydratedInputFields={hydratedInputFields}
-          disabled={disabled}
-        />
-      </div>
-    </div>
-  )
+    if (authLoading || tableLoading) return null
+    if (authError || tableError) return null
+
+    return (
+        <RegisterComponent authMutation={authMutation}/>
+    )
 }

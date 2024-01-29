@@ -9,5 +9,25 @@
     
         "followedBy_zero": "Followed By <0>{{ mutualFollowers }}</0>",
         "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
+    },
+
+    "register": {
+        "title": "register"
+    },
+
+    "signIn": {
+        "title": "sign in"
+    },
+    
+    "form": {
+        "email": {
+            "error": "please enter a valid email address",
+            "label": "email"
+        },
+        "password": {
+            "error": "A minimum 8 characters password contains a combination of uppercase and lowercase letter and number are required.",
+            "label": "password"
+        },
+        "submit": "submit"
     }
 }
