@@ -6,7 +6,7 @@ import MiniProfile from "../MiniProfile";
 import ItemIterator from "$lib/components/common/ItemIterator";
 import './style/miniProfileIterator.scss'
 
-interface MiniProfileIteratorProps {
+export interface MiniProfileIteratorProps {
     items : FollowingsMiniProfileFragment,
     action: {
         handleFollow?: (id: string) => void,

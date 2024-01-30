@@ -16,7 +16,7 @@ export default function MiniProfile(props: IHeaderProfileProps<MiniProfileProps>
         <div className="mini-profile-container">
             <div className="profile-container">
                 <ProfileImage {...props}/>
-                <AccountInfo {...props}/>
+                <AccountInfo mini {...props}/>
             </div>
             <div className="interaction-container">
                 <AccountInteraction {...props}/>

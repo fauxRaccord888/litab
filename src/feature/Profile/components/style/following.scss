@@ -9,6 +9,10 @@
         :not(:first-child) {
             margin-left: 0.25rem;
         }
+        a {
+            color: rgb(var(--font-color));
+            text-decoration: none;
+        }
         em {
             font-style: normal;
             font-weight: bold;

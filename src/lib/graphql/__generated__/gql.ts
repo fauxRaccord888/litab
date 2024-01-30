@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    mutation updateUser(\n        $id: UUID!,\n        $nickname: String,\n        $mutable_id: String,\n        $preference: [Int],\n        $description: String,\n    ) {\n        updateusersCollection(\n            filter: {id: {eq: $id}}\n            set: {\n                approved: true,\n                nickname: $nickname,\n                mutable_id: $mutable_id,\n                preference: $preference,\n                description: $description,\n            }\n        ) {\n            records {\n                id,\n                approved,\n                nickname,\n                mutable_id,\n                preference,\n                description,\n            }\n        }\n    }\n": types.UpdateUserDocument,
-    "\n    fragment MiniProfile on users {\n        mutable_id,\n        id\n    }\n": types.MiniProfileFragmentDoc,
+    "\n    fragment MiniProfile on users {\n        mutable_id,\n        nickname,\n        id\n    }\n": types.MiniProfileFragmentDoc,
     "\n    fragment FollowingsMiniProfile on usersConnection {\n        edges {\n            node {\n              ...MiniProfile\n            }\n        }\n    }\n": types.FollowingsMiniProfileFragmentDoc,
     "\n    fragment PostsMiniData on postsConnection {\n        edges {\n            node {\n                id\n                title\n            }\n        }\n    }\n": types.PostsMiniDataFragmentDoc,
     "\n    query GetProfileByMutableId($mutableId: String!) {\n        usersCollection(filter: { mutable_id: {eq: $mutableId } }) {\n            edges {\n                node {\n                    ...MiniProfile,\n                    description,\n                    nickname,\n                    preference,\n                    followers {\n                        ...FollowingsMiniProfile\n                    },\n                    followings {\n                        ...FollowingsMiniProfile\n                    },\n                    posts {\n                        ...PostsMiniData\n                    }\n                }\n            }\n        }\n    }\n": types.GetProfileByMutableIdDocument,
@@ -43,7 +43,7 @@ export function graphql(source: "\n    mutation updateUser(\n        $id: UUID!,
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    fragment MiniProfile on users {\n        mutable_id,\n        id\n    }\n"): (typeof documents)["\n    fragment MiniProfile on users {\n        mutable_id,\n        id\n    }\n"];
+export function graphql(source: "\n    fragment MiniProfile on users {\n        mutable_id,\n        nickname,\n        id\n    }\n"): (typeof documents)["\n    fragment MiniProfile on users {\n        mutable_id,\n        nickname,\n        id\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
