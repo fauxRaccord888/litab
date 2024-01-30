@@ -3,6 +3,7 @@ import { graphql } from "../../lib/graphql/__generated__"
 graphql(/* GraphQL */ `
     fragment MiniProfile on users {
         mutable_id,
+        nickname,
         id
     }
 `)
