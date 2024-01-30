@@ -29,5 +29,12 @@
             "label": "password"
         },
         "submit": "submit"
+    },
+
+    "modal": {
+        "title": {
+            "followers": "followers",
+            "followings": "followings"
+        }
     }
 }

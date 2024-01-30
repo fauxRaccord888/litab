@@ -1,5 +1,5 @@
 /* route */
-import { createFileRoute } from "@tanstack/react-router";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
 /* types */
 import type { PropsWithStatus } from "$lib/types/components";
 import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types";
@@ -48,6 +48,7 @@ function ProfileComponent(props: PropsWithStatus<IHeaderProfileProps>) {
     return (
         <div className="profile-container">
             <ProfileHeader {...props} />
+            <Outlet />
         </div>
     )
 }

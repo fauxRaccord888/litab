@@ -29,5 +29,12 @@
             "label": "비밀번호"
         },
         "submit": "제출"
+    },
+
+    "modal": {
+        "title": {
+            "followers": "팔로워",
+            "followings": "팔로잉"
+        }
     }
 }
