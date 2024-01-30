@@ -38,10 +38,6 @@ function Profile() {
             handleFollow: () => {},
             handleShowMore: () => {},
             handleShowMutualFollowing: () => {},
-            handleShowFollowingsInfo: {
-                followers: () => {},
-                followings: () => {}
-            }
         }
     }
     return <ProfileComponent status="success" {...profileProps}/>

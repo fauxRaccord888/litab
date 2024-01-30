@@ -8,7 +8,6 @@ import { checkSessionUser, checkTableUser } from '$feature/auth/function'
 
 import Layout from '$lib/layout/Layout'
 import LeftSideBar from '$lib/components/NavigationBar/LeftSideBar'
-import Modal from '$feature/Modal'
 
 export const Route = rootRouteWithContext<{
     store: AppStore
@@ -25,7 +24,6 @@ export const Route = rootRouteWithContext<{
 function RootComponent() {
     return (
         <Layout left={<LeftSideBar />} >
-            <Modal />
             <Outlet />
             <TanStackRouterDevtools />
         </Layout>
