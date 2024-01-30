@@ -1,5 +1,4 @@
 import type { AppStore } from "$lib/stores/store"
-import type { User } from "@supabase/supabase-js"
 import type { ApolloClient, NormalizedCacheObject } from "@apollo/client"
 import type { GetUserByIdQuery } from "$lib/graphql/__generated__/graphql"
 
@@ -10,14 +9,16 @@ import { getFirstNodeOfCollection } from "$lib/utils/graphql"
 export async function checkTableUser(payload: { 
     store: AppStore, 
     client: ApolloClient<NormalizedCacheObject>,
-    sessionUser: User, 
 }) {
-    const { store, client, sessionUser } = payload
+    const { store, client } = payload
+    const { auth } = store.getState()
+    if (auth.user && auth.user.id === auth.sessionUser?.id) return auth.user
+
     const { data } = await client.query<GetUserByIdQuery>({
         query: getUserById_GRAPHQL,
-        variables: { id: sessionUser?.id }
+        variables: { id: auth.sessionUser?.id }
     })
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
-    if (firstNode) store.dispatch(setUser(firstNode))
+    store.dispatch(setUser(firstNode))
     return firstNode
 }

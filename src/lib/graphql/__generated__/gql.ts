@@ -18,7 +18,7 @@ const documents = {
     "\n    fragment FollowingsMiniProfile on usersConnection {\n        edges {\n            node {\n              ...MiniProfile\n            }\n        }\n    }\n": types.FollowingsMiniProfileFragmentDoc,
     "\n    fragment PostsMiniData on postsConnection {\n        edges {\n            node {\n                id\n                title\n            }\n        }\n    }\n": types.PostsMiniDataFragmentDoc,
     "\n    query GetProfileByMutableId($mutableId: String!) {\n        usersCollection(filter: { mutable_id: {eq: $mutableId } }) {\n            edges {\n                node {\n                    ...MiniProfile,\n                    description,\n                    nickname,\n                    preference,\n                    followers {\n                        ...FollowingsMiniProfile\n                    },\n                    followings {\n                        ...FollowingsMiniProfile\n                    },\n                    posts {\n                        ...PostsMiniData\n                    }\n                }\n            }\n        }\n    }\n": types.GetProfileByMutableIdDocument,
-    "\n    query GetUserById($id: UUID!) {\n        usersCollection(filter: { id: {eq: $id } }) {\n            edges {\n                node {\n                    ...MiniProfile,\n                }\n            }\n        }\n    }\n": types.GetUserByIdDocument,
+    "\n    query GetUserById($id: UUID!) {\n        usersCollection(filter: { id: {eq: $id } }) {\n            edges {\n                node {\n                    id,\n                    mutable_id,\n                    nickname,\n                    preference,\n                }\n            }\n        }\n    }\n": types.GetUserByIdDocument,
     "\n    mutation registerUser($id: UUID!) {\n        insertIntousersCollection(objects: [\n            {id: $id},\n        ]) {\n            records {\n                id\n                mutable_id\n            }\n        }\n    }\n": types.RegisterUserDocument,
 };
 
@@ -59,7 +59,7 @@ export function graphql(source: "\n    query GetProfileByMutableId($mutableId: S
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query GetUserById($id: UUID!) {\n        usersCollection(filter: { id: {eq: $id } }) {\n            edges {\n                node {\n                    ...MiniProfile,\n                }\n            }\n        }\n    }\n"): (typeof documents)["\n    query GetUserById($id: UUID!) {\n        usersCollection(filter: { id: {eq: $id } }) {\n            edges {\n                node {\n                    ...MiniProfile,\n                }\n            }\n        }\n    }\n"];
+export function graphql(source: "\n    query GetUserById($id: UUID!) {\n        usersCollection(filter: { id: {eq: $id } }) {\n            edges {\n                node {\n                    id,\n                    mutable_id,\n                    nickname,\n                    preference,\n                }\n            }\n        }\n    }\n"): (typeof documents)["\n    query GetUserById($id: UUID!) {\n        usersCollection(filter: { id: {eq: $id } }) {\n            edges {\n                node {\n                    id,\n                    mutable_id,\n                    nickname,\n                    preference,\n                }\n            }\n        }\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

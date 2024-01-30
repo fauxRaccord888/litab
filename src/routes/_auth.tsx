@@ -1,13 +1,13 @@
 import { createFileRoute, redirect } from "@tanstack/react-router"
 
 export const Route = createFileRoute('/_auth')({
-    beforeLoad: ({ context }) => {
-      const { auth } = context.store.getState()
-      if (!auth.sessionUser) {
-        throw redirect({
-          to: '/account/signIn',
-        })
-      }
+    beforeLoad: async ({ context }) => {
+        const sessionUser = context.store.getState().auth.sessionUser
+        if (!sessionUser) {
+            throw redirect({
+                to: '/account/signIn',
+            })
+        }
     }
 })
   
