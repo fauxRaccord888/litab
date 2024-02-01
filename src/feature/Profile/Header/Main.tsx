@@ -1,4 +1,4 @@
-import type { IHeaderProfileProps } from "$feature/Profile/types"
+import type { DBProfiles } from "$feature/Profile/types"
 
 import ProfileImage from "../components/ProfileImage";
 import AccountInfo from "../components/AccountInfo";
@@ -6,7 +6,7 @@ import AccountInteraction from "../components/AccountInteraction";
 import FollowingInfo from "../components/FollowingInfo";
 import DescriptionInfo from "../components/DescriptionInfo";
 
-export default function Main(props: IHeaderProfileProps) {
+export default function Main(props: DBProfiles) {
     return (
         <div className="profile-header-container">
             <div className="profile-image-outer-container">
