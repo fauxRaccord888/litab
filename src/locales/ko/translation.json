@@ -5,7 +5,10 @@
             "followers": "팔로워",
             "posts": "게시물"
         },
-        "followButtonLabel": "팔로우",
+        "followButtonLabel": {
+            "follow": "팔로우",
+            "unfollow": "언팔로우"
+        },
         
         "followedBy_zero": "<0>{{ mutualFollowers }}</0>이 팔로우하고 있습니다",
         "followedBy": "<0>{{ mutualFollowers }}</0> 외 {{ additionalCount }}명이 팔로우하고 있습니다."
@@ -34,7 +37,9 @@
     "modal": {
         "title": {
             "followers": "팔로워",
-            "followings": "팔로잉"
+            "followings": "팔로잉",
+            "mutualFollowers": "함께 아는 사람",
+            "interaction": "추가 상호작용"
         }
     }
 }

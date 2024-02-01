@@ -5,7 +5,10 @@
             "followers": "follower",
             "posts": "post"
         },
-        "followButtonLabel": "follow",
+        "followButtonLabel": {
+            "follow": "follow",
+            "unfollow": "unfollow"
+        },
     
         "followedBy_zero": "Followed By <0>{{ mutualFollowers }}</0>",
         "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
@@ -34,7 +37,9 @@
     "modal": {
         "title": {
             "followers": "followers",
-            "followings": "followings"
+            "followings": "followings",
+            "mutualFollowers": "mutual followers",
+            "interaction": "interaction"
         }
     }
 }
