@@ -8,12 +8,10 @@ import { useMutation } from "@apollo/client"
 import { useRegisterOnAuthMutation } from "$feature/auth/hooks"
 import { registerUser_GRAPHQL } from "$feature/auth/graphql"
 /* store */
-import { setSessionUser, setUser } from "$lib/stores/authSlice"
+import { setSessionUser } from "$lib/stores/authSlice"
 /* types */
 import type { AppDispatch } from "$lib/stores/store"
 import type { RegisterUserMutation } from "$lib/graphql/__generated__/graphql"
-/* utils */
-import { getFirstRecordOfResponse } from "$lib/utils/graphql"
 /* components */
 import RegisterComponent from "$feature/Register"
 
@@ -27,23 +25,14 @@ export default function Register() {
     const [tableMutation, tableStatus] = useMutation<RegisterUserMutation>(registerUser_GRAPHQL)
 
     const { loading: authLoading, error: authError, data: authData } = authStatus 
-    const { loading: tableLoading, error: tableError, data: tableData } = tableStatus
+    const { loading: tableLoading, error: tableError } = tableStatus
 
     useEffect(() => {
         if (authData?.id) {
             tableMutation({ variables: { id: authData.id } })
             dispatch(setSessionUser(authData))
         }
-    }, [authData, dispatch, tableMutation])
-
-    useEffect(() => {
-        const firstRecord = getFirstRecordOfResponse(tableData?.insertIntousersCollection)
-        if (tableData && firstRecord) {
-            dispatch(setUser(firstRecord))
-            //TODO ROUTER PUSH
-        }
-    }, [tableData, dispatch])
-        
+    }, [authData, dispatch, tableMutation])        
 
     if (authLoading || tableLoading) return null
     if (authError || tableError) return null
