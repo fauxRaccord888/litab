@@ -1,6 +1,8 @@
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
+import type { DBProfiles } from "$feature/Profile/types"
 import type { PropsWithChildren } from "react";
+/* hooks */
+import { useMutualFollowers, useProfileNavigation } from "../hooks";
 /* constants */
 import PROFILE from "$feature/Profile/constants"
 /* styles */
@@ -9,33 +11,35 @@ import "./style/description.scss"
 import { Trans } from 'react-i18next';
 
 interface DescriptionInfoProps extends DBProfiles {
-    id: string,
     nickname?: string | null,
     description?: string | null
 }
 
-export default function DescriptionInfo(props: IHeaderProfileProps<DescriptionInfoProps>) {
-    const { id, profile, action, mutualFollowers } = props
+export default function DescriptionInfo(props: DescriptionInfoProps) {
+    const { id, mutable_id, nickname, followers, description } = props
+    const mutualFollowers = useMutualFollowers(id, followers)
+    const { mutualFollowers: handleShowMutualFollowers } = useProfileNavigation()
+    
     const mutualFollowerDisplayCount = PROFILE.DEFAULT_VALUES.mutualFollowerDisplayCount
-
-    const totalMutualFollowerCount = mutualFollowers?.length ?? 0
-    const displayedMutualFollowers = mutualFollowers?.slice(0, mutualFollowerDisplayCount)
+    const totalMutualFollowerCount = mutualFollowers.length
+    const displayedMutualFollowers = mutualFollowers
+        .slice(0, mutualFollowerDisplayCount)
+        .map((edge) => edge.node.mutable_id)
     const additionalCount = Math.max(totalMutualFollowerCount - mutualFollowerDisplayCount, 0)
 
     const handleShowMutualFollowing = () => {
-        if (!action?.handleShowMutualFollowing) return
-        action?.handleShowMutualFollowing(id)
+        handleShowMutualFollowers(mutable_id)
     }
 
     return (
         <div className="description-info-container">
-            {profile?.nickname &&
-                <span className="nickname"><em>{profile?.nickname}</em></span>
+            {nickname &&
+                <span className="nickname"><em>{nickname}</em></span>
             }
-            {profile?.description &&
-                <span className="description">{profile?.description}</span>
+            {description &&
+                <span className="description">{description}</span>
             }
-            {mutualFollowers && !!mutualFollowers?.length && action?.handleShowMutualFollowing &&
+            {mutualFollowers && !!mutualFollowers?.length && 
                 <span className="mutual-follower">
                     <button onClick={handleShowMutualFollowing}>
                         <Trans

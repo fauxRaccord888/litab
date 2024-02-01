@@ -6,6 +6,7 @@ import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/grap
 import { useQuery } from '@apollo/client';
 import { useNavigate } from "@tanstack/react-router"
 import { useTranslation } from 'react-i18next';
+import { useMutualFollowers } from '$feature/Profile/hooks';
 /* query */
 import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 /* router */
@@ -16,7 +17,7 @@ import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import ModalContainer from '$feature/Modal/components/ModalContainer';
 import MiniProfileIterator from '$feature/Profile/MiniProfileIterator';
 
-export const Route = createFileRoute('/profile/$mutableId/followings')({
+export const Route = createFileRoute('/profile/$mutableId/mutualFollowers')({
     component: FollowersModal
 })
 
@@ -24,24 +25,25 @@ function FollowersModal() {
     const params = Route.useParams()
     const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
+    const { mutualFollowers } = useMutualFollowers(firstNode?.id, firstNode?.followings)
     
-    if (loading) return <FollowingsModalComponent status="pending" />
-    if (error || !firstNode?.followings) return <FollowingsModalComponent status="error" error={error} />
-
+    if (loading) return <MutualFollowingModalComponent status="pending" />    
+    if (error || !firstNode || !mutualFollowers) return <MutualFollowingModalComponent status="error" error={error} />
+    
     return (
-        <FollowingsModalComponent 
+        <MutualFollowingModalComponent 
             status="success"
-            edges={firstNode.followings.edges}
+            edges={mutualFollowers}
         />
     )
 }
 
-function FollowingsModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) {
+function MutualFollowingModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.followings")
+    const title = t("modal.title.mutualFollowers")
     const handleClickClose = () => {
         navigate({to: "/profile/$mutableId", params: params})
     }

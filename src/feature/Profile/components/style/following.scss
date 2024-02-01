@@ -9,6 +9,11 @@
         :not(:first-child) {
             margin-left: 0.25rem;
         }
+        button {
+            &:not(:disabled) {
+                cursor: pointer
+            }
+        }
         a {
             color: rgb(var(--font-color));
             text-decoration: none;

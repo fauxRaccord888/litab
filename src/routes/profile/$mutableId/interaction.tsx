@@ -1,6 +1,5 @@
 /* types */
 import type { PropsWithStatus } from '$lib/types/components';
-import type { ModalMiniProfileProps } from '$feature/Profile/types';
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
@@ -14,41 +13,40 @@ import { createFileRoute } from '@tanstack/react-router';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
 import ModalContainer from '$feature/Modal/components/ModalContainer';
-import MiniProfileIterator from '$feature/Profile/MiniProfileIterator';
 
-export const Route = createFileRoute('/profile/$mutableId/followings')({
-    component: FollowersModal
+export const Route = createFileRoute('/profile/$mutableId/interaction')({
+    component: InteractionModal
 })
 
-function FollowersModal() {
+// TODO - Implement
+function InteractionModal() {
     const params = Route.useParams()
     const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
+    console.log(firstNode)
     
-    if (loading) return <FollowingsModalComponent status="pending" />
-    if (error || !firstNode?.followings) return <FollowingsModalComponent status="error" error={error} />
+    if (loading) return <InteractionModalComponent status="pending" />
+    if (error) return <InteractionModalComponent status="error" error={error} />
 
     return (
-        <FollowingsModalComponent 
-            status="success"
-            edges={firstNode.followings.edges}
-        />
+        <InteractionModalComponent status="pending">
+        </InteractionModalComponent>
     )
 }
 
-function FollowingsModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) {
+function InteractionModalComponent(props: PropsWithStatus<null>) {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.followings")
+    const title = t("modal.title.interaction")
     const handleClickClose = () => {
         navigate({to: "/profile/$mutableId", params: params})
     }
 
     return (
         <ModalContainer title={title} handleClickClose={handleClickClose}>
-            <MiniProfileIterator {...props}/>
+            {props.status}
         </ModalContainer>
     )
 }

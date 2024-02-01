@@ -1,53 +1,42 @@
 /* types */
 import type { PropsWithStatus } from '$lib/types/components';
+import type { ModalMiniProfileProps } from '$feature/Profile/types';
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
-import type { MiniProfileIteratorProps } from "$feature/Profile/MiniProfileIterator"
 /* hooks */
+import { useQuery } from '@apollo/client';
 import { useNavigate } from "@tanstack/react-router"
 import { useTranslation } from 'react-i18next';
 /* query */
 import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
+/* utils */
+import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
 import ModalContainer from '$feature/Modal/components/ModalContainer';
 import MiniProfileIterator from '$feature/Profile/MiniProfileIterator';
 
 export const Route = createFileRoute('/profile/$mutableId/followers')({
-    loader: async ({ context, params }) => {
-        const queryOption = { query: getProfileByMutableId_QUERY, variables: { mutableId: params.mutableId } }
-        const { data } = await context.apolloClient.query<GetProfileByMutableIdQuery>(queryOption)
-
-        const firstNode = data.usersCollection?.edges[0]?.node
-        if (firstNode) return firstNode
-
-        else throw new Error('profile not found')
-    },
-    errorComponent: ({ error }) => <FollowersModalComponent status="error" error={error}/>,
-    pendingComponent: () => <FollowersModalComponent status="pending" />,
     component: FollowersModal
 })
 
 function FollowersModal() {
-    const data  = Route.useLoaderData()
+    const params = Route.useParams()
+    const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     
-    const items = data.followers
-    const action = {
-        handleFollow: () => {},
-        handleShowProfile: () => {}
-    }
+    if (loading) return <FollowersModalComponent status="pending" />
+    if (error || !firstNode?.followers) return <FollowersModalComponent status="error" error={error} />
 
-    if (!items) throw new Error()
     return (
         <FollowersModalComponent 
             status="success"
-            items={items}
-            action={action}
+            edges={firstNode.followers.edges}
         />
     )
 }
 
-function FollowersModalComponent(props: PropsWithStatus<MiniProfileIteratorProps>) {
+function FollowersModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()

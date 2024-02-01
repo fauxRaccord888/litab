@@ -16,6 +16,14 @@
     display: flex;
     justify-content: center;
 
+    &.primary {
+        --bg-color: var(--primary);
+    }
+
+    &.danger {
+        --bg-color: var(--danger);
+    }
+    
     &.lg {
         font-size: 1.2rem;
         padding-top: 8px;

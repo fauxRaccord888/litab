@@ -1,4 +1,4 @@
-import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
+import type { DBProfiles } from "$feature/Profile/types"
 import Main from "./Main"
 
 const errorProfile = (errorMessage: string): DBProfiles =>  ({
@@ -21,12 +21,5 @@ export default function ErrorComponent(props: {error: unknown}) {
     if (error instanceof Error) errorMessage = error.message
     const profile = errorProfile(errorMessage)
 
-    const errorProps: IHeaderProfileProps = {
-        profile,
-        id: profile.id,
-        mutualFollowers: [],
-        action: {},
-    }
-    
-    return <Main {...errorProps}/>
+    return <Main {...profile}/>
 }
