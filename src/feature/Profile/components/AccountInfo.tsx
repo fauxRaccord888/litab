@@ -1,42 +1,41 @@
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
+import type { DBProfiles } from "$feature/Profile/types"
+/* hooks */
+import { useProfileNavigation } from "../hooks"
 /* styles */
 import "./style/accountInfo.scss"
 
 interface AccountInfoProps extends DBProfiles {
-    mutable_id?: string | null
+    mutable_id: string 
     nickname?: string | null
 }
 
-export default function AcocuntInfo(props: IHeaderProfileProps<AccountInfoProps> & { mini?: boolean }) {
-    const { id, profile, action, mini } = props
-
-    const showProfileFlag = mini && action?.handleShowProfile
+export default function AcocuntInfo(props: AccountInfoProps & { mini?: boolean }) {
+    const { mutable_id, nickname, mini } = props
+    const { profile: showProfileHandler } = useProfileNavigation()
 
     const handleShowProfile = () => {
-        if (!showProfileFlag || !action?.handleShowProfile) return
-        action?.handleShowProfile(id)
+        if (!mini) return
+        showProfileHandler(mutable_id)
     }
 
     return (
         <div className={`account-info-container ${mini ? 'mini-profile' : ''}`}>
-            {profile.mutable_id && 
-                <span className="header-mutable-id">
-                    <button 
-                        className={`${showProfileFlag ? 'pointer' : ''}`}
-                        onClick={handleShowProfile}
-                    >
-                        {profile.mutable_id}
-                    </button>
-                </span>
-            }
-            {mini && profile.nickname && 
+            <span className="header-mutable-id">
+                <button 
+                    className={`${mini ? 'pointer' : ''}`}
+                    onClick={handleShowProfile}
+                >
+                    {mutable_id}
+                </button>
+            </span>
+            {mini && nickname && 
                 <span className="header-nickname">
                     <button 
-                        className={`${showProfileFlag ? 'pointer' : ''}`}
+                        className={`${mini ? 'pointer' : ''}`}
                         onClick={handleShowProfile}
                     >
-                        {profile.nickname}
+                        {nickname}
                     </button>
                 </span>
             }

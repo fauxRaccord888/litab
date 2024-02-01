@@ -1,56 +1,45 @@
+/* types */
+import type { DBProfiles } from "$feature/Profile/types"
 /* hooks */
 import { useTranslation } from "react-i18next";
-/* types */
-import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
+import { useCheckFollowed, useFollowMutationHandler, useProfileNavigation } from '../hooks';
 /* components */
 import Button from "$lib/components/common/Button";
 import MoreIcon from "$lib/components/icons/More";
-/* constants */
-import PROFILE from '$feature/Profile/constants';
-/* utils */
-import { calcFontColorByBG, getFontColorArray } from "$lib/utils/luminance";
 /* styles */
 import "./style/accountIneraction.scss"
 
 interface AccountInteractionButtonsProps extends DBProfiles {
     id: string
-    preference?: (number | null)[] | null
+    mutable_id: string
 }
 
-export default function AccountInteraction(props: IHeaderProfileProps<AccountInteractionButtonsProps>) {
+export default function AccountInteraction(props: AccountInteractionButtonsProps & { mini?: boolean } ) {
+    const { id, mutable_id, mini } = props;
     const { t } = useTranslation();
-    const { id, profile, action } = props
-    
-    const buttonBackground = getFontColorArray(profile.preference, PROFILE.DEFAULT_VALUES.buttonColor) 
-    const fontColor = calcFontColorByBG(buttonBackground)
-    const buttonStyle = {
-        '--bg-color': String([...buttonBackground]), 
-        '--font-color': fontColor
-    }
+    const followed = useCheckFollowed(id)
+    const {
+        follow: [followMutation],
+        unfollow: [unfollowMutation]
+    } = useFollowMutationHandler()
+    const { interaction: handleMoreInteraction } = useProfileNavigation()
 
     const handleFollow = () => {
-        if (!action?.handleFollow) return
-        action.handleFollow(id)
-    }
-
-    const handleShowMore = () => {
-        if (!action?.handleShowMore) return
-        action.handleShowMore(id)
+        if (followed) unfollowMutation(id)
+        else followMutation(id)
     }
 
     return (
         <div className="account-interaction-container">
-            {action && action.handleFollow && 
-                <Button 
-                    style={buttonStyle} 
-                    onClick={handleFollow}
-                >
-                    {t('header.followButtonLabel')}
-                </Button>
-            }
-            {action && action.handleShowMore && 
+            <Button 
+                className={followed ? 'danger' : 'primary'}
+                onClick={handleFollow}
+            >
+                {followed ? t('header.followButtonLabel.unfollow') : t('header.followButtonLabel.follow')}
+            </Button>
+            {!mini && 
                 <div className="more-action-icon-container">
-                    <Button icon onClick={handleShowMore}>
+                    <Button icon onClick={() => handleMoreInteraction(mutable_id)}>
                         <MoreIcon />
                     </Button>
                 </div>

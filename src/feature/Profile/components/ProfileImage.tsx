@@ -1,7 +1,8 @@
 /* hooks */
 import { useState } from "react"
+import { useProfileNavigation } from "../hooks"
 /* types */
-import type { DBProfiles, IHeaderProfileProps } from "$feature/Profile/types"
+import type { DBProfiles } from "$feature/Profile/types"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
 /* utils */
@@ -11,17 +12,20 @@ import "./style/profileImage.scss"
 
 interface ProfileImageProps extends DBProfiles{
     id: string 
+    mutable_id: string
 }
 
-export default function ProfileImage(props: IHeaderProfileProps<ProfileImageProps>) {
-    const { id, profile, action } = props
+export default function ProfileImage(props: ProfileImageProps & { mini?: boolean }) {
+    const { id, mutable_id, mini  } = props
     const [error, setError] = useState(false)
+    const { profile: showProfile } = useProfileNavigation()
+
     const handleImageError = () => setError(true)
-    const imgSrc = imageSourceHelper({bucket: 'profiles', userId: profile.id})
+    const imgSrc = imageSourceHelper({bucket: 'profiles', userId: id})
 
     const handleShowProfile = () => {
-        if (!action?.handleShowProfile) return
-        action.handleShowProfile(id)
+        if (!mini) return
+        showProfile(mutable_id)
     }
 
     return (
@@ -31,7 +35,7 @@ export default function ProfileImage(props: IHeaderProfileProps<ProfileImageProp
                         onClick={handleShowProfile}
                         className={[
                             'profile-image',
-                            (action?.handleShowProfile ? 'pointer' : '')
+                            (mini ? 'pointer' : '')
                         ].join(' ')}
                         src={imgSrc}
                         onError={handleImageError}
