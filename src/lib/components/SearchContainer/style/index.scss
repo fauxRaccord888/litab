@@ -1,0 +1,12 @@
+.search-container {
+    width: 100%;
+
+    .icon {
+        stroke: rgb(var(--font-color));
+    }
+
+    .button {
+        background-color: rgb(var(--primary));
+        width: 100%;
+    }
+}
