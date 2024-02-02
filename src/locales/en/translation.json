@@ -31,7 +31,15 @@
             "error": "A minimum 8 characters password contains a combination of uppercase and lowercase letter and number are required.",
             "label": "password"
         },
+        "search": {
+            "error": "something went wrong",
+            "label": "enter your query here"
+        },
         "submit": "submit"
+    },
+
+    "button": {
+        "search": "search"
     },
 
     "modal": {
