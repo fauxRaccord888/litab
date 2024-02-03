@@ -1,8 +1,14 @@
-import type { MouseEventHandler, PropsWithChildren } from "react";
+import type { MouseEventHandler, PropsWithChildren, CSSProperties } from "react";
 import './style/button.scss'
+
+interface ButtonCSSProperties extends CSSProperties {
+    "--bg-color": number[],
+    "--font-color": string
+}
 
 interface ButtonProps extends PropsWithChildren {
     onClick?: MouseEventHandler<HTMLButtonElement>
+    style?: ButtonCSSProperties,
     primary?: boolean,
     danger?: boolean,
     lg?: boolean
@@ -12,9 +18,10 @@ interface ButtonProps extends PropsWithChildren {
 }
 
 export default function Button(props: ButtonProps) {
-    const { children, primary, danger, icon, lg, disabled, className, ...restProps } = props
+    const { children, style, primary, danger, icon, lg, disabled, className, ...restProps } = props
     return (
         <button 
+            style={style}
             className={[
                 'button',
                 className,

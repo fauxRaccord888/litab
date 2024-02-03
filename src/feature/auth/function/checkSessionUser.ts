@@ -1,6 +1,6 @@
 import type { AppStore } from "$lib/stores/store"
 
-import { supabaseClient } from "$lib/graphql/supabaseClient"
+import { supabaseClient } from "$lib/supabase/client"
 import { setSessionUser } from "$lib/stores/authSlice"
 
 export async function checkSessionUser(payload: {

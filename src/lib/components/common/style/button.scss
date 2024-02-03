@@ -1,7 +1,7 @@
 .button {
     --bg-color: var(--true-gray);
-    font-size: 1rem;
-    background-color: rgba(var(--bg-color), 10);
+    font-size: inherit;
+    background-color: rgba(var(--bg-color), 80);
     color: var(--font-color);
     
     border-radius: 8px;

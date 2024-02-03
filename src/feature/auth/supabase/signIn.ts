@@ -1,4 +1,4 @@
-import { supabaseClient } from "$lib/graphql/supabaseClient"
+import { supabaseClient } from "$lib/supabase/client"
 
 export const signIn_SUPABASE = async (
     payload: { email: string, password: string },
