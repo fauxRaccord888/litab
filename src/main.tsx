@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/client'
 
 import { persistor, store } from "./lib/stores/store.ts"
 import { routeTree } from './routeTree.gen.ts'
-import apolloClient from '$lib/graphql/apolloClient.ts'
+import apolloClient from '$lib/graphql/client.ts'
 
 import './App.scss'
 import './locales/i18n.ts'

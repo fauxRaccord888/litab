@@ -6,7 +6,7 @@ import {
 } from '@apollo/client'
 
 import { setContext } from '@apollo/client/link/context'
-import { supabaseClient } from './supabaseClient'
+import { supabaseClient } from '../supabase/client'
 
 const API_KEY = import.meta.env.VITE_PUBLIC_DB_API_KEY
 const GRAPHQL_END_POINT = import.meta.env.VITE_PUBLIC_GRAPHQL_ENDPOINT
