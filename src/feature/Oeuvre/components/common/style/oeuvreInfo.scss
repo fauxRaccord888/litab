@@ -1,0 +1,81 @@
+.oeuvre-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    > :not(:first-child) {
+        padding-top: 1.5rem;
+    }
+
+    @media only screen and (min-width: 500px) {
+        flex-direction: row;
+        
+        > :not(:first-child) {
+            padding-top: 0rem;
+            padding-left: 1rem;
+        }    
+    }
+
+
+    .cover-container {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .data-container {
+        display: flex;
+        flex-direction: column;
+        >:not(:first-child) {
+            padding-top: 1rem;
+        }
+    }
+
+    .main-info-container {
+        display: flex;
+        flex-direction: column;
+
+        >:not(:first-child) {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .artist-container {
+        font-size: 1.1rem;
+        color: rgba(var(--font-color), 0.8);
+        display: flex;
+        .button {
+            background-color: transparent;
+            padding: 0 0 0 0;
+        }
+        >:not(:first-child) {
+            margin-left: 0.5rem;
+        }
+        >:not(:last-child)::after {
+            content: ","
+        }
+    }
+    
+    .genre-container {
+        font-size: 0.75rem;
+        display: flex;
+
+        .button {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        >:not(:first-child) {
+            margin-left: 0.5rem;
+        }
+    }
+
+    .description{
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+    }
+}
