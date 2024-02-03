@@ -16,7 +16,7 @@ const queryOption = (followerId: string, followingId: string) => ({
     ]
 })
 
-export function useFollowMutationHandler(): Record<string, [Handler, MutationResult]> {
+export function useFollowMutation(): Record<string, [Handler, MutationResult]> {
     const { user } = useUserData()
 
     const [follow, followStatus] = useMutation<InsertFollowingsMutation>(insertFollowingsMutation_QUERY)

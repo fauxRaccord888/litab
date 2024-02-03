@@ -2,7 +2,7 @@
 import type { DBProfiles } from "$feature/Profile/types"
 /* hooks */
 import { useTranslation } from "react-i18next";
-import { useCheckFollowed, useFollowMutationHandler, useProfileNavigation } from '../hooks';
+import { useCheckFollowed, useFollowMutation, useProfileNavigation } from '../hooks';
 /* components */
 import Button from "$lib/components/common/Button";
 import MoreIcon from "$lib/components/icons/More";
@@ -21,7 +21,7 @@ export default function AccountInteraction(props: AccountInteractionButtonsProps
     const {
         follow: [followMutation],
         unfollow: [unfollowMutation]
-    } = useFollowMutationHandler()
+    } = useFollowMutation()
     const { interaction: handleMoreInteraction } = useProfileNavigation()
 
     const handleFollow = () => {

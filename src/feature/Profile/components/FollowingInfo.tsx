@@ -1,5 +1,6 @@
 /* hooks */
 import { useTranslation } from "react-i18next"
+import { useProfileNavigation } from "../hooks";
 /* types */
 import type { DBProfiles } from "$feature/Profile/types"
 import type { FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/graphql/__generated__/graphql"
@@ -7,7 +8,6 @@ import type { FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/
 import { calcCollectionLength } from "$lib/utils/graphql"
 /* styles */
 import "./style/following.scss"
-import { useProfileNavigation } from "../hooks";
 
 interface FollowingInfoProps extends DBProfiles {
     mutable_id: string
