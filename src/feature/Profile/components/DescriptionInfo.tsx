@@ -16,15 +16,15 @@ interface DescriptionInfoProps extends DBProfiles {
 }
 
 export default function DescriptionInfo(props: DescriptionInfoProps) {
-    const { id, mutable_id, nickname, followers, description } = props
-    const mutualFollowers = useMutualFollowers(id, followers)
+    const { id, mutable_id, nickname, followersCollection, description } = props
+    const mutualFollowers = useMutualFollowers(id, followersCollection)
     const { mutualFollowers: handleShowMutualFollowers } = useProfileNavigation()
     
     const mutualFollowerDisplayCount = PROFILE.DEFAULT_VALUES.mutualFollowerDisplayCount
     const totalMutualFollowerCount = mutualFollowers.length
     const displayedMutualFollowers = mutualFollowers
         .slice(0, mutualFollowerDisplayCount)
-        .map((edge) => edge.node.mutable_id)
+        .map((edge) => edge.node.follower_id.mutable_id)
     const additionalCount = Math.max(totalMutualFollowerCount - mutualFollowerDisplayCount, 0)
 
     const handleShowMutualFollowing = () => {

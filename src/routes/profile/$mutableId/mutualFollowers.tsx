@@ -25,7 +25,7 @@ function FollowersModal() {
     const params = Route.useParams()
     const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
-    const mutualFollowers = useMutualFollowers(firstNode?.id, firstNode?.followings)
+    const mutualFollowers = useMutualFollowers(firstNode?.id, firstNode?.followersCollection)
     
     if (loading) return <MutualFollowingModalComponent status="pending" />    
     if (error || !firstNode || !mutualFollowers) return <MutualFollowingModalComponent status="error" error={error} />
@@ -33,7 +33,7 @@ function FollowersModal() {
     return (
         <MutualFollowingModalComponent 
             status="success"
-            edges={mutualFollowers}
+            profiles={mutualFollowers.map((edge) => edge.node.follower_id)}
         />
     )
 }

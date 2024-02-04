@@ -6,10 +6,10 @@ const errorProfile = (errorMessage: string): DBProfiles =>  ({
     mutable_id: errorMessage,
     description: errorMessage,
     id: '',
-    followers: null,
-    followings: null,
+    followersCollection: null,
+    followingsCollection: null,
     nickname: null,
-    posts: null,
+    postsCollection: null,
     preference: null,
 })
 

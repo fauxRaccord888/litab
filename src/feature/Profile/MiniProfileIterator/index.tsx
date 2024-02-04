@@ -1,4 +1,4 @@
-import type { DBProfiles, ModalMiniProfileProps } from "$feature/Profile/types";
+import type { ModalMiniProfileProps } from "$feature/Profile/types";
 import type { PropsWithStatus } from "$lib/types/components";
 
 import MiniProfile from "../MiniProfile";
@@ -10,16 +10,12 @@ export default function MiniProfileIterator(props: PropsWithStatus<ModalMiniProf
     if (props.status === 'error') return null
     if (props.status === 'pending') return null
 
-    const { edges } = props
-
-    const items = edges.map((edge):DBProfiles => ({
-        ...edge.node,
-    }))
+    const { profiles } = props
 
     return (
         <div className="user-collection-iterator-container">
             <ItemIterator
-                items={items}
+                items={profiles}
                 componentFunction={MiniProfile}
             />
         </div>
