@@ -11,26 +11,26 @@ import "./style/following.scss"
 
 interface FollowingInfoProps extends DBProfiles {
     mutable_id: string
-    followings?: FollowingsMiniProfileFragment | null,
-    followers?: FollowersMiniProfileFragment | null,
-    posts?: PostsMiniDataFragment | null
+    followingsCollection?: FollowingsMiniProfileFragment | null,
+    followersCollection?: FollowersMiniProfileFragment | null,
+    postsCollection?: PostsMiniDataFragment | null
 }
 
 export default function FollowingInfo(props: FollowingInfoProps) {
-    const { mutable_id, posts, followings, followers } = props
+    const { mutable_id, followingsCollection, followersCollection, postsCollection } = props
     const { t } = useTranslation()
     const showModalHandler = useProfileNavigation()
     const items = {
         posts: {
-            item: posts,
+            item: postsCollection,
             onClick: () => {}
         }, 
         followings: {
-            item: followings,
+            item: followingsCollection,
             onClick: showModalHandler.followings
         }, 
         followers: {
-            item: followers,
+            item: followersCollection,
             onClick: showModalHandler.followers
         }
     }
