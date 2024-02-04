@@ -26,12 +26,12 @@ function FollowersModal() {
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     
     if (loading) return <FollowersModalComponent status="pending" />
-    if (error || !firstNode?.followers) return <FollowersModalComponent status="error" error={error} />
+    if (error || !firstNode?.followersCollection) return <FollowersModalComponent status="error" error={error} />
 
     return (
         <FollowersModalComponent 
             status="success"
-            edges={firstNode.followers.edges}
+            profiles={firstNode.followersCollection.edges.map((edge) => edge.node.follower_id)}
         />
     )
 }

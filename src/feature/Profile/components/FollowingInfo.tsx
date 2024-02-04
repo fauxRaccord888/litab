@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useProfileNavigation } from "../hooks";
 /* types */
 import type { DBProfiles } from "$feature/Profile/types"
-import type { FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/graphql/__generated__/graphql"
+import type { FollowersMiniProfileFragment, FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/graphql/__generated__/graphql"
 /* utils */
 import { calcCollectionLength } from "$lib/utils/graphql"
 /* styles */
@@ -12,7 +12,7 @@ import "./style/following.scss"
 interface FollowingInfoProps extends DBProfiles {
     mutable_id: string
     followings?: FollowingsMiniProfileFragment | null,
-    followers?: FollowingsMiniProfileFragment | null,
+    followers?: FollowersMiniProfileFragment | null,
     posts?: PostsMiniDataFragment | null
 }
 
@@ -38,7 +38,7 @@ export default function FollowingInfo(props: FollowingInfoProps) {
     return (
         <div className="following-info-container">
             {Object.entries(items).map(([key, value]) => {
-                const disabled = (value.item?.edges.length === 0) || (value.item?.__typename !== 'usersConnection')
+                const disabled = (value.item?.edges.length === 0) || (value.item?.__typename !== 'followingsConnection')
                 return (
                     <div key={key} className="following-info" >
                         <button disabled={disabled} onClick={() => value?.onClick(mutable_id)}>
