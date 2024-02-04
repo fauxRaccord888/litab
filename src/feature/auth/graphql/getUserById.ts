@@ -9,12 +9,8 @@ export const getUserById_QUERY = graphql(/* GraphQL */ `
                     mutable_id,
                     nickname,
                     preference,
-                    followings {
-                        edges {
-                            node {
-                                id
-                            }
-                        }
+                    followingsCollection {
+                        ...FollowingsMiniProfile
                     },
                 }
             }

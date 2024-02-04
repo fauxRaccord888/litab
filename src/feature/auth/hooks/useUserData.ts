@@ -19,8 +19,8 @@ export function useUserData() {
     }, [data])
 
     const followings = useMemo(() => {
-        return new Set(user?.followings?.edges.map((edge) => edge.node.id))
-    }, [user?.followings])
+        return new Set(user?.followingsCollection?.edges.map((edge) => edge.node.following_id.id))
+    }, [user?.followingsCollection])
 
     return { user, followings, loading, error }
 }
