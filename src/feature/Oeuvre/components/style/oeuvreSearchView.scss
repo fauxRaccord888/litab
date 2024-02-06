@@ -1,17 +1,16 @@
 .oeuvre-search-view-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-
     >:not(:first-child) {
-        padding-top: 2rem;
+        margin-top: 2rem;
+    }
+    .search-form {
+        >:not(:first-child) {
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
     }
 
     .search-panel-container {
         width: 100%;
-        @media only screen and (min-width: 500px) {            
-            max-width: 400px;
-        }
     }
 }
