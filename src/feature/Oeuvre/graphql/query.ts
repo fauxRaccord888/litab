@@ -5,7 +5,11 @@ export const searchOeuvres_QUERY = graphql(/* GraphQL */ `
         oeuvresCollection(
             filter: { title: { ilike: $word } }
         ) {
-            ...OeuvresInfo
+            edges {
+                node {
+                    ...OeuvresInfo
+                }
+            }
         }
     }
 `)
