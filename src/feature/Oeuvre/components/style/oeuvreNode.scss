@@ -1,0 +1,60 @@
+@use "src/lib/style/variables";
+
+$node: variables.$node;
+
+.oeuvre-node-container {
+    .oeuvre-hover-card-container {
+        display: none;
+        &.show {
+            display:flex;
+            position: absolute;
+            min-width: #{$node * 3}rem;
+            min-height: #{$node * 1.2}rem;
+            left: #{$node * -1.25}rem;
+            top: #{$node * -2.3}rem;
+            border-radius: 8px;
+            padding-top: #{$node * 0.25}rem;
+            padding-bottom: #{$node * 0.25}rem;
+            padding-left: #{$node * 0.25}rem;
+            padding-right:  #{$node * 0.25}rem;
+
+            border: rgb(var(--font-color)) solid 2px;
+            background-color: rgb(var(--background-color));
+        }
+    }
+
+    .oeuvre-cover-container {
+        width: #{$node}rem;
+        height: #{$node}rem;
+        border-radius: 50%;
+        
+        .bucket-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                stroke: rgb(var(--font-color));
+                fill: rgb(var(--font-color));
+                width: 1rem;
+                height: 1rem;
+            }
+        }
+    }
+
+    .oeuvre-main-info-container {
+        .title {
+            font-size: 1.2rem;
+        }
+        .artist-container {
+            font-size: 0.7rem;
+        }
+        .genre-container {
+            font-size: 0.5rem;
+            .button {
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+        }
+    }
+}
