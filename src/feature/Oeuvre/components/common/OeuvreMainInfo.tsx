@@ -6,7 +6,7 @@ import "./style/oeuvreMainInfo.scss"
 
 // TODO onClick Handler 
 export default function OeuvreMainInfo(props: DBOeuvre & { mini?: boolean }) {
-    const { title, oeuvres_artistsCollection, oeuvres_genresCollection } = props
+    const { title, oeuvres_artistsCollection, oeuvres_genresCollection, mini } = props
     
     const artistsInfo = oeuvres_artistsCollection?.edges.map((edge) => (
         <Button key={edge.node.artists.id}>
@@ -29,10 +29,10 @@ export default function OeuvreMainInfo(props: DBOeuvre & { mini?: boolean }) {
         <div className="oeuvre-main-info-container">
             <span className="title">{title}</span>
             <div className="artist-container">
-                {artistsInfo}
+                {mini ? artistsInfo?.slice(0, 3) : artistsInfo }
             </div>
             <div className="genre-container">
-                {genresInfo}
+                {mini ? genresInfo?.slice(0, 3) : genresInfo }
             </div>
         </div>
     )
