@@ -49,5 +49,11 @@
             "mutualFollowers": "mutual followers",
             "interaction": "interaction"
         }
+    },
+
+    "feed": {
+        "message": {
+            "pentagram": "{{ user }} posted new pentagram"
+        }
     }
 }
