@@ -1,18 +1,20 @@
-import type PentagramInfo from '$feature/Pentagram/components/common/PentagramInfo';
+import type { FeedItems } from '../type';
 import FeedMessage from "./common/FeedMessage";
+import PentagramInfo from '$feature/Pentagram/components/common/PentagramInfo';
 import "./style/feedItem.scss"
 
-// TODO Interface 통합
-interface FeedItemProps {
-    children: ReturnType<typeof PentagramInfo>
-}
+export default function FeedItem(props: FeedItems) {
+    let feedItem = null
 
-export default function FeedItem(props: FeedItemProps) {
+    if (props.__typename === 'pentagrams') {
+        feedItem = <PentagramInfo feed {...props} />
+    }
+
     return (
         <div className="feed-item-container">
             <div className="inner-container">
-                <FeedMessage {...props.children.props}/>
-                {props.children}
+                <FeedMessage {...props}/>
+                {feedItem}
             </div>
         </div>
     )
