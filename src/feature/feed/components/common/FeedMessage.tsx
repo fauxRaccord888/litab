@@ -1,11 +1,10 @@
-import type { DBPentagram } from "$feature/Pentagram/types"
+import type { FeedItems } from "../..//type"
 import { useTranslation } from "react-i18next"
 import PentagonIcon from "$lib/components/icons/PentagonIcon"
 
 import "./style/feedMessage.scss"
 
-// TODO Feed Item typing
-export default function FeedMessage(props: DBPentagram) {
+export default function FeedMessage(props: FeedItems) {
     const { t } = useTranslation()
     const { __typename, users } = props
     let icon = null

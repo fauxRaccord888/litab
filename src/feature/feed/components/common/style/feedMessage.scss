@@ -5,11 +5,15 @@
     :not(:first-child){
         margin-left: 0.25rem;
     }
+
     .icon-container {
         stroke: rgba(var(--font-color), 0.5);
+        stroke-width: 2;
+        fill: none;
         width: 1rem;
         height: 1rem;
     }
+    
     .meta-info {
         color: rgba(var(--font-color), 0.5);
     }

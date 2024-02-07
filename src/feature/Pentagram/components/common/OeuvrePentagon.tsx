@@ -2,6 +2,7 @@ import type { DBOeuvresCollection } from "$feature/Pentagram/types";
 import type { FirstNodeOfCollection } from "$lib/types/graphql";
 import OeuvreNode from "$feature/Oeuvre/components/OeuvreNode";
 import "./style/oeuvrePentagon.scss"
+import PentagonIcon from "$lib/components/icons/PentagonIcon";
 
 type Node = FirstNodeOfCollection<DBOeuvresCollection>
 export default function OeuvrePentagon(props: {collection: DBOeuvresCollection | undefined | null}) {
@@ -20,7 +21,7 @@ export default function OeuvrePentagon(props: {collection: DBOeuvresCollection |
                         <OeuvreNode oeuvre={item?.oeuvres} />
                     </div>
                 ))}
-                <div className="circle" />
+                <PentagonIcon className="pentagon"/>
             </div>
         </div>
     )
