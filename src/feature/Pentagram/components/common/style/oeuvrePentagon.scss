@@ -1,10 +1,14 @@
 @use "src/lib/style/variables";
 
-$node: 4;
-
 .oeuvre-pentagon-container {
+    --node: #{variables.$node_small}rem;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}rem;
+    }
+
     width: 100%;
-    height: #{$node*8}rem;
+    height: calc(var(--node) * 8);
+    
     
     .parent {
         position: relative;
@@ -15,10 +19,9 @@ $node: 4;
         background-color: red;
 
         .main-node {
-            --offset: #{$node*3}rem;
-            --size: #{$node}rem;
-            --transformX: calc(cos(var(--degrees)) * var(--offset) - var(--size) * 0.5);
-            --transformY: calc(sin(var(--degrees)) * var(--offset) - var(--size) * 0.5);
+            --offset: calc(var(--node) * 3);
+            --transformX: calc(cos(var(--degrees)) * var(--offset) - var(--node) * 0.5);
+            --transformY: calc(sin(var(--degrees)) * var(--offset) - var(--node) * 0.5);
             position: absolute;
             border-radius: 50%;
             transform: translate(var(--transformX), var(--transformY));
@@ -34,7 +37,7 @@ $node: 4;
         }
 
         .circle {
-            --size: #{$node*6}rem;
+            --size: calc(var(--node) * 6);
             width: var(--size);
             height: var(--size);
             border: rgb(var(--font-color)) 1px solid;

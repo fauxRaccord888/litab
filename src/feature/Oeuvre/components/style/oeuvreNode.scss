@@ -1,22 +1,25 @@
 @use "src/lib/style/variables";
 
-$node: variables.$node;
-
 .oeuvre-node-container {
+    --node: #{variables.$node_small}rem;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}rem;
+    }
+
     .oeuvre-hover-card-container {
         display: none;
         &.show {
             display:flex;
             position: absolute;
-            min-width: #{$node * 3}rem;
-            min-height: #{$node * 1.2}rem;
-            left: #{$node * -1.25}rem;
-            top: #{$node * -2.3}rem;
+            min-width: 300%;
+            min-height: 110%;
+            left: -125%;
+            top: -185%;
             border-radius: 8px;
-            padding-top: #{$node * 0.25}rem;
-            padding-bottom: #{$node * 0.25}rem;
-            padding-left: #{$node * 0.25}rem;
-            padding-right:  #{$node * 0.25}rem;
+            padding-top: 25%;
+            padding-bottom: 25%;
+            padding-left: 25%;
+            padding-right:  25%;
 
             border: rgb(var(--font-color)) solid 2px;
             background-color: rgb(var(--background-color));
@@ -24,8 +27,8 @@ $node: variables.$node;
     }
 
     .oeuvre-cover-container {
-        width: #{$node}rem;
-        height: #{$node}rem;
+        width: var(--node);
+        height: var(--node);
         border-radius: 50%;
         
         .bucket-image-container {
@@ -44,13 +47,13 @@ $node: variables.$node;
 
     .oeuvre-main-info-container {
         .title {
-            font-size: 1.2rem;
+            font-size: calc(var(--node) * 0.3);
         }
         .artist-container {
-            font-size: 0.7rem;
+            font-size: calc(var(--node) * 0.2);
         }
         .genre-container {
-            font-size: 0.5rem;
+            font-size: calc(var(--node) * 0.15);
             .button {
                 padding-left: 6px;
                 padding-right: 6px;

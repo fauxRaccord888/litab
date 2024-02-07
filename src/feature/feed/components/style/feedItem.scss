@@ -1,0 +1,17 @@
+.feed-item-container {
+    max-width: 100%;
+    width: min(600px, 100vw);
+    display: flex;
+    justify-items: center;
+    
+    .inner-container {
+        width: 100%;
+        border: rgba(var(--font-color), 0.8) solid 1px;
+        border-radius: 8px;
+        padding: 1rem;
+        
+        > :not(:first-child) {
+            margin-top: 0.5rem;
+        }
+    }
+}

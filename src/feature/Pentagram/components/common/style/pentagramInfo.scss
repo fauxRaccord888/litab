@@ -1,0 +1,38 @@
+.pentagram-info-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    > :not(:first-child) {
+        margin-top: 1rem;
+    }
+
+    .pentagram-title-date-container {
+        display: flex;
+        align-items: baseline;
+        
+        > :not(:first-child) {
+            margin-left: 0.75rem;
+        }
+
+        .pentagram-title {
+            font-size: 1.5rem;
+        }
+
+        .pentagram-date {
+            color: rgba(var(--font-color), 0.8)
+        }
+
+    }
+
+    .pentagram-description {
+        font-size: 1.1rem;
+        color: rgba(var(--font-color), 0.8);
+        line-height: 2;
+        margin-bottom: 0
+    }
+
+    .mini-profile-container {
+        width: fit-content;
+    }
+}

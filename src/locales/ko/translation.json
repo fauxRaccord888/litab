@@ -49,5 +49,11 @@
             "mutualFollowers": "함께 아는 사람",
             "interaction": "추가 상호작용"
         }
+    },
+
+    "feed": {
+        "message": {
+            "pentagram": "{{ user }}님이 새로운 펜타그램을 작성했어요"
+        }
     }
 }
