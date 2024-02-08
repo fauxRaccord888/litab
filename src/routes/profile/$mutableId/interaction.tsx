@@ -12,7 +12,7 @@ import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
-import ModalContainer from '$feature/Modal/components/ModalContainer';
+import Modal from '$feature/portal/components/Modal';
 
 export const Route = createFileRoute('/profile/$mutableId/interaction')({
     component: InteractionModal
@@ -45,8 +45,8 @@ function InteractionModalComponent(props: PropsWithStatus<null>) {
     }
 
     return (
-        <ModalContainer title={title} handleClickClose={handleClickClose}>
+        <Modal title={title} handleClickClose={handleClickClose}>
             {props.status}
-        </ModalContainer>
+        </Modal>
     )
 }

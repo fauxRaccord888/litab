@@ -1,0 +1,12 @@
+.hover-card-container {
+    display: none;
+    &.show {
+        display: flex;
+        position: absolute;
+        top: var(--top);
+        left: var(--left);
+        width: 0;
+        height: 0;
+        z-index: 9999;
+    }
+}
