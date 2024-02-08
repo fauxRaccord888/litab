@@ -3,11 +3,9 @@
     min-height: 100vh;
     min-width: 90vw;
     display: flex;
-    font-family: "Wanted Sans Variable";
 
     .left-sidebar-section {
         display: none;
-        background-color: rgb(var(--background-color));
         @media only screen and (min-width: 500px) {
             display: inline;
             min-width: 100px;
@@ -20,7 +18,6 @@
 
     .main-section {
         flex-grow: 1;
-        background-color: rgb(var(--background-color));
         @media only screen and (min-width: 500px) {
             display: inline;
             width: 400px;
@@ -30,10 +27,14 @@
     
     .right-sidebar-section {
         display: none;
-        background-color: rgb(var(--background-color));
         @media only screen and (min-width: 1200px) {
             display: inline;
             min-width: 250px;
        }
    }
+}
+
+.portal-root {
+    position: fixed;
+    z-index: 9999;
 }

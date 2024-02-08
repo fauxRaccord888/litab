@@ -39,5 +39,7 @@ input {
     --primary: 109, 164, 170;
     --danger: 238, 68, 68;
 
-    color: rgb(var(--font-color))
+    color: rgb(var(--font-color));
+    background-color: rgb(var(--background-color));
+    font-family: "Wanted Sans Variable";
 }

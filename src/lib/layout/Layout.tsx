@@ -8,18 +8,21 @@ interface LayoutProps extends PropsWithChildren{
 
 export default function Layout(props: LayoutProps) {
     return (
-        <div className="main-container">
-            <div className="left-sidebar-section">
-                {props.left}
-            </div>
+        <>
+            <div id="portal-root" className="portal-root"></div>
+            <div className="main-container">
+                <div className="left-sidebar-section">
+                    {props.left}
+                </div>
 
-            <div className="main-section">
-                {props.children}
-            </div>
+                <div className="main-section">
+                    {props.children}
+                </div>
 
-            <div className="right-sidebar-section">
-                {props.right}
+                <div className="right-sidebar-section">
+                    {props.right}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
