@@ -13,7 +13,7 @@ import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
-import ModalContainer from '$feature/Modal/components/ModalContainer';
+import Modal from '$feature/portal/components/Modal';
 import MiniProfileIterator from '$feature/Profile/MiniProfileIterator';
 
 export const Route = createFileRoute('/profile/$mutableId/followers')({
@@ -47,8 +47,8 @@ function FollowersModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) 
     }
 
     return (
-        <ModalContainer title={title} handleClickClose={handleClickClose}>
+        <Modal title={title} handleClickClose={handleClickClose}>
             <MiniProfileIterator {...props}/>
-        </ModalContainer>
+        </Modal>
     )
 }
