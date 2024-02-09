@@ -19,7 +19,7 @@ function isInside(y: number, x: number, radius: number, sides: number) {
     const radianPerSide = 2 * Math.PI / sides
     const calibrate = PENTAGRAM.ANGLE_CALIBRATE / 180 * Math.PI
     
-    for (let i = 0; i < sides - 1; i++) {
+    for (let i = 0; i < sides; i++) {
         const x1 = Math.cos(radianPerSide * i + calibrate) * radius
         const y1 = Math.sin(radianPerSide * i + calibrate) * radius
         const x2 = Math.cos(radianPerSide * (i+1) + calibrate) * radius
