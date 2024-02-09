@@ -1,9 +1,9 @@
 @use "src/lib/style/variables";
 
 .oeuvre-node-container {
-    --node: #{variables.$node_small}rem;
+    --node: #{variables.$node_small}px;
     @media only screen and (min-width: 500px) {
-        --node: #{variables.$node_medium}rem;
+        --node: #{variables.$node_medium}px;
     }
 
     .oeuvre-cover-container {
@@ -27,9 +27,9 @@
 }
 
 .oeuvre-hover-card-container {
-    --node: #{variables.$node_small}rem;
+    --node: #{variables.$node_small}px;
     @media only screen and (min-width: 500px) {
-        --node: #{variables.$node_medium}rem;
+        --node: #{variables.$node_medium}px;
     }
 
     display: flex;
