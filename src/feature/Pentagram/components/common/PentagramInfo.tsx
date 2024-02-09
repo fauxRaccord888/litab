@@ -5,8 +5,14 @@ import OeuvrePentagon from "./OeuvrePentagon";
 
 import './style/pentagramInfo.scss'
 
-export default function PentagramInfo(props: DBPentagram & { feed?: boolean }) {
-    const { title, created_at, description, users, pentagrams_oeuvresCollection, feed } = props
+interface PentagramInfoProps {
+    pentagram: DBPentagram
+    feed?: boolean
+}
+
+export default function PentagramInfo(props: PentagramInfoProps) {
+    const { pentagram, feed } = props
+    const { title, created_at, description, users, pentagrams_oeuvresCollection, pentagrams_nodesCollection } = pentagram
     const relativeTime = useTranslatedRelativeTime(new Date(created_at))
 
     return (
@@ -22,7 +28,10 @@ export default function PentagramInfo(props: DBPentagram & { feed?: boolean }) {
             </div>
 
             {!feed && <MiniProfile {...users}/>}
-            <OeuvrePentagon collection={pentagrams_oeuvresCollection}/>
+            <OeuvrePentagon 
+                mainNodes={pentagrams_oeuvresCollection}
+                subNodes={pentagrams_nodesCollection}
+            />
             {!feed && <p className="pentagram-description">{description}</p>}
         </div>
     )

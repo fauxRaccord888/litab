@@ -1,8 +1,8 @@
 import { Fragment } from "react"
 
-interface MinimalProp {
+type MinimalProp = {
     id: string
-}
+} | null | undefined
 
 interface ItemIteratorProps<T extends MinimalProp> {
     items: T[],
@@ -13,8 +13,8 @@ export default function ItemIterator<T extends MinimalProp>(props: ItemIteratorP
     const { items, componentFunction } = props
     return (
         <>
-            {items.map((item) => (
-                <Fragment key={item.id}>
+            {items.map((item, idx) => (
+                <Fragment key={item?.id || idx}>
                     {componentFunction(item)}
                 </Fragment>
             ))}
