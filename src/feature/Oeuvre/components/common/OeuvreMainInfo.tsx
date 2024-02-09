@@ -1,4 +1,4 @@
-import type { DBOeuvre } from "$feature/Oeuvre/types"
+import type { DBOeuvre } from "../../types";
 import Button from "$lib/components/common/Button"
 import { calcFontColorByBG } from "$lib/utils/luminance";
 import { fromHex } from "$lib/utils/rgba";

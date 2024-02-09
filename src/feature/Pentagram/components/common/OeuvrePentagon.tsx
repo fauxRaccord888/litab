@@ -1,16 +1,25 @@
-import type { DBOeuvresCollection } from "$feature/Pentagram/types";
-import type { FirstNodeOfCollection } from "$lib/types/graphql";
+import type { DBOeuvresCollection, DBPentagramsNodesCollection, DBPentagramsNodes } from "../../types";
+import type { DBOeuvre } from "$feature/Oeuvre/types";
+import type { CSSProperties, MouseEventHandler } from "react";
+
 import OeuvreNode from "$feature/Oeuvre/components/OeuvreNode";
-import "./style/oeuvrePentagon.scss"
 import PentagonIcon from "$lib/components/icons/PentagonIcon";
 
 type Node = FirstNodeOfCollection<DBOeuvresCollection>
 export default function OeuvrePentagon(props: {collection: DBOeuvresCollection | undefined | null}) {
     const { collection } = props;
 
-    const items = Array.from<Node | null>({length:  5})
-    collection && collection.edges.forEach((edge) => {
-        items[edge.node.index] = edge.node
+interface OeuvrePentagonProps {
+    mainNodes: DBOeuvresCollection
+    subNodes: DBPentagramsNodesCollection
+}
+
+export default function OeuvrePentagon(props: OeuvrePentagonProps) {
+    const { mainNodes, subNodes } = props;
+
+    const items = Array.from<DBOeuvre | undefined>({length:  5})
+    mainNodes && mainNodes.edges.forEach((edge) => {
+        items[edge.node.index] = edge.node.oeuvres
     })
 
     return (

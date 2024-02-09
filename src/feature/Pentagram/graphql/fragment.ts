@@ -14,6 +14,20 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
+    fragment PentagramsNodesInfo on pentagrams_nodesConnection {
+        edges {
+            node {
+                oeuvres {
+                    ...OeuvresInfo
+                }
+                angle
+                distance
+            }
+        }
+    }
+`)
+
+graphql(/* GraphQL */ `
     fragment PentagramsInfo on pentagramsConnection {
         edges {
             node {
@@ -26,6 +40,9 @@ graphql(/* GraphQL */ `
                 }
                 pentagrams_oeuvresCollection {
                     ...OeuvresCollections
+                }
+                pentagrams_nodesCollection {
+                    ...PentagramsNodesInfo
                 }
             }
         }
