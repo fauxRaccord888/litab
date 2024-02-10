@@ -10,13 +10,10 @@ import "./style/description.scss"
 /* locale */
 import { Trans } from 'react-i18next';
 
-interface DescriptionInfoProps extends DBProfiles {
-    nickname?: string | null,
-    description?: string | null
-}
 
-export default function DescriptionInfo(props: DescriptionInfoProps) {
-    const { id, mutable_id, nickname, followersCollection, description } = props
+export default function DescriptionInfo(props: DBProfiles) {
+    const { item } = props
+    const { id, mutable_id, nickname, followersCollection, description } = item
     const mutualFollowers = useMutualFollowers(id, followersCollection)
     const { mutualFollowers: handleShowMutualFollowers } = useProfileNavigation()
     

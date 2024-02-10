@@ -1,5 +1,4 @@
 /* types */
-import type { PropsWithStatus } from '$lib/types/components';
 import type { ModalMiniProfileProps } from '$feature/Profile/types';
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
@@ -13,6 +12,7 @@ import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { formatProps } from '$lib/utils';
 /* components */
 import Modal from '$feature/portal/components/Modal';
 import MiniProfileIterator from '$feature/Profile/MiniProfileIterator';
@@ -23,22 +23,20 @@ export const Route = createFileRoute('/profile/$mutableId/mutualFollowers')({
 
 function FollowersModal() {
     const params = Route.useParams()
-    const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     const mutualFollowers = useMutualFollowers(firstNode?.id, firstNode?.followersCollection)
     
-    if (loading) return <MutualFollowingModalComponent status="pending" />    
-    if (error || !firstNode || !mutualFollowers) return <MutualFollowingModalComponent status="error" error={error} />
-    
+    if (!mutualFollowers) return null
+
     return (
         <MutualFollowingModalComponent 
-            status="success"
-            profiles={mutualFollowers.map((edge) => edge.node.follower_id)}
+            items={mutualFollowers.map((edge) => formatProps(edge.node.follower_id))}
         />
     )
 }
 
-function MutualFollowingModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) {
+function MutualFollowingModalComponent(props: ModalMiniProfileProps) {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()
@@ -50,7 +48,7 @@ function MutualFollowingModalComponent(props: PropsWithStatus<ModalMiniProfilePr
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
-            <MiniProfileIterator {...props}/>
+            <MiniProfileIterator items={props.items}/>
         </Modal>
     )
 }

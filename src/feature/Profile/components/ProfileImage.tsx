@@ -8,13 +8,9 @@ import BucketImage from "$lib/components/common/BucketImage"
 /* style */
 import "./style/profileImage.scss"
 
-interface ProfileImageProps extends DBProfiles{
-    id: string 
-    mutable_id: string
-}
-
-export default function ProfileImage(props: ProfileImageProps & { mini?: boolean }) {
-    const { id, mutable_id, mini  } = props
+export default function ProfileImage(props: DBProfiles & { mini?: boolean }) {
+    const { item, mini  } = props
+    const { id, mutable_id } = item
     const { profile: showProfile } = useProfileNavigation()
 
     const handleShowProfile = () => {

@@ -3,21 +3,14 @@ import { useTranslation } from "react-i18next"
 import { useProfileNavigation } from "../hooks";
 /* types */
 import type { DBProfiles } from "$feature/Profile/types"
-import type { FollowersMiniProfileFragment, FollowingsMiniProfileFragment, PostsMiniDataFragment } from "$lib/graphql/__generated__/graphql"
 /* utils */
 import { calcCollectionLength } from "$lib/utils/graphql"
 /* styles */
 import "./style/following.scss"
 
-interface FollowingInfoProps extends DBProfiles {
-    mutable_id: string
-    followingsCollection?: FollowingsMiniProfileFragment | null,
-    followersCollection?: FollowersMiniProfileFragment | null,
-    postsCollection?: PostsMiniDataFragment | null
-}
-
-export default function FollowingInfo(props: FollowingInfoProps) {
-    const { mutable_id, followingsCollection, followersCollection, postsCollection } = props
+export default function FollowingInfo(props: DBProfiles) {
+    const { item } = props
+    const { mutable_id, followingsCollection, followersCollection, postsCollection } = item
     const { t } = useTranslation()
     const showModalHandler = useProfileNavigation()
     const items = {
