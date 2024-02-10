@@ -6,8 +6,9 @@ import "./style/oeuvreMainInfo.scss"
 
 // TODO onClick Handler 
 export default function OeuvreMainInfo(props: DBOeuvre & { mini?: boolean }) {
-    const { title, oeuvres_artistsCollection, oeuvres_genresCollection, mini } = props
-    
+    const { item, mini } = props
+    const { title, oeuvres_artistsCollection, oeuvres_genresCollection } = item
+
     const artistsInfo = oeuvres_artistsCollection?.edges.map((edge) => (
         <Button key={edge.node.artists.id}>
             {edge.node.artists.name}

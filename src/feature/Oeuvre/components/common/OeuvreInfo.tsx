@@ -5,7 +5,8 @@ import BucketImage from "$lib/components/common/BucketImage";
 import './style/oeuvreInfo.scss'
 
 export default function OeuvreInfo(props: DBOeuvre ) {
-    const { id, description } = props
+    const { item } = props
+    const { id, description } = item
 
     return (
         <div className="oeuvre-info-container">
@@ -14,7 +15,7 @@ export default function OeuvreInfo(props: DBOeuvre ) {
             </div>
 
             <div className="data-container">
-                <OeuvreMainInfo {...props}/>
+                <OeuvreMainInfo item={item}/>
                 <span className="description">{description}</span>
             </div>
             

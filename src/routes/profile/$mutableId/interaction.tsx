@@ -1,5 +1,4 @@
 /* types */
-import type { PropsWithStatus } from '$lib/types/components';
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
@@ -21,20 +20,15 @@ export const Route = createFileRoute('/profile/$mutableId/interaction')({
 // TODO - Implement
 function InteractionModal() {
     const params = Route.useParams()
-    const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
-    console.log(firstNode)
-    
-    if (loading) return <InteractionModalComponent status="pending" />
-    if (error) return <InteractionModalComponent status="error" error={error} />
 
     return (
-        <InteractionModalComponent status="pending">
-        </InteractionModalComponent>
+        <InteractionModalComponent>{firstNode && firstNode?.nickname}</InteractionModalComponent>
     )
 }
 
-function InteractionModalComponent(props: PropsWithStatus<null>) {
+function InteractionModalComponent() {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()
@@ -46,7 +40,6 @@ function InteractionModalComponent(props: PropsWithStatus<null>) {
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
-            {props.status}
         </Modal>
     )
 }

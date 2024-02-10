@@ -5,13 +5,9 @@ import { useProfileNavigation } from "../hooks"
 /* styles */
 import "./style/accountInfo.scss"
 
-interface AccountInfoProps extends DBProfiles {
-    mutable_id: string 
-    nickname?: string | null
-}
-
-export default function AcocuntInfo(props: AccountInfoProps & { mini?: boolean }) {
-    const { mutable_id, nickname, mini } = props
+export default function AcocuntInfo(props: DBProfiles & { mini?: boolean }) {
+    const { item, mini } = props
+    const { mutable_id, nickname } = item
     const { profile: showProfileHandler } = useProfileNavigation()
 
     const handleShowProfile = () => {

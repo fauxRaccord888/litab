@@ -9,14 +9,11 @@ import MoreIcon from "$lib/components/icons/More";
 /* styles */
 import "./style/accountIneraction.scss"
 
-interface AccountInteractionButtonsProps extends DBProfiles {
-    id: string
-    mutable_id: string
-}
 
-export default function AccountInteraction(props: AccountInteractionButtonsProps & { mini?: boolean } ) {
-    const { id, mutable_id, mini } = props;
-    const { t } = useTranslation();
+export default function AccountInteraction(props: DBProfiles & { mini?: boolean } ) {
+    const { item, mini } = props
+    const { id, mutable_id } = item
+    const { t } = useTranslation()
     const followed = useCheckFollowed(id)
     const {
         follow: [followMutation],

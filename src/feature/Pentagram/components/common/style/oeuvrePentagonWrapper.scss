@@ -1,0 +1,31 @@
+@use "src/lib/style/variables";
+
+.oeuvre-pentagon-wrapper-container {
+    --node: #{variables.$node_small}px;
+    --offset: 0;
+    --degrees: 0;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}px;
+    }
+
+    width: 100%;
+    height: calc(var(--node) * 8);
+    
+    .parent {
+        position: relative;
+        width: 0px;
+        height:calc(var(--node) * 3); // CSS BALCK MAGIC 반응형으로 넘기는 부모 요소의 '반지름'이 달라지는 부분 해결
+        left: 50%;
+        top: 50%;
+
+        .pentagon {
+            --size: calc(var(--node) * 7.5);
+            width: var(--size);
+            height: var(--size);
+            transform: translate(-50%, -53%);
+            stroke: rgb(var(--font-color));
+            stroke-width: 0.5px;
+            fill: none;
+        }
+    }
+}

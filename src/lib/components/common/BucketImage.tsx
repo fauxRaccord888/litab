@@ -17,7 +17,7 @@ export default function BucketImage(props: BucketImageProps) {
     return (
         <div className="bucket-image-container">
             {!error && 
-                <img {...restProps} src={url} onError={() => setError(true)}/>
+                <img {...restProps} src={url} loading="lazy" onError={() => setError(true)}/>
             }
             {error && fallback}
         </div>

@@ -6,21 +6,26 @@ import AccountInteraction from "../components/AccountInteraction";
 
 import "./style/index.scss"
 
-interface MiniProfileProps extends DBProfiles {
-    id: string,
-    mutable_id: string ,
+interface MiniProfileProps extends DBProfiles{
+    interaction?: boolean
+    md?: boolean
 }
 
 export default function MiniProfile(props: MiniProfileProps) {
+    const { item, interaction, md } = props
     return (
-        <div className="mini-profile-container">
+        <div 
+            className={`mini-profile-container ${md ? 'md' : ''}`}
+        >
             <div className="profile-container">
-                <ProfileImage mini {...props}/>
-                <AccountInfo mini {...props}/>
+                <ProfileImage mini item={item}/>
+                <AccountInfo mini item={item}/>
             </div>
-            <div className="interaction-container">
-                <AccountInteraction mini {...props}/>
-            </div>
+            {interaction && 
+                <div className="interaction-container">
+                    <AccountInteraction mini item={item}/>
+                </div>
+            }
         </div>
     )
 }

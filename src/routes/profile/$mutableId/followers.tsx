@@ -1,5 +1,4 @@
 /* types */
-import type { PropsWithStatus } from '$lib/types/components';
 import type { ModalMiniProfileProps } from '$feature/Profile/types';
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
@@ -12,6 +11,7 @@ import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { formatProps } from '$lib/utils';
 /* components */
 import Modal from '$feature/portal/components/Modal';
 import MiniProfileIterator from '$feature/Profile/MiniProfileIterator';
@@ -22,21 +22,19 @@ export const Route = createFileRoute('/profile/$mutableId/followers')({
 
 function FollowersModal() {
     const params = Route.useParams()
-    const { data, error, loading } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     
-    if (loading) return <FollowersModalComponent status="pending" />
-    if (error || !firstNode?.followersCollection) return <FollowersModalComponent status="error" error={error} />
+    if (!firstNode?.followersCollection) return null
 
     return (
         <FollowersModalComponent 
-            status="success"
-            profiles={firstNode.followersCollection.edges.map((edge) => edge.node.follower_id)}
+            items={firstNode.followersCollection.edges.map((edge) => formatProps(edge.node.follower_id))}
         />
     )
 }
 
-function FollowersModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) {
+function FollowersModalComponent(props: ModalMiniProfileProps) {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()
@@ -48,7 +46,7 @@ function FollowersModalComponent(props: PropsWithStatus<ModalMiniProfileProps>) 
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
-            <MiniProfileIterator {...props}/>
+            <MiniProfileIterator items={props.items}/>
         </Modal>
     )
 }
