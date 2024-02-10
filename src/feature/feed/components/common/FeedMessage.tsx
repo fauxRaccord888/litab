@@ -6,7 +6,8 @@ import "./style/feedMessage.scss"
 
 export default function FeedMessage(props: FeedItems) {
     const { t } = useTranslation()
-    const { __typename, users } = props
+    const { item } = props
+    const { __typename, users } = item
     let icon = null
     let message = null
         

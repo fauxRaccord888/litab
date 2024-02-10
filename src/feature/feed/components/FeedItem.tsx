@@ -1,13 +1,14 @@
 import type { FeedItems } from '../type';
 import FeedMessage from "./common/FeedMessage";
-import PentagramInfo from '$feature/Pentagram/components/common/PentagramInfo';
+import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
 import "./style/feedItem.scss"
 
 export default function FeedItem(props: FeedItems) {
     let feedItem = null
+    const { item } = props
 
-    if (props.__typename === 'pentagrams') {
-        feedItem = <PentagramInfo feed {...props} />
+    if (item.__typename === 'pentagrams') {
+        feedItem = <PentagramSelectView feed item={item} />
     }
 
     return (
