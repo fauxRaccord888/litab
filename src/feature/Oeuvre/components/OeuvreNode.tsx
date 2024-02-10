@@ -1,4 +1,4 @@
-import type { DBOeuvre } from "../types";
+import type { SelectableDBOeuvre } from "../types";
 import { useRef } from "react";
 import { useHover } from '$lib/hooks/useHover';
 import BucketImage from "$lib/components/common/BucketImage";
@@ -8,12 +8,8 @@ import HoverCard from "$feature/portal/components/HoverCard";
 
 import "./style/oeuvreNode.scss"
 
-interface OeuvreInfoProps {
-    oeuvre?: DBOeuvre | undefined
-}
-
-export default function OeuvreNode(props: OeuvreInfoProps) {
-    const { oeuvre } = props
+export default function OeuvreNode(props: SelectableDBOeuvre) {
+    const { item, selected } = props
     const { status, handleMouseLeave, handleMouseOver } = useHover()
     const ref = useRef<HTMLDivElement | null>(null)
     const position = ref.current?.getBoundingClientRect()
@@ -25,7 +21,7 @@ export default function OeuvreNode(props: OeuvreInfoProps) {
             onMouseLeave={handleMouseLeave}
             className="oeuvre-node-container"
         >
-            {oeuvre &&
+            {item && !selected &&
                 <HoverCard
                     position={position}
                     status={status}
@@ -33,16 +29,16 @@ export default function OeuvreNode(props: OeuvreInfoProps) {
                     handleMouseLeave={handleMouseLeave} 
                 >
                     <div className="oeuvre-hover-card-container">
-                        <OeuvreMainInfo mini {...oeuvre}/>
+                        <OeuvreMainInfo mini item={item}/>
                     </div>
                 </HoverCard>
             }
 
-            <div className="oeuvre-cover-container">
-                {oeuvre &&
+            <div className={`oeuvre-cover-container ${selected ? "selected" : ""}`}>
+                {item &&
                     <BucketImage 
                         bucket="oeuvres"
-                        id={oeuvre.id}
+                        id={item.id}
                         fallback={<FallbackIcon className="fallback-icon"/>}
                     />
                 }
