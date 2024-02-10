@@ -1,0 +1,16 @@
+.pentagram-meta-info-container {
+    display: flex;
+    align-items: center;
+    
+    > :not(:first-child) {
+        margin-left: 0.75rem;
+    }
+
+    .pentagram-date {
+        color: rgba(var(--font-color), 0.5)
+    }
+
+    .mini-profile-container {
+        width: fit-content;
+    }
+}
