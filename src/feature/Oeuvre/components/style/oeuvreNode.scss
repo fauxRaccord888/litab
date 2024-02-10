@@ -10,7 +10,10 @@
         width: var(--node);
         height: var(--node);
         border-radius: 50%;
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+
         .bucket-image-container {
             display: flex;
             justify-content: center;
@@ -23,6 +26,39 @@
                 height: 1rem;
             }
         }
+
+        .target-icon {
+            fill: rgb(var(--primary));
+            width: 2rem;
+            height: 2rem;
+        }
+
+        &.selected{
+            --main: rgba(var(--font-color), 0.8);
+            --point: rgb(var(--primary));
+            &::before {
+                content: '';
+                display: block;
+                background: conic-gradient(var(--main), var(--point), var(--point), var(--point), var(--main));
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 110%;
+                height: 110%;
+                border-radius: 100%;
+                z-index: -2;
+                animation: spin 2s linear infinite;
+              }
+              &::after{
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgb(var(--background-color));
+                z-index: -1;
+                border-radius: 50%;
+              }
+        }
+        
     }
 }
 
@@ -64,3 +100,8 @@
     }
 }
 
+@keyframes spin {
+    from {transform: translate(-50%, -50%) rotate(0);}
+    to   {transform: translate(-50%, -50%) rotate(360deg);}
+  }
+  

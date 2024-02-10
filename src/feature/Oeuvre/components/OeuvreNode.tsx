@@ -5,6 +5,7 @@ import BucketImage from "$lib/components/common/BucketImage";
 import FallbackIcon from "$lib/components/icons/FallbackIcon";
 import OeuvreMainInfo from "./common/OeuvreMainInfo";
 import HoverCard from "$feature/portal/components/HoverCard";
+import TargetIcon from "$lib/components/icons/TargetIcon";
 
 import "./style/oeuvreNode.scss"
 
@@ -41,6 +42,9 @@ export default function OeuvreNode(props: SelectableDBOeuvre) {
                         id={item.id}
                         fallback={<FallbackIcon className="fallback-icon"/>}
                     />
+                }
+                {!item && selected && 
+                    <TargetIcon className="target-icon"/>
                 }
             </div>
         </div>
