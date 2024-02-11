@@ -1,4 +1,5 @@
 export type FormatProps<T=unknown> = {
+    id?: string | number
     item: T
 }
 
