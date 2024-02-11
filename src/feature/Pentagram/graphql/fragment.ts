@@ -4,6 +4,7 @@ graphql(/* GraphQL */ `
     fragment OeuvresCollections on pentagrams_oeuvresConnection {
         edges {
             node {
+                id
                 index
                 oeuvres {
                     ...OeuvresInfo
@@ -17,11 +18,12 @@ graphql(/* GraphQL */ `
     fragment PentagramsNodesInfo on pentagrams_nodesConnection {
         edges {
             node {
+                id
+                angle
+                distance
                 oeuvres {
                     ...OeuvresInfo
                 }
-                angle
-                distance
             }
         }
     }
@@ -32,7 +34,6 @@ graphql(/* GraphQL */ `
         edges {
             node {
                 id
-                title
                 description
                 created_at
                 users {
