@@ -1,4 +1,4 @@
-import type { SelectableDBOeuvre } from "../types";
+import type { DBOeuvre } from "../types";
 import { useRef } from "react";
 import { useHover } from '$lib/hooks/useHover';
 import BucketImage from "$lib/components/common/BucketImage";
@@ -9,7 +9,12 @@ import TargetIcon from "$lib/components/icons/TargetIcon";
 
 import "./style/oeuvreNode.scss"
 
-export default function OeuvreNode(props: SelectableDBOeuvre) {
+interface OeuvreNodeProps {
+    item?: DBOeuvre | null | undefined
+    selected?: boolean
+}
+
+export default function OeuvreNode(props: OeuvreNodeProps) {
     const { item, selected } = props
     const { status, handleMouseLeave, handleMouseOver } = useHover()
     const ref = useRef<HTMLDivElement | null>(null)

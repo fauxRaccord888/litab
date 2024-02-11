@@ -1,11 +1,12 @@
 import type { DBOeuvre } from "../../types";
+import type { FormatProps } from "$lib/types/components"
 import Button from "$lib/components/common/Button"
 import { calcFontColorByBG } from "$lib/utils/luminance";
 import { fromHex } from "$lib/utils/rgba";
 import "./style/oeuvreMainInfo.scss"
 
 // TODO onClick Handler 
-export default function OeuvreMainInfo(props: DBOeuvre & { mini?: boolean }) {
+export default function OeuvreMainInfo(props: FormatProps<DBOeuvre> & { mini?: boolean }) {
     const { item, mini } = props
     const { title, oeuvres_artistsCollection, oeuvres_genresCollection } = item
 
