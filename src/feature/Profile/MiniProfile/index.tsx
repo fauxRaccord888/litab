@@ -1,3 +1,4 @@
+import type { FormatProps } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types";
 
 import ProfileImage from "../components/ProfileImage";
@@ -6,7 +7,7 @@ import AccountInteraction from "../components/AccountInteraction";
 
 import "./style/index.scss"
 
-interface MiniProfileProps extends DBProfiles{
+interface MiniProfileProps extends FormatProps<DBProfiles>{
     interaction?: boolean
     md?: boolean
 }

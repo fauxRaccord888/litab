@@ -1,14 +1,15 @@
+/* types */
+import type { FormatProps } from '$lib/types/components';
+import type { DBProfiles } from "$feature/Profile/types"
 /* hooks */
 import { useProfileNavigation } from "../hooks"
-/* types */
-import type { DBProfiles } from "$feature/Profile/types"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
 import BucketImage from "$lib/components/common/BucketImage"
 /* style */
 import "./style/profileImage.scss"
 
-export default function ProfileImage(props: DBProfiles & { mini?: boolean }) {
+export default function ProfileImage(props: FormatProps<DBProfiles> & { mini?: boolean }) {
     const { item, mini  } = props
     const { id, mutable_id } = item
     const { profile: showProfile } = useProfileNavigation()

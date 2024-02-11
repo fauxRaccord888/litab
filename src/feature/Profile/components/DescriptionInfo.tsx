@@ -1,4 +1,5 @@
 /* types */
+import type { FormatProps } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types"
 import type { PropsWithChildren } from "react";
 /* hooks */
@@ -11,7 +12,7 @@ import "./style/description.scss"
 import { Trans } from 'react-i18next';
 
 
-export default function DescriptionInfo(props: DBProfiles) {
+export default function DescriptionInfo(props: FormatProps<DBProfiles>) {
     const { item } = props
     const { id, mutable_id, nickname, followersCollection, description } = item
     const mutualFollowers = useMutualFollowers(id, followersCollection)
