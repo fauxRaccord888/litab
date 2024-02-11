@@ -1,4 +1,5 @@
 /* types */
+import type { FormatProps } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types"
 /* hooks */
 import { useTranslation } from "react-i18next";
@@ -10,7 +11,7 @@ import MoreIcon from "$lib/components/icons/More";
 import "./style/accountIneraction.scss"
 
 
-export default function AccountInteraction(props: DBProfiles & { mini?: boolean } ) {
+export default function AccountInteraction(props: FormatProps<DBProfiles> & { mini?: boolean } ) {
     const { item, mini } = props
     const { id, mutable_id } = item
     const { t } = useTranslation()

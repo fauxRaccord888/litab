@@ -1,8 +1,9 @@
 import type { DBPentagram } from "$feature/Pentagram/types";
+import type { FormatProps } from '$lib/types/components';
 
 import './style/pentagramDetailedInfo.scss'
 
-interface PentagramDetailedInfoProps extends DBPentagram {
+interface PentagramDetailedInfoProps extends FormatProps<DBPentagram> {
     feed?: boolean
 }
 

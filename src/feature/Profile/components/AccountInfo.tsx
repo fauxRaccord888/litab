@@ -1,11 +1,12 @@
 /* types */
+import type { FormatProps } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types"
 /* hooks */
 import { useProfileNavigation } from "../hooks"
 /* styles */
 import "./style/accountInfo.scss"
 
-export default function AcocuntInfo(props: DBProfiles & { mini?: boolean }) {
+export default function AcocuntInfo(props: FormatProps<DBProfiles> & { mini?: boolean }) {
     const { item, mini } = props
     const { mutable_id, nickname } = item
     const { profile: showProfileHandler } = useProfileNavigation()

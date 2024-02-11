@@ -1,4 +1,5 @@
 /* hooks */
+import type { FormatProps } from '$lib/types/components';
 import { useTranslation } from "react-i18next"
 import { useProfileNavigation } from "../hooks";
 /* types */
@@ -8,7 +9,7 @@ import { calcCollectionLength } from "$lib/utils/graphql"
 /* styles */
 import "./style/following.scss"
 
-export default function FollowingInfo(props: DBProfiles) {
+export default function FollowingInfo(props: FormatProps<DBProfiles>) {
     const { item } = props
     const { mutable_id, followingsCollection, followersCollection, postsCollection } = item
     const { t } = useTranslation()

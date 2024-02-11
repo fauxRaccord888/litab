@@ -1,3 +1,4 @@
+import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "$feature/Pentagram/types";
 import { useMainNodeItems, useSubNodeItems } from "../hooks";
 
@@ -10,7 +11,7 @@ import PentagramDetailedInfo from "./common/PentagramDetailedInfo";
 
 import './style/pentagramSelectView.scss'
 
-interface PentagramSelectViewProps extends DBPentagram {
+interface PentagramSelectViewProps extends FormatProps<DBPentagram> {
     feed?: boolean
 }
 

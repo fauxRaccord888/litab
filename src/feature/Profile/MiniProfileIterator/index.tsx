@@ -1,3 +1,4 @@
+import type { FormatProps } from "$lib/types/components"
 import type { DBProfiles } from "../types";
 
 import MiniProfile from "../MiniProfile";
@@ -5,7 +6,7 @@ import ItemIterator from "$lib/components/common/ItemIterator";
 import './style/miniProfileIterator.scss'
 
 export default function MiniProfileIterator(props: {
-    items: DBProfiles[]
+    items: FormatProps<DBProfiles>[]
 }) {
     return (
         <div className="user-collection-iterator-container">

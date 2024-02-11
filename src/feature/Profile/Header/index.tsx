@@ -1,4 +1,5 @@
 import type { DBProfiles } from "$feature/Profile/types"
+import type { FormatProps } from '$lib/types/components';
 
 import ProfileImage from "../components/ProfileImage";
 import AccountInfo from "../components/AccountInfo";
@@ -8,7 +9,7 @@ import DescriptionInfo from "../components/DescriptionInfo";
 
 import './style/index.scss'
 
-export default function ProfileSelectView(props: DBProfiles) {
+export default function ProfileSelectView(props: FormatProps<DBProfiles>) {
     const { item } = props
     return (
         <div className="profile-header-container">

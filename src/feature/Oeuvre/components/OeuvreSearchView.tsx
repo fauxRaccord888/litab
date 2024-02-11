@@ -1,4 +1,3 @@
-import type { DBOeuvre } from '../types';
 import { useOeuvresQuery } from '../hooks';
 
 import OeuvreInfo from './common/OeuvreInfo';
@@ -10,7 +9,7 @@ import "./style/oeuvreSearchView.scss"
 
 export default function OeuvreSearchView() {
     const [searchOeuvres, {data}] = useOeuvresQuery()
-    const result :DBOeuvre[] = data?.oeuvresCollection?.edges.map((edge) => formatProps(edge.node)) || []
+    const result = data?.oeuvresCollection?.edges.map((edge) => formatProps(edge.node)) || []
 
     // TODO navigate w/ query param
     return (

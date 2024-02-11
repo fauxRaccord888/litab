@@ -1,10 +1,11 @@
 import type { DBPentagram } from "$feature/Pentagram/types";
+import type { FormatProps } from '$lib/types/components';
 import MiniProfile from "$feature/Profile/MiniProfile";
 import { useTranslatedRelativeTime } from "$lib/hooks";
 
 import './style/pentagramMetaInfo.scss'
 
-interface PentagramMetaInfoProps extends DBPentagram {
+interface PentagramMetaInfoProps extends FormatProps<DBPentagram> {
     feed?: boolean
 }
 

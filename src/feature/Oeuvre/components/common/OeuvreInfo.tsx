@@ -1,10 +1,11 @@
 import type { DBOeuvre } from "../../types";
+import type { FormatProps } from "$lib/types/components";
 import OeuvreMainInfo from "./OeuvreMainInfo";
 import BucketImage from "$lib/components/common/BucketImage";
 
 import './style/oeuvreInfo.scss'
 
-export default function OeuvreInfo(props: DBOeuvre ) {
+export default function OeuvreInfo(props: FormatProps<DBOeuvre> ) {
     const { item } = props
     const { id, description } = item
 
