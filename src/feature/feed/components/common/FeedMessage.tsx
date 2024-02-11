@@ -1,10 +1,12 @@
 import type { FeedItems } from "../..//type"
+import type { FormatProps } from '$lib/types/components';
+
 import { useTranslation } from "react-i18next"
 import PentagonIcon from "$lib/components/icons/PentagonIcon"
 
 import "./style/feedMessage.scss"
 
-export default function FeedMessage(props: FeedItems) {
+export default function FeedMessage(props: FormatProps<FeedItems>) {
     const { t } = useTranslation()
     const { item } = props
     const { __typename, users } = item
