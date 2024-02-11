@@ -6,6 +6,8 @@ import AccountInteraction from "../components/AccountInteraction";
 import FollowingInfo from "../components/FollowingInfo";
 import DescriptionInfo from "../components/DescriptionInfo";
 
+import './style/index.scss'
+
 export default function ProfileSelectView(props: DBProfiles) {
     const { item } = props
     return (
