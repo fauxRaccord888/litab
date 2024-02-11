@@ -1,4 +1,5 @@
 import type { MouseEventHandler } from "react";
+import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "../types";
 import { useState } from "react";
 import { useMainNodeItems, useSubNodeItems } from "../hooks";
@@ -12,7 +13,7 @@ import { PENTAGRAM } from '../constants';
 import './style/pentagramUpdateView.scss'
 
 
-export default function PentagramUpdateView(props: DBPentagram) {
+export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
     const { item } = props
     const { pentagrams_oeuvresCollection: mainNodes, pentagrams_nodesCollection: subNodes } = item
     // TODO selected MainNode 정교화
