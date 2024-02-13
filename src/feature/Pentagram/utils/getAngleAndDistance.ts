@@ -1,17 +1,22 @@
-import type { MouseEvent } from "react"
 import { PENTAGRAM } from "../constants"
 
-export function getAngleAndDisctance(e: MouseEvent, rect: DOMRect, sides: number) {
-    const x = e.clientX - rect.left 
-    const y = e.clientY - rect.top
+export function getAngleAndDisctance(
+    event: {clientX: number, clientY: number}, 
+    parentElem: HTMLDivElement, 
+    sides: number
+) {
+    const rect = parentElem.getBoundingClientRect()
+    const x = event.clientX - rect.left 
+    const y = event.clientY - rect.top
+
     const radius = rect.height // DEBUG 반응형으로 radius가 바뀌기 때문에 불가피하게 넣은 흑마술임 다른 방법을 고안할 필요가 있음
+
     if (!isInside(y, x, radius, sides)) return { error: true }
 
     const angle = calcAngle(y, x)
     const distance = calcDistance(y, x, radius)
 
     return { angle, distance }
-    
 }
 
 function isInside(y: number, x: number, radius: number, sides: number) {

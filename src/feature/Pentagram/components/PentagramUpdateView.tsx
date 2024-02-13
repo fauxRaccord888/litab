@@ -1,75 +1,59 @@
-import type { MouseEventHandler } from "react";
 import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "../types";
-import { useState } from "react";
-import { useMainNodeItems, useSubNodeItems } from "../hooks";
+
+import { useRef } from 'react';
+import { useHandleClickNodes, useHandleDrag, usePentagramNodes } from "../hooks";
 import OeuvrePentagonWrapper from "./common/OeuvrePentagonWrapper";
 import ItemIterator from "$lib/components/common/ItemIterator";
-import MainNode from "./common/MainNode";
-import SubNode from "./common/SubNode";
+import { MainNode, SubNode, SelectedPosition, PendingNode} from './Node_REDUX';
 
-import { getAngleAndDisctance } from "../utils";
-import { PENTAGRAM } from '../constants';
 import './style/pentagramUpdateView.scss'
 
 
 export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
     const { item } = props
     const { pentagrams_oeuvresCollection: mainNodes, pentagrams_nodesCollection: subNodes } = item
-    // TODO selected MainNode 정교화
-    const [selectedMainNode, setSelectedMainNode] = useState<null | number>(null)
-    const [selectedSubNode, setSelectedSubNode] = useState<null | string>(null)
-    const [selectedPosition, setSelectedPosition] = useState<null | {angle : number, distance: number}>(null)
-    const mainNodeItems = useMainNodeItems(mainNodes, selectedMainNode)
-    const subNodeItems = useSubNodeItems(subNodes, selectedSubNode)
 
-    const nullifySelected = () => {
-        setSelectedMainNode(null)
-        setSelectedSubNode(null)
-        setSelectedPosition(null)
-    }
-
-    const handleClickMainNode = (index: number) => {
-        nullifySelected()
-        setSelectedMainNode(index)
-    }
-
-    const handleClickSubNode = (id: string) => {
-        nullifySelected()
-        setSelectedSubNode(id)
-    }
-    
-    const handleClickParent: MouseEventHandler<HTMLDivElement> = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect()
-        const { angle, distance, error } = getAngleAndDisctance(e, rect, PENTAGRAM.SIDES)
-        if (angle && distance) {
-            // TODO - PENTAGRAMS_NODES MUTATION
-            if (selectedSubNode) console.log(angle, distance, error)
-            else {
-                nullifySelected()
-                setSelectedPosition({angle, distance})
-            }
-        }
-    }
+    const parentRef = useRef<HTMLDivElement | null>(null)
+    const { handleClickMainNode, handleClickSubNode, handleClickPendingNode, handleClickParent } = useHandleClickNodes()
+    const { handleDrag } = useHandleDrag(parentRef.current)
+    const { mainNodeIds, subNodeIds, pendingNodeIds } = usePentagramNodes(mainNodes, subNodes)
 
     return (
         <div className="pentagram-update-view-container">
-            <OeuvrePentagonWrapper handleClickParent={handleClickParent}>
+            <OeuvrePentagonWrapper 
+                ref={parentRef}
+                handleClickParent={handleClickParent}    
+            >
                 <ItemIterator
                     additionalProps={{handleClickNode: handleClickMainNode}}
-                    items={mainNodeItems}
+                    items={mainNodeIds}
                     componentFunction={MainNode}
                 />
-                {subNodeItems &&
+                {subNodeIds &&
                     <ItemIterator
-                        additionalProps={{handleClickNode: handleClickSubNode}}
-                        items={subNodeItems}
+                        additionalProps={{
+                            handleDrag,
+                            handleClickNode: handleClickSubNode
+                        }}
+                        items={subNodeIds}
                         componentFunction={SubNode}
                     />
                 }
-                {selectedPosition && <SubNode selected item={selectedPosition} />}
+                {pendingNodeIds &&
+                    <ItemIterator
+                        additionalProps={{
+                            handleDrag,
+                            handleClickNode: handleClickPendingNode
+                        }}
+                        items={pendingNodeIds}
+                        componentFunction={PendingNode}
+                    />
+                }
+                <SelectedPosition handleDrag={handleDrag} />
             </OeuvrePentagonWrapper>
             {/* TODO UPDATE FORM */}
+            {/* TODO WORKING TREE */}
         </div>
     )
 }

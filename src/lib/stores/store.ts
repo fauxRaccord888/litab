@@ -12,9 +12,11 @@ import {
 import storage from 'redux-persist/lib/storage' 
 
 import authReducer from "./authSlice";
+import updateNodeReducer from "$feature/Pentagram/store/updateNodeSlice";
 
 const baseReducer = combineReducers({
     auth: authReducer,
+    updateNode: updateNodeReducer,
 })
 
 const persistConfig = {
