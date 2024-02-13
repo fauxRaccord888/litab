@@ -28,6 +28,7 @@ export default function HoverCard(props: HoverCardProps) {
             {rootElem && createPortal(
                 <div
                     style={style}
+                    onClick={(e) => e.stopPropagation()}
                     onMouseOver={handleMouseOver}
                     onMouseLeave={handleMouseLeave} 
                     className={`hover-card-container ${status ? 'show' : ''}`}

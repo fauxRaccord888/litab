@@ -6,7 +6,7 @@ type MinimalProp<T> = {
 
 interface ItemIteratorProps<T extends MinimalProp<K>, K> {
     items: T[],
-    additionalProps?: Record<string, unknown>,
+    additionalProps?: Partial<T>,
     componentFunction: (p: T) => JSX.Element
 }
 
