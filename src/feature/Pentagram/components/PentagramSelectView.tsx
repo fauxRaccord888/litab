@@ -1,12 +1,11 @@
 import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "$feature/Pentagram/types";
-import { useMainNodeItems, useSubNodeItems } from "../hooks";
+import { usePentagramNodes } from "../hooks";
 
 import PentagramMetaInfo from "./common/PentagramMetaInfo";
 import OeuvrePentagonWrapper from "./common/OeuvrePentagonWrapper";
+import { MainNode, SubNode } from './Node_REDUX';
 import ItemIterator from "$lib/components/common/ItemIterator";
-import MainNode from "./common/MainNode";
-import SubNode from "./common/SubNode";
 import PentagramDetailedInfo from "./common/PentagramDetailedInfo";
 
 import './style/pentagramSelectView.scss'
@@ -19,21 +18,19 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
     const { item, feed } = props
 
     const { pentagrams_oeuvresCollection: mainNodes, pentagrams_nodesCollection: subNodes } = item
-    const mainNodeItems = useMainNodeItems(mainNodes)
-    const subNodeItems = useSubNodeItems(subNodes)
-
+    const { mainNodeIds, subNodeIds } = usePentagramNodes(mainNodes, subNodes)
 
     return (
         <div className="pentagram-select-view-container">
             <PentagramMetaInfo item={item} feed={feed}/>
             <OeuvrePentagonWrapper>
                 <ItemIterator
-                    items={mainNodeItems}
+                    items={mainNodeIds}
                     componentFunction={MainNode}
                 />
-                {subNodeItems &&
+                {subNodeIds &&
                     <ItemIterator
-                        items={subNodeItems}
+                        items={subNodeIds}
                         componentFunction={SubNode}
                     />
                 }
