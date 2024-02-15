@@ -11,24 +11,24 @@ export function getAngleAndDisctance(
 
     const radius = rect.height // DEBUG 반응형으로 radius가 바뀌기 때문에 불가피하게 넣은 흑마술임 다른 방법을 고안할 필요가 있음
 
-    if (!isInside(y, x, radius, sides)) return { error: true }
+    if (!isInside(y, x, radius, sides)) return { angle: null, distance: null }
 
-    const angle = calcAngle(y, x)
-    const distance = calcDistance(y, x, radius)
+    const angle = Math.round(calcAngle(y, x))
+    const distance = Math.round(calcDistance(y, x, radius))
 
-    return { angle, distance }
+    return positionWithAdjustment({ angle, distance })
 }
 
 function isInside(y: number, x: number, radius: number, sides: number) {
     let inside = false
     const radianPerSide = 2 * Math.PI / sides
-    const calibrate = PENTAGRAM.ANGLE_CALIBRATE / 180 * Math.PI
+    const offset = PENTAGRAM.ANGLE_OFFSET / PENTAGRAM.HALF_CIRCLE * Math.PI
     
     for (let i = 0; i < sides; i++) {
-        const x1 = Math.cos(radianPerSide * i + calibrate) * radius
-        const y1 = Math.sin(radianPerSide * i + calibrate) * radius
-        const x2 = Math.cos(radianPerSide * (i+1) + calibrate) * radius
-        const y2 = Math.sin(radianPerSide * (i+1) + calibrate) * radius
+        const x1 = Math.cos(radianPerSide * i + offset) * radius
+        const y1 = Math.sin(radianPerSide * i + offset) * radius
+        const x2 = Math.cos(radianPerSide * (i+1) + offset) * radius
+        const y2 = Math.sin(radianPerSide * (i+1) + offset) * radius
 
         const intersect = ((y2 > y) != (y1 > y)) &&
             (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1 + PENTAGRAM.EPSILON) 
@@ -42,10 +42,25 @@ function isInside(y: number, x: number, radius: number, sides: number) {
 
 function calcAngle(y: number, x: number) {
     const radian = Math.atan2(y, x)
-    const angle = ((radian + Math.PI) / Math.PI * PENTAGRAM.HALF_CIRCLE + PENTAGRAM.ANGLE_CALIBRATE) % PENTAGRAM.FULL_CIRCLE
+    const angle = ((radian + Math.PI) / Math.PI * PENTAGRAM.HALF_CIRCLE + PENTAGRAM.ANGLE_OFFSET) % PENTAGRAM.FULL_CIRCLE
     return angle
 }
 
 function calcDistance(y: number, x: number, radius: number) {
     return ((y ** 2 + x ** 2) ** 0.5) / radius * 100
+}
+
+function positionWithAdjustment(position: {angle: number, distance: number}) {
+    const { angle, distance } = position
+    
+    for (let i = 0; i < PENTAGRAM.SIDES; i++ ){
+        const targetAngle = PENTAGRAM.FULL_CIRCLE / PENTAGRAM.SIDES * i
+        if (
+            Math.abs(PENTAGRAM.VERTEX_TARGET_DISTANCE - distance) < PENTAGRAM.VERTEX_DISTANCE_THRESHOLD &&
+            Math.abs(targetAngle - angle) < PENTAGRAM.VERTEX_ANGLE_THRESHOLD
+        ) {
+            return { angle: targetAngle, distance: PENTAGRAM.VERTEX_TARGET_DISTANCE }
+        }
+    }
+    return { angle, distance }
 }
