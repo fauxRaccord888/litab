@@ -2,7 +2,7 @@ import type { AppRootState } from "$lib/stores/store"
 import type { DBPentagram } from "../../types" 
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { initialize, subNodeSelector, mainNodeSelector, mergeWorkingTree, pendingNodeSelector } from "./../../store/updateNodeSlice"
+import { initialize, subNodeSelector, mainNodeSelector, mergeWorkingTree, pendingNodeSelector } from "../../store/pentagramUpsertSlice"
 
 export function usePentagramNodes(
     mainNodes: DBPentagram["pentagrams_oeuvresCollection"],

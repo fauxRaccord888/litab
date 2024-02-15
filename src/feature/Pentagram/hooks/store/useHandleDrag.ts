@@ -2,13 +2,13 @@ import type { AppRootState } from "$lib/stores/store"
 import { useDispatch, useSelector } from "react-redux"
 import { useThrottle } from "$lib/hooks"
 
-import { setSelectedPosition, updatePosition } from "$feature/Pentagram/store/updateNodeSlice"
+import { setSelectedPosition, updatePosition } from "$feature/Pentagram/store/pentagramUpsertSlice"
 
 import { getAngleAndDisctance } from "../../utils"
 import { PENTAGRAM } from "../../constants"
 
 export function useHandleDrag(parentElem: HTMLDivElement | null) {
-    const { selected } = useSelector((state: AppRootState) => state.updateNode)
+    const { selected } = useSelector((state: AppRootState) => state.pentagramUpsert)
     const dispatch = useDispatch()
     const throttle = useThrottle()
 

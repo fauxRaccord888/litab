@@ -27,8 +27,8 @@ const initialSelectedPositionState: SelectedPosition = {
     distance: null
 }
 
-const updateNodeSlice = createSlice({
-    name: 'updateNode',
+const pentagramUpsertSlice = createSlice({
+    name: 'pentagramUpsert',
     initialState: {
         selected: initialSelectedState as SelectedNode, // COMMENT 리터럴 타입이 하나로 고정되는 부분 방지
         selectedPosition: initialSelectedPositionState as SelectedPosition,
@@ -99,10 +99,10 @@ const updateNodeSlice = createSlice({
     },
 })
 
-export type UpdateNodeState = AppRootState["updateNode"]
-export const { initialize, updateOeuvre, updatePosition, mergeWorkingTree, clenaWorkingTree, revert, unselect, setSelected, setSelectedPosition } = updateNodeSlice.actions
-export const mainNodeSelector = mainNodeAdapter.getSelectors<AppRootState>(state => state.updateNode.mainNode)
-export const subNodeSelector = subNodeAdapter.getSelectors<AppRootState>(state => state.updateNode.subNode)
-export const pendingNodeSelector = pendingNodeAdapter.getSelectors<AppRootState>(state => state.updateNode.pendingNode)
-export const mainNodeWorkingTreeSelector =  workingTreeAdapter.getSelectors<AppRootState>(state => state.updateNode.workingTree)
-export default updateNodeSlice.reducer
+export type UpdateNodeState = AppRootState["pentagramUpsert"]
+export const { initialize, updateOeuvre, updatePosition, mergeWorkingTree, clenaWorkingTree, revert, unselect, setSelected, setSelectedPosition } = pentagramUpsertSlice.actions
+export const mainNodeSelector = mainNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.mainNode)
+export const subNodeSelector = subNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.subNode)
+export const pendingNodeSelector = pendingNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.pendingNode)
+export const mainNodeWorkingTreeSelector =  workingTreeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.workingTree)
+export default pentagramUpsertSlice.reducer

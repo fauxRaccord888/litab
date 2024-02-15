@@ -1,6 +1,6 @@
 import type { MouseEventHandler } from "react"
 import { useDispatch } from "react-redux"
-import { setSelected, setSelectedPosition, unselect } from "../../store/updateNodeSlice"
+import { setSelected, setSelectedPosition, unselect } from "../../store/pentagramUpsertSlice"
 import { getAngleAndDisctance } from "../../utils"
 import { PENTAGRAM } from "../../constants"
 
