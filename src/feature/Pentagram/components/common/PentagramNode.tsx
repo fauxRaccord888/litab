@@ -1,13 +1,14 @@
-import { useRef, type CSSProperties, type MouseEventHandler, DragEventHandler } from 'react';
+import type { CSSProperties, MouseEventHandler, DragEventHandler, TouchEventHandler } from 'react';
 import type { DBOeuvre } from '$feature/Oeuvre/types';
 import OeuvreNode from '$feature/Oeuvre/components/OeuvreNode';
+import './style/pentagramNode.scss'
 
-interface SubNodeStyle extends CSSProperties {
-    '--offset-multiplier': number,
+interface NodeStyle extends CSSProperties {
+    '--distance-multiplier': number,
     '--degrees': string
 }
 
-type SubNodeProps = {
+type NodeProps = {
     item: { 
         id?: string | undefined, 
         angle: number,
@@ -19,14 +20,12 @@ type SubNodeProps = {
     handleDrag?: (e: { clientX: number, clientY: number}) => void
 }
 
-export default function NodeWithPosition(props: SubNodeProps) {
+export default function PentagramNode(props: NodeProps) {
     const { item, handleClickNode, handleDrag, ...restProps } = props
     const { id } = item
 
-    const nodeRef = useRef<HTMLDivElement | null>(null)
-
-    const style: SubNodeStyle = {
-        '--offset-multiplier': (item?.distance || 0) / 100,
+    const style: NodeStyle = {
+        '--distance-multiplier': (item?.distance || 0) / 100,
         '--degrees': `${item?.angle || 0}deg`
     }
 
@@ -45,17 +44,22 @@ export default function NodeWithPosition(props: SubNodeProps) {
         if (handleDrag) handleDrag(e)
     }
 
+    const onTouch: TouchEventHandler<HTMLDivElement> = (e) => {
+        e.stopPropagation()
+        if (handleDrag) handleDrag(e.touches[0])
+    }
+
     return (
         <div 
             {...restProps}
-            ref={nodeRef}
             draggable={true}
             onClick={handleClick}
             onDrag={onDrag}
+            onTouchMove={onTouch}
             onDragOver={(e) => e.preventDefault()}
             onDragStart={onDragStart}
             style={style}
-            className="pentagram-node pentagram-sub-node" 
+            className="pentagram-node-container" 
         >
             <OeuvreNode selected={item?.selected} item={item?.oeuvres} />
         </div>

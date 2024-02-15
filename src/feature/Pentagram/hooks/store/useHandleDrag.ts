@@ -1,29 +1,35 @@
 import type { AppRootState } from "$lib/stores/store"
 import { useDispatch, useSelector } from "react-redux"
+import { useThrottle } from "$lib/hooks"
 
-import { setSelectedPosition, updatePosition } from "$feature/Pentagram/store/updateNodeSlice"
+import { setSelectedPosition, updatePosition } from "$feature/Pentagram/store/pentagramUpsertSlice"
 
 import { getAngleAndDisctance } from "../../utils"
 import { PENTAGRAM } from "../../constants"
 
 export function useHandleDrag(parentElem: HTMLDivElement | null) {
-    const { selected } = useSelector((state: AppRootState) => state.updateNode)
+    const { selected } = useSelector((state: AppRootState) => state.pentagramUpsert)
     const dispatch = useDispatch()
+    const throttle = useThrottle()
 
-    // TODO 쓰로틀 / 디바운스
     const handleDrag = (e: {clientX: number, clientY: number}) => {
         if (!parentElem) return
 
         const { angle, distance } = getAngleAndDisctance(e, parentElem, PENTAGRAM.SIDES)
         if (typeof angle !== 'number' || typeof distance !== 'number') return
 
-        if (selected.nodeType === 'sub-node') {
-            dispatch(updatePosition({ angle, distance}))
+        if (selected.nodeType === 'node') {
+            throttle(
+                () => dispatch(updatePosition({ angle, distance}))
+            , 200)
         }
+
         if (selected.nodeType === 'idle') {
-            dispatch(setSelectedPosition({angle, distance}))
+            throttle(
+                () => dispatch(setSelectedPosition({ angle, distance }))
+            , 200)
         }
     }
 
-    return {handleDrag }
+    return { handleDrag }
 }    

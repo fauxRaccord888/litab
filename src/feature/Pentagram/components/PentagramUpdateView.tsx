@@ -1,23 +1,23 @@
 import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "../types";
-
 import { useRef } from 'react';
 import { useHandleClickNodes, useHandleDrag, usePentagramNodes } from "../hooks";
+import { Node, PendingNode, SelectedPosition } from './Node_REDUX';
+
 import OeuvrePentagonWrapper from "./common/OeuvrePentagonWrapper";
 import ItemIterator from "$lib/components/common/ItemIterator";
-import { MainNode, SubNode, SelectedPosition, PendingNode} from './Node_REDUX';
 
 import './style/pentagramUpdateView.scss'
 
 
 export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
     const { item } = props
-    const { pentagrams_oeuvresCollection: mainNodes, pentagrams_nodesCollection: subNodes } = item
+    const { pentagrams_nodesCollection: nodes } = item
 
     const parentRef = useRef<HTMLDivElement | null>(null)
-    const { handleClickMainNode, handleClickSubNode, handleClickPendingNode, handleClickParent } = useHandleClickNodes()
+    const { handleClickNode, handleClickPendingNode, handleClickParent } = useHandleClickNodes()
     const { handleDrag } = useHandleDrag(parentRef.current)
-    const { mainNodeIds, subNodeIds, pendingNodeIds } = usePentagramNodes(mainNodes, subNodes)
+    const { nodeIds, pendingNodeIds } = usePentagramNodes(nodes)
 
     return (
         <div className="pentagram-update-view-container">
@@ -25,19 +25,14 @@ export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
                 ref={parentRef}
                 handleClickParent={handleClickParent}    
             >
-                <ItemIterator
-                    additionalProps={{handleClickNode: handleClickMainNode}}
-                    items={mainNodeIds}
-                    componentFunction={MainNode}
-                />
-                {subNodeIds &&
+                {nodeIds &&
                     <ItemIterator
                         additionalProps={{
                             handleDrag,
-                            handleClickNode: handleClickSubNode
+                            handleClickNode
                         }}
-                        items={subNodeIds}
-                        componentFunction={SubNode}
+                        items={nodeIds}
+                        componentFunction={Node}
                     />
                 }
                 {pendingNodeIds &&
