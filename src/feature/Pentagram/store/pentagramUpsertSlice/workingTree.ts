@@ -1,9 +1,7 @@
-import type { DBOeuvre } from "$feature/Oeuvre/types"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import type { UpdateNodeState } from "."
 
-import { updateNode } from "./update"
-import { upsertNode } from "./upsert"
+import { update } from "./update"
 import { pendingNodeAdapter, workingTreeAdapter } from "."
 
 export const mergeChanges = (state: UpdateNodeState) => {
@@ -11,8 +9,9 @@ export const mergeChanges = (state: UpdateNodeState) => {
     ids.forEach((id) => {
         const change = state.workingTree.entities[id]
         if (!change) return
-        if (change.type === 'update') updateNode(state, change)
-        if (change.type === 'upsert') upsertNode(state, change)
+        if (change.type === 'update') update(state, change)
+        // TODO DELETE
+        if (change.type === 'delete') () => {}
     })
 }
 
@@ -24,84 +23,35 @@ export const abortChanges = (state: UpdateNodeState) => {
 export const revertChange = (state: UpdateNodeState, action: PayloadAction<{id: string}>) => {
     const { id } = action.payload
     const change = state.workingTree.entities[id]
+    if (!change) return
 
-    if (change.nodeType === 'main-node') {
-        const nodeType = 'main-node'
-        if (change.type === 'upsert') {
-            updateNode(state, {id, nodeType, oeuvres: null})
-        }
-        if (change.type === 'update') {
-            const { oeuvres } = change.originalNode
-            updateNode(state, {id, nodeType, oeuvres})
-        }
+    // TODO 예약어 사용 리팩토링
+    const { type, nodeType } = change
+
+    if (type === 'update') {
+        const { angle, distance } = change.originalNode
+        update(state, {id, nodeType, angle, distance})
     }
 
-    if (change.nodeType === 'sub-node') {
-        const nodeType = 'sub-node'
-        if (change.type === 'update') {
-            const { oeuvres, angle, distance } = change.originalNode
-            updateNode(state, {id, nodeType, oeuvres, angle, distance})
-        }
-    }
+    // TODO Delete
 
     workingTreeAdapter.removeOne(state.workingTree, id)
 }
 
-export const updateSelectedPositionWorkingTree = (state: UpdateNodeState, action: PayloadAction<{distance: number, angle: number}>) => {
+export const upsertUpdateRecord = (state: UpdateNodeState, action: PayloadAction<{distance: number, angle: number}>) => {
     const { distance, angle } = action.payload
     const { nodeType, id } = state.selected
 
-    if (nodeType === 'sub-node') {
-        const data = state.subNode.entities[id]
+    if (nodeType === 'node') {
+        const data = state.node.entities[id]
         if (data) {
             workingTreeAdapter.upsertOne(state.workingTree, {
                 id,
                 distance,
                 angle,
                 type: 'update',
-                nodeType: 'sub-node',
+                nodeType: 'node',
                 originalNode: data.originalNode,
-            })
-        }
-    }
-}
-
-
-export const updateSelectedOeuvreWokringTree = (state: UpdateNodeState, action: PayloadAction<{ oeuvres: DBOeuvre }>) => {
-    const { oeuvres } = action.payload
-    const { nodeType, id, index } = state.selected
-
-    if (nodeType === 'main-node') {
-        const { originalNode } = state.mainNode.entities[id]
-        if (originalNode) {
-            workingTreeAdapter.upsertOne(state.workingTree, {
-                id,
-                originalNode,
-                oeuvres,
-                nodeType,
-                type: 'update',
-            })
-        }
-        if (!originalNode) {
-            workingTreeAdapter.upsertOne(state.workingTree, {
-                id,
-                index,
-                oeuvres,
-                nodeType,
-                type: 'upsert',
-            })
-        }
-    }
-
-    if (nodeType === 'sub-node') {
-        const data = state.subNode.entities[id]
-        if (data) {
-            workingTreeAdapter.upsertOne(state.workingTree, {
-                id,
-                oeuvres,
-                nodeType,
-                originalNode: data.originalNode,
-                type: 'update',
             })
         }
     }

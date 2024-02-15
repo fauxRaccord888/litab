@@ -1,17 +1,9 @@
 import type { DBOeuvre } from "$feature/Oeuvre/types"
-import type { DBMainNodes, DBSubNodes } from "../../types"
+import type { DBPentagramsNodes } from "../../types"
 
-export interface MainNode {
-    id: string
-    index: number 
-    originalNode?: DBMainNodes
-    oeuvres: DBOeuvre | null
-    selected?: boolean
-}
-
-export interface SubNode {
+export interface Node {
     id: string,
-    originalNode: DBSubNodes,
+    originalNode: DBPentagramsNodes,
     oeuvres: DBOeuvre,
     angle: number,
     distance: number,
@@ -27,17 +19,14 @@ export interface PendingNode {
 }
 
 export type WorkingTree =  (
-    { id: string, nodeType: 'main-node', type: 'upsert', oeuvres: DBOeuvre, index: number } 
-    | { id: string, nodeType: 'main-node', type: 'update', oeuvres: DBOeuvre, originalNode: DBMainNodes}
-    | { id: string, nodeType: 'sub-node', type: 'update', oeuvres?: DBOeuvre, angle?: number, distance?: number, originalNode: DBSubNodes }
-    | { id: string, nodeType: 'sub-node', type: 'delete', originalNode: DBSubNodes }
+    | { id: string, nodeType: 'node', type: 'update', angle: number, distance: number, originalNode: DBPentagramsNodes }
+    | { id: string, nodeType: 'node', type: 'delete', originalNode: DBPentagramsNodes }
 ) 
 
 export type SelectedNode = (
-    { nodeType: "idle", id: null, index: null } 
-    | { nodeType: "pending-node", id: string, index: null }  
-    | { nodeType: "main-node", id: string, index: number }
-    | { nodeType: "sub-node", id: string, index: null }
+    { nodeType: "idle", id: null } 
+    | { nodeType: "node", id: string }
+    | { nodeType: "pending-node", id: string }  
 )
 
 export type SelectedPosition = {
