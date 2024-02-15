@@ -7,12 +7,8 @@ import { PENTAGRAM } from "../../constants"
 export function useHandleClickNodes() {
     const dispatch = useDispatch()
 
-    const handleClickMainNode = (id: string, index: number) => {
-        dispatch(setSelected({id, index, nodeType: 'main-node'}))
-    }
-    
-    const handleClickSubNode = (id: string) => {
-        dispatch(setSelected({id, nodeType: 'sub-node'}))
+    const handleClickNode = (id: string) => {
+        dispatch(setSelected({id, nodeType: 'node'}))
     }
 
     const handleClickPendingNode = (id: string) => {
@@ -27,5 +23,5 @@ export function useHandleClickNodes() {
         }
     }
 
-    return { handleClickMainNode, handleClickSubNode, handleClickPendingNode, handleClickParent }
+    return { handleClickNode, handleClickPendingNode, handleClickParent }
 }    

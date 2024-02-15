@@ -18,16 +18,16 @@ export function useHandleDrag(parentElem: HTMLDivElement | null) {
         const { angle, distance } = getAngleAndDisctance(e, parentElem, PENTAGRAM.SIDES)
         if (typeof angle !== 'number' || typeof distance !== 'number') return
 
-        if (selected.nodeType === 'sub-node') {
+        if (selected.nodeType === 'node') {
             throttle(
                 () => dispatch(updatePosition({ angle, distance}))
-            , 100)
+            , 200)
         }
 
         if (selected.nodeType === 'idle') {
             throttle(
                 () => dispatch(setSelectedPosition({ angle, distance }))
-            , 100)
+            , 200)
         }
     }
 
