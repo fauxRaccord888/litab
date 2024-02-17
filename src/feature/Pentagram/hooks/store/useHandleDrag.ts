@@ -6,6 +6,7 @@ import { setSelectedPosition, updatePosition } from "$feature/Pentagram/store/pe
 
 import { getAngleAndDisctance } from "../../utils"
 import { PENTAGRAM } from "../../constants"
+import { Quadtree, quadtreeRoot } from "../../utils/quadtree"
 
 export function useHandleDrag(parentElem: HTMLDivElement | null) {
     const { selected } = useSelector((state: AppRootState) => state.pentagramUpsert)
@@ -18,16 +19,23 @@ export function useHandleDrag(parentElem: HTMLDivElement | null) {
         const { angle, distance } = getAngleAndDisctance(e, parentElem, PENTAGRAM.SIDES)
         if (typeof angle !== 'number' || typeof distance !== 'number') return
 
+        const colliding = Quadtree.checkCollidingByPosition(quadtreeRoot, {
+            angle, 
+            distance, 
+        })
+        
+        if (colliding) return
+
         if (selected.nodeType === 'node') {
             throttle(
                 () => dispatch(updatePosition({ angle, distance}))
-            , 200)
+            , 25)
         }
 
         if (selected.nodeType === 'idle') {
             throttle(
                 () => dispatch(setSelectedPosition({ angle, distance }))
-            , 200)
+            , 25)
         }
     }
 

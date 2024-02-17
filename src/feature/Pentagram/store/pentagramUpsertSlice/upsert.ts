@@ -4,6 +4,7 @@ import type { UpdateNodeState } from "."
 
 import { PENTAGRAM } from "$feature/Pentagram/constants"
 import { pendingNodeAdapter, nodeAdapter } from "."
+import { Quadtree, quadtreeRoot } from "../../utils/quadtree"
 
 interface UpsertPayload {
     distance: number
@@ -25,7 +26,6 @@ export const upsert = (
     state: UpdateNodeState, 
     payload: UpsertNodePayload | UpsertPendingNodePayload
 ) => {
-    
     const { nodeType } = payload
     if (nodeType === 'node') {
         upsertNode(state, payload)
@@ -48,6 +48,12 @@ const upsertNode = (
         oeuvres,
         originalNode
     })
+
+    Quadtree.insertNodeByPosition(quadtreeRoot, {
+        id,
+        angle,
+        distance
+    })
 }
 
 const upsertPendingNode = (
@@ -55,10 +61,18 @@ const upsertPendingNode = (
     payload: UpsertPendingNodePayload
 ) => {
     const { oeuvres, angle, distance } = payload
+    
+    const id =  String(state.pendingNode.ids.length + PENTAGRAM.PENDING_NODE_OFFSET)
     pendingNodeAdapter.upsertOne(state.pendingNode, {
+        id,
         oeuvres,
         angle,
         distance,
-        id: String(state.pendingNode.ids.length + PENTAGRAM.PENDING_NODE_OFFSET)
+    })
+
+    Quadtree.insertNodeByPosition(quadtreeRoot, {
+        id,
+        angle,
+        distance
     })
 }
