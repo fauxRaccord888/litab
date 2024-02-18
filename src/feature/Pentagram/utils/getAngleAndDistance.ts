@@ -52,15 +52,16 @@ function calcDistance(y: number, x: number, radius: number) {
 
 function positionWithAdjustment(position: {angle: number, distance: number}) {
     const { angle, distance } = position
+    const { SIDES, FULL_CIRCLE, FULL_DISTANCE, VERTEX_DISTANCE_THRESHOLD, VERTEX_ANGLE_THRESHOLD } = PENTAGRAM
     
-    for (let i = 0; i < PENTAGRAM.SIDES; i++ ){
-        const targetAngle = PENTAGRAM.FULL_CIRCLE / PENTAGRAM.SIDES * i
+    for (let i = 0; i < SIDES; i++ ){
+        const targetAngle = FULL_CIRCLE / SIDES * i
         if (
-            Math.abs(PENTAGRAM.VERTEX_TARGET_DISTANCE - distance) < PENTAGRAM.VERTEX_DISTANCE_THRESHOLD &&
-            (Math.abs(PENTAGRAM.FULL_CIRCLE - targetAngle + angle) % PENTAGRAM.FULL_CIRCLE < PENTAGRAM.VERTEX_ANGLE_THRESHOLD || 
-            Math.abs(PENTAGRAM.FULL_CIRCLE + targetAngle - angle) % PENTAGRAM.FULL_CIRCLE < PENTAGRAM.VERTEX_ANGLE_THRESHOLD)
+            Math.abs(FULL_DISTANCE - distance) < VERTEX_DISTANCE_THRESHOLD &&
+            (Math.abs(FULL_CIRCLE - targetAngle + angle) % FULL_CIRCLE < VERTEX_ANGLE_THRESHOLD || 
+            Math.abs(FULL_CIRCLE + targetAngle - angle) % FULL_CIRCLE < VERTEX_ANGLE_THRESHOLD)
         ) {
-            return { angle: targetAngle, distance: PENTAGRAM.VERTEX_TARGET_DISTANCE }
+            return { angle: targetAngle, distance: FULL_DISTANCE }
         }
     }
     return { angle, distance }
