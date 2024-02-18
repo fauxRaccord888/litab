@@ -1,7 +1,7 @@
 import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "../types";
 import { useRef } from 'react';
-import { useHandleClickNodes, useHandleDrag, usePentagramNodes } from "../hooks";
+import { useHandleClickNodes, useHandleDrag, usePentagramNodes, useQuadtree } from "../hooks";
 import { Node, PendingNode, SelectedPosition } from './Node_REDUX';
 
 import OeuvrePentagonWrapper from "./common/OeuvrePentagonWrapper";
@@ -14,9 +14,10 @@ export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
     const { item } = props
     const { pentagrams_nodesCollection: nodes } = item
 
+    useQuadtree()
     const parentRef = useRef<HTMLDivElement | null>(null)
-    const { handleClickNode, handleClickPendingNode, handleClickParent } = useHandleClickNodes()
     const { handleDrag } = useHandleDrag(parentRef.current)
+    const { handleClickNode, handleClickPendingNode, handleClickParent } = useHandleClickNodes()
     const { nodeIds, pendingNodeIds } = usePentagramNodes(nodes)
 
     return (

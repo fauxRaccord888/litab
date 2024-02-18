@@ -106,29 +106,32 @@ export class Quadtree {
 
     private static insert(qtNode: QuadtreeNode, obj:Bounds): void {
         if (qtNode.maxDepth === qtNode.level) return // 같은 좌표의 경우 재귀 탈출 불가
+        
+        if (qtNode.objects.some((item) => item.id === obj.id)) return
 
         if (!qtNode.objects.length && !qtNode.nodes.length) {
             qtNode.objects.push(obj)
             return
         }
-
-        if (qtNode.objects.some((item) => item.id === obj.id)) return
         
         if (!qtNode.nodes.length) {
             Quadtree.split(qtNode)
         }
 
-        const indice = Quadtree.getIndice(qtNode, obj)
-
+        const objIndice = Quadtree.getIndice(qtNode, obj)
         if (qtNode.nodes.length) {
-            indice.forEach((index) => {
+            objIndice.forEach((index) => {
                 Quadtree.insert(qtNode.nodes[index], obj)
-                qtNode.objects.forEach((o) => {
-                    Quadtree.insert(qtNode.nodes[index], o)
-                })
             })
         }
 
+        qtNode.objects.forEach((o) => {
+            const indice = Quadtree.getIndice(qtNode, o)
+            indice.forEach((i) => {
+                Quadtree.insert(qtNode.nodes[i], o)
+            })
+        })
+        
         qtNode.objects = []
     }
 
@@ -170,10 +173,3 @@ export class Quadtree {
         }
     }
 }
-
-export const quadtreeRoot = Quadtree.createNode({
-    x: 0,
-    y: 0,
-    width: 200,
-    height: 200
-})

@@ -13,10 +13,12 @@ import storage from 'redux-persist/lib/storage'
 
 import authReducer from "./authSlice";
 import pentagramUpsertReducer from "$feature/Pentagram/store/pentagramUpsertSlice";
+import quadtreeReducer from "$feature/Pentagram/store/quadtree";
 
 const baseReducer = combineReducers({
     auth: authReducer,
     pentagramUpsert: pentagramUpsertReducer,
+    quadtree: quadtreeReducer
 })
 
 const persistConfig = {
