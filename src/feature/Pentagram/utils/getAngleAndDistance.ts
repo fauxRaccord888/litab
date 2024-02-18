@@ -57,7 +57,8 @@ function positionWithAdjustment(position: {angle: number, distance: number}) {
         const targetAngle = PENTAGRAM.FULL_CIRCLE / PENTAGRAM.SIDES * i
         if (
             Math.abs(PENTAGRAM.VERTEX_TARGET_DISTANCE - distance) < PENTAGRAM.VERTEX_DISTANCE_THRESHOLD &&
-            Math.abs(targetAngle - angle) < PENTAGRAM.VERTEX_ANGLE_THRESHOLD
+            (Math.abs(PENTAGRAM.FULL_CIRCLE - targetAngle + angle) % PENTAGRAM.FULL_CIRCLE < PENTAGRAM.VERTEX_ANGLE_THRESHOLD || 
+            Math.abs(PENTAGRAM.FULL_CIRCLE + targetAngle - angle) % PENTAGRAM.FULL_CIRCLE < PENTAGRAM.VERTEX_ANGLE_THRESHOLD)
         ) {
             return { angle: targetAngle, distance: PENTAGRAM.VERTEX_TARGET_DISTANCE }
         }
