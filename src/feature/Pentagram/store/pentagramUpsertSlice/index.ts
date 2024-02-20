@@ -1,23 +1,22 @@
-import type { Node, PendingNode, WorkingTree, SelectedNode, SelectedPosition } from './interface';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { AppRootState } from '$lib/stores/store';
-import type { DBOeuvre } from '$feature/Oeuvre/types'
+import type { DBOeuvre } from '$feature/Oeuvre/types';
 import type { DBPentagram } from '../../types';
+import type { Node, PendingChange } from './interface';
 
-import { createSlice, createEntityAdapter  } from '@reduxjs/toolkit'
-import { initializeStore } from './initialize';
-import { update } from './update';
-import { upsert } from './upsert';
-import { selectNode, selectPosition, unselectSelected } from './select';
-import { abortChanges, mergeChanges, revertChange, upsertUpdateRecord } from './workingTree';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { mergeChange } from './mergedNode';
+import { initializeNode } from './node';
+import { removePendingChanges, upsertPendingChange } from './pendingChange';
 
-export const nodeAdapter = createEntityAdapter({ selectId: (node: Node) => node.id })
-export const pendingNodeAdapter = createEntityAdapter({ selectId: (node: PendingNode) => node.id })
-export const workingTreeAdapter = createEntityAdapter({ selectId: (node: WorkingTree) => node.id })
+type SelectedNode = null | string
 
-const initialSelectedState: SelectedNode = {
-    nodeType: "idle",
-    id: null,
+type SelectedPosition = {
+    angle: number,
+    distance: number
+} | {
+    angle: null,
+    distance: null
 }
 
 const initialSelectedPositionState: SelectedPosition = {
@@ -25,81 +24,103 @@ const initialSelectedPositionState: SelectedPosition = {
     distance: null
 }
 
+export const mergedNodeAdapter = createEntityAdapter({ selectId: (node: Node) => node.id })
+export const nodeAdapter = createEntityAdapter({ selectId: (node: Node) => node.id })
+export const pendingChangeAdapter = createEntityAdapter({ selectId: (change: PendingChange) => change.id })
+
+// pending changes는 렌더링 단계에서 통합됨(별도 hooks)
 const pentagramUpsertSlice = createSlice({
     name: 'pentagramUpsert',
     initialState: {
-        selected: initialSelectedState as SelectedNode, // COMMENT 리터럴 타입이 하나로 고정되는 부분 방지
-        selectedPosition: initialSelectedPositionState as SelectedPosition,
+        mergedNode: mergedNodeAdapter.getInitialState(),
         node: nodeAdapter.getInitialState(),
-        pendingNode: pendingNodeAdapter.getInitialState(),
-        workingTree: workingTreeAdapter.getInitialState()
+        pendingChange: pendingChangeAdapter.getInitialState(),
+        selected: null as SelectedNode, // COMMENT 리터럴 타입이 하나로 고정되는 부분 방지
+        selectedPosition: initialSelectedPositionState as SelectedPosition,
     },
     reducers: {
         initialize(state, action: PayloadAction<{
             nodes: DBPentagram["pentagrams_nodesCollection"]
         }>) {
-            initializeStore(state, action)
+            initializeNode(state, action)
         },
 
-        upsertPendingNode(state, action: PayloadAction<{oeuvres: DBOeuvre}>) {
-            const { nodeType } = state.selected
+        setPosition(state, action: PayloadAction<{ angle: number, distance: number }>) {
+            const id = state.selected
+            const { angle, distance } = action.payload
+
+            if (id) {
+                upsertPendingChange(state, { 
+                    type: 'string',
+                    payload: {
+                        id,
+                        angle,
+                        distance,
+                        changeType: 'update'
+                    }
+                })
+            } else {
+                setSelectedPosition({ angle, distance })
+            }
+        },
+
+        upsertNode(state, action: PayloadAction<{ oeuvres: DBOeuvre }>) {
+            const selected = state.selected
             const { angle, distance } = state.selectedPosition
             const { oeuvres } = action.payload
 
             if (
-                nodeType === 'idle' &&
+                !selected && 
+                oeuvres &&
                 typeof angle === 'number' &&
-                typeof distance === 'number'
+                typeof distance === 'number' 
             ) {
-                upsert(state, { nodeType, oeuvres, angle, distance })
-                unselectSelected(state)
+                upsertPendingChange(state, { 
+                    type: 'string',
+                    payload: {
+                        angle,
+                        distance,
+                        oeuvres,
+                        changeType: "upsert" 
+                    }
+                })
             }
         },
 
-        updatePosition(state, action: PayloadAction<{ angle: number, distance: number }>) {
-            const { id, nodeType } = state.selected
-            const { angle, distance } = action.payload
-            if (nodeType === 'node' || nodeType === 'pending-node') {
-                update(state, { id, angle, distance, nodeType })
-                upsertUpdateRecord(state, action)
-            }
+        merge(state, action: PayloadAction<{
+            node: null | Node,
+            pendingChange: null | PendingChange,
+        }>) {
+            mergeChange(state, action)
         },
 
-        // TODO DELETE NODE
-
-        mergeWorkingTree(state) {
-            mergeChanges(state)
+        revertChange(state, payload: PayloadAction<{ id: string }>) {
+            removePendingChanges(state, payload)
         },
 
-        clenaWorkingTree(state) {
-            abortChanges(state)
+        cleanChanges(state) {
+            state.pendingChange = pendingChangeAdapter.getInitialState()
         },
-
-        revert(state, payload: PayloadAction<{ id: string }>) {
-            revertChange(state, payload)
+        
+        setSelected(state, action: PayloadAction<{ id: string }>) {
+            state.selected = action.payload.id
         },
 
         unselect(state) {
-            unselectSelected(state)
-        },
-
-        setSelected(state, action: PayloadAction<
-            { id: string, nodeType: "node" | "pending-node" }
-        >) {
-            unselectSelected(state)
-            selectNode(state, action)
+            state.selected = null
+            state.selectedPosition = { angle: null, distance: null }
         },
 
         setSelectedPosition(state, action: PayloadAction<{angle: number, distance: number}>) {
-            unselectSelected(state)
-            selectPosition(state, action)
+            state.selected = null
+            state.selectedPosition = action.payload
         }
     },
 })
 
 export type UpdateNodeState = AppRootState["pentagramUpsert"]
-export const { initialize, upsertPendingNode, updatePosition, mergeWorkingTree, clenaWorkingTree, revert, unselect, setSelected, setSelectedPosition } = pentagramUpsertSlice.actions
+export const { initialize, setPosition, upsertNode, merge, revertChange, cleanChanges, unselect, setSelected, setSelectedPosition } = pentagramUpsertSlice.actions
 export const nodeSelector = nodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.node)
-export const pendingNodeSelector = pendingNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.pendingNode)
-export const mainNodeWorkingTreeSelector =  workingTreeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.workingTree)
+export const pendingChangeSelector =  pendingChangeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.pendingChange)
+export const mergedNodeSelector = mergedNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.mergedNode)
 export default pentagramUpsertSlice.reducer
