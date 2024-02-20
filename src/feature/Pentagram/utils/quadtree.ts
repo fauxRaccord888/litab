@@ -29,6 +29,16 @@ type PositionWithId = Position & {
 }
 
 export class Quadtree {
+    static createRoot() {
+        const root = Quadtree.createNode({
+            x: 0,
+            y: 0,
+            width: 200,
+            height: 200
+        })
+        return root
+    }
+
     static insertNodeByPosition(qtNode: QuadtreeNode, position: PositionWithId) {
         const bound = Quadtree.calcBound(position)
         Quadtree.insert(qtNode, bound)
@@ -41,7 +51,7 @@ export class Quadtree {
         return collidable.some((b) => Quadtree.checkColliding(b, obj))
     }
 
-    static createNode(bounds:Bounds, level=0, maxDepth=9): QuadtreeNode {
+    private static createNode(bounds:Bounds, level=0, maxDepth=9): QuadtreeNode {
         return {
             level,
             bounds,
