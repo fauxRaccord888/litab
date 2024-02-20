@@ -1,7 +1,7 @@
 import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "../types";
 import { useRef } from 'react';
-import { useInitialize, useQuadtreeRef } from '../hooks/store';
+import { useInitialize, useQuadtreeRef } from '../hooks';
 import { useHandleClickNodes, useHandleDrag } from "../hooks";
 import { Node, SelectedPosition } from './Node_REDUX';
 
@@ -32,10 +32,7 @@ export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
                             handleDrag,
                             handleClickNode,
                         }}
-                        items={ids.map((id) => ({
-                            id,
-                            quadtreeRef: quadtreeRef.current
-                        }))}
+                        items={ids.map((id) => ({ id }))}
                         componentFunction={Node}
                     />
                 }
