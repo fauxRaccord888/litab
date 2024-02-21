@@ -1,12 +1,12 @@
 import type { FormatProps } from '$lib/types/components';
-import type { DBPentagram } from "../types";
+import type { DBPentagram } from "../../types";
 import { useRef } from 'react';
-import { useInitialize, useQuadtreeRef } from '../hooks';
-import { useHandleClickNodes, useHandleDrag } from "../hooks";
-import { Node, SelectedPosition } from './Node_REDUX';
+import { useInitialize, useQuadtreeRef, useHandleClickNodes, useHandleDrag } from '../../hooks';
 
-import OeuvrePentagonWrapper from "./common/OeuvrePentagonWrapper";
+import OeuvrePentagonWrapper from "../common/OeuvrePentagonWrapper";
 import ItemIterator from "$lib/components/common/ItemIterator";
+import MergedNode from './MergedNode';
+import SelectedPosition from './SelectedPosition';
 
 import './style/pentagramUpdateView.scss'
 
@@ -15,10 +15,12 @@ export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
     const { item } = props
     const { pentagrams_nodesCollection: nodes } = item
     const parentRef = useRef<HTMLDivElement | null>(null)
-    const ids = useInitialize(nodes)
     const quadtreeRef = useQuadtreeRef()
+
+    const nodeIds = useInitialize(nodes)
+
     const { handleDrag } = useHandleDrag(parentRef.current, quadtreeRef.current)
-    const { handleClickNode, handleClickParent } = useHandleClickNodes()
+    const { handleClickNode, handleClickParent } = useHandleClickNodes(quadtreeRef.current)
     
     return (
         <div className="pentagram-update-view-container">
@@ -26,20 +28,19 @@ export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
                 ref={parentRef}
                 handleClickParent={handleClickParent}    
             >
-                {ids &&
+                {nodeIds &&
                     <ItemIterator
                         additionalProps={{
                             handleDrag,
                             handleClickNode,
                         }}
-                        items={ids.map((id) => ({ id }))}
-                        componentFunction={Node}
+                        items={nodeIds.map((id) => ({ id }))}
+                        componentFunction={MergedNode}
                     />
                 }
                 <SelectedPosition handleDrag={handleDrag} />
             </OeuvrePentagonWrapper>
             {/* TODO UPDATE FORM */}
-            {/* TODO WORKING TREE */}
         </div>
     )
 }
