@@ -10,11 +10,10 @@ export function useHandleDrag(parentRef: HTMLDivElement | null, quadtreeRef: Qua
     const throttle = useThrottle()
 
     const handleDrag = (e: {clientX: number, clientY: number}) => {
-        if (!parentRef) return
+        if (!parentRef || !quadtreeRef) return
         const { angle, distance } = getAngleAndDisctance(e, parentRef, PENTAGRAM.SIDES)
         if (typeof angle !== 'number' || typeof distance !== 'number') return
 
-        if (!quadtreeRef) return
         const colliding = Quadtree.checkCollidingByPosition(quadtreeRef, { angle, distance })
         if (colliding) return
 
