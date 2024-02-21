@@ -5,10 +5,11 @@
     border-radius: inherit;
     object-fit: inherit;
 
-    img {
-        width: inherit;
-        height: inherit;
-        border-radius: inherit;      
-        object-fit: inherit;      
+    .image {
+        max-width: 100%;
+        min-width: 100%;
+        aspect-ratio: 1;
+        border-radius: inherit;
+        object-fit: inherit;
     }
 }
