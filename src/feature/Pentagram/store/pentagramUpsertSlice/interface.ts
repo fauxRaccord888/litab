@@ -9,6 +9,6 @@ export interface Node {
 
 export type PendingChange = (UpsertChange | UpdateChange | RemoveChange) 
 
-export type UpsertChange = { id: string, changeType: 'upsert', angle: number, distance: number, oeuvres: DBOeuvre, selected?: boolean }
-export type UpdateChange = { id: string, changeType: 'update', angle: number, distance: number, selected?: boolean }
+export type UpsertChange = { id: string, changeType: 'upsert', angle: number, distance: number, oeuvres: DBOeuvre }
+export type UpdateChange = { id: string, changeType: 'update', angle: number, distance: number }
 export type RemoveChange = { id: string, changeType: 'remove' }

@@ -8,6 +8,7 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { mergeChange } from './mergedNode';
 import { initializeNode } from './node';
 import { removePendingChanges, upsertPendingChange } from './pendingChange';
+import { select, selectPosition } from './select';
 
 type SelectedNode = null | string
 
@@ -59,8 +60,6 @@ const pentagramUpsertSlice = createSlice({
                         changeType: 'update'
                     }
                 })
-            } else {
-                setSelectedPosition({ angle, distance })
             }
         },
 
@@ -101,25 +100,19 @@ const pentagramUpsertSlice = createSlice({
         cleanChanges(state) {
             state.pendingChange = pendingChangeAdapter.getInitialState()
         },
-        
-        setSelected(state, action: PayloadAction<{ id: string }>) {
-            state.selected = action.payload.id
-        },
 
-        unselect(state) {
-            state.selected = null
-            state.selectedPosition = { angle: null, distance: null }
+        setSelected(state, action: PayloadAction<{ id: string }>) {
+            select(state, action)
         },
 
         setSelectedPosition(state, action: PayloadAction<{angle: number, distance: number}>) {
-            state.selected = null
-            state.selectedPosition = action.payload
+            selectPosition(state, action)
         }
     },
 })
 
 export type UpdateNodeState = AppRootState["pentagramUpsert"]
-export const { initialize, setPosition, upsertNode, merge, revertChange, cleanChanges, unselect, setSelected, setSelectedPosition } = pentagramUpsertSlice.actions
+export const { initialize, setPosition, upsertNode, merge, revertChange, cleanChanges, setSelected, setSelectedPosition } = pentagramUpsertSlice.actions
 export const nodeSelector = nodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.node)
 export const pendingChangeSelector =  pendingChangeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.pendingChange)
 export const mergedNodeSelector = mergedNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.mergedNode)

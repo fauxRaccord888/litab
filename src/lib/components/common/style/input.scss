@@ -28,7 +28,7 @@
     &.invalid {
         &::after {
             z-index: 1;
-            border: 2px solid rgb(var(--red));
+            border: 2px solid rgb(var(--danger));
         }
     }
     

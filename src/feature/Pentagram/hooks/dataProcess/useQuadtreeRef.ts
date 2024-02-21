@@ -12,7 +12,10 @@ export function useQuadtreeRef() {
     const quadtreeRef = useRef<null | QuadtreeNode>(null)
 
     useEffect(() => {
-        if (previousSelectedIdRef.current !== selectedId) {
+        if (
+            !previousSelectedIdRef.current ||
+            previousSelectedIdRef.current !== selectedId
+        ) {
             const root = Quadtree.createRoot()
             const nodes = unfilteredNodes.filter((n) => n.id !== selectedId)
             nodes.forEach((n) => {

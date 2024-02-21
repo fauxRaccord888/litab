@@ -1,1 +1,2 @@
-export * from './store'
+export * from './eventHandler'
+export * from './dataProcess'
