@@ -1,0 +1,21 @@
+@use "src/lib/style/variables";
+
+.pentagram-node {
+    --node: #{variables.$node_small}px;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}px;
+    };
+
+    width: var(--node);
+    height: var(--node);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgb(var(--font-color)) inset;
+    cursor: pointer;
+
+
+    &.selected{
+        box-shadow: 0 0 0 4px rgb(var(--primary)) inset;
+        cursor: grab;
+    }
+}
+

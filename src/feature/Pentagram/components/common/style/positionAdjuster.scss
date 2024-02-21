@@ -1,9 +1,14 @@
 @use "src/lib/style/variables";
 
-.pentagram-node-container {
+.position-adjuster-container {
+    --node: #{variables.$node_small}px;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}px;
+    };
+
     touch-action: none;
     -ms-touch-action: none;
-
+    
     --radius: calc(var(--distance-multiplier) * var(--node) * 3);
     --calibrated: calc(var(--degrees) + #{variables.$pentagon_angle_offset});
     --transformX: calc(cos(var(--calibrated)) * var(--radius) - var(--node) * 0.5);
