@@ -1,5 +1,4 @@
 @import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
-@import "./lib//style/atomic.scss";
 
 body {
     margin: 0px;
@@ -37,6 +36,7 @@ input {
     --primary: 109, 164, 170;
     --success: 28, 183, 45;
     --danger: 238, 68, 68;
+    --warning: 255, 246, 0;
 
     color: rgb(var(--font-color));
     background-color: rgb(var(--background-color));

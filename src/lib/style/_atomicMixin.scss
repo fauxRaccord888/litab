@@ -1,0 +1,113 @@
+@mixin flex-center {
+    @include flex-col;
+    @include justify-center;
+    @include align-center;
+}
+
+@mixin flex {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin justify-center {
+    justify-content: center;
+}
+
+@mixin align-center {
+    align-items: center;
+}
+
+@mixin rounded-lg {
+    border-radius: 8px;
+}
+
+@mixin box-shadow-2($color) {
+    box-shadow: 0 0 0 2px $color inset;
+}
+
+@mixin stroke-sm($color) {
+    stroke: $color;
+    stroke-width: 0.5px;
+}
+
+@mixin fill-sm($color) {
+    fill: $color;
+    stroke-width: 0.5px;
+}
+
+@mixin child-top-m($size) {
+    > :not(:first-child) {
+        margin-top: $size;
+    }
+}
+
+@mixin child-left-m($size) {
+    > :not(:first-child) {
+        margin-left: $size;
+    }
+}
+
+@mixin text-xs {
+    font-size: 0.5rem;
+}
+
+@mixin text-sm {
+    font-size: 0.75rem;
+}
+
+@mixin text-md {
+    font-size: 1rem;
+}
+
+@mixin text-lg {
+    font-size: 1.2rem;
+}
+
+@mixin text-xl {
+    font-size: 1.5rem;
+}
+
+@mixin pointer {
+    cursor: pointer;
+}
+
+@mixin p-xs {
+    padding: 0.2rem;
+}
+
+@mixin p-sm {
+    padding: 0.4rem;
+}
+
+@mixin p-md {
+    padding: 0.8rem;
+}
+
+@mixin p-lg {
+    padding: 1.2rem;
+}
+
+@mixin p-v-xs {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+
+@mixin p-v-sm {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+
+@mixin p-v-md {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+@mixin p-v-lg {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+}
