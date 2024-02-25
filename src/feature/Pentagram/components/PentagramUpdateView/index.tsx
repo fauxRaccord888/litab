@@ -1,46 +1,37 @@
 import type { FormatProps } from '$lib/types/components';
 import type { DBPentagram } from "../../types";
-import { useRef } from 'react';
-import { useInitialize, useQuadtreeRef, useHandleClickNodes, useHandleDrag } from '../../hooks';
+import { useInitialize, useMerge, useMergedNode, useQuadtreeRef, useUnmergedChangeInfo } from '../../hooks';
 
-import OeuvrePentagonWrapper from "../common/OeuvrePentagonWrapper";
-import ItemIterator from "$lib/components/common/ItemIterator";
-import MergedNode from './MergedNode';
-import SelectedPosition from './SelectedPosition';
+import MainPentagon from './MainPentagon';
+import PendingChangeList from './PendingChangeList';
 
 import './style/pentagramUpdateView.scss'
 
 
 export default function PentagramUpdateView(props: FormatProps<DBPentagram>) {
     const { item } = props
-    const { pentagrams_nodesCollection: nodes } = item
-    const parentRef = useRef<HTMLDivElement | null>(null)
+    const { pentagrams_nodesCollection } = item
     const quadtreeRef = useQuadtreeRef()
-
-    const nodeIds = useInitialize(nodes)
-
-    const { handleDrag } = useHandleDrag(parentRef.current, quadtreeRef.current)
-    const { handleClickNode, handleClickParent } = useHandleClickNodes(quadtreeRef.current)
     
+    useInitialize(pentagrams_nodesCollection)
+    useMerge()
+    
+    const mergedNodes = useMergedNode()
+    const unmergedNodeInfos = useUnmergedChangeInfo()
+
     return (
         <div className="pentagram-update-view-container">
-            <OeuvrePentagonWrapper 
-                ref={parentRef}
-                handleClickParent={handleClickParent}    
-            >
-                {nodeIds &&
-                    <ItemIterator
-                        additionalProps={{
-                            handleDrag,
-                            handleClickNode,
-                        }}
-                        items={nodeIds.map((id) => ({ id }))}
-                        componentFunction={MergedNode}
-                    />
-                }
-                <SelectedPosition handleDrag={handleDrag} />
-            </OeuvrePentagonWrapper>
-            {/* TODO UPDATE FORM */}
+            <div className="update-action-container">
+                <MainPentagon
+                    pentagramId={item.id}
+                    mergedNodes={mergedNodes}
+                    quadtreeRef={quadtreeRef}
+               />
+                <PendingChangeList 
+                    unmergedNodeInfos={unmergedNodeInfos}
+                    quadtreeRef={quadtreeRef}
+                />
+            </div>
         </div>
     )
 }
