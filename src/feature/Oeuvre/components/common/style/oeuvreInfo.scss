@@ -1,33 +1,31 @@
+@import "src/lib/style/atomicMixin";
+
 .oeuvre-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    > :not(:first-child) {
-        padding-top: 1.5rem;
-    }
+    @include child-top-m(1.5rem);
+    @include flex-col;
+    @include flex-center;
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include p-lg;
+    @include rounded-lg;
 
-    @media only screen and (min-width: 500px) {
-        flex-direction: row;
-        
-        > :not(:first-child) {
-            padding-top: 0rem;
-            padding-left: 1rem;
-        }    
-    }
+    .oeuvre-main-container {
+        @include flex;
+        @include child-left-m(1rem);
+        width: 100%;
 
-    .cover-container {
-        width: 200px;
-        height: 200px;
-        border-radius: 8px;
-        object-fit: cover;
-    }
+        .cover-container {
+            @include box-shadow-2(rgb(var(--font-color)));
+            @include rounded-lg;
+            width: 124px;
+            height: 124px;
+            object-fit: cover;
+        }
 
-    .data-container {
-        display: flex;
-        flex-direction: column;
-        >:not(:first-child) {
-            margin-top: 1rem;
+        svg {
+            @include stroke-sm((var(--font-color)));
+            @include fill-sm(rgb(var(--font-color)));
+            width: 50%;
+            height: 50%;
         }
     }
 

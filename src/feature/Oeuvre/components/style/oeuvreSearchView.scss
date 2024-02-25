@@ -1,16 +1,10 @@
-.oeuvre-search-view-container {
-    >:not(:first-child) {
-        margin-top: 2rem;
-    }
-    .search-form {
-        >:not(:first-child) {
-            margin-top: 1rem;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-    }
+@import "src/lib/style/atomicMixin";
 
-    .search-panel-container {
-        width: 100%;
+.oeuvre-search-view-container {
+    @include child-top-m(2rem);
+    width: 100%;
+    
+    .result-container {
+        @include child-top-m(1rem);
     }
 }
