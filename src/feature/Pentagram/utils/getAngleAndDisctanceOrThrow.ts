@@ -1,17 +1,19 @@
+import { PositionError } from "../error"
 import { PENTAGRAM } from "../constants"
 
-export function getAngleAndDisctance(
+export function getAngleAndDisctanceOrThrow(
     event: {clientX: number, clientY: number}, 
-    parentElem: HTMLDivElement, 
-    sides: number
+    parentElem: HTMLDivElement | null, 
+    sides: number=PENTAGRAM.SIDES
 ) {
+    if (!parentElem) throw new PositionError()
     const rect = parentElem.getBoundingClientRect()
     const x = event.clientX - rect.left 
     const y = event.clientY - rect.top
 
-    const radius = rect.height // DEBUG 반응형으로 radius가 바뀌기 때문에 불가피하게 넣은 흑마술임 다른 방법을 고안할 필요가 있음
+    const radius = rect.height // TODO 반응형으로 radius가 바뀌기 때문에 불가피하게 넣은 흑마술임 다른 방법을 고안할 필요가 있음
 
-    if (!isInside(y, x, radius, sides)) return { angle: null, distance: null }
+    if (!isInside(y, x, radius, sides)) throw new PositionError()
 
     const angle = Math.round(calcAngle(y, x))
     const distance = Math.round(calcDistance(y, x, radius))
@@ -64,5 +66,6 @@ function positionWithAdjustment(position: {angle: number, distance: number}) {
             return { angle: targetAngle, distance: FULL_DISTANCE }
         }
     }
+    
     return { angle, distance }
 }
