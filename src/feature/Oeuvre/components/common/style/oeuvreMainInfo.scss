@@ -1,42 +1,21 @@
-.oeuvre-main-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+@import "src/lib/style/atomicMixin";
 
-    >:not(:first-child) {
-        margin-top: 0.5rem;
-    }
+.oeuvre-main-info-container {
+    @include flex-col;
+    @include justify-center;
+    @include child-top-m(0.5rem);
 
     .title {
-        font-size: 1.8rem;
+        @include text-lg;
     }
 
     .artist-container {
-        font-size: 1.1rem;
-        color: rgba(var(--font-color), 0.8);
-        display: flex;
-        .button {
-            background-color: transparent;
-            padding: 0 0 0 0;
-        }
-        >:not(:first-child) {
-            margin-left: 0.5rem;
-        }
-        >:not(:last-child)::after {
-            content: ","
-        }
+        @include text-sm;
+        @include child-left-m(0.25rem);
     }
     
     .genre-container {
-        font-size: 0.75rem;
-        display: flex;
-
-        .button {
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-        >:not(:first-child) {
-            margin-left: 0.5rem;
-        }
+        @include text-sm;
+        @include child-left-m(0.25rem);
     }
 }

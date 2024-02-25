@@ -14,6 +14,29 @@
         "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
     },
 
+    "pentagram": {
+        "changes": {
+            "upsert": "Add",
+            "update": "Update",
+            "remove": "Delete"
+        },
+        "update": {
+            "recoverNode": "Recover",
+            "removeNode": "Delete"
+        },
+        "toast": {
+            "success": {
+                "removeNode": "Selected oeuvre will be permanently deleted after you finalize changes",
+                "revertChange": "Your change has been reverted",
+                "addNode": "New oeuvre has been added"
+            },
+            "error": {
+                "invalidPosition": "The selected position has already been occupied by another node",
+                "notUniqueOeuvre": "A duplicate oeuvre already exists in this Pentagram"
+            }
+        }
+    },
+
     "register": {
         "title": "register"
     },
@@ -39,15 +62,18 @@
     },
 
     "button": {
-        "search": "search"
+        "search": "search",
+        "delete": "delete"
     },
 
     "modal": {
         "title": {
-            "followers": "followers",
-            "followings": "followings",
-            "mutualFollowers": "mutual followers",
-            "interaction": "interaction"
+            "followers": "Followers",
+            "followings": "Followings",
+            "mutualFollowers": "Mutual followers",
+            "interaction": "Interaction",
+            "addNode": "New oeuvre",
+            "nodeInteraction": "Oeuvre Interaction"
         }
     },
 

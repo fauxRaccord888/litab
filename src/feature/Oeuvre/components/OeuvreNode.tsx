@@ -1,6 +1,6 @@
 import type { DBOeuvre } from "../types";
 import { useRef } from "react";
-import { useHover } from '$lib/hooks/useHover';
+import { useHover } from '$lib/hooks';
 import BucketImage from "$lib/components/common/BucketImage";
 import FallbackIcon from "$lib/components/icons/FallbackIcon";
 import OeuvreMainInfo from "./common/OeuvreMainInfo";
@@ -10,11 +10,11 @@ import "./style/oeuvreNode.scss"
 
 interface OeuvreNodeProps {
     item: DBOeuvre
-    disableHover?: boolean | undefined
+    enableHover?: boolean | undefined
 }
 
 export default function OeuvreNode(props: OeuvreNodeProps) {
-    const { item, disableHover } = props
+    const { item, enableHover } = props
     const { status, handleMouseLeave, handleMouseOver } = useHover()
     const ref = useRef<HTMLDivElement | null>(null)
     const position = ref.current?.getBoundingClientRect()
@@ -26,7 +26,7 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
             onMouseLeave={handleMouseLeave}
             className="oeuvre-node-container"
         >
-            {!disableHover &&
+            {enableHover &&
                 <HoverCard
                     position={position}
                     status={status}

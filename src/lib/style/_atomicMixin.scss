@@ -1,10 +1,13 @@
 @mixin flex-center {
-    @include flex-col;
     @include justify-center;
     @include align-center;
 }
 
 @mixin flex {
+    display: flex;
+}
+
+@mixin flex-row {
     display: flex;
     flex-direction: row;
 }

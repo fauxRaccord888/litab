@@ -1,9 +1,24 @@
-.pentagram-update-view-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+@import "src/lib/style/atomicMixin";
 
-    > :not(:first-child) {
-        margin-top: 1rem;
+.pentagram-update-view-container {
+    @include flex;
+    @include flex-center;
+    @media only screen and (min-width: 500px) {
+        @include flex-col;
     }
+    width: 100%;
+    
+    .update-action-container {
+        @include flex-col;
+        @include child-left-m(1rem);
+        width: 100%;
+        @media only screen and (min-width: 500px) {
+            @include flex-row;
+        }
+    }
+}
+
+.oeuvre-search-view-container {
+    @include flex-col;
+    width: 100%;
 }

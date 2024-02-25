@@ -8,6 +8,7 @@ export type QuadtreeNode = {
     bounds: Bounds
     level: number,
     maxDepth: number
+    maxItems: number
 }
 
 type Bounds = {
@@ -51,17 +52,19 @@ export class Quadtree {
         return collidable.some((b) => Quadtree.checkColliding(b, obj))
     }
 
-    private static createNode(bounds:Bounds, level=0, maxDepth=9): QuadtreeNode {
+    private static createNode(bounds:Bounds, level=0, maxDepth=9, maxItems=3): QuadtreeNode {
         return {
             level,
             bounds,
             maxDepth,
+            maxItems,
             objects: [],
             nodes: [],
         }
     }
 
     private static checkColliding(bound: Bounds, obj: Bounds) {
+        if (bound.id && bound.id === obj.id) return false
         const objX = obj.x + (obj.width / 2)
         const objY = obj.y + (obj.height / 2)
         const boundX = bound.x + (bound.width / 2)
@@ -119,50 +122,45 @@ export class Quadtree {
         
         if (qtNode.objects.some((item) => item.id === obj.id)) return
 
-        if (!qtNode.objects.length && !qtNode.nodes.length) {
+        if (!qtNode.nodes.length && qtNode.objects.length < qtNode.maxItems) {
             qtNode.objects.push(obj)
             return
         }
-        
+
         if (!qtNode.nodes.length) {
             Quadtree.split(qtNode)
         }
 
-        const objIndice = Quadtree.getIndice(qtNode, obj)
         if (qtNode.nodes.length) {
+            const objIndice = Quadtree.getIndice(qtNode, obj)
             objIndice.forEach((index) => {
                 Quadtree.insert(qtNode.nodes[index], obj)
             })
-        }
 
-        qtNode.objects.forEach((o) => {
-            const indice = Quadtree.getIndice(qtNode, o)
-            indice.forEach((i) => {
-                Quadtree.insert(qtNode.nodes[i], o)
+            qtNode.objects.forEach((o) => {
+                const indice = Quadtree.getIndice(qtNode, o)
+                indice.forEach((i) => {
+                    Quadtree.insert(qtNode.nodes[i], o)
+                })
             })
-        })
-        
-        qtNode.objects = []
+    
+            qtNode.objects = []
+        }
     }
 
-    private static retrieve(qtNode: QuadtreeNode, obj: Bounds) {
-        let returnObjects = [...qtNode.objects]
-        
+    static retrieve(qtNode: QuadtreeNode, obj: Bounds) {
+        const returnObjects = new Set(qtNode.objects)
+
         const indice = Quadtree.getIndice(qtNode, obj)
 
         if (qtNode.nodes.length) {
             indice.forEach((index) => {
-                returnObjects = returnObjects.concat(
-                    Quadtree.retrieve(qtNode.nodes[index], obj)
-                )
+                const objs = Quadtree.retrieve(qtNode.nodes[index], obj)
+                objs.forEach((o) => returnObjects.add(o))
             })
         }
 
-        if (qtNode.level === 0) {
-            return Array.from(new Set(returnObjects))
-        }
-
-        return returnObjects
+        return Array.from(returnObjects)
     }
 
     private static getDistance(x1: number, y1: number, x2: number, y2:number) {

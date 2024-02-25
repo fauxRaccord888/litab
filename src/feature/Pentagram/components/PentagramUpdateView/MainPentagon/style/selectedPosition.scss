@@ -1,10 +1,11 @@
 @use "src/lib/style/variables";
+@import "src/lib/style/atomicMixin";
 
 .selected-position-container {
-    fill: rgba(var(--success), 0.9);
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 0 0 0;
+    @include flex-col;
+    @include flex-center;
+    @include fill-sm(rgb(var(--success)));
+    box-shadow: none;
     
     &::before {
         content: "";

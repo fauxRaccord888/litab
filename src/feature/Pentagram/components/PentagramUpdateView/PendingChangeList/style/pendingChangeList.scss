@@ -1,0 +1,12 @@
+@import "src/lib/style/mixin";
+@import "src/lib/style/atomicMixin";
+
+.pending-change-list-container {
+    @include flex-col;
+    @include child-top-m(1rem);
+    flex-grow: 1;
+    @media only screen and (min-width: 500px) {
+        @include custom-scroll;
+        height: 75vh;
+    }
+}

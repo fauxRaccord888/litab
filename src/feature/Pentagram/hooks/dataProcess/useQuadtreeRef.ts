@@ -13,11 +13,13 @@ export function useQuadtreeRef() {
 
     useEffect(() => {
         if (
-            !previousSelectedIdRef.current ||
-            previousSelectedIdRef.current !== selectedId
+            !selectedId ||
+            selectedId !== previousSelectedIdRef.current
         ) {
             const root = Quadtree.createRoot()
-            const nodes = unfilteredNodes.filter((n) => n.id !== selectedId)
+            const nodes = unfilteredNodes
+                .filter((n) => n.id !== selectedId)
+                .filter((n) => n.deleted !== true)
             nodes.forEach((n) => {
                 Quadtree.insertNodeByPosition(root, n)
             })

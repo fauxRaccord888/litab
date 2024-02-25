@@ -1,19 +1,14 @@
-.button {
+@import "src/lib/style/atomicMixin";
+
+.button-container {
+    @include p-sm;
+    @include pointer;
     --bg-color: var(--true-gray);
     font-size: inherit;
-    background-color: rgba(var(--bg-color), 80);
+    background-color: rgb(var(--bg-color));
     color: var(--font-color);
     
     border-radius: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    
-    cursor: pointer;
-    border-width: 0px;
-
-    display: flex;
     justify-content: center;
 
     &.primary {
@@ -36,5 +31,4 @@
         padding-top: 4px;
         padding-bottom: 4px;    
     }
-
 }

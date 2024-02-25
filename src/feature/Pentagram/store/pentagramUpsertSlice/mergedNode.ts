@@ -1,56 +1,75 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import type { Node, PendingChange, UpdateChange } from './interface'
+import type { IMergedNode, IPendingChange, UpdateChange } from './interface'
 import type { UpdateNodeState } from "."
 import { mergedNodeAdapter } from "."
 
 type NodePayload = {
-    node: null | Node,
-    pendingChange: null | PendingChange,    
+    id: string,
+    node: null | IMergedNode,
+    pendingChange: null | IPendingChange,    
 }
 
 export const mergeChange = (state: UpdateNodeState, action: PayloadAction<NodePayload>) => {
-    const { node, pendingChange } = action.payload
+    const { id, node, pendingChange } = action.payload
 
     if (node && !pendingChange) {
-        upsert(state, { node })
+        set(state, { node })
     }
 
     if (pendingChange?.changeType === 'upsert') {
-        upsert(state, { node: pendingChange })
-    }    
+        set(state, { node: pendingChange })
+    }
 
     if (pendingChange?.changeType === 'update' && node) {
         update(state, { node, pendingChange })
     }
 
-    if (pendingChange?.changeType === 'remove') {
-        remove(state,pendingChange.id)
+    if (pendingChange?.changeType === 'remove' && node) {
+        set(state, { node: {...node, deleted: true}})
+    }
+
+    if (!node && !pendingChange) {
+        remove(state, id)
+    }
+
+    if (pendingChange?.changeType === 'update' && !node) {
+        remove(state, id)
+    }
+
+    if (pendingChange?.changeType === 'remove' && !node) {
+        remove(state, id)
     }
 }
 
 interface UpdatePayload {
-    node: Node,
+    node: IMergedNode,
     pendingChange: UpdateChange,
 }
 
 const update = (state: UpdateNodeState, payload: UpdatePayload) => {
     const { node, pendingChange } = payload
     const { angle, distance } = pendingChange
-
+    const selectedId = state.selected
     mergedNodeAdapter.upsertOne(state.mergedNode, {
         ...node,
         angle,
-        distance
+        distance,
+        selected: node.id === selectedId
     })
 }
 
 type UpsertPayload = {
-    node: Node
+    node: IMergedNode
 }
 
-const upsert = (state: UpdateNodeState, payload: UpsertPayload) => {
+const set = (state: UpdateNodeState, payload: UpsertPayload) => {
     const { node } = payload
-    mergedNodeAdapter.upsertOne(state.mergedNode, {...node})
+    const selectedId = state.selected
+
+    mergedNodeAdapter.setOne(state.mergedNode, {
+        ...node,
+        selected: node.id === selectedId
+    })
 }
 
 const remove = (state: UpdateNodeState, payload: string) => {

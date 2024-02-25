@@ -1,20 +1,17 @@
+@import "src/lib/style/atomicMixin";
+
 .profile-image-container {
     width: fit-content;
-    width: 100%;
-    height: 100%;
     border-radius: 50%;
 
     .profile-image {
-        width: 100%;
-        height: 100%;
         border-radius: 50%;
     }
 
     .fallback-image {
         width: 100%;
-        height: 100%;
         border-radius: 50%;
-        box-shadow: 0 0 0 0.5px rgb(var(--font-color)) inset;
+        @include box-shadow-2(rgb(var(--font-color)));
 
         stroke: rgb(var(--font-color));
         stroke-width: 0.5px;
