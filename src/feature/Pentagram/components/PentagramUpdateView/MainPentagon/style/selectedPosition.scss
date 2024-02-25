@@ -1,0 +1,23 @@
+@use "src/lib/style/variables";
+@import "src/lib/style/atomicMixin";
+
+.selected-position-container {
+    @include flex-col;
+    @include flex-center;
+    @include fill-sm(rgb(var(--success)));
+    box-shadow: none;
+    
+    &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border: 2px rgb(var(--font-color)) dashed;
+        border-radius: 50%;
+    }
+  
+    svg {
+        width: 50%;
+    }
+}
+

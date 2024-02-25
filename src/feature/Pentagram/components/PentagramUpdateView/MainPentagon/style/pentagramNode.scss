@@ -1,0 +1,26 @@
+@use "src/lib/style/variables";
+@import "src/lib/style/atomicMixin";
+
+
+.pentagram-node {
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include pointer;
+    --node: #{variables.$node_small}px;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}px;
+    };
+
+    width: var(--node);
+    height: var(--node);
+    border-radius: 50%;
+
+    &.selected{
+        @include box-shadow-2(rgb(var(--primary)));
+        cursor: grab;
+    }
+
+    //TODO z-index new one before deleted
+    &.deleted{
+        background-color: rgba(var(--background-color), 0.8);
+    }
+}
