@@ -23,7 +23,7 @@ export default function Button(props: ButtonProps) {
         <button 
             style={style}
             className={[
-                'button',
+                'button-container',
                 className,
                 (primary ? 'primary' : ''),
                 (danger ? 'danger' : ''),

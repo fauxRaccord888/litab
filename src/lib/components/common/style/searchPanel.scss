@@ -1,11 +1,9 @@
-.search-panel-container {
-    width: inherit;
-    
+.search-panel-container {    
     .icon {
         stroke: rgb(var(--font-color));
     }
 
-    .button {
+    .button-container {
         background-color: rgb(var(--primary));
         width: 100%;
     }

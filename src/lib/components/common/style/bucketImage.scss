@@ -1,4 +1,8 @@
+@import "src/lib/style/atomicMixin";
+
 .bucket-image-container {
+    @include flex-col;
+    @include flex-center;
     z-index: -1;
     width: inherit;
     height: inherit;

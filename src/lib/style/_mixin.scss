@@ -1,4 +1,5 @@
 @mixin custom-scroll {
+    overflow-y: scroll;
     &::-webkit-scrollbar {
         width: 5px;
         height: 5px;
