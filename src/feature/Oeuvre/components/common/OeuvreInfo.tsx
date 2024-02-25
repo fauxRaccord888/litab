@@ -1,25 +1,40 @@
+import type { MouseEventHandler } from "react";
 import type { DBOeuvre } from "../../types";
 import type { FormatProps } from "$lib/types/components";
 import OeuvreMainInfo from "./OeuvreMainInfo";
 import BucketImage from "$lib/components/common/BucketImage";
+import FallbackIcon from "$lib/components/icons/FallbackIcon";
 
 import './style/oeuvreInfo.scss'
 
-export default function OeuvreInfo(props: FormatProps<DBOeuvre> ) {
-    const { item } = props
+type OeuvreInfoProps = FormatProps<DBOeuvre> & {
+    handleClickItem?: (item: DBOeuvre) => void
+    enableDescription?: boolean
+}
+
+export default function OeuvreInfo(props: OeuvreInfoProps) {
+    const { item, handleClickItem, enableDescription } = props
     const { id, description } = item
 
-    return (
-        <div className="oeuvre-info-container">
-            <div className="cover-container">
-                <BucketImage bucket="oeuvres" id={id} />
-            </div>
+    const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
+        e.stopPropagation()
+        if (handleClickItem) handleClickItem(item)
+    }
 
-            <div className="data-container">
+    return (
+        <div 
+            className="oeuvre-info-container"
+            onClickCapture={onClick}
+        >
+            <div className="oeuvre-main-container">
+                <div className="cover-container">
+                    <BucketImage bucket="oeuvres" id={id} fallback={<FallbackIcon />} />
+                </div>
                 <OeuvreMainInfo item={item}/>
-                <span className="description">{description}</span>
             </div>
-            
+            {enableDescription && description &&
+                <div className="description">{description}</div>            
+            }
         </div>
     )
 }
