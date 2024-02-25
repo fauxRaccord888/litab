@@ -1,23 +1,20 @@
+import type { FormatProps } from "$lib/types/components"
 import { Fragment } from "react"
 
-type MinimalProp<T> = {
-    id?: T 
+interface ItemIteratorProps<I, P> {
+    items: FormatProps<I>[],
+    additionalProps: P,
+    componentFunction: (p: (FormatProps<I> & P)) => JSX.Element
 }
 
-interface ItemIteratorProps<T extends MinimalProp<K>, K> {
-    items: T[],
-    additionalProps?: Partial<T>,
-    componentFunction: (p: T) => JSX.Element
-}
-
-export default function ItemIterator<T extends MinimalProp<K>, K extends (number | string)>(props: ItemIteratorProps<T, K>) {
+export default function ItemIterator<I, P>(props: ItemIteratorProps<I, P>) {
     const { items, additionalProps, componentFunction } = props
 
     return (
         <>
-            {items.map((i, idx) => (
-                <Fragment key={i?.id || idx}>
-                    {componentFunction({...i, ...additionalProps})}
+            {items.map((i) => (
+                <Fragment key={i.id}>
+                    {componentFunction(Object.assign({}, i, additionalProps))}
                 </Fragment>
             ))}
         </>
