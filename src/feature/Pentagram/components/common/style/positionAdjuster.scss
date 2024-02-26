@@ -17,5 +17,9 @@
     border-radius: 50%;
     transform: translate(var(--transformX), var(--transformY));
     background-color: rgb(var(--background-color));
-    z-index: 1;
+    z-index: 2;
+
+    &.behind {
+        z-index: 1
+    }
 }

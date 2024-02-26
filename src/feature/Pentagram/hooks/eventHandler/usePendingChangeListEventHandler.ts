@@ -17,11 +17,11 @@ export function usePendingChangeListEventHandler(quadtreeRef: MutableRefObject<Q
         dispatch(unselectSelected());
 
         (
-            changes[id].changeType === "update" && 
+            (changes[id].changeType === "remove" || changes[id].changeType === "update") &&
             nodes[id] && 
             checkCollidingOrThrow(nodes[id], quadtreeRef.current)
         );
-        
+
         dispatch(revertChange({id}));
     }
 
