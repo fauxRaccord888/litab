@@ -1,0 +1,41 @@
+@import "src/lib/style/atomicMixin";
+
+.info-card-template {
+    @include flex;
+    @include child-left-m(var(--base-size));
+    .info-card-template__cover-outer-container {
+        @include flex;
+        @include align-center;
+        min-width: 30%;
+        max-width: 30%;
+        .info-card-template__cover-inner-container {
+            @include box-shadow-2(rgb(var(--font-color)));
+            @include rounded-lg;
+            aspect-ratio: 1;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .info-card-template__main-container {
+        @include flex-col;
+        @include justify-center;
+        @include child-top-m(calc(var(--base-size) * 0.5));
+        flex-basis: 1;
+        .info-card-template__title {
+            font-size: calc(var(--base-size) * 1.3);
+        }
+
+        .info-card-template__info-container {
+            @include child-top-m(calc(var(--base-size) * 0.5));
+            .info-card-template__main-info {
+                font-size: calc(var(--base-size) * 0.8);
+            }
+
+            .info-card-template__sub-info {
+                font-size: calc(var(--base-size) * 0.7);
+                line-height: calc(var(--base-size) * 1.2);
+            }
+        }
+    }
+}
