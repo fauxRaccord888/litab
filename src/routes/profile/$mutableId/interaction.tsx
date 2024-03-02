@@ -1,5 +1,6 @@
 /* types */
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
+import type { PropsWithChildren } from 'react';
 /* hooks */
 import { useQuery } from '@apollo/client';
 import { useNavigate } from "@tanstack/react-router"
@@ -24,11 +25,11 @@ function InteractionModal() {
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
 
     return (
-        <InteractionModalComponent>{firstNode && firstNode?.nickname}</InteractionModalComponent>
+        <InteractionModalComponent>{firstNode?.__typename}</InteractionModalComponent>
     )
 }
 
-function InteractionModalComponent() {
+function InteractionModalComponent(props: PropsWithChildren) {
     const params = Route.useParams()
     const navigate = useNavigate()
     const { t } = useTranslation()
@@ -40,6 +41,7 @@ function InteractionModalComponent() {
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
+            {props.children}
         </Modal>
     )
 }
