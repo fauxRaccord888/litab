@@ -1,0 +1,53 @@
+@import "src/lib/style/atomicMixin";
+
+.user-info-card-component {
+    @include flex;
+    @include child-left-m(calc(var(--base-size) * 0.5));
+
+    .user-info-card-component__title-container {
+        @include flex;
+        @include align-center;
+
+        .user-info-card-component__cover-image-container {
+            margin-right: calc(var(--base-size) * 1.25);
+            &.user-info-card-component__cover-image-container--mini-view {
+                min-width: 36px;
+                max-width: 36px;
+                min-height: 36px;
+                max-height: 36px;
+            }
+    
+            &.user-info-card-component__cover-image-container--mobile { 
+                display: flex;
+                width: 50%;
+                height: 50%;
+    
+                @media only screen and (min-width: 500px) {
+                    display: none;
+                }
+            }
+        }
+
+        .user-info-card-component__profile-info-interaction-container {
+            @include flex;
+            @include w-full;
+            @include child-left-m(calc(var(--base-size) * 0.75));
+            flex-grow: 1;
+
+            &.user-info-card-component__profile-info-interaction-container--line-break {
+                @include flex-col;
+                @include child-left-m(calc(var(--base-size) * 0));
+                @include child-top-m(calc(var(--base-size) * 0.75));
+                @media only screen and (min-width: 500px) {
+                    @include flex-row;
+                    @include child-left-m(calc(var(--base-size) * 0.75));
+                    @include child-top-m(calc(var(--base-size) * 0));
+                }
+            }
+
+            &.user-info-card-component__profile-info-interaction-container--mini-view {
+                justify-content: space-between;
+            }
+        }
+    }
+}
