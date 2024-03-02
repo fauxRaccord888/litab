@@ -1,21 +1,20 @@
-import type { ISlotComponent, ISlotOption } from "../type"
+import type { ISlotComponent, ISlotRenderConfig } from "../type"
 import type { MouseEventHandler } from "react"
 import { filterComponents } from "../util"
 import "./style/infoCard.scss"
 
-export type InfoCardKey = "coverImage" | "title" | "mainInfo" | "subInfo"
-export type InfoCardOptions = ISlotOption<InfoCardKey>
+export type RenderConfigKey = "coverImage" | "title" | "mainInfo" | "subInfo"
 
 type InfoCardProps = {
     id: string,
-    components: ISlotComponent<InfoCardKey>,
-    options?: InfoCardOptions,
+    components: ISlotComponent<RenderConfigKey>,
+    renderConfig: ISlotRenderConfig<RenderConfigKey>,
     onClick?: MouseEventHandler<HTMLDivElement>
 }
 
 export default function InfoCardTemplate (props: InfoCardProps) {
-    const { components, options, ...restProps } = props
-    const filteredComponents = filterComponents<InfoCardKey>(components, options)
+    const { components, renderConfig, ...restProps } = props
+    const filteredComponents = filterComponents<RenderConfigKey>(components, renderConfig)
 
     return (
         <div 
