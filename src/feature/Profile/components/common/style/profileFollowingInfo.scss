@@ -1,0 +1,15 @@
+@import "src/lib/style/atomicMixin";
+
+.profile-following-info-component {
+    @include flex;
+    @include child-left-m(calc(var(--base-size) * 1));
+    font-size: calc(var(--base-size) * 0.9);
+
+    .profile-following-info-component__count-button {
+        @include child-left-m(calc(var(--base-size) * 0.25));
+        &:not(:disabled) {
+            @include pointer;
+        }
+    }
+
+}

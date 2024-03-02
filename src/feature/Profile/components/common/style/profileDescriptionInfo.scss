@@ -1,0 +1,27 @@
+@import "src/lib/style/atomicMixin";
+
+.profile-description-info-component {
+    @include flex-col;
+    @include child-top-m(calc(var(--base-size) * 0.25));
+    font-size: calc(var(--base-size) * 0.9);
+
+    .profile-description-info-component__description__description {
+        font-size: calc(var(--base-size) * 0.8);
+    }
+
+    .profile-description-info-component__mutual-followers-list {
+        @include pointer;
+        font-size: calc(var(--base-size) * 0.8);
+        color: rgba(var(--font-color), 0.5);
+        
+        .profile-description-info-component__mutual-follower {
+            @include pointer;
+            color: rgb(var(--font-color));
+            &:not(:last-child)::after {
+                content: ',';
+                margin-right: calc(var(--base-size) * 0.25);
+            }
+        }
+    }
+}
+
