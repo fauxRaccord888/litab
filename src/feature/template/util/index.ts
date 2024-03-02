@@ -1,6 +1,6 @@
-import type { ISlotComponent, ISlotOption } from "../type"
+import type { ISlotComponent, ISlotRenderConfig } from "../type"
 
-export function filterComponents<K extends string>(components: ISlotComponent<K>, options: ISlotOption<K> | undefined){
+export function filterComponents<K extends string>(components: ISlotComponent<K>, options: ISlotRenderConfig<K>){
     const filteredObject = {} as ISlotComponent<K>
     if (!options) return filteredObject
 

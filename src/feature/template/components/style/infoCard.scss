@@ -2,15 +2,29 @@
 
 .info-card-template {
     @include flex;
+    // COMMENT - 배수 조정 시 하단의 disable-partition-on-mobile 함께 수정 필요
     @include child-left-m(var(--base-size));
+    flex-grow: 1;
     .info-card-template__cover-outer-container {
         @include flex;
         @include align-center;
         min-width: 30%;
         max-width: 30%;
+
+        &:has(.disable-partition-on-mobile) {
+            width: 0px;
+            min-width: 0%;
+            max-width: 0%;
+            // COMMENT - 상단의 child-left-m과 함께 수정 필요
+            margin-right: calc(var(--base-size)* -1);
+            @media only screen and (min-width: 500px) {
+                min-width: 30%;
+                max-width: 30%;
+                margin-right: 0;
+            }
+        }
+
         .info-card-template__cover-inner-container {
-            @include box-shadow-2(rgb(var(--font-color)));
-            @include rounded-lg;
             aspect-ratio: 1;
             width: 100%;
             object-fit: cover;
@@ -21,7 +35,7 @@
         @include flex-col;
         @include justify-center;
         @include child-top-m(calc(var(--base-size) * 0.5));
-        flex-basis: 1;
+        flex-grow: 1;
         .info-card-template__title {
             font-size: calc(var(--base-size) * 1.3);
         }

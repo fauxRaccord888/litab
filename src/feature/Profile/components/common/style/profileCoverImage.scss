@@ -1,0 +1,22 @@
+@import "src/lib/style/atomicMixin";
+
+.profile-cover-image-component {
+    width: fit-content;
+    border-radius: 50%;
+
+    &.profile-cover-image-component__pointer {
+        @include pointer;
+    }
+
+    &.profile-cover-image-component__mini-view {
+        width: 50%;
+        height: 50%;
+    }
+
+    .profile-cover-image-component__fallback-image {
+        @include box-shadow-2(rgb(var(--font-color)));
+        @include w-full;
+        @include stroke-sm(var(--font-color));
+        border-radius: 50%;
+    }
+}

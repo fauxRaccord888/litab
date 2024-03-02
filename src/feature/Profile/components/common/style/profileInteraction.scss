@@ -1,0 +1,27 @@
+@import "src/lib/style/atomicMixin";
+
+.profile-interaction-component {
+    @include flex;
+    @include align-center;
+    @include child-left-m(calc(var(--base-size) * 0.5));
+
+    .profile-interaction-component__follow {
+        @include flex;
+        @include align-center;
+        @include w-full;
+        .button-component {
+            @include w-full;
+        }
+    }
+
+    .profile-interaction-component__more-interaction{
+        @include flex;
+        @include align-center;
+        .more-icon-component {
+            @include stroke-sm(rgb(var(--font-color)));
+            @include fill-sm(rgb(var(--font-color)));
+            width: var(--base-size);
+            height: var(--base-size);
+        }
+    }
+}

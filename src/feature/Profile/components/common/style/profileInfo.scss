@@ -1,0 +1,19 @@
+@import "src/lib/style/atomicMixin";
+
+.profile-info-component {
+    @include flex-col;
+    @include justify-center;
+    font-size: calc(var(--base-size) * 1.5);
+
+    .profile-info-component__mutable-id {
+        @include flex;
+        @include align-center;
+    }
+
+    .profile-info-component__nickname{
+        @include flex;
+        @include align-center;
+        color: rgba(var(--font-color), 0.5);
+        font-size: calc(var(--base-size) * 1.25);
+    }
+}

@@ -33,17 +33,6 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment PostsMiniData on postsConnection {
-        edges {
-            node {
-                id
-                title
-            }
-        }
-    }
-`)
-
-graphql(/* GraphQL */ `
     fragment ProfileData on users {
         ...MiniProfile,
         description,
@@ -55,8 +44,5 @@ graphql(/* GraphQL */ `
         followingsCollection {
             ...FollowingsMiniProfile
         },
-        postsCollection {
-            ...PostsMiniData
-        }
     }
 `)

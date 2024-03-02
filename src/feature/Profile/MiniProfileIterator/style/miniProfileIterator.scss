@@ -1,9 +1,0 @@
-.user-collection-iterator-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    
-    > :not(:first-child) {
-        padding-top: 0.75rem;
-    }
-}
