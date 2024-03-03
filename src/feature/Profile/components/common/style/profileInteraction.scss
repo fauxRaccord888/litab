@@ -23,5 +23,9 @@
             width: var(--base-size);
             height: var(--base-size);
         }
+
+        &.profile-interaction-component__more-interaction--pointer {
+            @include pointer;
+        }
     }
 }
