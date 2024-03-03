@@ -25,8 +25,8 @@ export default function ProfileCoverImage(props: ProfileCoverImageProps) {
             onClick={handleClickProfile}
             className={[
                 "profile-cover-image-component",
-                (miniView ? 'profile-cover-image-component__mini-view' : ''),
-                (handleShowProfile ? 'profile-cover-image-component__pointer' : ''),
+                (miniView ? 'profile-cover-image-component--mini-view' : ''),
+                (handleShowProfile ? 'profile-cover-image-component--pointer' : ''),
             ].join(' ')}
         >
             <BucketImage

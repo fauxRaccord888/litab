@@ -4,11 +4,11 @@
     width: fit-content;
     border-radius: 50%;
 
-    &.profile-cover-image-component__pointer {
+    &.profile-cover-image-component--pointer {
         @include pointer;
     }
 
-    &.profile-cover-image-component__mini-view {
+    &.profile-cover-image-component--mini-view {
         width: 50%;
         height: 50%;
     }

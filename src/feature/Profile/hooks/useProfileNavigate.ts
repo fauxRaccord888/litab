@@ -1,8 +1,7 @@
 import { useNavigate } from "@tanstack/react-router"
 import { useCallback } from "react"
 
-type Handler = () => void
-export function useProfileNavigate(mutableId: string): Record<string, Handler> {
+export function useProfileNavigate(mutableId: string) {
     const navigate = useNavigate()
 
     const showProfileHandler = useCallback(() => {

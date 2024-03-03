@@ -28,8 +28,11 @@ export default function ProfileSelectView(props: FormatProps<DBProfiles>) {
                     displayInteraction: true,
                 }}
                 eventHandler={{
-                    ...navigate,
-                    handleFollow
+                    handleFollow,
+                    showFollowers: navigate.showFollowers,
+                    showFollowings: navigate.showFollowings,
+                    showInteraction: navigate.showInteraction,
+                    showMutualFollowers: navigate.showMutualFollowers,
                 }}
             />
         </div>

@@ -2,7 +2,7 @@
 import type { MouseEvent } from 'react';
 import type { DBProfiles } from "$feature/Profile/types"
 /* styles */
-import "./style/profileInfo.scss"
+import "./style/profileUserInfo.scss"
 
 type ProfileUserInfoProps = {
     mutable_id: DBProfiles["mutable_id"]
@@ -20,14 +20,17 @@ export default function ProfileUserInfo(props: ProfileUserInfoProps) {
 
     return (
         <div 
-            className="profile-info-component"
+            className={[
+                "profile-user-info-component",
+                handleShowProfile ? "profile-user-info-component--pointer" : ""
+            ].join(" ")}
             onClick={(e) => handleClickProfile(e)}
         >
-            <span className="profile-info-component__mutable-id">
+            <span className="profile-user-info-component__mutable-id">
                 {mutable_id}
             </span>
             {miniView &&
-                <span className="profile-info-component__nickname">
+                <span className="profile-user-info-component__nickname">
                     {nickname}
                 </span>
             }

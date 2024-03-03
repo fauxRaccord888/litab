@@ -49,7 +49,10 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
                     {displayMoreInteraction &&
                         <div 
                             onClick={(e) => handleClickMoreInteraction(e)}
-                            className="profile-interaction-component__more-interaction"
+                            className={[
+                                "profile-interaction-component__more-interaction",
+                                handleShowInteraction ? "profile-interaction-component__more-interaction--pointer" : ""
+                            ].join(" ")}
                         >
                             <MoreIcon />
                         </div>
