@@ -28,8 +28,8 @@ export default function MiniProfile(props: FormatProps<DBMiniProfile> & { displa
                     displayInteraction: false,
                 }}
                 eventHandler={{
-                    ...navigate,
-                    handleFollow
+                    handleFollow,
+                    showProfile: navigate.showProfile
                 }}
             />
         </div>
