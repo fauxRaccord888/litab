@@ -1,41 +1,44 @@
-import type { MouseEventHandler, PropsWithChildren } from "react";
-import { useMemo } from 'react';
+import type { PropsWithChildren } from "react";
+import { useMemo, useRef } from 'react';
+import { useResetScroll } from "../hooks";
 import { createPortal } from "react-dom";
 import CloseIcon from "$lib/components/icons/CloseIcon";
 import './style/modal.scss'
 
 interface ModalProps extends PropsWithChildren {
     title: string
-    handleClickClose: () => void
+    handleClickClose?: () => void
 }
 
 export default function Modal(props: ModalProps) {
     const { title, children, handleClickClose } = props
-    const stopPropagation: MouseEventHandler<HTMLDivElement> = (e) => e.stopPropagation()
+    const ref = useRef<HTMLDivElement | null>(null)
     const rootElem = useMemo(() => document.getElementById('portal-root'), [])
+    useResetScroll(ref)
 
     return (
         <>
             {rootElem && createPortal(
-                <div className="modal-container" onClick={handleClickClose}>
-                    <div className="modal-main-container" onClick={stopPropagation} >
+                <div className="modal-component" onClick={handleClickClose}>
+                    <div className="modal-component__main-container" onClick={(e) => e.stopPropagation()} >
                         
-                        <div className="title-container">
-                            <div className="title-center-placeholder">{}</div>
-                            <div className="modal-title">{title}</div>
-                            <div className="title-center-placeholder">
-                                <button className="close-button" onClick={handleClickClose}>
-                                    <CloseIcon />
-                                </button>
+                        <div className="modal-component__title-container">
+                            <div className="modal-component__title-placeholder">{}</div>
+                            <div className="modal-component__title">{title}</div>
+                            <div className="modal-component__title-placeholder">
+                                {handleClickClose &&
+                                    <button className="modal-component__close-button" onClick={handleClickClose}>
+                                        <CloseIcon />
+                                    </button>
+                                }
                             </div>
                         </div>
 
-                        <div className="body-container">
-                            <div className="body-inner-container">
+                        <div ref={ref} className="modal-component__body-container">
+                            <div className="modal-component__body-inner-container">
                                 {children}
                             </div>
                         </div>
-                        
                     </div>
                 </div>,
             rootElem)}
