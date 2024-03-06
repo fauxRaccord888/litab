@@ -6,20 +6,19 @@ import { createFileRoute } from '@tanstack/react-router'
 import toast from 'react-hot-toast';
 import AddNodeModal from "$feature/Pentagram/components/PentagramUpsertView/Modal/AddNodeModal"
 
-export const Route = createFileRoute('/pentagram/$pentagramId/update/addNode')({
-    component: PentagramUpdateAddNode
+export const Route = createFileRoute('/pentagram/create/addNode')({
+    component: PentagramInsertAddNode
 })
 
-function PentagramUpdateAddNode() {
+function PentagramInsertAddNode() {
     const { t } = useTranslation()
-    const { pentagramId } = Route.useParams()
     const { handleAddNode } = usePentagramAddModalEventHandler()
     const errorToast = useThrottledErrorToast()
     const navigate = usePentagramNavigate()
     const title = t("modal.title.addNode")
 
     const handleClickClose = () => {
-        navigate.update(pentagramId)
+        navigate.create()
     }
 
     const handleClickAddNode = (item: DBOeuvre) => {
