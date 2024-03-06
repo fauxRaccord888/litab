@@ -1,0 +1,12 @@
+@import "src/lib/style/atomicMixin";
+
+.add-node-modal-component__inner-cotainer {
+    @include w-full;
+    
+    .info-card-template {
+        @include box-shadow-2(rgb(var(--font-color)));
+        @include rounded-lg;
+        @include padding-(calc(var(--base-size) * 1.1));
+        @include pointer;
+    }
+}
