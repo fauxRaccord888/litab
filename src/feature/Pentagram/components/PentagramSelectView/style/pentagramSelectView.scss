@@ -1,0 +1,19 @@
+@import "src/lib/style/atomicMixin";
+
+.pentagram-select-view-component {
+    @include flex-col;
+    @include child-top-m(calc(var(--base-size) * 0.75));
+    width: 100%;
+
+    .pentagram-select-view-component__main-container {
+        @include flex-col;
+        @media only screen and (min-width:500px){
+            @include flex-row;
+        }
+
+        .pentagram-select-view-component__description-container {
+            flex-grow: 1;
+        }
+    }
+    
+}

@@ -1,0 +1,28 @@
+@import "src/lib/style/atomicMixin";
+
+.select-meta-info-component {
+    @include flex;
+    @include align-center;
+    @include w-full;
+    justify-content: space-between;
+
+    .select-meta-info-component__main-container {
+        @include flex;
+        @include align-center;
+        @include child-left-m(calc(var(--base-size) * 0.75));
+        .select-meta-info-component__date {
+            flex-grow:1 ;
+            color: rgba(var(--font-color), 0.5)
+        }
+    }
+
+    .select-meta-info-component__interaction-container {
+        @include flex;
+        @include justify-center;
+        .more-icon-component {
+            @include fill-sm(rgb(var(--font-color)));
+            width: calc(var(--base-size) * 1.5);
+            height: calc(var(--base-size) * 1.5);
+        }
+    }
+}

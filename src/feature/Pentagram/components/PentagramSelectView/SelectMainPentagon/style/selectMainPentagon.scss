@@ -1,0 +1,6 @@
+@import "src/lib/style/atomicMixin";
+
+.select-main-pentagon-component {
+    @include flex;
+    @include flex-center;
+}
