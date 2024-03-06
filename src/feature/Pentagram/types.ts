@@ -1,6 +1,8 @@
-import type { GetPentagramByIdQuery, PentagramsNodesInfoFragment } from "$lib/graphql/__generated__/graphql";
+import type { GetPentagramSelectInfoByIdQuery, GetPentagramUpdateInfoByIdQuery, PentagramNodesInfoFragment, PentagramRevisionsInfoFragment } from "$lib/graphql/__generated__/graphql";
 import type { FirstNodeOfCollection } from "$lib/types/graphql";
 
-export type DBPentagram = FirstNodeOfCollection<GetPentagramByIdQuery["pentagramsCollection"]>
+export type DBPentagram_SELECT = FirstNodeOfCollection<GetPentagramSelectInfoByIdQuery["pentagramsCollection"]>
+export type DBPentagram_UPDATE = FirstNodeOfCollection<GetPentagramUpdateInfoByIdQuery["pentagramsCollection"]>
 
-export type DBPentagramsNodes = FirstNodeOfCollection<PentagramsNodesInfoFragment>
+export type DBPentagramNodes = FirstNodeOfCollection<PentagramNodesInfoFragment>
+export type DBPentagramRevisions = FirstNodeOfCollection<PentagramRevisionsInfoFragment>
