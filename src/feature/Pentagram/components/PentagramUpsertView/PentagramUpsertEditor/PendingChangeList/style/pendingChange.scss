@@ -1,0 +1,25 @@
+@import "src/lib/style/atomicMixin";
+
+.pending-change-component {
+    @include flex-col;
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include rounded-lg;
+    @include padding-(calc(var(--base-size) * 1));
+    @include child-top-m(calc(var(--base-size) * 0.5));
+
+    &.pending-change-component--upsert {
+        background-color: rgba(var(--info), 0.25);
+    }
+
+    &.pending-change-component--update {
+        background-color: rgba(var(--warning), 0.25);
+    }
+
+    &.pending-change-component--remove {
+        background-color: rgba(var(--danger), 0.25);
+    }
+
+    &.pending-change-component--recover {
+        background-color: rgba(var(--success), 0.25);
+    }
+}

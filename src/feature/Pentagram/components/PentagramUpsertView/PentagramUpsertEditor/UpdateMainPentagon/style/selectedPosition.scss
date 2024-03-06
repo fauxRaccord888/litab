@@ -1,9 +1,10 @@
-@use "src/lib/style/variables";
 @import "src/lib/style/atomicMixin";
+@import "src/lib/style/mainPentagonMixin";
 
-.selected-position-container {
+.selected-position-component {
     @include flex-col;
     @include flex-center;
+    @include node;
     @include fill-sm(rgb(var(--success)));
     box-shadow: none;
     
@@ -16,7 +17,7 @@
         border-radius: 50%;
     }
   
-    svg {
+    .selected-position-component__plus-icon-component {
         width: 50%;
     }
 }
