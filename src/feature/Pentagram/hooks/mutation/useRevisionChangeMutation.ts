@@ -13,7 +13,7 @@ import {
     insertPentagramRemoveChangeRecords_MUTATION, 
     insertPentagramUpdateChangeRecords_MUTATION, 
     insertPentagramUpsertChangeRecords_MUTATION, 
-} from '../../graphql/mutation';
+} from '../../graphql';
 
 type NewNode = {
     id: string

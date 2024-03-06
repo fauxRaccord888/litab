@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useMutation } from "@apollo/client";
 import { useUnmergedChangeInfo } from "..";
 import { filterChanges, omit } from "$feature/Pentagram/utils";
-import { insertPentagramNode_MUTATION, updatePentagramNode_MUTATION } from '../../graphql/mutation';
+import { insertPentagramNode_MUTATION, updatePentagramNode_MUTATION } from '../../graphql';
 
 export function usePentagramNodeMutation() {
     const [insertPentagramNodeMutation] = useMutation<InsertPentagramNodeMutation>(insertPentagramNode_MUTATION)

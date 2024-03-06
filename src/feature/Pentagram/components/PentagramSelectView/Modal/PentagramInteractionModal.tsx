@@ -16,7 +16,7 @@ export default function PentagramInteractionModal(props: PentagramInteractionMod
 
     const onClickUpdate = (e: MouseEvent) => {
         e.stopPropagation()
-        handleClickUpdate
+        handleClickUpdate()
     }
 
     return (

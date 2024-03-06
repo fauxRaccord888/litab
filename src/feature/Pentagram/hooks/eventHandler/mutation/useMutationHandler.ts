@@ -71,10 +71,10 @@ export function useMutationHandler() {
     }, [handleInsertChanges, handleUpsertNodes, insertRevision, unmergedNodes])
 
     const handleUpdatePentagram = useCallback(async (pentagramId: string) => {
-        const { pentagramInsertResponse } = await updatePentagram(pentagramId)
+        const { pentagramUpdateResponse } = await updatePentagram(pentagramId)
 
         //TODO error handler
-        if (pentagramInsertResponse.errors) {
+        if (pentagramUpdateResponse.errors) {
             throw new Error()
         }
 
@@ -91,6 +91,7 @@ export function useMutationHandler() {
         }
 
         handleInsertRevision(pentagram.id)
+        return pentagram
     }, [insertPentagram, handleInsertRevision])
 
     return { handleInsertPentagram, handleUpdatePentagram }

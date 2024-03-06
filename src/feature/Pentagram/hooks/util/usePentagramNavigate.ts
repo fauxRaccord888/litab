@@ -17,8 +17,16 @@ export function usePentagramNavigate() {
     }, [navigate])
 
 
-    const showAddNodeHandler = useCallback((pentagramId: string)=> {
+    const showUpdateAddNodeHandler = useCallback((pentagramId: string)=> {
         navigate({to: '/pentagram/$pentagramId/update/addNode', params: { pentagramId }})
+    }, [navigate])
+
+    const showCreateAddNodeHandler = useCallback(()=> {
+        navigate({to: '/pentagram/create/addNode'})
+    }, [navigate])
+
+    const showCreateNodeInteractionHandler = useCallback((nodeId: string) => {
+        navigate({ to: '/pentagram/create/node/$nodeId', params: { nodeId } })
     }, [navigate])
 
     const showUpdateNodeInteractionHandler = useCallback((pentagramId: string, nodeId: string) => {
@@ -49,7 +57,9 @@ export function usePentagramNavigate() {
         nodeDetail: showNodeDetailHandler,
         revisionDetail: showRevisionDetailHandler,
         
-        addNode: showAddNodeHandler,
-        updateNodeInteraction: showUpdateNodeInteractionHandler,
+        addNodeOnUpdate: showUpdateAddNodeHandler,
+        addNodeOnCreate: showCreateAddNodeHandler,
+        nodeInteractionOnUpdate: showUpdateNodeInteractionHandler,
+        nodeInteractionOnCreate: showCreateNodeInteractionHandler
     }
 }

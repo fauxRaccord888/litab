@@ -17,6 +17,7 @@ type UpdateChangePayload = {
     distance: number,
 }
 
+let idCnt = 0
 export const upsertPendingChange = (state: UpdateNodeState, action: PayloadAction<UpsertChangePayload>) => {
     const { changeType } = action.payload
 
@@ -25,7 +26,7 @@ export const upsertPendingChange = (state: UpdateNodeState, action: PayloadActio
     }
 
     if ( changeType === 'upsert' ) {
-        const id =  String(state.pendingChange.ids.length + PENTAGRAM.PENDING_NODE_OFFSET)
+        const id =  String(idCnt++ + PENTAGRAM.PENDING_NODE_OFFSET)
         pendingChangeAdapter.upsertOne(state.pendingChange, { id, ...action.payload })
     }
 }
