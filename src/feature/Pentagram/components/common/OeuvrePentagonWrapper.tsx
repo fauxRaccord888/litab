@@ -1,29 +1,30 @@
-import type { ForwardedRef, MouseEventHandler, PropsWithChildren } from "react";
+import type { ForwardedRef, MouseEvent, PropsWithChildren } from "react";
 import { forwardRef } from 'react';
 
 import PentagonIcon from "$lib/components/icons/PentagonIcon";
 import "./style/oeuvrePentagonWrapper.scss"
 
 interface OeuvrePentagonWrapperProps extends PropsWithChildren {
-    handleClickParent?: MouseEventHandler<HTMLDivElement>
+    handleClickParent?: (e: MouseEvent<HTMLDivElement>) => void,
 }
 
 export default forwardRef(function OeuvrePentagonWrapper(props: OeuvrePentagonWrapperProps, ref: ForwardedRef<HTMLDivElement>) {
     const { children, handleClickParent } = props
 
-    const handleClick:MouseEventHandler<HTMLDivElement> = (e) => {
+    const onClickOeuvre = (e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
         if (handleClickParent) handleClickParent(e)
     }
 
     return (
-        <div className="oeuvre-pentagon-wrapper-container">
+        <div className="oeuvre-pentagon-wrapper-component">
             <div
-                onClick={handleClick} 
                 ref={ref} 
-                className="parent"
+                onClick={onClickOeuvre} 
+                className="oeuvre-pentagon-wrapper-component__parent"
             >
                 {children}
-                <PentagonIcon className="pentagon"/>
+                <PentagonIcon className="oeuvre-pentagon-wrapper-component__pentagon"/>
             </div>
         </div>
     )
