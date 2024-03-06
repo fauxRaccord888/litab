@@ -1,0 +1,6 @@
+@import "src/lib/style/atomicMixin";
+
+.update-main-pentagon-component {
+    @include flex-col;
+    @include justify-center;
+}

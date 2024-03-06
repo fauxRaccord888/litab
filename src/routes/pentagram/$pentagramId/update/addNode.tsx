@@ -1,10 +1,10 @@
 import type { DBOeuvre } from '$feature/Oeuvre/types';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
-import { usePentagramModalEventHandler, usePentagramNavigation } from '$feature/Pentagram/hooks';
+import { usePentagramAddModalEventHandler, usePentagramNavigate } from '$feature/Pentagram/hooks';
 import { createFileRoute } from '@tanstack/react-router'
 import toast from 'react-hot-toast';
-import AddNodeModal from "$feature/Pentagram/components/PentagramUpdateView/Modal/AddNodeModal"
+import AddNodeModal from "$feature/Pentagram/components/PentagramUpsertView/Modal/AddNodeModal"
 
 export const Route = createFileRoute('/pentagram/$pentagramId/update/addNode')({
     component: PentagramUpdateAddNode
@@ -13,13 +13,13 @@ export const Route = createFileRoute('/pentagram/$pentagramId/update/addNode')({
 function PentagramUpdateAddNode() {
     const { t } = useTranslation()
     const { pentagramId } = Route.useParams()
-    const { handleAddNode } = usePentagramModalEventHandler()
+    const { handleAddNode } = usePentagramAddModalEventHandler()
     const errorToast = useThrottledErrorToast()
-    const navigate = usePentagramNavigation()
+    const navigate = usePentagramNavigate()
     const title = t("modal.title.addNode")
 
     const handleClickClose = () => {
-        navigate.pentagram(pentagramId)
+        navigate.update(pentagramId)
     }
 
     const handleClickAddNode = (item: DBOeuvre) => {

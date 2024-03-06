@@ -1,0 +1,31 @@
+@import "src/lib/style/atomicMixin";
+
+.revision-component {
+    @include flex;
+    @include align-center;
+    @include rounded-lg;
+    @include pointer;
+    @include padding-(calc(var(--base-size) * 1));
+    @include child-left-m(calc(var(--base-size) * 0.5));
+    @include box-shadow-2(rgb(var(--font-color)));
+    background-color: rgb(var(--dark-gray));
+    justify-content: space-between;
+
+    .revision-component__change-list {
+        @include flex;
+        @include child-left-m(calc(var(--base-size) * 0.5));
+        .revision-component__change-count-container {
+            @include flex;
+            @include align-center;
+            @include child-left-m(calc(var(--base-size) * 0.4));
+    
+            .revision-component__change-count {
+                @include flex;
+                @include rounded-lg;
+                @include padding-wide-(calc(var(--base-size) * 0.3));
+                background-color: rgba(var(--true-gray), 0.5);
+                font-size: calc(var(--base-size) * 0.8)
+            }
+        }
+    }
+}

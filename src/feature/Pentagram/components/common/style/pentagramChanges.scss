@@ -1,0 +1,39 @@
+@import "src/lib/style/atomicMixin";
+
+.pentagram-change-component {
+    @include flex-col;
+    @include child-top-m(calc(var(--base-size) * 0.5));
+
+    .pentagram-change-component__main-info-container {
+        @include flex-col;
+        .pentagram-change-component__change-type {
+            font-size: calc(var(--base-size) * 0.9);
+            color: rgba(var(--font-color), 0.5)
+        }
+
+        .pentagram-change-component__title {
+            font-size: calc(var(--base-size) * 1.4)
+        }
+    }
+
+    .pentagram-change-component__position-info-container {
+        @include flex-col;
+        .pentagram-change-component__position-container {
+            @include flex;
+            @include align-center;
+
+            .pentagram-change-component__position-icon-component {
+                width: calc(var(--base-size) * 1);
+                height: calc(var(--base-size) * 1);
+            }
+            
+            .pentagram-change-component__position-icon-component--current {
+                @include fill-sm(rgb(var(--success)))
+            }
+    
+            .pentagram-change-component__position-icon-component--previous {
+                @include fill-sm(rgb(var(--danger)))
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/mainPentagonMixin";
+
+.merged-node-component {
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include pointer;
+    @include node;
+
+    &.merged-node-component--selected{
+        @include box-shadow-2(rgb(var(--primary)));
+        cursor: grab;
+    }
+
+    &.merged-node-component--deleted{
+        background-color: rgba(var(--background-color), 0.8);
+    }
+}

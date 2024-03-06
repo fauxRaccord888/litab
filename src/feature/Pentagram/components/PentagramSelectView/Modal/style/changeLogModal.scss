@@ -1,0 +1,11 @@
+@import "src/lib/style/atomicMixin";
+
+.change-log-modal-component__inner-cotainer {
+    @include w-full;
+    @include child-top-m(calc(var(--base-size) * 0.5));
+    .pentagram-change-component {
+        @include box-shadow-2(rgb(var(--font-color)));
+        @include rounded-lg;
+        @include padding-(calc(var(--base-size) * 0.75))
+    }
+}

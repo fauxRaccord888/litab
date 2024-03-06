@@ -9,7 +9,7 @@ interface NodeStyle extends CSSProperties {
 interface PositionAdjusterProps extends PropsWithChildren{
     angle: number,
     distance: number, 
-    behind?: boolean | undefined
+    behind?: boolean | null | undefined
 }
 
 export default function PositionAdjuster(props: PositionAdjusterProps) {
@@ -24,7 +24,10 @@ export default function PositionAdjuster(props: PositionAdjusterProps) {
         <div 
             {...restProps}
             style={style}
-            className={`position-adjuster-container ${behind ? "behind" : ""}` }
+            className={[
+                "position-adjuster-component", 
+                behind ? "position-adjuster-component--behind" : ""
+            ].join(" ")}
         >
             {props.children}
         </div>

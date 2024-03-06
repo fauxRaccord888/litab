@@ -1,0 +1,11 @@
+@import "src/lib/style/atomicMixin";
+
+.pentagram-description-component {
+    @include w-full;
+    @include flex;
+    .pentagram-description-component__text-area {
+        flex-grow: 1;
+        height: 300px;
+        font-size: calc(var(--base-size) * 1.3);
+    }
+}

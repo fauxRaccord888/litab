@@ -1,6 +1,6 @@
 @use "src/lib/style/variables";
 
-.position-adjuster-container {
+.position-adjuster-component {
     --node: #{variables.$node_small}px;
     @media only screen and (min-width: 500px) {
         --node: #{variables.$node_medium}px;
@@ -19,7 +19,7 @@
     background-color: rgb(var(--background-color));
     z-index: 2;
 
-    &.behind {
+    &.position-adjuster-component--behind {
         z-index: 1
     }
 }

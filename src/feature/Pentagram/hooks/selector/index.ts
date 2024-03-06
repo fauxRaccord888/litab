@@ -1,3 +1,5 @@
 export * from './useMergedNode'
 export * from './useUnmergedChangeInfo'
 export * from './useSelectedPosition'
+export * from './useNodeById'
+export * from './useMergedNodeById'

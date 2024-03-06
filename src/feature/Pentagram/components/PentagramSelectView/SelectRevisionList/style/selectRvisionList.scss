@@ -1,0 +1,5 @@
+@import "src/lib/style/atomicMixin";
+
+.select-revision-list-component {
+    @include child-top-m(calc(var(--base-size) * 0.75))
+}

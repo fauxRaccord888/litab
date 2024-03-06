@@ -1,0 +1,22 @@
+@import "src/lib/style/atomicMixin";
+
+.pentagram-innteraction-modal-component__inner-cotainer {
+    @include flex-col;
+    @include flex-center;
+    @include w-full;
+    @include child-top-m(calc(var(--base-size) * 1));
+
+    .pentagram-innteraction-modal-component__interaction-button {
+        @include flex;
+        @include flex-center;
+        @include rounded-lg;
+        @include pointer;
+        @include padding-(calc(var(--base-size) * 0.4));
+        @include w-full;
+        background-color: rgb(var(--dark-gray));
+    }
+
+    .pentagram-innteraction-modal-component__interaction-button--update {
+        background-color: rgba(var(--info), 0.5);
+    }
+}

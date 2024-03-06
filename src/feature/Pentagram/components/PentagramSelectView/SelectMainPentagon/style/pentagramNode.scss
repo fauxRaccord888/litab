@@ -1,0 +1,8 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/mainPentagonMixin";
+
+.pentagram-node-component {
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include pointer;
+    @include node;
+}
