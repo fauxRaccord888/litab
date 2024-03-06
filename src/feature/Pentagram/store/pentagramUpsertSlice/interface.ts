@@ -5,21 +5,24 @@ export interface INode {
     oeuvres: DBOeuvre,
     angle: number,
     distance: number,
+    deleted?: boolean | null
 }
 
 export interface IMergedNode extends INode {
-    deleted?: boolean,
     selected?: boolean
 }
 
-export type IPendingChange = (UpsertChange | UpdateChange | RemoveChange) 
+export type IPendingChange = (UpsertChange | UpdateChange | RemoveChange | RecoverChange) 
 
-export type UpsertChange = { id: string, changeType: 'upsert', angle: number, distance: number, oeuvres: DBOeuvre }
-export type UpdateChange = { id: string, changeType: 'update', angle: number, distance: number }
-export type RemoveChange = { id: string, changeType: 'remove' }
 
-export type IUnmergedChangeInfo = {
+type ChangeBase = { id: string, oeuvres: DBOeuvre }
+export type UpsertChange = ChangeBase & { changeType: 'upsert', angle: number, distance: number }
+export type UpdateChange = ChangeBase & { changeType: 'update', angle: number, distance: number }
+export type RemoveChange = ChangeBase & { changeType: 'remove', deleted: true }
+export type RecoverChange= ChangeBase & { changeType: 'recover', deleted: false, angle: number, distance: number }
+
+export type IUnmergedChangeInfo<T = IPendingChange> = {
     id: string
     node: INode,
-    change: IPendingChange
+    change: T
 }

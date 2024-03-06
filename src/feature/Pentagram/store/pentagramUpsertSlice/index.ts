@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { AppRootState } from '$lib/stores/store';
 import type { DBOeuvre } from '$feature/Oeuvre/types';
-import type { DBPentagram } from '../../types';
+import type { DBPentagram_UPDATE } from '../../types';
 import type { IMergedNode, IPendingChange } from './interface';
 
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
@@ -10,7 +10,7 @@ import { initializeNode } from './node';
 import { removePendingChanges, updatePendingChange, upsertPendingChange } from './pendingChange';
 import { select, selectPosition, unselect } from './select';
 
-type SelectedNode = null | string
+type NullableString = null | string
 
 type SelectedPosition = {
     angle: number,
@@ -32,41 +32,54 @@ export const pendingChangeAdapter = createEntityAdapter({ selectId: (change: IPe
 const pentagramUpsertSlice = createSlice({
     name: 'pentagramUpsert',
     initialState: {
+        pentagramId: null as NullableString,
+        description: "",
         mergedNode: mergedNodeAdapter.getInitialState(),
         node: nodeAdapter.getInitialState(),
         pendingChange: pendingChangeAdapter.getInitialState(),
-        selected: null as SelectedNode,
+        selected: null as NullableString,
         selectedPosition: initialSelectedPositionState as SelectedPosition,
     },
     reducers: {
         initialize(state, action: PayloadAction<{
-            nodes: DBPentagram["pentagrams_nodesCollection"]
+            nodes: DBPentagram_UPDATE["pentagram_nodesCollection"] | undefined
         }>) {
             initializeNode(state, action)
         },
 
+        setPentagramId(state, action: PayloadAction<string>) {
+            state.pentagramId = action.payload
+        },
+
+        setDescription(state, action: PayloadAction<string>) {
+            state.description = action.payload
+        },
+
         setPosition(state, action: PayloadAction<{ angle: number, distance: number }>) {
             const id = state.selected
+            const node = id ? state.node.entities[id] : null
             const change = id ? state.pendingChange.entities[id] : null
+            const mergedNode = id ? state.mergedNode.entities[id] : null
             const { angle, distance } = action.payload
 
             if (!id) {
                 selectPosition(state, action)
             }
 
-            if (id && !change) {
+            if (id && node && !change && !mergedNode?.deleted) {
                 upsertPendingChange(state, { 
                     type: 'string',
                     payload: {
                         id,
                         angle,
                         distance,
+                        oeuvres: node.oeuvres,
                         changeType: 'update'
                     }
                 })
             }
 
-            if (id && change) {
+            if (id && change && !mergedNode?.deleted) {
                 updatePendingChange(state, { 
                     type: 'string',
                     payload: {
@@ -102,6 +115,30 @@ const pentagramUpsertSlice = createSlice({
             }
         },
 
+        recoverNode(state, action: PayloadAction<{ id: string }>) {
+            const { id } = action.payload
+            const node = id ? state.node.entities[id] : null
+
+            if (node?.deleted) {
+                upsertPendingChange(state, {
+                    type: 'string',
+                    payload: {
+                        id,
+                        angle: node.angle,
+                        distance: node.distance,
+                        oeuvres: node.oeuvres,
+                        deleted: false,
+                        changeType: 'recover'
+                    }
+                })
+            }
+
+            if (!node?.deleted) {
+                removePendingChanges(state, action)
+            }
+
+        },
+
         removeNode(state, action: PayloadAction<{ id: string }>) {
             const { id } = action.payload
             const node = id ? state.node.entities[id] : null
@@ -111,6 +148,8 @@ const pentagramUpsertSlice = createSlice({
                     type: 'string',
                     payload: {
                         id,
+                        deleted: true,
+                        oeuvres: node.oeuvres,
                         changeType: 'remove'
                     }
                 })
@@ -134,8 +173,9 @@ const pentagramUpsertSlice = createSlice({
             unselect(state)
         },
 
-        cleanChanges(state) {
+        abortChanges(state) {
             state.pendingChange = pendingChangeAdapter.getInitialState()
+            state.description = ''
         },
 
         unselectSelected(state) {
@@ -149,7 +189,20 @@ const pentagramUpsertSlice = createSlice({
 })
 
 export type UpdateNodeState = AppRootState["pentagramUpsert"]
-export const { initialize, setPosition, upsertNode, removeNode, merge, revertChange, cleanChanges, unselectSelected, setSelected } = pentagramUpsertSlice.actions
+export const { 
+    initialize,
+    setPentagramId,
+    setDescription, 
+    setPosition, 
+    upsertNode, 
+    removeNode, 
+    recoverNode,
+    merge, 
+    revertChange, 
+    abortChanges, 
+    unselectSelected, 
+    setSelected 
+} = pentagramUpsertSlice.actions
 export const nodeSelector = nodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.node)
 export const pendingChangeSelector =  pendingChangeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.pendingChange)
 export const mergedNodeSelector = mergedNodeAdapter.getSelectors<AppRootState>(state => state.pentagramUpsert.mergedNode)

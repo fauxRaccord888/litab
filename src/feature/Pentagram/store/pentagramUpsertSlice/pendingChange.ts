@@ -1,19 +1,14 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import type { RemoveChange, UpdateChange } from "./interface"
-import type { DBOeuvre } from "$feature/Oeuvre/types"
+import type { UpsertChange, RemoveChange, UpdateChange, RecoverChange } from "./interface"
 import type { UpdateNodeState } from "."
 import { pendingChangeAdapter } from "."
 import { PENTAGRAM } from "../../constants"
 
 type UpsertChangePayload = (
-    {
-        changeType: 'upsert',
-        angle: number,
-        distance: number,
-        oeuvres: DBOeuvre
-    } |
+    Omit<UpsertChange, "id"> |
     RemoveChange | 
-    UpdateChange
+    UpdateChange | 
+    RecoverChange
 )
 
 type UpdateChangePayload = {
@@ -25,7 +20,7 @@ type UpdateChangePayload = {
 export const upsertPendingChange = (state: UpdateNodeState, action: PayloadAction<UpsertChangePayload>) => {
     const { changeType } = action.payload
 
-    if ( changeType === 'remove' || changeType === 'update' ) {
+    if ( changeType === 'remove' || changeType === 'update' || changeType === 'recover') {
         pendingChangeAdapter.upsertOne(state.pendingChange, action.payload)
     }
 

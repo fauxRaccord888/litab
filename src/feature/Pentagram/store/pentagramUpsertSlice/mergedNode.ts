@@ -1,5 +1,5 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import type { IMergedNode, IPendingChange, UpdateChange } from './interface'
+import type { IMergedNode, IPendingChange } from './interface'
 import type { UpdateNodeState } from "."
 import { mergedNodeAdapter } from "."
 
@@ -21,41 +21,26 @@ export const mergeChange = (state: UpdateNodeState, action: PayloadAction<NodePa
     }
 
     if (pendingChange?.changeType === 'update' && node) {
-        update(state, { node, pendingChange })
+        set(state, { node : { ...node, ...pendingChange }})
     }
 
     if (pendingChange?.changeType === 'remove' && node) {
         set(state, { node: {...node, deleted: true}})
     }
 
-    if (!node && !pendingChange) {
-        remove(state, id)
+    if (pendingChange?.changeType === 'recover' && node) {
+        set(state, { node: {...node, ...pendingChange, deleted: false}})
     }
 
-    if (pendingChange?.changeType === 'update' && !node) {
+    if (!node && (
+            !pendingChange ||
+            pendingChange?.changeType === 'update' ||
+            pendingChange?.changeType === 'remove' ||
+            pendingChange?.changeType === 'recover'
+        )
+    ) {
         remove(state, id)
     }
-
-    if (pendingChange?.changeType === 'remove' && !node) {
-        remove(state, id)
-    }
-}
-
-interface UpdatePayload {
-    node: IMergedNode,
-    pendingChange: UpdateChange,
-}
-
-const update = (state: UpdateNodeState, payload: UpdatePayload) => {
-    const { node, pendingChange } = payload
-    const { angle, distance } = pendingChange
-    const selectedId = state.selected
-    mergedNodeAdapter.upsertOne(state.mergedNode, {
-        ...node,
-        angle,
-        distance,
-        selected: node.id === selectedId
-    })
 }
 
 type UpsertPayload = {
