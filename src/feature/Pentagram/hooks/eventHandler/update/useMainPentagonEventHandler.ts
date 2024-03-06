@@ -1,11 +1,11 @@
 import type { MouseEvent, MutableRefObject, TouchEvent } from "react"
-import type { QuadtreeNode } from "../../utils"
+import type { QuadtreeNode } from "../../../utils"
 
 import { useDispatch } from "react-redux"
 import { useThrottle, useThrottledErrorToast } from "$lib/hooks"
-import { useInsertSelectedInQuadtree } from '..';
-import { unselectSelected, setSelected, setPosition } from "../../store/pentagramUpsertSlice"
-import { checkCollidingOrThrow, getAngleAndDisctanceOrThrow } from '../../utils';
+import { useInsertSelectedInQuadtree } from '../..';
+import { unselectSelected, setSelected, setPosition } from "../../../store/pentagramUpsertSlice"
+import { checkCollidingOrThrow, getAngleAndDisctanceOrThrow } from '../../../utils';
 
 export function useMainPentagonEventHandler(
     parentRef: MutableRefObject<HTMLDivElement | null>, 
@@ -16,13 +16,11 @@ export function useMainPentagonEventHandler(
     const insertSelected = useInsertSelectedInQuadtree(quadtreeRef)
     const errorToast = useThrottledErrorToast()
 
-    const handleSelectNode = (e :MouseEvent, id: string) => {
-        e.stopPropagation()
+    const handleSelectNode = (id: string) => {
         dispatch(setSelected({ id }))
     }
 
     const handleSetNewPosition = (e: MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation()
         errorToast(
             () => {
                 insertSelected();
@@ -36,9 +34,7 @@ export function useMainPentagonEventHandler(
         )
     }
 
-    const handleDragAndTouchMove = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-        e.stopPropagation()
-        
+    const handleDragAndTouchMove = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {       
         throttle(
             () => {
                 const target = ("touches" in e) ? e.touches[0] : e 

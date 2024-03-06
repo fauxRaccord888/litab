@@ -1,15 +1,15 @@
 import type { AppRootState } from "$lib/stores/store"
 import type { MutableRefObject } from "react"
-import type { QuadtreeNode } from "../../utils"
+import type { QuadtreeNode } from "../../../utils"
 import { useDispatch, useSelector } from "react-redux"
-import { useInsertSelectedInQuadtree } from ".."
-import { checkCollidingOrThrow } from "../../utils"
-import { revertChange, unselectSelected } from "../../store/pentagramUpsertSlice"
+import { useInsertSelectedInQuadtree } from "../.."
+import { revertChange, unselectSelected, nodeSelector, pendingChangeSelector } from "../../../store/pentagramUpsertSlice"
+import { checkCollidingOrThrow } from "../../../utils"
 
 export function usePendingChangeListEventHandler(quadtreeRef: MutableRefObject<QuadtreeNode | null>) {
     const dispatch = useDispatch()
-    const { entities: nodes } = useSelector((state: AppRootState) => state.pentagramUpsert.node)
-    const { entities: changes } = useSelector((state: AppRootState) => state.pentagramUpsert.pendingChange)
+    const nodes = useSelector((state: AppRootState) => nodeSelector.selectEntities(state))
+    const changes = useSelector((state: AppRootState) => pendingChangeSelector.selectEntities(state))
     const insertSelected = useInsertSelectedInQuadtree(quadtreeRef)
 
     const handleRevertChange = (id: string) => {
