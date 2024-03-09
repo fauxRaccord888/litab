@@ -1,26 +1,45 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment PentagramNodesInfo on pentagram_nodesConnection {
-        edges {
-            node {
-                id
-                angle
-                distance
-                deleted
-                oeuvres {
-                    ...OeuvresInfo
-                }
-                pentagram_revision_update_recordsCollection {
+    fragment PentagramNodesMinimalInfo on pentagram_nodes {
+        id
+        angle
+        distance
+        deleted
+        oeuvres {
+            ...OeuvresInfo
+        }
+    }
+`)
+
+
+graphql(/* GraphQL */ `
+    fragment PentagramNodesInfo on pentagram_nodes {
+        ...PentagramNodesMinimalInfo
+        pentagram_revision_update_recordsCollection {
+            edges {
+                node {
                     ...UpdateRecordInfo
                 }
-                pentagram_revision_upsert_recordsCollection {
+            }
+        }
+        pentagram_revision_upsert_recordsCollection {
+            edges {
+                node {
                     ...UpsertRecordInfo
                 }
-                pentagram_revision_remove_recordsCollection {
+            }
+        }
+        pentagram_revision_remove_recordsCollection {
+            edges {
+                node {
                     ...RemoveRecordInfo
                 }
-                pentagram_revision_recover_recordsCollection {
+            }
+        }
+        pentagram_revision_recover_recordsCollection {
+            edges {
+                node {
                     ...RecoverRecordInfo
                 }
             }

@@ -1,25 +1,7 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment PentagramsUpdateInfo on pentagramsConnection {
-        edges {
-            node {
-                id
-                description
-                created_at
-                users {
-                    ...MiniProfile
-                }
-                pentagram_nodesCollection {
-                    ...PentagramNodesInfo
-                }
-            }
-        }
-    }
-`)
-
-graphql(/* GraphQL */ `
-    fragment PentagramsSelectSingleInfo on pentagrams {
+    fragment PentagramsUpdateInfo on pentagrams {
         id
         description
         created_at
@@ -27,20 +9,37 @@ graphql(/* GraphQL */ `
             ...MiniProfile
         }
         pentagram_nodesCollection {
-            ...PentagramNodesInfo
+            edges {
+                node {
+                    ...PentagramNodesMinimalInfo
+                }
+            }
+        }
+    }
+`)
+
+graphql(/* GraphQL */ `
+    fragment PentagramsSelectInfo on pentagrams {
+        id
+        description
+        created_at
+        users {
+            ...MiniProfile
+        }
+        pentagram_nodesCollection {
+            edges {
+                node {
+                    ...PentagramNodesMinimalInfo
+                }
+            }
         }
         pentagram_revisionsCollection(
             orderBy: { created_at: DescNullsLast }
         ) {
-            ...PentagramRevisionsInfo                
-        }
-    }
-`)
-graphql(/* GraphQL */ `
-    fragment PentagramsSelectInfo on pentagramsConnection {
-        edges {
-            node {
-                ...PentagramsSelectSingleInfo
+            edges {
+                node {
+                    ...PentagramRevisionsMinimalInfo
+                }
             }
         }
     }
