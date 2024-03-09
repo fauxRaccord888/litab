@@ -1,12 +1,14 @@
 import type { AppRootState } from "$lib/stores/store";
 import { useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useUnmergedChangeInfo } from "../..";
 import { supabaseClient } from "$lib/supabase/client";
-import { InsertPentagramTransactionError, UpdatePentagramTransactionError } from "$feature/Pentagram/error";
+import { abortChanges } from "../../../store/pentagramUpsertSlice";
+import { InsertPentagramTransactionError, UpdatePentagramTransactionError } from "../../../error";
 import { filterChanges, formatChanges } from '../../../utils';
 
 export function useMutationHandler() {
+    const dispatch = useDispatch()
     const { description } = useSelector((state: AppRootState) => state.pentagramUpsert)
     const changes = useUnmergedChangeInfo()
     const filteredChanges = filterChanges(changes)
@@ -23,12 +25,13 @@ export function useMutationHandler() {
                 pentagram: {
                     description: description
                 },
-                upsert: processedUpsertChanges,
+                upsert_changes: processedUpsertChanges,
             })
 
         if (error) throw new UpdatePentagramTransactionError()
+        dispatch(abortChanges())
         return data
-    }, [description, processedUpsertChanges])
+    }, [description, dispatch, processedUpsertChanges])
 
     const handleUpdatePentagram = useCallback(async (pentagramId: string) => {
         const { data, error } =await supabaseClient
@@ -37,15 +40,16 @@ export function useMutationHandler() {
                 pentagram: {
                     description: description
                 },
-                upsert: processedUpsertChanges,
-                update: processedUpdateChanges,
-                remove: processedRemoveChanges,
-                recover: processedRecoverChanges,
+                upsert_changes: processedUpsertChanges,
+                update_changes: processedUpdateChanges,
+                remove_changes: processedRemoveChanges,
+                recover_changes: processedRecoverChanges,
             })
 
         if (error) throw new InsertPentagramTransactionError()
+        dispatch(abortChanges())
         return data
-        }, [description, processedRecoverChanges, processedRemoveChanges, processedUpdateChanges, processedUpsertChanges])
+        }, [description, dispatch, processedRecoverChanges, processedRemoveChanges, processedUpdateChanges, processedUpsertChanges])
 
 
     return { handleInsertPentagram, handleUpdatePentagram }
