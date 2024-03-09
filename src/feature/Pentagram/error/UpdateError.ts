@@ -18,3 +18,20 @@ export class DuplicateError extends CustomError {
     }
 }
 
+export class UpdatePentagramTransactionError extends CustomError {
+    constructor() {
+        super(
+            '펜타그램 업데이트에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요.',
+            'pentagram.toast.error.updateTransactionFailed'
+        )
+    }
+}
+
+export class InsertPentagramTransactionError extends CustomError {
+    constructor() {
+        super(
+            '펜타그램 등록에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요.',
+            'pentagram.toast.error.insertTransactionFailed'
+        )
+    }
+}

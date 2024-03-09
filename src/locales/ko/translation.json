@@ -35,8 +35,10 @@
                 "createPentagram": "펜타그램이 성공적으로 생성 되었어요"
             },
             "error": {
-                "invalidPosition": "선택한 자리는 다른 작품이 차지하고 있어요",
-                "notUniqueOeuvre": "중복된 작품이 이 펜타그램에 이미 존재해요"
+                "invalidPosition": "선택한 위치는 선택할 수 없습니다.",
+                "notUniqueOeuvre": "중복된 작품이 이 펜타그램에 이미 존재해요",
+                "insertTransactionFailed": "펜타그램 업데이트에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요.", 
+                "updateTransactionFailed": "펜타그램 등록에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요."
             }
         },
         "dialog": {
