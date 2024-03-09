@@ -34,13 +34,13 @@ export default function Revision(props: RevisionProps) {
         >
             <div className="revision-component__change-list">
                 {Object.entries(changes).map(([key, value]) => {
-                    return Boolean(value?.edges.length) && (
+                    return Boolean(value?.totalCount) && (
                         <span key={key} className="revision-component__change-count-container">
                             <span className="revision-component__change-type">
                                 <Trans i18nKey={`pentagram.changes.${key}`}/>
                             </span>
                             <span className="revision-component__change-count">
-                                {value?.edges.length}
+                                {value?.totalCount}
                             </span>
                         </span>
                     )

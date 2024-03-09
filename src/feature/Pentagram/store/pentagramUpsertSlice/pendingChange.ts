@@ -1,8 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
 import type { UpsertChange, RemoveChange, UpdateChange, RecoverChange } from "./interface"
 import type { UpdateNodeState } from "."
+import { v4 as uuidv4 } from 'uuid';
 import { pendingChangeAdapter } from "."
-import { PENTAGRAM } from "../../constants"
 
 type UpsertChangePayload = (
     Omit<UpsertChange, "id"> |
@@ -17,7 +17,6 @@ type UpdateChangePayload = {
     distance: number,
 }
 
-let idCnt = 0
 export const upsertPendingChange = (state: UpdateNodeState, action: PayloadAction<UpsertChangePayload>) => {
     const { changeType } = action.payload
 
@@ -26,7 +25,7 @@ export const upsertPendingChange = (state: UpdateNodeState, action: PayloadActio
     }
 
     if ( changeType === 'upsert' ) {
-        const id =  String(idCnt++ + PENTAGRAM.PENDING_NODE_OFFSET)
+        const id = uuidv4()
         pendingChangeAdapter.upsertOne(state.pendingChange, { id, ...action.payload })
     }
 }

@@ -25,7 +25,7 @@ export default function PentagramChange(props: PentagramChangeProps) {
                 <span className="pentagram-change-component__change-type">
                     <Trans i18nKey={`pentagram.changes.${changeType}`}/>
                 </span>
-                <span className="pentagram-change-component__title">{oeuvres.title}</span>
+                <span className="pentagram-change-component__title">{oeuvres?.title}</span>
             </div>
             
             <div className="pentagram-change-component__position-info-container">

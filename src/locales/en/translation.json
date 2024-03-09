@@ -35,8 +35,10 @@
                 "createPentagram": "Pentagram has been successfully added"
             },
             "error": {
-                "invalidPosition": "The selected position has already been occupied by another node",
-                "notUniqueOeuvre": "A duplicate oeuvre already exists in this Pentagram"
+                "invalidPosition": "Selected position isn't valid. Please try placing it somewhere else",
+                "notUniqueOeuvre": "A duplicate oeuvre already exists in this Pentagram",
+                "insertTransactionFailed": "Pentagram update failed. Please contact us if the same issue persists.", 
+                "updateTransactionFailed": "Pentagram registration failed. Please contact us if the same issue persists."
             }
         },
         "dialog": {

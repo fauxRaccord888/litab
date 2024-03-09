@@ -1,12 +1,13 @@
 import type { RecoverRecordInfoFragment, RemoveRecordInfoFragment, UpdateRecordInfoFragment, UpsertRecordInfoFragment } from "$lib/graphql/__generated__/graphql";
 import type { ChangeTypeKey, PentagramChangeProps } from "../components/common/PentagramChange";
+import type { Collections } from "$lib/types/graphql";
 import { formatProps } from "$lib/utils";
 
 type EntityWithUnunionedChanges= {
-    pentagram_revision_upsert_recordsCollection?: UpsertRecordInfoFragment | null | undefined,
-    pentagram_revision_update_recordsCollection?: UpdateRecordInfoFragment | null | undefined,
-    pentagram_revision_remove_recordsCollection?: RemoveRecordInfoFragment | null | undefined,
-    pentagram_revision_recover_recordsCollection?: RecoverRecordInfoFragment | null | undefined
+    pentagram_revision_upsert_recordsCollection?: Collections<UpsertRecordInfoFragment> | null | undefined,
+    pentagram_revision_update_recordsCollection?: Collections<UpdateRecordInfoFragment> | null | undefined,
+    pentagram_revision_remove_recordsCollection?: Collections<RemoveRecordInfoFragment> | null | undefined,
+    pentagram_revision_recover_recordsCollection?: Collections<RecoverRecordInfoFragment> | null | undefined
 } | null | undefined
 
 export function getUnionedChanges(node: EntityWithUnunionedChanges):PentagramChangeProps[] {
@@ -29,7 +30,7 @@ export function getUnionedChanges(node: EntityWithUnunionedChanges):PentagramCha
     const keys:ChangeTypeKey[] = ["upsert", "update", "remove", "recover"]
     const result: PentagramChangeProps[] = keys
         .map((key) => (
-            unprocessedChanges[key]?.edges.map((edge) => formatProps({
+            unprocessedChanges[key]?.edges?.map((edge) => formatProps({
                 ...edge.node,
                 created_at: edge.node.pentagram_revisions.created_at,
                 oeuvres: edge.node.pentagram_nodes.oeuvres,

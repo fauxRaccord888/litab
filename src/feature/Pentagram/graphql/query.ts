@@ -5,7 +5,11 @@ export const getPentagramUpdateInfoById_QUERY = graphql(/* GraphQL */ `
         pentagramsCollection(
             filter: { id: { eq: $id } }
         ) {
-            ...PentagramsUpdateInfo
+            edges {
+                node {
+                    ...PentagramsUpdateInfo
+                }
+            }
         }
     }
 `)
@@ -15,7 +19,11 @@ export const getPentagramSelectInfoById_QUERY = graphql(/* GraphQL */ `
         pentagramsCollection(
             filter: { id: { eq: $id } }
         ) {
-            ...PentagramsSelectInfo
+            edges {
+                node {
+                    ...PentagramsSelectInfo
+                }
+            }
         }
     }
 `)
@@ -25,7 +33,11 @@ export const getPentagramNodesInfoById_QUERY = graphql(/* GraphQL */ `
         pentagram_nodesCollection(
             filter: { id: { eq: $id } }
         ) {
-            ...PentagramNodesInfo
+            edges {
+                node {
+                    ...PentagramNodesInfo
+                }
+            }
         }
     }
 `)
@@ -35,7 +47,11 @@ export const getPentagramRevisionsInfoById_QUERY = graphql(/* GraphQL */ `
         pentagram_revisionsCollection(
             filter: { id: { eq: $id } }
         ) {
-            ...PentagramRevisionsInfo
+            edges {
+                node {
+                    ...PentagramRevisionsInfo
+                }
+            }
         }
     }
 `)
