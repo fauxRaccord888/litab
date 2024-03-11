@@ -4,56 +4,62 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { usePentagramNavigate } from "../../../hooks"
-import { abortChanges, pendingChangeSelector, setPentagramId } from "$feature/Pentagram/store/pentagramUpsertSlice"
+import { abortChanges, pendingChangeSelector, setDescription, setPentagramId } from "$feature/Pentagram/store/pentagramUpsertSlice"
 import Modal from "$feature/portal/components/Modal"
 import Button from "$lib/components/common/Button"
 import "./style/loadStoredChangeDialog.scss"
 
-export default function LoadStoredChangeDialog(props: { pentagramId: string }) {
-    const { pentagramId } = props
+export default function LoadStoredChangeDialog(props: { 
+    pentagramId: string | null, 
+    description: string | null | undefined
+}) {
+    const { pentagramId, description } = props
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const [loaded, setLoaded] = useState(false)
-    const description = useSelector((state: AppRootState) => state.pentagramUpsert.description)
+
     const storedPentagramId = useSelector((state: AppRootState) => state.pentagramUpsert.pentagramId)
+    const storedDescription = useSelector((state: AppRootState) => state.pentagramUpsert.description)
     const changes = useSelector((state: AppRootState) => pendingChangeSelector.selectAll(state))
     const navigate = usePentagramNavigate()
-
-    useEffect(() => {
-        if (!changes.length && !description) {
-            setLoaded(true)
-            dispatch(setPentagramId(pentagramId))
-        }
-    }, [description, dispatch, changes, pentagramId])
 
     const isCurrentPentagram = Boolean(
         storedPentagramId === pentagramId || 
         (!pentagramId && !storedPentagramId)
     )
+        
+    useEffect(() => {
+        if (
+            !changes.length && 
+            description === storedDescription
+        ) {
+            setLoaded(true)
+            if (pentagramId) dispatch(setPentagramId(pentagramId))
+        }
+    }, [description, dispatch, changes, pentagramId, storedDescription])
 
     const onClickAbortChanges = (e: MouseEvent) => {
         e.stopPropagation()
         dispatch(abortChanges())
         setLoaded(true)
-        dispatch(setPentagramId(pentagramId))
+        if (pentagramId) dispatch(setPentagramId(pentagramId))
+        if (description) dispatch(setDescription(description))
     }
     
     const onClickPreserveChanges = (e: MouseEvent) => {
         e.stopPropagation()
         setLoaded(true)
-        dispatch(setPentagramId(pentagramId))
     }
 
     const onClickNavigateRelated = (e: MouseEvent) => {
         e.stopPropagation()
-        if (storedPentagramId) navigate.view(pentagramId)
+        if (storedPentagramId) navigate.view(storedPentagramId)
         else navigate.create()
     }
 
-    // TODO i18n
     return (
         <>
-            {Boolean(!loaded && changes.length) &&
+            {Boolean(!loaded) &&
                 <Modal title={t('pentagram.dialog.title.temp')} >
                     <div className="load-stored-change-dialog__inner-container">
                         <span className="load-stored-change-dialog__message">
