@@ -1,5 +1,5 @@
 import type { RecoverRecordInfoFragment, RemoveRecordInfoFragment, UpdateRecordInfoFragment, UpsertRecordInfoFragment } from "$lib/graphql/__generated__/graphql";
-import type { ChangeTypeKey, PentagramChangeProps } from "../components/common/PentagramChange";
+import type { ChangeTypeKey, PentagramChangeProps } from "../../components/common/PentagramChange";
 import type { Collections } from "$lib/types/graphql";
 import { formatProps } from "$lib/utils";
 
@@ -46,5 +46,5 @@ export function getUnionedChanges(node: EntityWithUnunionedChanges):PentagramCha
             return new Date(b.item?.created_at).getTime() - new Date(a.item?.created_at).getTime()
         })
 
-        return result
+    return result
 }

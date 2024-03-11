@@ -1,5 +1,5 @@
-import { PositionError } from "../error"
-import { PENTAGRAM } from "../constants"
+import { PositionError } from "../../error"
+import { PENTAGRAM } from "../../constants"
 
 export function getAngleAndDisctanceOrThrow(
     event: {clientX: number, clientY: number}, 

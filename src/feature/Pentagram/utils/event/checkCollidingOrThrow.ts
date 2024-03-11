@@ -1,6 +1,6 @@
-import type { QuadtreeNode } from "."
-import { Quadtree } from "."
-import { PositionError } from "../error"
+import type { QuadtreeNode } from ".."
+import { Quadtree } from ".."
+import { PositionError } from "../../error"
 
 
 export function checkCollidingOrThrow (

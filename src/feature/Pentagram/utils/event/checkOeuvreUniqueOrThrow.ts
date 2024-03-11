@@ -1,6 +1,6 @@
 import type { DBOeuvre } from "$feature/Oeuvre/types"
-import type { IMergedNode } from "../store/pentagramUpsertSlice/interface"
-import { DuplicateError } from "../error"
+import type { IMergedNode } from "../../store/pentagramUpsertSlice/interface"
+import { DuplicateError } from "../../error"
 
 export const checkOeuvreUniqueOrThrow = (nodeEntities: Record<string, IMergedNode>, oeuvre: DBOeuvre) => {
     const isUnique = Object
