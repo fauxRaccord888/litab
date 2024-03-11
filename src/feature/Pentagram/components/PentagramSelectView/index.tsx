@@ -23,11 +23,12 @@ type PentagramEventHandler = {
 export type PentagramSelectViewProps = FormatProps<DBPentagram_SELECT> & {
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
-    eventHandler: PentagramEventHandler
+    eventHandler: PentagramEventHandler,
+    timestamp: Date
 }
 
 export default function PentagramSelectView(props: PentagramSelectViewProps) {
-    const { item, renderConfig, options, eventHandler } = props
+    const { item, renderConfig, options, eventHandler, timestamp } = props
     const { users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
 
     return (
@@ -40,6 +41,7 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
             <div className="pentagram-select-view-component__main-container">
                 {renderConfig.mainPentagon && 
                     <SelectMainPentagon 
+                        timestamp={timestamp}
                         handleClickNode={eventHandler.node}
                         pentagram_nodesCollection={pentagram_nodesCollection}
                     />
