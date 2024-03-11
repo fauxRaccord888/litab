@@ -1,4 +1,4 @@
-import { filterChanges } from ".";
+import { filterChanges } from "..";
 
 export function formatChanges(
     filteredChanges: ReturnType<typeof filterChanges>, 

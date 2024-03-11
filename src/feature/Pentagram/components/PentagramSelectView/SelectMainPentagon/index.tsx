@@ -7,19 +7,21 @@ import PentagramNode from "./PentagramNode";
 import './style/selectMainPentagon.scss'
 
 type SelectMainPentagonProps = {
+    timestamp: Date,
     pentagram_nodesCollection: DBPentagram_SELECT["pentagram_nodesCollection"],
     handleClickNode?: (id: string) => void
 }
 
 export default function SelectMainPentagon(props: SelectMainPentagonProps) {
-    const { pentagram_nodesCollection, handleClickNode } = props
+    const { timestamp, pentagram_nodesCollection, handleClickNode } = props
 
     return pentagram_nodesCollection && (
         <div className="select-main-pentagon-component">
             <OeuvrePentagonWrapper>
                 <ItemIterator 
                     additionalProps={{
-                        handleClickNode
+                        handleClickNode,
+                        timestamp
                     }}
                     items={pentagram_nodesCollection?.edges.map((edge) => formatProps(edge.node))}
                     componentFunction={PentagramNode}

@@ -1,21 +1,11 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment PentagramNodesMinimalInfo on pentagram_nodes {
+    fragment PentagramNodesInfo on pentagram_nodes {
         id
-        angle
-        distance
-        deleted
         oeuvres {
             ...OeuvresInfo
         }
-    }
-`)
-
-
-graphql(/* GraphQL */ `
-    fragment PentagramNodesInfo on pentagram_nodes {
-        ...PentagramNodesMinimalInfo
         pentagram_revision_update_recordsCollection {
             edges {
                 node {

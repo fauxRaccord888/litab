@@ -1,4 +1,4 @@
-import type { IUnmergedChangeInfo, RecoverChange, RemoveChange, UpdateChange, UpsertChange } from "../store/pentagramUpsertSlice/interface"
+import type { IUnmergedChangeInfo, RecoverChange, RemoveChange, UpdateChange, UpsertChange } from "../../store/pentagramUpsertSlice/interface"
 
 type DummyChange = {
     change : { changeType: string }

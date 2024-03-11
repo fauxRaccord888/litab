@@ -1,6 +1,6 @@
 // https://github.com/timohausmann/quadtree-ts의 코드를 상황에 맞게 변형함
 
-import { PENTAGRAM } from "../constants"
+import { PENTAGRAM } from "../../constants"
 
 export type QuadtreeNode = {
     objects: Bounds[]
