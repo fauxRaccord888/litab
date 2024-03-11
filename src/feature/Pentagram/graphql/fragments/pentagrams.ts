@@ -11,7 +11,7 @@ graphql(/* GraphQL */ `
         pentagram_nodesCollection {
             edges {
                 node {
-                    ...PentagramNodesMinimalInfo
+                    ...PentagramNodesInfo
                 }
             }
         }
@@ -29,7 +29,7 @@ graphql(/* GraphQL */ `
         pentagram_nodesCollection {
             edges {
                 node {
-                    ...PentagramNodesMinimalInfo
+                    ...PentagramNodesInfo
                 }
             }
         }
