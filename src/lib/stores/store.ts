@@ -11,11 +11,9 @@ import {
 } from "redux-persist";  
 import storage from 'redux-persist/lib/storage' 
 
-import authReducer from "./authSlice";
 import pentagramUpsertReducer from "$feature/Pentagram/store/pentagramUpsertSlice";
 
 const baseReducer = combineReducers({
-    auth: authReducer,
     pentagramUpsert: pentagramUpsertReducer,
 })
 

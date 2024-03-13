@@ -1,12 +1,9 @@
 import type { DeleteFollowingsMutation, InsertFollowingsMutation } from "$lib/graphql/__generated__/graphql"
-import type { MutationResult } from "@apollo/client"
+import type { DBAuthUser } from "$feature/auth/type"
 import { useCallback } from "react"
 import { useMutation } from "@apollo/client"
-import { useUserData } from "$feature/auth/hooks/useUserData"
 import { getProfileByMutableId_QUERY, deleteFollowings_MUTATION, insertFollowings_MUTATION } from "../graphql"
 import { getUserById_QUERY } from "$feature/auth/graphql"
-
-type Handler = (id: string) => void
 
 const queryOption = (followerId: string, followingId: string) => ({
     variables: { followerId, followingId },
@@ -16,23 +13,21 @@ const queryOption = (followerId: string, followingId: string) => ({
     ]
 })
 
-export function useFollowMutation(): Record<string, [Handler, MutationResult]> {
-    const { user } = useUserData()
-
-    const [follow, followStatus] = useMutation<InsertFollowingsMutation>(insertFollowings_MUTATION)
+export function useFollowMutation(currentUser: DBAuthUser | null | undefined) {
+    const [follow] = useMutation<InsertFollowingsMutation>(insertFollowings_MUTATION)
     const followHandler = useCallback((id: string) => {
-        if (!user || user?.id === id) return
-        follow(queryOption(user.id, id))
-    }, [follow, user])
+        if (!currentUser || currentUser?.id === id) return
+        follow(queryOption(currentUser.id, id))
+    }, [follow, currentUser])
 
-    const [unfollow, unfollowStatus] = useMutation<DeleteFollowingsMutation>(deleteFollowings_MUTATION)
+    const [unfollow] = useMutation<DeleteFollowingsMutation>(deleteFollowings_MUTATION)
     const unfollowHandler = useCallback((id: string) => {
-        if (!user || user?.id === id) return
-        unfollow(queryOption(user.id, id))
-    }, [unfollow, user])
+        if (!currentUser || currentUser?.id === id) return
+        unfollow(queryOption(currentUser.id, id))
+    }, [unfollow, currentUser])
 
     return {
-        follow: [followHandler, followStatus],
-        unfollow: [unfollowHandler, unfollowStatus]
+        follow: followHandler,
+        unfollow: unfollowHandler
     }
 }

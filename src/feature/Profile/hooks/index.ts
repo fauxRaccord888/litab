@@ -1,5 +1,3 @@
-export * from './useCheckFollowed'
 export * from './useFollowMutation'
-export * from './useMutualFollowers'
 export * from './useProfileNavigate'
 export * from './eventHandler'

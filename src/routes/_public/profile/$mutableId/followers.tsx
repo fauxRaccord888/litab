@@ -6,7 +6,6 @@ import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/grap
 import { useQuery } from '@apollo/client';
 import { useNavigate } from "@tanstack/react-router"
 import { useTranslation } from 'react-i18next';
-import { useMutualFollowers } from '$feature/Profile/hooks';
 /* query */
 import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 /* router */
@@ -17,7 +16,7 @@ import { formatProps } from '$lib/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
-export const Route = createFileRoute('/profile/$mutableId/mutualFollowers')({
+export const Route = createFileRoute('/_public/profile/$mutableId/followers')({
     component: FollowersModal
 })
 
@@ -25,25 +24,25 @@ function FollowersModal() {
     const params = Route.useParams()
     const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
-    const mutualFollowers = useMutualFollowers(firstNode?.id, firstNode?.followersCollection)
     
-    if (!mutualFollowers) return null
+    if (!firstNode?.followersCollection) return null
 
     return (
-        <MutualFollowingModalComponent 
-            items={mutualFollowers.map((edge) => formatProps(edge.node.follower_id))}
+        <FollowersModalComponent 
+            items={firstNode.followersCollection.edges.map((edge) => formatProps(edge.node.follower_id))}
         />
     )
 }
 
-function MutualFollowingModalComponent(props: {
+function FollowersModalComponent(props: {
     items : FormatProps<DBMiniProfile>[]
 }) {
     const params = Route.useParams()
+    const context = Route.useRouteContext()
     const navigate = useNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.mutualFollowers")
+    const title = t("modal.title.followers")
     const handleClickClose = () => {
         navigate({to: "/profile/$mutableId", params: params})
     }
@@ -53,6 +52,7 @@ function MutualFollowingModalComponent(props: {
             title={title} 
             handleClickClose={handleClickClose}
             items={props.items}
+            context={context}
         />
     )
 }

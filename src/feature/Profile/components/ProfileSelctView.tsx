@@ -1,4 +1,4 @@
-import type { FormatProps } from '$lib/types/components';
+import type { RouterContext, FormatProps } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types";
 
 import { useHandleFollow, useProfileNavigate } from '../hooks';
@@ -6,10 +6,12 @@ import UserInfoCard from './UserInfoCard';
 
 import "./style/profileSelectView.scss"
 
-export default function ProfileSelectView(props: FormatProps<DBProfiles>) {
-    const { item } = props
+export default function ProfileSelectView(props: FormatProps<DBProfiles> & {
+    context: RouterContext
+}) {
+    const { item, context } = props
     const navigate = useProfileNavigate(item.mutable_id)
-    const handleFollow = useHandleFollow(item.id)
+    const handleFollow = useHandleFollow(item.id, context.currentUser)
 
     return (
         <div className="profile-select-view-component">
@@ -34,6 +36,7 @@ export default function ProfileSelectView(props: FormatProps<DBProfiles>) {
                     showInteraction: navigate.showInteraction,
                     showMutualFollowers: navigate.showMutualFollowers,
                 }}
+                context={context}
             />
         </div>
     )

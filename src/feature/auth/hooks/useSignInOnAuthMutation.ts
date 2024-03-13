@@ -1,14 +1,12 @@
-import type { AuthError, AuthTokenResponsePassword, User } from "@supabase/supabase-js"
+import type { AuthError, User } from "@supabase/supabase-js"
 import { useCallback, useState } from "react"
 import { signIn_SUPABASE } from "../supabase"
 
-export type AuthSignInMutation = (email: string, password: string) => Promise<AuthTokenResponsePassword>
-type Status = { data: User | null, error: null | AuthError, loading: boolean}
-
-export function useSignInOnAuthMutation(): [AuthSignInMutation, Status] {
+export function useSignInOnAuthMutation(): [typeof mutation, typeof status] {
     const [data, setData] = useState<User | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<AuthError | null>(null)
+    const status = { data, loading, error }
     
     const mutation = useCallback((email: string, password: string) => {
         setLoading(true)
@@ -22,5 +20,5 @@ export function useSignInOnAuthMutation(): [AuthSignInMutation, Status] {
         return response
     }, [])
 
-    return [mutation, { data, loading, error }]
+    return [mutation, status]
 }

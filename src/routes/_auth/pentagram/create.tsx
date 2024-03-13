@@ -1,5 +1,4 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
-
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
@@ -13,7 +12,9 @@ import {
     useQuadtreeRef, 
     useSelectedPosition, 
     useUnmergedChangeInfo, 
-    useSetPentagramDescription
+    useSetPentagramDescription,
+    useInitialize,
+    useDescription
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
@@ -21,25 +22,29 @@ import toast from 'react-hot-toast';
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 
-export const Route = createFileRoute('/pentagram/create')({
-    component: PentagramUpdate
+export type PentagramInsertRoute = typeof Route
+
+export const Route = createFileRoute('/_auth/pentagram/create')({
+    component: PentagramInsert
 })
 
-function PentagramUpdate() {
+function PentagramInsert() {
     const { t } = useTranslation()
     const errorToast = useThrottledErrorToast()
     const navigate = usePentagramNavigate()
 
+    useInitialize(null)
     useMerge()
     
     const mergedNodes = useMergedNode()
     const unmergedNodeInfos = useUnmergedChangeInfo()
+    const description = useDescription()
     const { angle, distance } = useSelectedPosition()
 
     const parentRef = useRef<HTMLDivElement | null>(null)
     const quadtreeRef = useQuadtreeRef()
 
-    const [description, handleSetDescription] = useSetPentagramDescription()
+    const { handleSetDescription } = useSetPentagramDescription()
     const { handleSelectNode, handleSetNewPosition, handleDragAndTouchMove } = useMainPentagonEventHandler(parentRef, quadtreeRef)
 
     const { handleRevertChange } = usePendingChangeListEventHandler(quadtreeRef)
@@ -55,13 +60,13 @@ function PentagramUpdate() {
         errorToast(async () => {
             const result = await handleInsertPentagram()
             toast.success(t("pentagram.toast.success.createPentagram"))
-            navigate.view(result.id)
+            navigate.view(result)
         })
     }
 
     return (
         <>
-            <LoadStoredChangeDialog  pentagramId={""} />
+            <LoadStoredChangeDialog pentagramId={null} description={""}/>
             <PentagramUpdateView
                 ref={parentRef}
 
@@ -80,8 +85,8 @@ function PentagramUpdate() {
                 handleSetDescription={handleSetDescription}
                 
                 handleClickNode={handleSelectNode}
-                handleClickSelectedNode={(nodeId: string) => navigate.nodeInteractionOnCreate(nodeId)}
-                handleClickSelectedPosition={() => navigate.addNodeOnCreate()}
+                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertDetail(nodeId, Route.fullPath)}
+                handleClickSelectedPosition={() => navigate.nodeInsert(Route.fullPath)}
                 handleSetNewPosition={handleSetNewPosition}
                 handleDragAndTouchMove={handleDragAndTouchMove}
 

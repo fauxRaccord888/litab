@@ -10,19 +10,20 @@ import "./style/profileCoverImage.scss"
 type ProfileCoverImageProps = {
     id: DBProfiles["id"]
     miniView?: boolean
-    handleShowProfile?: (e: MouseEvent) => void
+    handleShowProfile?: () => void
 }
 
 export default function ProfileCoverImage(props: ProfileCoverImageProps) {
     const { id, miniView, handleShowProfile } = props
     
-    const handleClickProfile = (e: MouseEvent) => {
-        if (handleShowProfile) handleShowProfile(e)
+    const onClickProfile = (e: MouseEvent) => {
+        e.stopPropagation()
+        if (handleShowProfile) handleShowProfile()
     }
 
     return (
         <div
-            onClick={handleClickProfile}
+            onClick={onClickProfile}
             className={[
                 "profile-cover-image-component",
                 (miniView ? 'profile-cover-image-component--mini-view' : ''),

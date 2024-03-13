@@ -1,3 +1,2 @@
 export * from './checkSessionUser'
-export * from './checkTableUser'
-export * from './registerTableUser'
+export * from './getTableUserOrRegister'

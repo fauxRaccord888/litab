@@ -9,24 +9,26 @@ import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 
 import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
 
-export const Route = createFileRoute('/pentagram/$pentagramId/view')({
-    component: PentagramUpdate,
+export type PentagramSelectRoute = typeof Route
+
+export const Route = createFileRoute('/_public/pentagram/$pentagramId/view')({
+    component: PentagramSelect,
 })
 
-function PentagramUpdate() {
-    const { pentagramId } = Route.useParams()
-
+function PentagramSelect() {
+    const params = Route.useParams()
+    const context = Route.useRouteContext()
     const { data } = useQuery<GetPentagramSelectInfoByIdQuery>(getPentagramSelectInfoById_QUERY, {
-        variables: { id: pentagramId }
+        variables: { id: params.pentagramId }
     })
 
     const firstNode = getFirstNodeOfCollection(data?.pentagramsCollection)
     const navigate = usePentagramNavigate();
 
     const eventHandler = {
-        node: (nodeId: string) => navigate.nodeDetail(pentagramId, nodeId),
-        interaction: () => navigate.selectInteraction(pentagramId),
-        revision: (revisionId: string) => navigate.revisionDetail(pentagramId, revisionId)
+        node: (nodeId: string) => navigate.nodeSelectDetail(nodeId, Route.fullPath, params),
+        interaction: (pentagramId: string) => navigate.selectInteraction(pentagramId, Route.fullPath, params),
+        revision: (revisionId: string) => navigate.revisionDetail(revisionId, Route.fullPath, params)
     }
 
     // TODO THROW ERROR + AUTH
@@ -46,6 +48,8 @@ function PentagramUpdate() {
                     horizontalMain: false,
                 }}
                 eventHandler={eventHandler}
+                timestamp={new Date()}
+                context={context}
             />
             <Outlet />
         </>

@@ -5,13 +5,7 @@ export const getUserById_QUERY = graphql(/* GraphQL */ `
         usersCollection(filter: { id: {eq: $id } }) {
             edges {
                 node {
-                    id,
-                    mutable_id,
-                    nickname,
-                    preference,
-                    followingsCollection {
-                        ...FollowingsMiniProfile
-                    },
+                    ...AuthInfo
                 }
             }
         }

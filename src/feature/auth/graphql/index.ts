@@ -1,2 +1,2 @@
-export * from './getUserById'
-export * from './registerUser'
+export * from './query'
+export * from './mutation'

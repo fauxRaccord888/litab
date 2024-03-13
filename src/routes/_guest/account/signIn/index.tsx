@@ -7,8 +7,6 @@ import { useLazyQuery } from "@apollo/client"
 /* Mutation (hooks)*/
 import { useSignInOnAuthMutation } from '$feature/auth/hooks'
 import { getUserById_QUERY } from "$feature/auth/graphql"
-/* store */
-import { setSessionUser } from "$lib/stores/authSlice"
 /* types */
 import type { AppDispatch } from "$lib/stores/store"
 import type { GetUserByIdQuery } from "$lib/graphql/__generated__/graphql"
@@ -21,7 +19,7 @@ export const Route = createFileRoute('/_guest/account/signIn/')({
 
 export default function SignIn() {
     const dispatch = useDispatch<AppDispatch>()
-    const [authMutation, authStatus] = useSignInOnAuthMutation()
+    const [signIn, authStatus] = useSignInOnAuthMutation()
     const [tableQuery, tableStatus] = useLazyQuery<GetUserByIdQuery>(getUserById_QUERY)
 
     const { loading: authLoading, error: authError, data: authData } = authStatus 
@@ -30,7 +28,6 @@ export default function SignIn() {
     useEffect(() => {
         if (authData?.id) {
             tableQuery({ variables: { id: authData.id } })
-            dispatch(setSessionUser(authData))
         }
     }, [authData, dispatch, tableQuery])
 
@@ -38,6 +35,6 @@ export default function SignIn() {
     if (authError || tableError) return null
 
     return (
-        <SignInComponent authMutation={authMutation}/>
+        <SignInComponent handleSignIn={signIn}/>
     )
 }

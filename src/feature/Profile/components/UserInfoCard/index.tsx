@@ -1,9 +1,7 @@
-import type { MouseEvent } from "react";
 import type { DBProfiles } from "$feature/Profile/types"
-import type { FormatProps } from '$lib/types/components';
+import type { RouterContext, FormatProps } from '$lib/types/components';
 import type { ISlotRenderConfig } from "$feature/template/type";
-
-import { useMutualFollowers } from "$feature/Profile/hooks";
+import { calcFollowings, calcMutualFollowers } from "$feature/Profile/util";
 
 import ProfileCoverImage from "../common/ProfileCoverImage";
 import ProfileUserInfo from "../common/ProfileUserInfo";
@@ -17,24 +15,30 @@ import './style/index.scss'
 type UserInfoCardKeys = "coverImage" | "title" | "mainInfo" | "subInfo"
 type UserInfoCardOptionKey = "full" | "miniView" | "displayFollow" | "displayInteraction"
 type UserInfoCardEventHandler = {
-    showProfile?: (e: MouseEvent) => void
-    showMutualFollowers?: (e: MouseEvent) => void
-    showFollowings?: (e: MouseEvent) => void
-    showFollowers?: (e: MouseEvent) => void
-    showInteraction?: (e: MouseEvent) => void
+    showProfile?: () => void
+    showMutualFollowers?: () => void
+    showFollowings?: () => void
+    showFollowers?: () => void
+    showInteraction?: () => void
     
-    handleFollow?: (e: MouseEvent) => void
+    handleFollow?: () => void
 }
+
 type UserInfoCardProps = FormatProps<DBProfiles> & {
+    context: RouterContext,
     renderConfig: ISlotRenderConfig<UserInfoCardKeys>
     options: ISlotRenderConfig<UserInfoCardOptionKey>
     eventHandler: UserInfoCardEventHandler
 }
 
 export default function UserInfoCard(props: UserInfoCardProps) {
-    const { item, renderConfig, options, eventHandler } = props
+    const { item, context, renderConfig, options, eventHandler } = props
     const { id, mutable_id, nickname, description, followersCollection, followingsCollection } = item
-    const mutualFollowers= useMutualFollowers(id, followersCollection)
+
+    const followings = calcFollowings(context.currentUser)
+    const mutualFollowers = calcMutualFollowers(context.currentUser, item, followings)
+    const isMe = context.currentUser?.id === id
+    const followed = followings?.has(id)
 
     const coverImage = (
         options.full &&
@@ -78,7 +82,8 @@ export default function UserInfoCard(props: UserInfoCardProps) {
                     handleShowProfile={eventHandler.showProfile}
                 />
                 <ProfileInteraction 
-                    id={id}
+                    isMe={isMe}
+                    followed={followed}
                     displayFollow={options.displayFollow}
                     displayMoreInteraction={options.displayInteraction}
                     handleFollow={eventHandler.handleFollow}

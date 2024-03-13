@@ -1,8 +1,16 @@
-import type { FollowersMiniProfileFragment } from "$lib/graphql/__generated__/graphql";
+import type { DBAuthUser } from "$feature/auth/type";
+import type { DBProfiles } from "../types";
+import { calcFollowings } from '.';
 
-/** 시간 복잡도 주의 필요 */
-export const calcMutualFollowers = (followers: FollowersMiniProfileFragment | null |undefined, followings: Set<string>) => {
-    if (!followers || !followings) return []
-    const mutualFollowers = followers.edges.filter((edge) => followings.has(edge.node.follower_id.id))
+export const calcMutualFollowers = (
+    currentUser: DBAuthUser | null | undefined,
+    targetUser: DBProfiles | null, 
+    followings: ReturnType<typeof calcFollowings>,
+) => {
+    if (!currentUser || !targetUser ) return []
+    if (targetUser.id === currentUser.id) return []
+    if (!targetUser.followersCollection || !followings) return []
+    const followers = targetUser?.followersCollection.edges.map((edge) => edge.node)
+    const mutualFollowers = followers.filter((node) => followings.has(node.follower_id.id))
     return mutualFollowers
 }

@@ -11,37 +11,43 @@ import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
+import { calcFollowings, calcMutualFollowers } from '$feature/Profile/util';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { formatProps } from '$lib/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
-export const Route = createFileRoute('/profile/$mutableId/followers')({
+export const Route = createFileRoute('/_public/profile/$mutableId/mutualFollowers')({
     component: FollowersModal
 })
 
 function FollowersModal() {
     const params = Route.useParams()
+    const context = Route.useRouteContext()
     const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
-    const firstNode = getFirstNodeOfCollection(data?.usersCollection)
+    const targetUser = getFirstNodeOfCollection(data?.usersCollection)
+
+    const followings = calcFollowings(context.currentUser)
+    const mutualFollowers = calcMutualFollowers(context.currentUser, targetUser, followings)
     
-    if (!firstNode?.followersCollection) return null
+    if (!mutualFollowers) return null
 
     return (
-        <FollowersModalComponent 
-            items={firstNode.followersCollection.edges.map((edge) => formatProps(edge.node.follower_id))}
+        <MutualFollowingModalComponent 
+            items={mutualFollowers.map((node) => formatProps(node.follower_id))}
         />
     )
 }
 
-function FollowersModalComponent(props: {
+function MutualFollowingModalComponent(props: {
     items : FormatProps<DBMiniProfile>[]
 }) {
     const params = Route.useParams()
+    const context = Route.useRouteContext()
     const navigate = useNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.followers")
+    const title = t("modal.title.mutualFollowers")
     const handleClickClose = () => {
         navigate({to: "/profile/$mutableId", params: params})
     }
@@ -51,6 +57,7 @@ function FollowersModalComponent(props: {
             title={title} 
             handleClickClose={handleClickClose}
             items={props.items}
+            context={context}
         />
     )
 }

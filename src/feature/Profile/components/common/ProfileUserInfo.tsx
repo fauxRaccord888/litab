@@ -8,14 +8,15 @@ type ProfileUserInfoProps = {
     mutable_id: DBProfiles["mutable_id"]
     nickname: DBProfiles["nickname"]
     miniView?: boolean,
-    handleShowProfile?: (e: MouseEvent) => void
+    handleShowProfile?: () => void
 }
 
 export default function ProfileUserInfo(props: ProfileUserInfoProps) {
     const { mutable_id, nickname, miniView, handleShowProfile } = props
 
-    const handleClickProfile = (e: MouseEvent) => {
-        if (handleShowProfile) handleShowProfile(e)
+    const onClickProfile = (e: MouseEvent) => {
+        e.stopPropagation()
+        if (handleShowProfile) handleShowProfile()
     }
 
     return (
@@ -24,7 +25,7 @@ export default function ProfileUserInfo(props: ProfileUserInfoProps) {
                 "profile-user-info-component",
                 handleShowProfile ? "profile-user-info-component--pointer" : ""
             ].join(" ")}
-            onClick={(e) => handleClickProfile(e)}
+            onClick={onClickProfile}
         >
             <span className="profile-user-info-component__mutable-id">
                 {mutable_id}

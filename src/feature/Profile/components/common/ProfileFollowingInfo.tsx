@@ -12,19 +12,20 @@ type ProfileFollowingInfoProps = {
     followingsCollection: DBProfiles["followingsCollection"]
     followersCollection: DBProfiles["followersCollection"]
 
-    handleShowFollowings?: (e: MouseEvent) => void
-    handleShowFollowers?: (e: MouseEvent) => void
+    handleShowFollowings?: () => void
+    handleShowFollowers?: () => void
 }
 
 export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
     const { followingsCollection, followersCollection, handleShowFollowings, handleShowFollowers } = props
     const { t } = useTranslation()
 
-    const handleOnClick = (
+    const onClickCountButton = (
         e: MouseEvent, 
-        func: ((e: MouseEvent) => void)| undefined
+        func: (() => void)| undefined
     ) => {
-        if (func) func(e)
+        e.stopPropagation()
+        if (func) func()
     }
 
     return (
@@ -33,7 +34,7 @@ export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
                 <button 
                     className="profile-following-info-component__count-button"
                     disabled={!followingsCollection?.edges.length} 
-                    onClick={(e) => handleOnClick(e, handleShowFollowings)}
+                    onClick={(e) => onClickCountButton(e, handleShowFollowings)}
                 >
                     <span>{t(`header.count.followings`)}</span>
                     <span>{calcCollectionLength(followingsCollection)}</span>
@@ -44,7 +45,7 @@ export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
                 <button 
                     className="profile-following-info-component__count-button"
                     disabled={(!followersCollection?.edges.length)} 
-                    onClick={(e) => handleOnClick(e, handleShowFollowers)}
+                    onClick={(e) => onClickCountButton(e, handleShowFollowers)}
                 >
                     <span>{t(`header.count.followers`)}</span>
                     <span>{calcCollectionLength(followersCollection)}</span>

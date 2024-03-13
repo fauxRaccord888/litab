@@ -14,7 +14,7 @@ import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
 import Modal from '$feature/portal/components/Modal';
 
-export const Route = createFileRoute('/profile/$mutableId/interaction')({
+export const Route = createFileRoute('/_public/profile/$mutableId/interaction')({
     component: InteractionModal
 })
 

@@ -1,8 +1,6 @@
 /* types */
 import type { MouseEvent } from 'react';
-import type { DBProfiles } from '../../types';
 /* hooks */
-import { useCheckFollowed } from '../../hooks';
 import { useTranslation } from "react-i18next";
 /* components */
 import Button from "$lib/components/common/Button";
@@ -11,36 +9,38 @@ import MoreIcon from "$lib/components/icons/More";
 import "./style/profileInteraction.scss"
 
 type ProfileInteractionsProps = {
-    id: DBProfiles["id"],
+    isMe?: boolean | undefined,
+    followed?: boolean | undefined,
     displayFollow?: boolean
     displayMoreInteraction?: boolean
-    handleFollow?: (e: MouseEvent) => void
-    handleShowInteraction?: (e: MouseEvent) => void
+    handleFollow?: () => void
+    handleShowInteraction?: () => void
 }
 
 export default function ProfileInteraction(props: ProfileInteractionsProps ) {
-    const { id, displayFollow, displayMoreInteraction, handleFollow, handleShowInteraction } = props
+    const { isMe, followed, displayFollow, displayMoreInteraction, handleFollow, handleShowInteraction } = props
     const { t } = useTranslation()
-    const followed = useCheckFollowed(id)
 
-    const handleClickFollow = (e:MouseEvent) => {
-        if (handleFollow) handleFollow(e)
+    const onClickFollow = (e:MouseEvent) => {
+        e.stopPropagation()
+        if (handleFollow) handleFollow()
     }
 
-    const handleClickMoreInteraction = (e: MouseEvent) => {
-        if (handleShowInteraction) handleShowInteraction(e)
+    const onClickInteraction = (e: MouseEvent) => {
+        e.stopPropagation()
+        if (handleShowInteraction) handleShowInteraction()
     }
 
     return (
         <>
             {(displayFollow || displayMoreInteraction) && 
                 <div className="profile-interaction-component">
-                    {displayFollow &&
+                    {displayFollow && !isMe &&
                         <div className="profile-interaction-component__follow">
                             <Button 
                                 danger={followed}
                                 primary={!followed}
-                                onClick={handleClickFollow}
+                                onClick={onClickFollow}
                             >
                                 {followed ? t('header.followButtonLabel.unfollow') : t('header.followButtonLabel.follow')}
                             </Button>
@@ -48,7 +48,7 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
                     }
                     {displayMoreInteraction &&
                         <div 
-                            onClick={(e) => handleClickMoreInteraction(e)}
+                            onClick={onClickInteraction}
                             className={[
                                 "profile-interaction-component__more-interaction",
                                 handleShowInteraction ? "profile-interaction-component__more-interaction--pointer" : ""

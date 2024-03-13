@@ -16,7 +16,7 @@ import { formatProps } from '$lib/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
-export const Route = createFileRoute('/profile/$mutableId/followings')({
+export const Route = createFileRoute('/_public/profile/$mutableId/followings')({
     component: FollowersModal
 })
 
@@ -38,6 +38,7 @@ function FollowingsModalComponent(props: {
     items : FormatProps<DBMiniProfile>[]
 }) {
     const params = Route.useParams()
+    const context = Route.useRouteContext()
     const navigate = useNavigate()
     const { t } = useTranslation()
 
@@ -51,6 +52,7 @@ function FollowingsModalComponent(props: {
             title={title} 
             handleClickClose={handleClickClose}
             items={props.items}
+            context={context}
         />
     )
 }

@@ -1,4 +1,4 @@
-import type { FormatProps } from '$lib/types/components';
+import type { RouterContext, FormatProps } from '$lib/types/components';
 import type { DBMiniProfile } from "$feature/Profile/types";
 
 import { useHandleFollow, useProfileNavigate } from '../hooks';
@@ -6,10 +6,15 @@ import UserInfoCard from './UserInfoCard';
 
 import "./style/miniProfile.scss"
 
-export default function MiniProfile(props: FormatProps<DBMiniProfile> & { displayFollow?: boolean }) {
-    const { item, displayFollow } = props
+type MiniProfileProps = FormatProps<DBMiniProfile> & {
+    context: RouterContext,
+    displayFollow?: boolean 
+}
+
+export default function MiniProfile(props: MiniProfileProps) {
+    const { item, context, displayFollow } = props
     const navigate = useProfileNavigate(item.mutable_id)
-    const handleFollow = useHandleFollow(item.id)
+    const handleFollow = useHandleFollow(item.id, context.currentUser)
 
     return (
         <div className="mini-profile-component">
@@ -31,6 +36,7 @@ export default function MiniProfile(props: FormatProps<DBMiniProfile> & { displa
                     handleFollow,
                     showProfile: navigate.showProfile
                 }}
+                context={context}
             />
         </div>
     )

@@ -1,8 +1,7 @@
 import type { GetPentagramUpdateInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 
 import { useRef } from 'react';
-import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
 import { 
@@ -16,7 +15,8 @@ import {
     useQuadtreeRef, 
     useSelectedPosition, 
     useUnmergedChangeInfo, 
-    useSetPentagramDescription
+    useSetPentagramDescription,
+    useDescription
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
@@ -26,32 +26,55 @@ import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 
-export const Route = createFileRoute('/pentagram/$pentagramId/update')({
+export type PentagramUpdateRoute = typeof Route
+
+export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
+    // COMMENT 검증 및 redirect 로직은 tanstack router로 통일
+    // 로더에서 fetch는 최소화(이중 fetch되는 경우에 한해서만 lodaer에서 fetch => refetch가 까다로워짐 등)
+    loader: async ({ context, params }) => {
+        const queryOption = { query: getPentagramUpdateInfoById_QUERY,
+            variables: { id: params.pentagramId }
+        }
+        const { data } = await context.apolloClient.query<GetPentagramUpdateInfoByIdQuery>(queryOption)
+        const pentagram = getFirstNodeOfCollection(data?.pentagramsCollection)
+
+        if (!pentagram) {
+            throw redirect({
+                to: '/error',
+            })
+        }
+
+        if (pentagram?.users.id !== context?.sessionUser?.id) {
+            throw redirect({
+                to: '/error',
+            })
+        }
+
+        return { pentagram }
+    },
     component: PentagramUpdate
 })
 
 function PentagramUpdate() {
-    const { pentagramId } = Route.useParams()
+    const params = Route.useParams()
+    const { pentagramId } = params
+    const { pentagram } = Route.useLoaderData()
     const { t } = useTranslation()
     const errorToast = useThrottledErrorToast()
     const navigate = usePentagramNavigate()
 
-    const { data } = useQuery<GetPentagramUpdateInfoByIdQuery>(getPentagramUpdateInfoById_QUERY, {
-        variables: { id: pentagramId }
-    })
-    const firstNode = getFirstNodeOfCollection(data?.pentagramsCollection)
-
-    useInitialize(firstNode)
+    useInitialize(pentagram)
     useMerge()
     
     const mergedNodes = useMergedNode()
     const unmergedNodeInfos = useUnmergedChangeInfo()
+    const description = useDescription()
     const { angle, distance } = useSelectedPosition()
 
     const parentRef = useRef<HTMLDivElement | null>(null)
     const quadtreeRef = useQuadtreeRef()
 
-    const [description, handleSetDescription] = useSetPentagramDescription()
+    const { handleSetDescription } = useSetPentagramDescription()
     const { handleSelectNode, handleSetNewPosition, handleDragAndTouchMove } = useMainPentagonEventHandler(parentRef, quadtreeRef)
 
     const { handleRevertChange } = usePendingChangeListEventHandler(quadtreeRef)
@@ -64,20 +87,16 @@ function PentagramUpdate() {
 
     const { handleUpdatePentagram } = useMutationHandler()
     const handleClickSubmit = () => {
-        errorToast(() => {
-            handleUpdatePentagram(pentagramId)
+        errorToast(async () => {
+            await handleUpdatePentagram(pentagramId)
             toast.success(t("pentagram.toast.success.updatePentagram"))
             navigate.view(pentagramId)
         })
     }
 
-
-    // TODO THROW ERROR + AUTH
-    if (!firstNode) return <></>
-
     return (
         <>
-            <LoadStoredChangeDialog  pentagramId={pentagramId} />
+            <LoadStoredChangeDialog pentagramId={pentagramId} description={pentagram.description || ""}/>
             <PentagramUpdateView
                 ref={parentRef}
 
@@ -96,8 +115,8 @@ function PentagramUpdate() {
                 handleSetDescription={handleSetDescription}
                 
                 handleClickNode={handleSelectNode}
-                handleClickSelectedNode={(nodeId: string) => navigate.nodeInteractionOnUpdate(pentagramId, nodeId)}
-                handleClickSelectedPosition={() => navigate.addNodeOnUpdate(pentagramId)}
+                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertDetail(nodeId, Route.fullPath ,params)}
+                handleClickSelectedPosition={() => navigate.nodeInsert(Route.fullPath ,params)}
                 handleSetNewPosition={handleSetNewPosition}
                 handleDragAndTouchMove={handleDragAndTouchMove}
 
