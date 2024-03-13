@@ -11,11 +11,6 @@ export const Route = rootRouteWithContext<{
     store: AppStore
     apolloClient: ApolloClient<NormalizedCacheObject>
 }>()({
-    beforeLoad: async ({ context }) => {
-        const { store, apolloClient } = context
-        checkSessionUser({ store })
-        checkTableUser({ store, client: apolloClient})
-    },
     component: RootComponent,
 })
 
