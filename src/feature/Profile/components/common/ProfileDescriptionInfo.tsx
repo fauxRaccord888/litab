@@ -1,7 +1,7 @@
 /* types */
 import type { DBProfiles } from "$feature/Profile/types"
 import type { MouseEvent, PropsWithChildren } from "react";
-import type { useMutualFollowers } from "$feature/Profile/hooks";
+import type { calcMutualFollowers } from "$feature/Profile/util/calcMutualFollower";
 /* utils */
 import { Trans } from 'react-i18next';
 import PROFILE from "$feature/Profile/constants"
@@ -11,9 +11,9 @@ import "./style/profileDescriptionInfo.scss"
 type ProfileDescriptionInfoProps = {
     nickname: DBProfiles["nickname"], 
     description: DBProfiles["description"]
-    mutualFollowers: ReturnType<typeof useMutualFollowers>
+    mutualFollowers: ReturnType<typeof calcMutualFollowers>
 
-    handleShowMutualFollowers?: (e: MouseEvent) => void
+    handleShowMutualFollowers?: () => void
 }
 
 export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProps) {
@@ -23,11 +23,12 @@ export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProp
     const totalMutualFollowerCount = mutualFollowers.length
     const displayedMutualFollowers = mutualFollowers
         .slice(0, mutualFollowerDisplayCount)
-        .map((edge) => edge.node.follower_id.mutable_id)
+        .map((node) => node.follower_id.mutable_id)
     const additionalCount = Math.max(totalMutualFollowerCount - mutualFollowerDisplayCount, 0)
 
     const onClickMutualFollowing = (e: MouseEvent) => {
-        if (handleShowMutualFollowers) handleShowMutualFollowers(e)
+        e.stopPropagation()
+        if (handleShowMutualFollowers) handleShowMutualFollowers()
     }
 
     return (
@@ -58,7 +59,7 @@ export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProp
     )
 }
 
-// i18n에서 받는 문자열로 받는 자녀를 찢어서 span으로 처리하는 컴포넌트
+// COMMENT i18n에서 받는 문자열로 받는 자녀를 찢어서 span으로 처리하는 컴포넌트
 const MutualFollowerSplitHelper = (props: PropsWithChildren) => {
     const stringifiedItems = (props.children && Array.isArray(props.children)) 
         ? String(props?.children?.[0])
