@@ -1,6 +1,6 @@
 import type { DBPentagram_SELECT } from "../../types";
 import type { ISlotRenderConfig } from '$feature/template/type';
-import type { FormatProps } from "$lib/types/components";
+import type { RouterContext, FormatProps } from "$lib/types/components";
 
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
@@ -14,9 +14,10 @@ type PentagramSelectOptions = {
     horizontalMain?: boolean | null | undefined,
     displayRevisionIds?: string[] | null | undefined
 }
-type PentagramEventHandler = {
+
+export type PentagramEventHandler = {
     'node'?: (nodeId: string) => void,
-    'interaction'?: () => void,
+    'interaction'?: (pentagramId: string) => void,
     'revision'?: (revisionId: string) => void 
 }
 
@@ -24,19 +25,22 @@ export type PentagramSelectViewProps = FormatProps<DBPentagram_SELECT> & {
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
     eventHandler: PentagramEventHandler,
+    context: RouterContext,
     timestamp: Date
 }
 
 export default function PentagramSelectView(props: PentagramSelectViewProps) {
-    const { item, renderConfig, options, eventHandler, timestamp } = props
-    const { users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
+    const { item, renderConfig, options, eventHandler, timestamp, context } = props
+    const { id, users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
 
     return (
         <div className="pentagram-select-view-component">
             <SelectMetaInfo 
+                id={id}
                 users={users} 
                 created_at={created_at} 
                 handleClickInteraction={eventHandler.interaction}
+                context={context}
             />
             <div className="pentagram-select-view-component__main-container">
                 {renderConfig.mainPentagon && 
