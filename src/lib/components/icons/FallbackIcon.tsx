@@ -1,7 +1,7 @@
 export default function FallbackIcon(props?: {className?: string}) {
     return (
         <svg 
-            className={props?.className}
+            className={`fallback-icon-component  ${props?.className}`}
             viewBox="0 0 512 512"
         >
             <g>
