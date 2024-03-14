@@ -1,11 +1,18 @@
+@import "src/lib/style/mixin";
 @import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
 
 body {
-    margin: 0px;
+    padding: 0;
+    margin: 0;
+    @include custom-scroll;
+}
+    
+#root {
+    overflow: hidden;
 }
 
 button, button:disabled {
-    font-family: "Wanted Sans Variable";
+    font-family: inherit;
     background-color: transparent;
     border: 0;
     color: inherit;
@@ -15,7 +22,13 @@ button, button:disabled {
 }
 
 input {
-    color: rgb(var(--font-color));
+    color: inherit;
+}
+
+textarea {
+    font-family: inherit;
+    background-color: inherit;
+    color: inherit;
 }
 
 :root {
@@ -34,10 +47,12 @@ input {
     --true-gray: 128, 128, 128;
 
     --primary: 109, 164, 170;
-    --success: 28, 183, 45;
-    --danger: 238, 68, 68;
-    --warning: 255, 246, 0;
+    --info: 0, 167, 195;
+    --success: 0, 188, 93;
+    --warning: 243, 133, 0;
+    --danger: 255, 69, 58;
 
+    --base-size: 1rem;
     color: rgb(var(--font-color));
     background-color: rgb(var(--background-color));
     font-family: "Wanted Sans Variable";
