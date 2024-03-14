@@ -1,36 +1,37 @@
 import type { DBOeuvre } from '../types';
+import type { ISlotRenderConfig } from '$feature/template/type';
+import type { InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
 import { useOeuvresQuery } from '../hooks';
-import { formatProps } from '$lib/utils';
 
-import OeuvreInfo from './common/OeuvreInfo';
+import OeuvreInfoCard from './common/OeuvreInfoCard';
 import SearchPanel from '$lib/components/common/SearchPanel';
-import ItemIterator from '$lib/components/common/ItemIterator';
 
 import "./style/oeuvreSearchView.scss"
 
 type OeuvreSearchViewProps = {
     handleClickResult: (item: DBOeuvre) => void
+    oeuvreInfoCardRenderConfig: ISlotRenderConfig<InfoCardRenderConfigKey>
 }
 
 export default function OeuvreSearchView(props: OeuvreSearchViewProps) {
-    const { handleClickResult } = props
+    const { handleClickResult, oeuvreInfoCardRenderConfig } = props
     const [searchOeuvres, {data}] = useOeuvresQuery()
-    const result = data?.oeuvresCollection?.edges.map((edge) => formatProps(edge.node)) || []
+    const items = data?.oeuvresCollection?.edges.map((edge) => edge.node) || []
 
-    // TODO navigate w/ query param
     return (
-        <div className="oeuvre-search-view-container">
+        <div className="oeuvre-search-view-component">
             <SearchPanel
                 submitFunction={searchOeuvres}
             />
-            <div className="result-container">
-                <ItemIterator
-                    items={result}
-                    additionalProps={{
-                        handleClickItem: handleClickResult
-                    }}
-                    componentFunction={OeuvreInfo}
-                />
+            <div className="oeuvre-search-view-component__result-container">
+                {items.map((item) => (
+                    <OeuvreInfoCard
+                        key={item.id}
+                        item={item}
+                        renderConfig={oeuvreInfoCardRenderConfig}
+                        handleClickItem={handleClickResult}
+                    />
+                ))}
             </div>
         </div>
     )

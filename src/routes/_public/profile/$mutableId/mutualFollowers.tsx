@@ -1,5 +1,4 @@
 /* types */
-import type { FormatProps } from '$lib/types/components';
 import type { DBMiniProfile } from '$feature/Profile/types';
 import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
@@ -13,7 +12,6 @@ import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { calcFollowings, calcMutualFollowers } from '$feature/Profile/util';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
-import { formatProps } from '$lib/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
@@ -34,13 +32,13 @@ function FollowersModal() {
 
     return (
         <MutualFollowingModalComponent 
-            items={mutualFollowers.map((node) => formatProps(node.follower_id))}
+            items={mutualFollowers.map((node) => node.follower_id)}
         />
     )
 }
 
 function MutualFollowingModalComponent(props: {
-    items : FormatProps<DBMiniProfile>[]
+    items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
     const context = Route.useRouteContext()

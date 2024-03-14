@@ -1,11 +1,11 @@
 import type { MouseEvent } from "react";
-import type { FormatProps } from "$lib/types/components";
 import type { DBPentagramRevisions } from "../../../types";
 import { useTranslatedRelativeTime } from "$lib/hooks";
 import { Trans } from "react-i18next";
 import "./style/revision.scss"
 
-type RevisionProps = FormatProps<DBPentagramRevisions> & {
+type RevisionProps = {
+    item: DBPentagramRevisions,
     handleClickRevision?: (id: string) => void
 }
 

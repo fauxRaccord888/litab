@@ -1,12 +1,12 @@
 import type { DragEvent, MouseEvent, TouchEvent } from 'react';
 import type { IMergedNode } from '../../../../store/pentagramUpsertSlice/interface';
-import { FormatProps } from '$lib/types/components';
 import PositionAdjuster from '../../../common/PositionAdjuster';
 import OeuvreNode from '$feature/Oeuvre/components/OeuvreNode';
 
 import "./style/mergedNode.scss"
 
-type MergedNodeProps = FormatProps<IMergedNode> & {
+type MergedNodeProps = {
+    item: IMergedNode,
     handleClickNode?: (id: string) => void
     handleClickSelectedNode?: (id: string) => void
     handleDragAndTouchMove?:(e: DragEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => void

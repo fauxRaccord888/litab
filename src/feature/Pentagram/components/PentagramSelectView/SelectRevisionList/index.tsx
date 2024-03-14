@@ -1,6 +1,4 @@
 import type { DBPentagram_SELECT } from "../../../types";
-import { formatProps } from '$lib/utils/formatProps';
-import ItemIterator from '$lib/components/common/ItemIterator';
 import Revision from "./Revision";
 import "./style/selectRvisionList.scss"
 
@@ -18,15 +16,17 @@ export default function SelectRevisionList(props: SelectRevisionListProps) {
         ? pentagram_revisionsCollection.edges.filter((edge) => revisionIdsSet.has(edge.node.id))
         : pentagram_revisionsCollection?.edges
 
-    return revisions && (
+    const items = revisions?.map((edge) => edge.node)
+
+    return items && (
         <div className="select-revision-list-component">
-            <ItemIterator 
-                additionalProps={{
-                    handleClickRevision
-                }}
-                items={revisions.map((edge) => formatProps(edge.node))}
-                componentFunction={Revision}
-            />
+            {items.map((item) => (
+                <Revision 
+                    key={item.id}
+                    item={item}
+                    handleClickRevision={handleClickRevision}
+                />
+            ))}
         </div>
     )
 }

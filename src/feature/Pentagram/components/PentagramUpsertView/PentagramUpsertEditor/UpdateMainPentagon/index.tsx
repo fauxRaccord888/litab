@@ -2,10 +2,8 @@ import type { IMergedNode } from "../../../../store/pentagramUpsertSlice/interfa
 import type { ForwardedRef, MouseEvent, TouchEvent } from 'react';
 
 import { forwardRef } from 'react';
-import { formatProps } from "$lib/utils";
 
 import OeuvrePentagonWrapper from '../../../common/OeuvrePentagonWrapper';
-import ItemIterator from "$lib/components/common/ItemIterator";
 import MergedNode from './MergedNode';
 import SelectedPosition from './SelectedPosition';
 
@@ -43,15 +41,16 @@ export default forwardRef(function UpdateMainPentagon(props: UpdateMainPentagonP
                 handleClickParent={handleSetNewPosition}    
             >
                 {Boolean(mergedNodes.length) &&
-                    <ItemIterator
-                        additionalProps={{
-                            handleDragAndTouchMove,
-                            handleClickSelectedNode,
-                            handleClickNode,
-                        }}
-                        items={mergedNodes.map((mergedNode) => formatProps(mergedNode))}
-                        componentFunction={MergedNode}
-                    />
+                    mergedNodes.map((item) => (
+                        <MergedNode 
+                            key={item.id}
+                            id={item.id}
+                            item={item}
+                            handleDragAndTouchMove={handleDragAndTouchMove}
+                            handleClickSelectedNode={handleClickSelectedNode}
+                            handleClickNode={handleClickNode}
+                        />
+                    ))
                 }
                 <SelectedPosition 
                     angle={angle}
