@@ -1,10 +1,15 @@
-.search-panel-container {    
-    .icon {
-        stroke: rgb(var(--font-color));
-    }
+@import "src/lib/style/atomicMixin";
 
-    .button-container {
-        background-color: rgb(var(--primary));
-        width: 100%;
+.search-panel-component {
+    .search-panel-component__search-form {
+        @include child-top-m(calc(var(--base-size) * 0.75));
+        .icon {
+            @include stroke-sm(rgb(var(--font-color)));
+            @include fill-sm(transparent);
+        }
+    
+        .button-component {
+            @include w-full;
+        }
     }
 }

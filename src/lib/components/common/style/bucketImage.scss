@@ -1,11 +1,11 @@
 @import "src/lib/style/atomicMixin";
 
-.bucket-image-container {
+.bucket-image-component {
     @include flex-col;
     @include flex-center;
+    @include w-full;
+    @include h-full;
     z-index: -1;
-    width: inherit;
-    height: inherit;
     border-radius: inherit;
     object-fit: inherit;
 
@@ -15,5 +15,12 @@
         aspect-ratio: 1;
         border-radius: inherit;
         object-fit: inherit;
+    }
+
+    svg {
+        @include stroke-sm((var(--font-color)));
+        @include fill-sm(rgb(var(--font-color)));
+        width: 50%;
+        height: 50%;
     }
 }
