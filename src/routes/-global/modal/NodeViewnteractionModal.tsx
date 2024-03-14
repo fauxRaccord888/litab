@@ -7,7 +7,7 @@ import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import PentagramInteractionModal from '$feature/Pentagram/components/PentagramSelectView/Modal/PentagramInteractionModal';
 
-export function NodeViewnteractionModal(props: {
+export default function NodeViewnteractionModal(props: {
     pentagramId: string;
     currentUser: DBAuthUser | null;
     handleClickClose: () => void;

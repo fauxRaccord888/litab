@@ -1,10 +1,10 @@
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
 import { useMergedNodeById, useNodeById, usePentagramInteractionEventHandler, useQuadtreeRef } from '$feature/Pentagram/hooks';
+import toast from 'react-hot-toast';
 import NodeInteractionModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/NodeInteractionModal';
 
-export function NodeUpsertModal(props: { nodeId: string; handleClickClose: () => void; }) {
+export default function NodeUpsertModal(props: { nodeId: string; handleClickClose: () => void; }) {
     const { nodeId, handleClickClose } = props;
     const node = useNodeById(nodeId);
     const mergedNode = useMergedNodeById(nodeId);
