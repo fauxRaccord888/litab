@@ -107,5 +107,13 @@
             "new": "{{ user }} posted a new Pentagram",
             "edit": "{{ user }} edited a Pentagram"
         }
+    },
+
+    "network": {
+        "toast": {
+            "error": {
+                "pending": "Request is being processed."
+            }
+        }
     }
 }
