@@ -1,7 +1,7 @@
 export default function MoreIcon(props?: {className?: string}) {
     return (
         <svg 
-            className={props?.className}
+            className={`more-icon-component ${props?.className}`}
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24"
         >

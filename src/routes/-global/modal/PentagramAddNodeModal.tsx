@@ -1,11 +1,11 @@
 import type { DBMiniOeuvre } from '$feature/Oeuvre/types';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
 import { usePentagramAddModalEventHandler } from '$feature/Pentagram/hooks';
+import toast from 'react-hot-toast';
 import AddNodeModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/AddNodeModal';
 
-export function PentagramAddNodeModal(props: { handleClickClose: () => void; }) {
+export default function PentagramAddNodeModal(props: { handleClickClose: () => void; }) {
     const { handleClickClose } = props;
     const { t } = useTranslation();
     const { handleAddNode } = usePentagramAddModalEventHandler();

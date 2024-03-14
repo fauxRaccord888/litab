@@ -1,13 +1,13 @@
 import type { Route } from 'routes/__root';
 import { useNavigate } from '@tanstack/react-router'
 
-import { NodeViewnteractionModal } from './modal/NodeViewnteractionModal';
-import { NodeUpsertModal } from './modal/NodeUpsertModal';
-import { PentagramAddNodeModal } from './modal/PentagramAddNodeModal';
-import { ChangeLogByRevisionModal } from './modal/ChangeLogByRevisionModal';
-import { ChangeLogByNodeModal } from './modal/ChangeLogByNodeModal';
+import NodeViewnteractionModal from './modal/NodeViewnteractionModal';
+import NodeUpsertModal from './modal/NodeUpsertModal';
+import PentagramAddNodeModal from './modal/PentagramAddNodeModal';
+import ChangeLogByRevisionModal from './modal/ChangeLogByRevisionModal';
+import ChangeLogByNodeModal from './modal/ChangeLogByNodeModal';
 
-export function ModalController(props: {
+export default function ModalController(props: {
     route: typeof Route
 }) {
     const { route } = props
@@ -18,11 +18,11 @@ export function ModalController(props: {
     const handleClickClose = () => {
         navigate({
             search: () => ({
-                nodeUpsertId: null,
-                insertNode: null,
-                pentagramInteractionId: null,
-                nodeViewId: null,
-                revisionViewId: null,
+                nodeUpsertId: undefined,
+                insertNode: undefined,
+                pentagramInteractionId: undefined,
+                nodeViewId: undefined,
+                revisionViewId: undefined,
             }),
         })
     }

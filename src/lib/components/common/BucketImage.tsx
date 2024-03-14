@@ -15,7 +15,7 @@ export default function BucketImage(props: BucketImageProps) {
     const url = getURLfromBucket({id, bucket, file: FILE[bucket]})
 
     return (
-        <div className="bucket-image-container">
+        <div className="bucket-image-component">
             {!error && 
                 <img className="image" {...restProps} src={url} loading="lazy" onError={() => setError(true)}/>
             }

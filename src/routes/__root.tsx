@@ -3,9 +3,18 @@ import type { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { Outlet, rootRouteWithContext, ScrollRestoration } from '@tanstack/react-router'
 import { checkSessionUser, getTableUserOrRegister } from '$feature/auth/function'
 import { getScrollKey } from '$lib/utils/route/getScrollKey'
+import ModalController from './-global/-modal';
 
 import Layout from '$lib/layout/Layout'
 import LeftSideBar from '$lib/components/NavigationBar/LeftSideBar'
+
+export type RootSearch = {
+    nodeUpsertId: string | undefined
+    insertNode: boolean | undefined
+    pentagramInteractionId: string | undefined
+    nodeViewId: string | undefined
+    revisionViewId: string | undefined
+}
 
 export const Route = rootRouteWithContext<{
     store: AppStore
@@ -21,6 +30,15 @@ export const Route = rootRouteWithContext<{
             currentUser
         }
     },
+    validateSearch: (search: Record<string, unknown>): RootSearch => {
+        return {
+            nodeUpsertId: (search.nodeUpsertId as string) || undefined,
+            insertNode: (search.insertNode as boolean) || undefined,
+            pentagramInteractionId: (search.pentagramInteractionId as string) || undefined,
+            nodeViewId: (search.nodeViewId as string) || undefined,
+            revisionViewId: (search.revisionViewId as string) || undefined,
+        }
+    },
 })
 
 function RootComponent() {
@@ -29,6 +47,7 @@ function RootComponent() {
             <ScrollRestoration 
                 getKey={(location) => getScrollKey(location)}
             />
+            <ModalController route={Route} />
             <Outlet />
         </Layout>
   )

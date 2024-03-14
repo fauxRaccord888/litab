@@ -16,16 +16,16 @@ export default function SearchPanel(props: SearchPanelProps) {
     const [keyword, setKeyword] = useState('')
     const { t } = useTranslation()
 
-    const handleSubmit:FormEventHandler<HTMLFormElement> = (e) => {
+    const onSubmit:FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault()
         submitFunction(keyword)    
     }
 
     return (
-        <div className="search-panel-container">
-            <form onSubmit={handleSubmit} className="search-form">
+        <div className="search-panel-component">
+            <form onSubmit={onSubmit} className="search-panel-component__search-form">
                 <Input label="search" icon={SearchIcon} value={keyword} onChange={setKeyword}/>
-                <Button>{t(`button.search`)}</Button>
+                <Button primary>{t(`button.search`)}</Button>
             </form>
         </div>
     )

@@ -34,8 +34,8 @@ export default function Form<K extends string> (props: FormProps<K>) {
                 <div className="validation-message-container">
                     {...validationMessages}
                 </div>
-                <Button lg disabled={disabled}>
-                    {t("form.submit")}
+                <Button disabled={disabled}>
+                    {t("button.submit")}
                 </Button>
             </form>
         </div>
