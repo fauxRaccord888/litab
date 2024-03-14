@@ -7,9 +7,10 @@ export function useThrottledErrorToast<T>(ms: number=1000) {
     const { t } = useTranslation()
     const timeoutRef = useRef<(() => void) | null>(null)
 
-    const errorToast = useCallback((func: () => T): T | void => {
+    const errorToast = useCallback(async (func: () => T): Promise<T | void> => {
         try {
-            return func()
+            await func()
+            return
         } catch (error) {
             if (timeoutRef.current) return
             
