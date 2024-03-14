@@ -40,7 +40,5 @@ export function getFontColorArray(colorValues: RGBColorInput, fallbackColor: num
 export function calcFontColorByBG([red, green, blue]: number[]) {
     const luminance = calcLuminance([red, green, blue])
     const isLightFontColor = luminance < LUMINANCE.FONT_COLOR_THRESHOLD
-    // TODO CSS variable을 안 넘기면서 일관성 있게 통제?
-    if (isLightFontColor) return 'rgb(var(--light-font-color))'
-    return 'rgb(var(--dark-font-color))'
+    return (isLightFontColor)
 }
