@@ -2,7 +2,7 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 /* types */
 import type { DBProfiles } from "$feature/Profile/types";
-import type { ContextualProps, FormatProps } from "$lib/types/components";
+import type { RouterContext } from "$lib/types/components";
 import type { GetProfileByMutableIdQuery } from "$lib/graphql/__generated__/graphql";
 /* hooks */
 import { useQuery } from "@apollo/client";
@@ -20,7 +20,7 @@ export const Route = createFileRoute('/_public/profile/$mutableId')({
 function Profile() {
     const params = Route.useParams()
     const context = Route.useRouteContext()
-    const {data} = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     
     if (!firstNode) return null
@@ -32,7 +32,7 @@ function Profile() {
     )
 }
 
-function ProfileComponent(props: FormatProps<DBProfiles> & {context: ContextualProps} ) {
+function ProfileComponent(props: { item: DBProfiles, context: RouterContext} ) {
     return (
         <div className="profile-container">
             <ProfileSelectView

@@ -1,6 +1,6 @@
 import type { DBPentagram_SELECT } from "../../types";
 import type { ISlotRenderConfig } from '$feature/template/type';
-import type { RouterContext, FormatProps } from "$lib/types/components";
+import type { RouterContext } from "$lib/types/components";
 
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
@@ -21,7 +21,8 @@ export type PentagramEventHandler = {
     'revision'?: (revisionId: string) => void 
 }
 
-export type PentagramSelectViewProps = FormatProps<DBPentagram_SELECT> & {
+export type PentagramSelectViewProps = {
+    item: DBPentagram_SELECT,
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
     eventHandler: PentagramEventHandler,

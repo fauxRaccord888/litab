@@ -1,13 +1,13 @@
 import type { MouseEventHandler } from 'react';
 import type { DBPentagramNodes } from '../../../types';
-import { FormatProps } from '$lib/types/components';
 import { getSnapshot, getUnionedChanges } from '../../../utils';
 import PositionAdjuster from '../../common/PositionAdjuster';
 import OeuvreNode from '$feature/Oeuvre/components/OeuvreNode';
 
 import "./style/pentagramNode.scss"
 
-type PentagramNodeProps = FormatProps<DBPentagramNodes> & {
+type PentagramNodeProps = {
+    item: DBPentagramNodes,
     timestamp: Date
     handleClickNode?: (id: string) => void
 }

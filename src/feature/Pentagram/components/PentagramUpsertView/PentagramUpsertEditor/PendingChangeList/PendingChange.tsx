@@ -1,5 +1,4 @@
 import type { MouseEvent } from "react";
-import type { FormatProps } from "$lib/types/components";
 import type { IUnmergedChangeInfo } from "../../../../store/pentagramUpsertSlice/interface";
 import { Trans } from "react-i18next";
 import Button from "$lib/components/common/Button";
@@ -7,7 +6,8 @@ import PentagramChange from "../../../common/PentagramChange";
 
 import "./style/pendingChange.scss"
 
-type PendingChangesProps = FormatProps<IUnmergedChangeInfo> & {
+type PendingChangesProps = {
+    item: IUnmergedChangeInfo,
     handleClickRevert?: ( id: string) => void,
 }
 
@@ -26,6 +26,7 @@ export default function PendingChanges(props: PendingChangesProps) {
             {change.changeType === 'remove' &&
                 <PentagramChange 
                     item={{
+                        id,
                         oeuvres,
                         changeType,
                         previous_angle: node?.angle,
@@ -40,6 +41,7 @@ export default function PendingChanges(props: PendingChangesProps) {
             ) &&
                 <PentagramChange 
                     item={{
+                        id,
                         oeuvres,
                         changeType,
                         previous_angle: node?.angle,

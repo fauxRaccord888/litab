@@ -3,7 +3,7 @@ import type { MouseEvent } from "react";
 import type { DBMiniProfile } from "$feature/Profile/types";
 import { useTranslatedRelativeTime } from "$lib/hooks";
 import MiniProfile from "$feature/Profile/components/MiniProfile";
-import MoreIcon from "$lib/components/icons/More";
+import MoreIcon from "$lib/components/icons/MoreIcon";
 
 import './style/selectMetaInfo.scss'
 

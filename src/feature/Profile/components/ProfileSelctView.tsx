@@ -1,4 +1,4 @@
-import type { RouterContext, FormatProps } from '$lib/types/components';
+import type { RouterContext } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types";
 
 import { useHandleFollow, useProfileNavigate } from '../hooks';
@@ -6,7 +6,8 @@ import UserInfoCard from './UserInfoCard';
 
 import "./style/profileSelectView.scss"
 
-export default function ProfileSelectView(props: FormatProps<DBProfiles> & {
+export default function ProfileSelectView(props: {
+    item: DBProfiles
     context: RouterContext
 }) {
     const { item, context } = props

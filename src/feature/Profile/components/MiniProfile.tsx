@@ -1,4 +1,4 @@
-import type { RouterContext, FormatProps } from '$lib/types/components';
+import type { RouterContext } from '$lib/types/components';
 import type { DBMiniProfile } from "$feature/Profile/types";
 
 import { useHandleFollow, useProfileNavigate } from '../hooks';
@@ -6,7 +6,8 @@ import UserInfoCard from './UserInfoCard';
 
 import "./style/miniProfile.scss"
 
-type MiniProfileProps = FormatProps<DBMiniProfile> & {
+type MiniProfileProps = {
+    item: DBMiniProfile,
     context: RouterContext,
     displayFollow?: boolean 
 }

@@ -4,7 +4,7 @@ import type { MouseEvent } from 'react';
 import { useTranslation } from "react-i18next";
 /* components */
 import Button from "$lib/components/common/Button";
-import MoreIcon from "$lib/components/icons/More";
+import MoreIcon from "$lib/components/icons/MoreIcon";
 /* styles */
 import "./style/profileInteraction.scss"
 

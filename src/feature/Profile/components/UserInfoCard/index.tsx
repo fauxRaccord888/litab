@@ -1,5 +1,5 @@
 import type { DBProfiles } from "$feature/Profile/types"
-import type { RouterContext, FormatProps } from '$lib/types/components';
+import type { RouterContext } from '$lib/types/components';
 import type { ISlotRenderConfig } from "$feature/template/type";
 import { calcFollowings, calcMutualFollowers } from "$feature/Profile/util";
 
@@ -24,7 +24,8 @@ type UserInfoCardEventHandler = {
     handleFollow?: () => void
 }
 
-type UserInfoCardProps = FormatProps<DBProfiles> & {
+type UserInfoCardProps = {
+    item: DBProfiles
     context: RouterContext,
     renderConfig: ISlotRenderConfig<UserInfoCardKeys>
     options: ISlotRenderConfig<UserInfoCardOptionKey>
