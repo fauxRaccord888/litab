@@ -3,7 +3,7 @@ import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/grap
 import type { PropsWithChildren } from 'react';
 /* hooks */
 import { useQuery } from '@apollo/client';
-import { useNavigate } from "@tanstack/react-router"
+import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
 import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
@@ -31,12 +31,12 @@ function InteractionModal() {
 
 function InteractionModalComponent(props: PropsWithChildren) {
     const params = Route.useParams()
-    const navigate = useNavigate()
+    const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
     const title = t("modal.title.interaction")
     const handleClickClose = () => {
-        navigate({to: "/profile/$mutableId", params: params})
+        navigate.profileSelect(params.mutableId)
     }
 
     return (

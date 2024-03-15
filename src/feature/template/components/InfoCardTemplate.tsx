@@ -3,18 +3,18 @@ import type { MouseEventHandler } from "react"
 import { filterComponents } from "../util"
 import "./style/infoCard.scss"
 
-export type RenderConfigKey = "coverImage" | "title" | "mainInfo" | "subInfo"
+export type InfoCardRenderConfigKey = "coverImage" | "title" | "mainInfo" | "subInfo"
 
 type InfoCardProps = {
     id: string,
-    components: ISlotComponent<RenderConfigKey>,
-    renderConfig: ISlotRenderConfig<RenderConfigKey>,
+    components: ISlotComponent<InfoCardRenderConfigKey>,
+    renderConfig: ISlotRenderConfig<InfoCardRenderConfigKey>,
     onClick?: MouseEventHandler<HTMLDivElement>
 }
 
 export default function InfoCardTemplate (props: InfoCardProps) {
     const { components, renderConfig, ...restProps } = props
-    const filteredComponents = filterComponents<RenderConfigKey>(components, renderConfig)
+    const filteredComponents = filterComponents<InfoCardRenderConfigKey>(components, renderConfig)
 
     return (
         <div 

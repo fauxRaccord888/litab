@@ -8,7 +8,7 @@ type ProfileUserInfoProps = {
     mutable_id: DBProfiles["mutable_id"]
     nickname: DBProfiles["nickname"]
     miniView?: boolean,
-    handleShowProfile?: () => void
+    handleShowProfile?: (mutableId: string) => void
 }
 
 export default function ProfileUserInfo(props: ProfileUserInfoProps) {
@@ -16,7 +16,7 @@ export default function ProfileUserInfo(props: ProfileUserInfoProps) {
 
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowProfile) handleShowProfile()
+        if (handleShowProfile) handleShowProfile(mutable_id)
     }
 
     return (

@@ -9,16 +9,17 @@ import "./style/profileCoverImage.scss"
 
 type ProfileCoverImageProps = {
     id: DBProfiles["id"]
+    mutable_id: DBProfiles["mutable_id"]
     miniView?: boolean
-    handleShowProfile?: () => void
+    handleShowProfile?: (mutableId: string) => void
 }
 
 export default function ProfileCoverImage(props: ProfileCoverImageProps) {
-    const { id, miniView, handleShowProfile } = props
+    const { id, mutable_id, miniView, handleShowProfile } = props
     
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowProfile) handleShowProfile()
+        if (handleShowProfile) handleShowProfile(mutable_id)
     }
 
     return (

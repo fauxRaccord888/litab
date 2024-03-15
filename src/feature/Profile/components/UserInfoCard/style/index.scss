@@ -1,8 +1,13 @@
+@use "src/lib/style/variables";
 @import "src/lib/style/atomicMixin";
 
 .user-info-card-component {
     @include flex;
     @include child-left-m(calc(var(--base-size) * 0.5));
+    --node: #{variables.$node_small}px;
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}px;
+    }
 
     .user-info-card-component__title-container {
         @include flex;
@@ -11,10 +16,10 @@
         .user-info-card-component__cover-image-container {
             margin-right: calc(var(--base-size) * 1.25);
             &.user-info-card-component__cover-image-container--mini-view {
-                min-width: 36px;
-                max-width: 36px;
-                min-height: 36px;
-                max-height: 36px;
+                min-width: var(--node);
+                max-width: var(--node);
+                min-height: var(--node);
+                max-height: var(--node);
             }
     
             &.user-info-card-component__cover-image-container--mobile { 

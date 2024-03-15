@@ -1,4 +1,5 @@
 /* types */
+import type { DBProfiles } from '$feature/Profile/types';
 import type { MouseEvent } from 'react';
 /* hooks */
 import { useTranslation } from "react-i18next";
@@ -9,16 +10,17 @@ import MoreIcon from "$lib/components/icons/MoreIcon";
 import "./style/profileInteraction.scss"
 
 type ProfileInteractionsProps = {
+    mutable_id: DBProfiles["mutable_id"]
     isMe?: boolean | undefined,
     followed?: boolean | undefined,
     displayFollow?: boolean
     displayMoreInteraction?: boolean
     handleFollow?: () => void
-    handleShowInteraction?: () => void
+    handleShowInteraction?: (mutableId: string) => void
 }
 
 export default function ProfileInteraction(props: ProfileInteractionsProps ) {
-    const { isMe, followed, displayFollow, displayMoreInteraction, handleFollow, handleShowInteraction } = props
+    const { mutable_id, isMe, followed, displayFollow, displayMoreInteraction, handleFollow, handleShowInteraction } = props
     const { t } = useTranslation()
 
     const onClickFollow = (e:MouseEvent) => {
@@ -28,7 +30,7 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
 
     const onClickInteraction = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowInteraction) handleShowInteraction()
+        if (handleShowInteraction) handleShowInteraction(mutable_id)
     }
 
     return (

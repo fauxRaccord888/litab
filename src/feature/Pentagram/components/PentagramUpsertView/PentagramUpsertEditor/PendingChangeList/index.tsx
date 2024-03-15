@@ -16,7 +16,6 @@ export default function PendingChangeList(props: PendingChangeProps) {
             {unmergedNodeInfos.map((item) => 
                 <PendingChanges 
                     key={item.id}
-                    id={item.id}
                     item={item}
                     handleClickRevert={handleClickRevert}
                 />

@@ -1,7 +1,8 @@
 import type { RouterContext } from '$lib/types/components';
 import type { DBProfiles } from "$feature/Profile/types";
 
-import { useHandleFollow, useProfileNavigate } from '../hooks';
+import { useHandleFollow } from '../hooks';
+import { useProfileNavigate } from '$feature/navigate/hooks';
 import UserInfoCard from './UserInfoCard';
 
 import "./style/profileSelectView.scss"
@@ -11,7 +12,7 @@ export default function ProfileSelectView(props: {
     context: RouterContext
 }) {
     const { item, context } = props
-    const navigate = useProfileNavigate(item.mutable_id)
+    const navigate = useProfileNavigate()
     const handleFollow = useHandleFollow(item.id, context.currentUser)
 
     return (
@@ -32,10 +33,10 @@ export default function ProfileSelectView(props: {
                 }}
                 eventHandler={{
                     handleFollow,
-                    showFollowers: navigate.showFollowers,
-                    showFollowings: navigate.showFollowings,
-                    showInteraction: navigate.showInteraction,
-                    showMutualFollowers: navigate.showMutualFollowers,
+                    showFollowers: navigate.followersDetail,
+                    showFollowings: navigate.followingsDetail,
+                    showInteraction: navigate.profileSelectDetail,
+                    showMutualFollowers: navigate.mutualFollowersDetail,
                 }}
                 context={context}
             />
