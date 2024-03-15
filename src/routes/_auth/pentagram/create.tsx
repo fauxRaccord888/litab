@@ -2,13 +2,13 @@ import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
+import { usePentagramNavigate } from "$feature/navigate/hooks"
 import { 
     useMutationHandler,
     useMainPentagonEventHandler, 
     useMerge, 
     useMergedNode, 
     usePendingChangeListEventHandler, 
-    usePentagramNavigate, 
     useQuadtreeRef, 
     useSelectedPosition, 
     useUnmergedChangeInfo, 
@@ -60,7 +60,7 @@ function PentagramInsert() {
         errorToast(async () => {
             const result = await handleInsertPentagram()
             toast.success(t("pentagram.toast.success.createPentagram"))
-            navigate.view(result)
+            navigate.viewPentagram(result)
         })
     }
 
@@ -86,7 +86,7 @@ function PentagramInsert() {
                 
                 handleClickNode={handleSelectNode}
                 handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertDetail(nodeId, Route.fullPath)}
-                handleClickSelectedPosition={() => navigate.nodeInsert(Route.fullPath)}
+                handleClickSelectedPosition={() => navigate.nodeInsertDetail(Route.fullPath)}
                 handleSetNewPosition={handleSetNewPosition}
                 handleDragAndTouchMove={handleDragAndTouchMove}
 

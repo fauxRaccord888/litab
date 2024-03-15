@@ -15,11 +15,11 @@ import './style/index.scss'
 type UserInfoCardKeys = "coverImage" | "title" | "mainInfo" | "subInfo"
 type UserInfoCardOptionKey = "full" | "miniView" | "displayFollow" | "displayInteraction"
 type UserInfoCardEventHandler = {
-    showProfile?: () => void
-    showMutualFollowers?: () => void
-    showFollowings?: () => void
-    showFollowers?: () => void
-    showInteraction?: () => void
+    showProfile?: (mutableId: string) => void
+    showMutualFollowers?: (mutableId: string) => void
+    showFollowings?: (mutableId: string) => void
+    showFollowers?: (mutableId: string) => void
+    showInteraction?: (mutableId: string) => void
     
     handleFollow?: () => void
 }
@@ -50,6 +50,7 @@ export default function UserInfoCard(props: UserInfoCardProps) {
         ].join(" ")}>
             <ProfileCoverImage 
                 id={id} 
+                mutable_id={mutable_id}
                 miniView={false}
                 handleShowProfile={eventHandler.showProfile}
             />
@@ -66,6 +67,7 @@ export default function UserInfoCard(props: UserInfoCardProps) {
             ].join(" ")}>
                 <ProfileCoverImage 
                     id={id} 
+                    mutable_id={mutable_id}
                     miniView={false}
                     handleShowProfile={eventHandler.showProfile}
                 />
@@ -83,6 +85,7 @@ export default function UserInfoCard(props: UserInfoCardProps) {
                     handleShowProfile={eventHandler.showProfile}
                 />
                 <ProfileInteraction 
+                    mutable_id={mutable_id}
                     isMe={isMe}
                     followed={followed}
                     displayFollow={options.displayFollow}
@@ -96,6 +99,7 @@ export default function UserInfoCard(props: UserInfoCardProps) {
 
     const mainInfo = (
         <ProfileFollowingInfo
+            mutable_id={mutable_id}
             followersCollection={followersCollection}
             followingsCollection={followingsCollection}
             handleShowFollowings={eventHandler.showFollowings}
@@ -105,6 +109,7 @@ export default function UserInfoCard(props: UserInfoCardProps) {
 
     const subInfo = (
         <ProfileDescriptionInfo
+            mutable_id={mutable_id}
             nickname={nickname}
             description={description}
             mutualFollowers={mutualFollowers}

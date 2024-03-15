@@ -9,23 +9,24 @@ import { calcCollectionLength } from "$lib/utils/graphql"
 import "./style/profileFollowingInfo.scss"
 
 type ProfileFollowingInfoProps = {
+    mutable_id: DBProfiles["mutable_id"]
     followingsCollection: DBProfiles["followingsCollection"]
     followersCollection: DBProfiles["followersCollection"]
 
-    handleShowFollowings?: () => void
-    handleShowFollowers?: () => void
+    handleShowFollowings?: (mutableId: string) => void
+    handleShowFollowers?: (mutableId: string) => void
 }
 
 export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
-    const { followingsCollection, followersCollection, handleShowFollowings, handleShowFollowers } = props
+    const { mutable_id, followingsCollection, followersCollection, handleShowFollowings, handleShowFollowers } = props
     const { t } = useTranslation()
 
     const onClickCountButton = (
         e: MouseEvent, 
-        func: (() => void)| undefined
+        func: ((mutableId: string) => void)| undefined
     ) => {
         e.stopPropagation()
-        if (func) func()
+        if (func) func(mutable_id)
     }
 
     return (

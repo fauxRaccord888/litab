@@ -1,7 +1,8 @@
 import type { RouterContext } from '$lib/types/components';
 import type { DBMiniProfile } from "$feature/Profile/types";
 
-import { useHandleFollow, useProfileNavigate } from '../hooks';
+import { useHandleFollow } from '../hooks';
+import { useProfileNavigate } from '$feature/navigate/hooks';
 import UserInfoCard from './UserInfoCard';
 
 import "./style/miniProfile.scss"
@@ -14,7 +15,7 @@ type MiniProfileProps = {
 
 export default function MiniProfile(props: MiniProfileProps) {
     const { item, context, displayFollow } = props
-    const navigate = useProfileNavigate(item.mutable_id)
+    const navigate = useProfileNavigate()
     const handleFollow = useHandleFollow(item.id, context.currentUser)
 
     return (
@@ -35,7 +36,7 @@ export default function MiniProfile(props: MiniProfileProps) {
                 }}
                 eventHandler={{
                     handleFollow,
-                    showProfile: navigate.showProfile
+                    showProfile: navigate.profileSelect
                 }}
                 context={context}
             />

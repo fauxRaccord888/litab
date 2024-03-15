@@ -21,7 +21,6 @@ export default function MiniProfileModal(props: MiniProfileModalProps) {
                 {items.map((item) => (
                     <MiniProfile 
                         key={item.id}
-                        id={item.id}
                         item={item}
                         context={context}
                         displayFollow={true}

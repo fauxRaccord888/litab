@@ -44,7 +44,6 @@ export default forwardRef(function UpdateMainPentagon(props: UpdateMainPentagonP
                     mergedNodes.map((item) => (
                         <MergedNode 
                             key={item.id}
-                            id={item.id}
                             item={item}
                             handleDragAndTouchMove={handleDragAndTouchMove}
                             handleClickSelectedNode={handleClickSelectedNode}

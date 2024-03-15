@@ -2,7 +2,7 @@ import type { GetPentagramSelectInfoByIdQuery } from '$lib/graphql/__generated__
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 import { useQuery } from '@apollo/client';
-import { usePentagramNavigate } from '$feature/Pentagram/hooks';
+import { usePentagramNavigate } from "$feature/navigate/hooks"
 
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
@@ -27,8 +27,8 @@ function PentagramSelect() {
 
     const eventHandler = {
         node: (nodeId: string) => navigate.nodeSelectDetail(nodeId, Route.fullPath, params),
-        interaction: (pentagramId: string) => navigate.selectInteraction(pentagramId, Route.fullPath, params),
-        revision: (revisionId: string) => navigate.revisionDetail(revisionId, Route.fullPath, params)
+        interaction: (pentagramId: string) => navigate.pentagramSelectDetail(pentagramId, Route.fullPath, params),
+        revision: (revisionId: string) => navigate.revisionSelectDetail(revisionId, Route.fullPath, params)
     }
 
     // TODO THROW ERROR + AUTH
