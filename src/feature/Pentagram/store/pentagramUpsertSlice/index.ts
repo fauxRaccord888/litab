@@ -33,7 +33,7 @@ const pentagramUpsertSlice = createSlice({
     name: 'pentagramUpsert',
     initialState: {
         pentagramId: null as NullableString,
-        description: "",
+        description: null as NullableString,
         mergedNode: mergedNodeAdapter.getInitialState(),
         node: nodeAdapter.getInitialState(),
         pendingChange: pendingChangeAdapter.getInitialState(),
@@ -47,11 +47,11 @@ const pentagramUpsertSlice = createSlice({
             initializeNode(state, action)
         },
 
-        setPentagramId(state, action: PayloadAction<string>) {
+        setPentagramId(state, action: PayloadAction<NullableString>) {
             state.pentagramId = action.payload
         },
 
-        setDescription(state, action: PayloadAction<string>) {
+        setDescription(state, action: PayloadAction<NullableString>) {
             state.description = action.payload
         },
 
@@ -175,7 +175,7 @@ const pentagramUpsertSlice = createSlice({
 
         abortChanges(state) {
             state.pendingChange = pendingChangeAdapter.getInitialState()
-            state.description = ''
+            state.description = null
         },
 
         unselectSelected(state) {

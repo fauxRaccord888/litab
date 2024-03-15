@@ -16,7 +16,7 @@ export type PentagramUpsertEditorProps = {
 
     angle: number | null,
     distance: number | null ,
-    description: string,
+    description: string | null,
     
     // COMMENT 이벤트 핸들러가 렌더링 중 바뀔 여지가 많고, object로 묶을 경우 전체 리렌더링 유발로 인해 나누어 전달
     handleClickNode?: (nodeId: string) => void,

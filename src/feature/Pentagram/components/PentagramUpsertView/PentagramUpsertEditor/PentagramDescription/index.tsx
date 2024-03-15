@@ -2,7 +2,7 @@ import type { ChangeEvent } from "react"
 import './style/pentagramDescription.scss'
 
 type PentagramDescriptionProps = {
-    description: string,
+    description: string | null,
     handleSetDescription: (e: ChangeEvent<HTMLTextAreaElement>) => void,
 }
 
@@ -18,7 +18,7 @@ export default function PentagramDescription(props : PentagramDescriptionProps) 
         <div className="pentagram-description-component">
             <textarea
                 className="pentagram-description-component__text-area"
-                value={description}
+                value={description || ""}
                 onChange={onChange}
             />
         </div>
