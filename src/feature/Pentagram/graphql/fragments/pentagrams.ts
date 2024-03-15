@@ -44,3 +44,12 @@ graphql(/* GraphQL */ `
         }
     }
 `)
+
+graphql(/* GraphQL */ `
+    fragment PentagramsSelectUserInfo on pentagrams {
+        id
+        users {
+            ...MiniProfile
+        }
+    }
+`)

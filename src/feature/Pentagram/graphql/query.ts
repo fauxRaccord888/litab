@@ -28,6 +28,20 @@ export const getPentagramSelectInfoById_QUERY = graphql(/* GraphQL */ `
     }
 `)
 
+export const getPentagramsSelectUserInfoById_QUERY = graphql(/* GraphQL */ `
+    query getPentagramsSelectUserInfoById($id: UUID!) {
+        pentagramsCollection(
+            filter: { id: { eq: $id } }
+        ) {
+            edges {
+                node {
+                    ...PentagramsSelectUserInfo
+                }
+            }
+        }
+    }
+`)
+
 export const getPentagramNodesInfoById_QUERY = graphql(/* GraphQL */ `
     query getPentagramNodesInfoById($id: UUID!) {
         pentagram_nodesCollection(
