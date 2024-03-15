@@ -5,7 +5,7 @@ import { usePentagramAddModalEventHandler } from '$feature/Pentagram/hooks';
 import toast from 'react-hot-toast';
 import AddNodeModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/AddNodeModal';
 
-export default function PentagramAddNodeModal(props: { handleClickClose: () => void; }) {
+export default function NodeInsertDetailModal(props: { handleClickClose: () => void; }) {
     const { handleClickClose } = props;
     const { t } = useTranslation();
     const { handleAddNode } = usePentagramAddModalEventHandler();
@@ -24,6 +24,7 @@ export default function PentagramAddNodeModal(props: { handleClickClose: () => v
         <AddNodeModal
             title={title}
             handleAddNode={handleClickAddNode}
-            handleClickClose={handleClickClose} />
+            handleClickClose={handleClickClose} 
+        />
     );
 }
