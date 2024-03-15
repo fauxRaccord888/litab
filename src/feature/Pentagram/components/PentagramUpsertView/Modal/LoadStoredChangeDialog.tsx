@@ -3,7 +3,7 @@ import type { AppRootState } from "$lib/stores/store"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
-import { usePentagramNavigate } from "../../../hooks"
+import { usePentagramNavigate } from "$feature/navigate/hooks"
 import { abortChanges, pendingChangeSelector, setDescription, setPentagramId } from "$feature/Pentagram/store/pentagramUpsertSlice"
 import Modal from "$feature/portal/components/Modal"
 import Button from "$lib/components/common/Button"
@@ -11,7 +11,7 @@ import "./style/loadStoredChangeDialog.scss"
 
 export default function LoadStoredChangeDialog(props: { 
     pentagramId: string | null, 
-    description: string | null | undefined
+    description: string | null 
 }) {
     const { pentagramId, description } = props
     const { t } = useTranslation()
@@ -23,27 +23,32 @@ export default function LoadStoredChangeDialog(props: {
     const changes = useSelector((state: AppRootState) => pendingChangeSelector.selectAll(state))
     const navigate = usePentagramNavigate()
 
+    // COMMENT storedDescription이 존재하는지 확인하는 기능
+    // 공백 문자열 역시 사용자의 저장사항일 수 있음을 주의
+    const storedChangesExist = Boolean(
+        changes.length ||
+        (typeof storedDescription === 'string' &&
+        description !== storedDescription)
+    )
+
     const isCurrentPentagram = Boolean(
         storedPentagramId === pentagramId || 
         (!pentagramId && !storedPentagramId)
     )
-        
+
     useEffect(() => {
-        if (
-            !changes.length && 
-            description === storedDescription
-        ) {
+        if (!storedChangesExist) {
             setLoaded(true)
-            if (pentagramId) dispatch(setPentagramId(pentagramId))
+            dispatch(setPentagramId(pentagramId))
         }
-    }, [description, dispatch, changes, pentagramId, storedDescription])
+    }, [dispatch, pentagramId, storedChangesExist])
 
     const onClickAbortChanges = (e: MouseEvent) => {
         e.stopPropagation()
         dispatch(abortChanges())
         setLoaded(true)
-        if (pentagramId) dispatch(setPentagramId(pentagramId))
-        if (description) dispatch(setDescription(description))
+        dispatch(setPentagramId(pentagramId))
+        dispatch(setDescription(description))
     }
     
     const onClickPreserveChanges = (e: MouseEvent) => {
@@ -53,13 +58,14 @@ export default function LoadStoredChangeDialog(props: {
 
     const onClickNavigateRelated = (e: MouseEvent) => {
         e.stopPropagation()
-        if (storedPentagramId) navigate.view(storedPentagramId)
-        else navigate.create()
+        if (storedPentagramId) navigate.viewPentagram(storedPentagramId)
+        else navigate.createPentagram()
     }
 
     return (
         <>
             {Boolean(!loaded) &&
+            storedChangesExist &&
                 <Modal title={t('pentagram.dialog.title.temp')} >
                     <div className="load-stored-change-dialog__inner-container">
                         <span className="load-stored-change-dialog__message">
