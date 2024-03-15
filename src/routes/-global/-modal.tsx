@@ -1,11 +1,11 @@
 import type { Route } from 'routes/__root';
 import { useNavigate } from '@tanstack/react-router'
 
-import NodeViewnteractionModal from './modal/NodeViewnteractionModal';
-import NodeUpsertModal from './modal/NodeUpsertModal';
-import PentagramAddNodeModal from './modal/PentagramAddNodeModal';
-import ChangeLogByRevisionModal from './modal/ChangeLogByRevisionModal';
-import ChangeLogByNodeModal from './modal/ChangeLogByNodeModal';
+import PentagramSelectDetailModal from './modal/PentagramSelectDetailModal';
+import NodeUpsertDetailModal from './modal/NodeUpsertDetailModal';
+import NodeInsertDetailModal from './modal/NodeInsertDetailModal';
+import RevisionSelectDetailModal from './modal/RevisionSelectDetailModal';
+import NodeSelectDetailModal from './modal/NodeSelectDetailModal';
 
 export default function ModalController(props: {
     route: typeof Route
@@ -30,30 +30,30 @@ export default function ModalController(props: {
     return (
         <>
             {nodeUpsertId &&
-                <NodeUpsertModal 
+                <NodeUpsertDetailModal 
                     nodeId={nodeUpsertId}
                     handleClickClose={handleClickClose}
                 />
             }
             {insertNode &&
-                <PentagramAddNodeModal
+                <NodeInsertDetailModal
                     handleClickClose={handleClickClose}
                 />
             }
             {nodeViewId &&
-                <ChangeLogByNodeModal 
+                <NodeSelectDetailModal 
                     nodeId={nodeViewId}
                     handleClickClose={handleClickClose}
                 />
             }
             {revisionViewId &&
-                <ChangeLogByRevisionModal 
+                <RevisionSelectDetailModal 
                     revisionId={revisionViewId}
                     handleClickClose={handleClickClose}
                 />
             }
             {pentagramInteractionId &&
-                <NodeViewnteractionModal
+                <PentagramSelectDetailModal
                     currentUser={currentUser}
                     pentagramId={pentagramInteractionId}
                     handleClickClose={handleClickClose}

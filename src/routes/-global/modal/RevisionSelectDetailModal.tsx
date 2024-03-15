@@ -6,7 +6,7 @@ import { getUnionedChanges } from '$feature/Pentagram/utils';
 import { getPentagramRevisionsInfoById_QUERY } from '$feature/Pentagram/graphql';
 import ChangeLogModal from '$feature/Pentagram/components/PentagramSelectView/Modal/ChangeLogModal';
 
-export default function ChangeLogByRevisionModal(props: {
+export default function RevisionSelectDetailModal(props: {
     revisionId: string;
     handleClickClose: () => void;
 }) {
@@ -26,6 +26,7 @@ export default function ChangeLogByRevisionModal(props: {
         <ChangeLogModal
             changes={changes}
             title={title}
-            handleClickClose={handleClickClose} />
+            handleClickClose={handleClickClose} 
+        />
     );
 }

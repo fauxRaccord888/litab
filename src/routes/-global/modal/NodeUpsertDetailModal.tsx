@@ -4,7 +4,7 @@ import { useMergedNodeById, useNodeById, usePentagramInteractionEventHandler, us
 import toast from 'react-hot-toast';
 import NodeInteractionModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/NodeInteractionModal';
 
-export default function NodeUpsertModal(props: { nodeId: string; handleClickClose: () => void; }) {
+export default function NodeUpsertDetailModal(props: { nodeId: string; handleClickClose: () => void; }) {
     const { nodeId, handleClickClose } = props;
     const node = useNodeById(nodeId);
     const mergedNode = useMergedNodeById(nodeId);
@@ -40,6 +40,7 @@ export default function NodeUpsertModal(props: { nodeId: string; handleClickClos
             isDeleted={isDeleted}
             handleClickRecover={handleClickRecover}
             handleClickRemove={handleClickRemove}
-            handleClickClose={handleClickClose} />
+            handleClickClose={handleClickClose} 
+        />
     );
 }
