@@ -6,6 +6,7 @@ import { usePentagramNavigate } from "$feature/navigate/hooks"
 
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { TIME } from '$feature/Pentagram/constants';
 
 import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
 
@@ -48,7 +49,7 @@ function PentagramSelect() {
                     horizontalMain: false,
                 }}
                 eventHandler={eventHandler}
-                timestamp={new Date()}
+                timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
                 context={context}
             />
             <Outlet />

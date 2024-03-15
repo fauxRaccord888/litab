@@ -9,3 +9,7 @@ export const PENTAGRAM = {
     VERTEX_ANGLE_THRESHOLD: 5,
     VERTEX_DISTANCE_THRESHOLD: 10,
 }
+
+export const TIME = {
+    NOW_OFFSET: 3000
+}
