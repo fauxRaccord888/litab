@@ -1,4 +1,12 @@
 {
+    "navigate": {
+        "route": {
+            "home": "홈",
+            "search": "검색",
+            "account": "계정",
+            "pentagram": "펜타그램"
+        }
+    },
     "header": {
         "count": {
             "followings": "팔로우",

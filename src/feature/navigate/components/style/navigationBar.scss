@@ -1,0 +1,52 @@
+@import "src/lib/style/atomicMixin";
+
+.navigation-bar-component {
+    @include flex;
+    @include margin-(calc(var(--base-size) * 0.75));
+    justify-content: space-between;
+    @media only screen and (min-width: 500px) {
+        @include flex-col;
+        min-height: 300px;
+    }
+
+    .navigation-bar-component__link-container {
+        @include flex;
+        @include align-center;
+        @include child-left-m(var(--base-size));
+        color: rgb(var(--font-color));
+        text-decoration: none;
+        font-size: calc(var(--base-size) * 1.5);
+    }
+
+    .navigation-bar-component__link-description {
+        display: none;
+        @media only screen and (min-width: 1200px) {
+            display: inline;
+        }
+    }
+
+    .home-icon-component, .search-icon-component, .user-icon-component, .pentagon-icon-component {
+        width: calc(var(--base-size) * 3);
+        height: calc(var(--base-size) * 3);
+        stroke: rgb(var(--font-color));
+        fill: none;
+    }
+
+    .pentagram-icon-place-holder {
+        width: calc(var(--base-size) * 3);
+        height: calc(var(--base-size) * 3);
+
+        .pentagon-icon-component {
+            position: absolute;
+        }
+
+        .plus-icon-component {
+            position: relative;
+            width: 0.8rem;
+            height: 0.8rem;
+            left: calc(50% - 0.4rem);
+            top: calc(50% - 1rem);
+            fill: rgb(var(--font-color));
+        }
+    }
+}
