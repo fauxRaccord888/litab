@@ -1,54 +1,106 @@
+@use "src/lib/style/variables";
 @import "src/lib/style/atomicMixin";
 
 .info-card-template {
-    @include flex;
-    // COMMENT - 배수 조정 시 하단의 disable-partition-on-mobile 함께 수정 필요
-    @include child-left-m(var(--base-size));
+    --node: #{variables.$node_small}px;
+    @include flex-col;
     flex-grow: 1;
-    .info-card-template__cover-outer-container {
+    @media only screen and (min-width: 500px) {
+        @include flex-row;
+    }
+
+    &:not(:has(.mini-view)) {
+        @media only screen and (min-width: 500px) {
+            @include child-left-m(var(--base-size));
+        }
+    } 
+
+    .info-card-template__cover-container {
         @include flex;
         @include align-center;
+        @include box-shadow-2(rgb(var(--font-color)));
+        @include rounded-lg;
         min-width: 30%;
         max-width: 30%;
+        height: fit-content;
+        align-self: center;
+        aspect-ratio: 1;
+        object-fit: cover;
 
-        &:has(.disable-partition-on-mobile) {
-            width: 0px;
+        &.info-card-template__cover-container--round {
+            @include rounded-full;
+        }
+
+        &.info-card-template__cover-container--full {
             min-width: 0%;
             max-width: 0%;
-            // COMMENT - 상단의 child-left-m과 함께 수정 필요
             margin-right: calc(var(--base-size)* -1);
             @media only screen and (min-width: 500px) {
                 min-width: 30%;
                 max-width: 30%;
+                width: 30%;
                 margin-right: 0;
             }
         }
 
-        .info-card-template__cover-inner-container {
-            aspect-ratio: 1;
-            width: 100%;
-            object-fit: cover;
+        &.info-card-template__cover-container--mini {
+            min-width: var(--node);
+            max-width: var(--node);
+            min-height: var(--node);
+            max-height: var(--node);
+        }
+
+        // COMMENT 다른 계층 구조에서 사용되는 선택자임을 주의
+        &.info-card-template__cover-container--mobile {
+            width: 50%;
+            @media only screen and (min-width: 500px) {
+                display: none;
+            }
+        }
+        
+        // COMMENT 다른 계층 구조에서 사용되는 선택자임을 주의
+        &.info-card-template__cover-container--disabled {
+            display: none;
         }
     }
 
-    .info-card-template__main-container {
+    .info-card-template__info-container {
+        @include w-full;
         @include flex-col;
         @include justify-center;
         @include child-top-m(calc(var(--base-size) * 0.5));
         flex-grow: 1;
-        .info-card-template__title {
-            font-size: calc(var(--base-size) * 1.3);
+
+        .info-card-template__main-container {
+            @include w-full;
+            @include flex;
+            @include align-center;
+            @include child-left-m(var(--base-size));
+            &:not(:has(.mini-view)) {
+                @media only screen and (min-width: 500px) {
+                    @include child-left-m(0);
+                }
+            }
+
+            font-size: calc(var(--base-size) * 0.7);
+            line-height: calc(var(--base-size) * 1.2);
+
+            .info-card-template__main-info-container {
+                @include w-full;
+                @include child-top-m(calc(var(--base-size) * 0.75));
+
+                .info-card-template__title {
+                    @include flex;
+                    @include align-center;
+                    font-size: calc(var(--base-size) * 1.5);
+                }
+            }
         }
 
-        .info-card-template__info-container {
+        .info-card-template__sub-container {
             @include child-top-m(calc(var(--base-size) * 0.5));
             .info-card-template__main-info {
                 font-size: calc(var(--base-size) * 0.8);
-            }
-
-            .info-card-template__sub-info {
-                font-size: calc(var(--base-size) * 0.7);
-                line-height: calc(var(--base-size) * 1.2);
             }
         }
     }
