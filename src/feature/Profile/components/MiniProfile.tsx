@@ -30,7 +30,7 @@ export default function MiniProfile(props: MiniProfileProps) {
                 }}
                 options={{
                     displayFollow: Boolean(displayFollow),
-                    full: false,
+                    roundedCover: true,
                     miniView: true,
                     displayInteraction: false,
                 }}

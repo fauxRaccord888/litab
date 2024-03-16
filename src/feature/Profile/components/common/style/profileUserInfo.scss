@@ -3,7 +3,6 @@
 .profile-user-info-component {
     @include flex-col;
     @include justify-center;
-    font-size: calc(var(--base-size) * 1.5);
 
     &.profile-user-info-component--pointer {
         @include pointer;

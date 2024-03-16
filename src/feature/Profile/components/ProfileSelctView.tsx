@@ -26,7 +26,7 @@ export default function ProfileSelectView(props: {
                     subInfo: true,
                 }}
                 options={{
-                    full: true,
+                    roundedCover: true,
                     miniView: false,
                     displayFollow: true,
                     displayInteraction: true,
