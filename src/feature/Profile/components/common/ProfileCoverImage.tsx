@@ -4,18 +4,16 @@ import type { DBProfiles } from "$feature/Profile/types"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
 import BucketImage from "$lib/components/common/BucketImage"
-/* style */
-import "./style/profileCoverImage.scss"
 
 type ProfileCoverImageProps = {
     id: DBProfiles["id"]
     mutable_id: DBProfiles["mutable_id"]
-    miniView?: boolean
+    className?: string,
     handleShowProfile?: (mutableId: string) => void
 }
 
 export default function ProfileCoverImage(props: ProfileCoverImageProps) {
-    const { id, mutable_id, miniView, handleShowProfile } = props
+    const { id, mutable_id, className, handleShowProfile } = props
     
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
@@ -23,19 +21,12 @@ export default function ProfileCoverImage(props: ProfileCoverImageProps) {
     }
 
     return (
-        <div
+        <BucketImage
+            id={id}
             onClick={onClickProfile}
-            className={[
-                "profile-cover-image-component",
-                (miniView ? 'profile-cover-image-component--mini-view' : ''),
-                (handleShowProfile ? 'profile-cover-image-component--pointer' : ''),
-            ].join(' ')}
-        >
-            <BucketImage
-                id={id}
-                bucket="profiles"
-                fallback={<UserIcon className="profile-cover-image-component__fallback-image"/>}
-            />
-        </div>
+            bucket="profiles"
+            className={className}
+            fallback={<UserIcon className="profile-cover-image-component__fallback-image"/>}
+        />
     )
 }

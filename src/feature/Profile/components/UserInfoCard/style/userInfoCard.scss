@@ -1,0 +1,40 @@
+@import "src/lib/style/atomicMixin";
+
+.user-info-card-component {
+    @include flex;
+    @include child-left-m(calc(var(--base-size) * 0.5));
+
+    .user-info-card-component__title-container {
+        @include flex;
+        @include w-full;
+        @include child-left-m(calc(var(--base-size) * 0.75));
+        justify-items: left;
+    }
+    
+    :not(.mini-view) {
+        .user-info-card-component__title-container {
+            @include flex-col;
+            @include child-left-m(0);
+            @include child-top-m(calc(var(--base-size) * 0.75));
+            @media only screen and (min-width: 500px) {
+                @include flex-row;
+                @include child-left-m(calc(var(--base-size) * 0.75));
+                @include child-top-m(0);
+                @include align-center;
+            }
+
+            .profile-interaction-component {
+                width: 100%;
+                @media only screen and (min-width: 500px) {
+                    width: fit-content;
+                }
+            }
+        }
+    }
+
+    .mini-view {
+        .user-info-card-component__title-container {
+            justify-content: space-between;
+        }
+    }
+}
