@@ -1,10 +1,10 @@
 @import "src/lib/style/atomicMixin";
 
-.oeuvre-search-view-container {
-    @include child-top-m(2rem);
+.oeuvre-search-view-component {
+    @include child-top-m(calc(var(--base-size) * 2));
     width: 100%;
     
-    .result-container {
-        @include child-top-m(1rem);
+    .oeuvre-search-view-component__result-container {
+        @include child-top-m(calc(var(--base-size) * 1));
     }
 }

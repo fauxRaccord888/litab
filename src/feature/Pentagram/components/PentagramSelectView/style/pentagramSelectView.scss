@@ -2,11 +2,12 @@
 
 .pentagram-select-view-component {
     @include flex-col;
+    @include w-full;
     @include child-top-m(calc(var(--base-size) * 0.75));
-    width: 100%;
 
     .pentagram-select-view-component__main-container {
         @include flex-col;
+        @include justify-center;
         @media only screen and (min-width:500px){
             @include flex-row;
         }
@@ -15,5 +16,4 @@
             flex-grow: 1;
         }
     }
-    
 }

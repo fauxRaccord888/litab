@@ -2,12 +2,10 @@
 
 .pentagram-upsert-editor-component {
     width: 100%;
+    @include child-top-m(calc(var(--base-size) * 2));
     .pentagram-upsert-editor-component__main-editor {
         width: 100%;
         @include flex-col;
         @include flex-center;
-        @media only screen and (min-width: 500px) {
-            @include flex-row;
-        }
     }
 }
