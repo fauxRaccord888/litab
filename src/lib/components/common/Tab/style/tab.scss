@@ -1,0 +1,42 @@
+@import "src/lib/style/atomicMixin";
+
+.tab-component {
+    @include flex;
+    @include flex-col;
+    margin-top: calc(var(--base-size) * 1.5);
+
+    .tab-component__header {
+        @include flex;
+        @include justify-center;
+        @include child-left-m(calc(var(--base-size) * 1.5));
+
+        .tab-component__header-label {
+            @include pointer;
+            position: relative;
+            font-size: calc(var(--base-size) * 1.25);
+            margin-bottom: 8px;
+            &.tab-component__header-label--selected {
+                &::after {
+                    content: " ";
+                    @include rounded-lg;
+                    position: absolute;
+                    width: 100%;
+                    height: 4px;
+                    left: 0;
+                    bottom: -8px;
+                    background-color: rgb(var(--primary));
+                }        
+            }
+        }
+    }
+
+    .tab-component__body {
+        @include child-top-m(calc(var(--base-size) * 0.75));
+        border-top: 2px solid rgba(var(--font-color), 0.5);
+
+        .tab-component__item {
+            @include padding-(calc(var(--base-size) * 0.75));
+            border-bottom: 2px solid rgba(var(--font-color), 0.5);
+        }
+    }
+}
