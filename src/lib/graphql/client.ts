@@ -19,21 +19,21 @@ const cache = new InMemoryCache({
       return defaultDataIdFromObject(responseObject)
     },
     typePolicies: {
-      Query: {
-        fields: {
-          node: {
-            read(_, { args, toReference }) {
-              const ref = toReference({
-                nodeId: args?.nodeId,
-              })
-              return ref
+        Query: {
+            fields: {
+                node: {
+                    read(_, { args, toReference }) {
+                    const ref = toReference({
+                        nodeId: args?.nodeId,
+                    })
+                    return ref
+                    },
+                },
             },
-          },
         },
-      },
     },
-  })
-  
+})
+
 const httpLink = createHttpLink({
     uri: GRAPHQL_END_POINT,
 })
