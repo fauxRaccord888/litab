@@ -43,6 +43,20 @@ graphql(/* GraphQL */ `
         },
         followingsCollection {
             ...FollowingsMiniProfile
-        },
+        }
+        pentagramsCollection {
+            edges {
+                node {
+                    ...PentagramsSelectInfo
+                }
+            }
+        }
+        pentagram_revisionsCollection {
+            edges {
+                node {
+                    ...FeedInfo
+                }
+            }
+        }
     }
 `)
