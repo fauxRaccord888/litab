@@ -22,6 +22,35 @@
         "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
     },
 
+    "genre": {
+        "tab": {
+            "oeuvre": "Oeuvres",
+            "user": "Followers"
+        }
+    },
+
+    "oeuvre": {
+        "tab" : {
+            "pentagram": "Pentagrams",
+            "user": "Followers"
+        }
+    },
+
+    "artist": {
+        "tab": {
+            "oeuvre": "Oeuvres",
+            "user": "Followers"
+        }
+    },
+
+    "user": {
+        "tab": {
+            "pentagram": "Pentagrams",
+            "feed": "Revisions"
+        }
+    },
+
+
     "pentagram": {
         "changes": {
             "upsert": "Add",

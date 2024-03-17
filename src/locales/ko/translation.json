@@ -22,6 +22,34 @@
         "followedBy": "<0>{{ mutualFollowers }}</0> 외 {{ additionalCount }}명이 팔로우하고 있습니다."
     },
 
+    "genre": {
+        "tab": {
+            "oeuvre": "작품",
+            "user": "팔로워"
+        }
+    },
+
+    "oeuvre": {
+        "tab" : {
+            "pentagram": "펜타그램",
+            "user": "팔로워"
+        }
+    },
+
+    "artist": {
+        "tab": {
+            "oeuvre": "작품",
+            "user": "팔로워"
+        }
+    },
+
+    "user": {
+        "tab": {
+            "pentagram": "펜타그램",
+            "feed": "피드"
+        }
+    },
+
     "pentagram": {
         "changes": {
             "upsert": "추가",
