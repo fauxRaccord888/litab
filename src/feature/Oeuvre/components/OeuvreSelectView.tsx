@@ -1,32 +1,34 @@
-import type { DBArtist } from '../types';
+import type { DBOeuvre } from '../types';
 import type { ISlotRenderConfig } from '$feature/template/type';
 import type { InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
 import type { TabItem } from '$lib/components/common/Tab';
-import ArtistInfoCard from './common/ArtistInfoCard';
+
+import OeuvreInfoCard from './common/OeuvreInfoCard';
 import Tab from '$lib/components/common/Tab';
 
-import "./style/artistSelectView.scss"
+import "./style/oeuvreSelectView.scss"
 
-type ArtistSelectViewProps = {
-    item: DBArtist
+type OeuvreSelectViewProps = {
+    item: DBOeuvre
     renderConfig: ISlotRenderConfig<InfoCardRenderConfigKey>
-    handleClickItem?: (id: string) => void,
-    tabItems: TabItem[]
+    handleClickItem?: (item: DBOeuvre) => void
+
+    tabItems?: TabItem[]
 }
 
-export default function ArtistSelectView(props: ArtistSelectViewProps) {
+export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
     const { item, renderConfig, handleClickItem, tabItems } = props
 
     return (
-        <div className="artist-select-view-component">
-            <ArtistInfoCard
+        <div className="oeuvre-select-view-component">
+            <OeuvreInfoCard
                 key={item.id}
                 item={item}
                 renderConfig={renderConfig}
                 handleClickItem={handleClickItem}
             />
             {tabItems &&
-                <Tab items={tabItems}/>
+                <Tab items={tabItems} />
             }
         </div>
     )

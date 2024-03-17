@@ -1,20 +1,28 @@
 import type { RouterContext } from '$lib/types/components';
+import type { DBAuthUser } from '$feature/auth/type';
 import type { DBProfiles } from "$feature/Profile/types";
+import type { TabItem } from '$lib/components/common/Tab';
+import type { useProfileNavigate } from '$feature/navigate/hooks';
 
-import { useHandleFollow } from '../hooks';
-import { useProfileNavigate } from '$feature/navigate/hooks';
 import UserInfoCard from './UserInfoCard';
+import Tab from '$lib/components/common/Tab';
 
 import "./style/profileSelectView.scss"
 
 export default function ProfileSelectView(props: {
     item: DBProfiles
-    context: RouterContext
-}) {
-    const { item, context } = props
-    const navigate = useProfileNavigate()
-    const handleFollow = useHandleFollow(item.id, context.currentUser)
+    context: RouterContext,
 
+    navigate: ReturnType<typeof useProfileNavigate>,
+    tabItems?: TabItem[]
+    handleFollow: (id: string, user: DBAuthUser | null | undefined) => void
+}) {
+    const { item, context, navigate, tabItems, handleFollow } = props
+
+    const onFollow = () => {
+        handleFollow(item.id, context.currentUser)
+    }
+    
     return (
         <div className="profile-select-view-component">
             <UserInfoCard 
@@ -32,7 +40,7 @@ export default function ProfileSelectView(props: {
                     displayInteraction: true,
                 }}
                 eventHandler={{
-                    handleFollow,
+                    handleFollow: onFollow,
                     showFollowers: navigate.followersDetail,
                     showFollowings: navigate.followingsDetail,
                     showInteraction: navigate.profileSelectDetail,
@@ -40,6 +48,9 @@ export default function ProfileSelectView(props: {
                 }}
                 context={context}
             />
+            {tabItems && 
+                <Tab items={tabItems} />
+            }
         </div>
     )
 }
