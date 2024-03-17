@@ -19,13 +19,16 @@ type InfoCardProps = {
 }
 
 export default function InfoCardTemplate(props: InfoCardProps) {
-    const { components, renderConfig, options, ...restProps } = props
+    const { components, renderConfig, options, onClick, ...restProps } = props
     const filteredComponents = filterComponents<InfoCardRenderConfigKey>(components, renderConfig)
 
     return (
         <div 
             {...restProps}
-            className="info-card-template"
+            className={[
+                "info-card-template",
+                options?.miniView ? "mini-view" : "",
+            ].join(" ")}
         >
             {filteredComponents?.coverImage &&
                 <div 
@@ -55,7 +58,7 @@ export default function InfoCardTemplate(props: InfoCardProps) {
                                             "info-card-template__cover-container",
                                             "info-card-template__cover-container--mobile",
                                             options?.roundedCover ? "info-card-template__cover-container--round" : "",
-                                            options?.miniView ? "info-card-template__cover-container--disabled" : ""
+                                            options?.miniView ? "info-card-template__cover-container--disabled" : "",
                                         ].join(" ")}
                                     >
                                         {filteredComponents.coverImage}
@@ -68,8 +71,9 @@ export default function InfoCardTemplate(props: InfoCardProps) {
                                             <div 
                                                 className={[
                                                     "info-card-template__title",
-                                                    options?.miniView ? "mini-view" : ""
+                                                    onClick ? "info-card-template__title--pointer" :""
                                                 ].join(" ")}
+                                                onClick={onClick}
                                             >
                                                 {filteredComponents.title}
                                             </div>
