@@ -11,7 +11,7 @@
         justify-items: left;
     }
     
-    :not(.mini-view) {
+    &:not(:has(.mini-view)) {
         .user-info-card-component__title-container {
             @include flex-col;
             @include child-left-m(0);

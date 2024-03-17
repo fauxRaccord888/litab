@@ -2,18 +2,18 @@ import type { DBAuthUser } from "$feature/auth/type"
 import { useFollowMutation } from ".."
 import { calcFollowings } from "../../util"
 
-export function useHandleFollow(id: string, currentUser: DBAuthUser | null | undefined) {
-    const followings = calcFollowings(currentUser)
-    const followed = followings.has(id)
-
+export function useHandleFollow() {
     const {
         follow: followMutation,
         unfollow: unfollowMutation
-    } = useFollowMutation(currentUser)
+    } = useFollowMutation()
     
-    const handleFollow = () => {
-        if (followed) unfollowMutation(id)
-        else followMutation(id)
+    const handleFollow = (id: string, currentUser: DBAuthUser | null | undefined) => {
+        const followings = calcFollowings(currentUser)
+        const followed = followings.has(id)
+    
+        if (followed) unfollowMutation(id, currentUser)
+        else followMutation(id, currentUser)
     }
 
     return handleFollow

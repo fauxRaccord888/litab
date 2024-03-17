@@ -4,8 +4,9 @@
     @include w-full;
     @include flex;
     .pentagram-description-component__text-area {
+        @include padding-(calc(var(--base-size) * 0.5));
         flex-grow: 1;
-        height: 300px;
+        height: 200px;
         font-size: calc(var(--base-size) * 1.3);
     }
 }

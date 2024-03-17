@@ -16,9 +16,13 @@
         @include flex;
         @include flex-col;
         @include align-center;
-        width: 400px;
+        width: 320px;
         height: 400px;
         background-color: rgba(var(--modal-background), 1);
+
+        @media only screen and (min-width: 500px) {
+            width: 400px;
+        }
         
         .modal-component__title-container {
             @include flex;

@@ -4,6 +4,9 @@
     @include flex;
     @include margin-(calc(var(--base-size) * 0.75));
     justify-content: space-between;
+    align-items: end;
+    padding-right: calc(var(--base-size) * 2);
+
     @media only screen and (min-width: 500px) {
         @include flex-col;
         min-height: 300px;
@@ -20,8 +23,9 @@
 
     .navigation-bar-component__link-description {
         display: none;
-        @media only screen and (min-width: 1200px) {
+        @media only screen and (min-width: 800px) {
             display: inline;
+            min-width: 150px;
         }
     }
 

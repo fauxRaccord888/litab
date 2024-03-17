@@ -1,0 +1,23 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/mixin";
+
+.oeuvre-main-info-component {
+    @include flex-col;
+    @include justify-center;
+    @include child-top-m(calc(var(--base-size) * 0.8));
+
+    .oeuvre-main-info-component__artist-container {
+        @include child-left-m(calc(var(--base-size) * 0.5));
+        word-break: break-all;
+    }
+    
+    .oeuvre-main-info-component__genre-container {
+        @include child-left-m(calc(var(--base-size) * 0.5));
+    }
+
+    .oeuvre-main-info-component__artist, .oeuvre-main-info-component__genre {
+        @include padding-wide-(calc(var(--base-size) * 0.25));
+        @include rounded-lg;
+        @include custom-background
+    }
+}

@@ -58,8 +58,8 @@ export default function LoadStoredChangeDialog(props: {
 
     const onClickNavigateRelated = (e: MouseEvent) => {
         e.stopPropagation()
-        if (storedPentagramId) navigate.viewPentagram(storedPentagramId)
-        else navigate.createPentagram()
+        if (storedPentagramId) navigate.select(storedPentagramId)
+        else navigate.create()
     }
 
     return (

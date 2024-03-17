@@ -12,5 +12,14 @@ graphql(/* GraphQL */ `
         ...GenresMinimalInfo,
         abstract
         description
+        oeuvres_genresCollection {
+            edges {
+                node {
+                    oeuvres {
+                        ...OeuvresMinimalInfo
+                    }
+                }
+            }
+        }
     }
 `)

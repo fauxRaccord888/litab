@@ -16,7 +16,11 @@ type MiniProfileProps = {
 export default function MiniProfile(props: MiniProfileProps) {
     const { item, context, displayFollow } = props
     const navigate = useProfileNavigate()
-    const handleFollow = useHandleFollow(item.id, context.currentUser)
+    const handleFollow = useHandleFollow()
+
+    const onFollow = () => {
+        handleFollow(item.id, context.currentUser)
+    }
 
     return (
         <div className="mini-profile-component">
@@ -35,7 +39,7 @@ export default function MiniProfile(props: MiniProfileProps) {
                     displayInteraction: false,
                 }}
                 eventHandler={{
-                    handleFollow,
+                    handleFollow: onFollow,
                     showProfile: navigate.profileSelect
                 }}
                 context={context}

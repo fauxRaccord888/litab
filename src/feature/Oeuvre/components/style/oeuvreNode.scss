@@ -1,69 +1,23 @@
 @use "src/lib/style/variables";
 @import "src/lib/style/atomicMixin";
+@import "src/lib/style/mixin";
 
-.oeuvre-node-container {
-    .oeuvre-cover-container {
+.oeuvre-node-component {
+    .oeuvre-node-component__cover-container {
         @include flex-col;
         @include flex-center;
         min-width: 100%;
         max-width: 100%;
         aspect-ratio: 1;
         border-radius: 50%;
-
-        .bucket-image-container {
-            @include flex-col;
-            @include flex-center;
-
-            .fallback-icon {
-                @include stroke-sm(rgb(var(--font-color)));
-                @include fill-sm((rgb(var(--font-color))));
-                width: 33%;
-            }
-        }
     }
 }
 
-.oeuvre-hover-card-container {
+.oeuvre-node-component__hover-card-inner-container {
     --node: #{variables.$node_small}px;
     @include box-shadow-2(rgb(var(--font-color)));
+    @include wide-hovercard(var(--node));
     @media only screen and (min-width: 500px) {
         --node: #{variables.$node_medium}px;
-    }
-
-    position: absolute;
-    left: calc(var(--node) * -1.25);
-    top: calc(var(--node) * -1.85);
-    min-width: calc(var(--node) * 3);
-    min-height: calc(var(--node) * 1.1);
-    border-radius: 8px;
-    padding-top: calc(var(--node) * 0.25);
-    padding-bottom: calc(var(--node) * 0.25);
-    padding-left: calc(var(--node) * 0.25);
-    padding-right: calc(var(--node) * 0.25);
-
-    background-color: rgb(var(--background-color));
-
-    .oeuvre-main-info-container {
-        .title {
-            @include text-lg;
-        }
-        .artist-container {
-            display: inline;
-            @include text-sm;
-            @include child-left-m(0.25rem);
-            .button-container {
-                @include p-xs;
-                @include p-v-sm;
-            }
-        }
-        .genre-container {
-            display: inline;
-            @include text-sm;
-            @include child-left-m(0.25rem);
-            .button-container {
-                @include p-xs;
-                @include p-v-sm;
-            }
-        }
     }
 }

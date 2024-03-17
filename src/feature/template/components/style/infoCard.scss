@@ -7,19 +7,20 @@
     flex-grow: 1;
     @media only screen and (min-width: 500px) {
         @include flex-row;
+        @include child-left-m(var(--base-size));
     }
 
-    &:not(:has(.mini-view)) {
-        @media only screen and (min-width: 500px) {
-            @include child-left-m(var(--base-size));
-        }
-    } 
+    &.mini-view {
+        @include flex-row;
+        @include child-left-m(calc(var(--base-size) * 1.25));
+    }
 
     .info-card-template__cover-container {
         @include flex;
         @include align-center;
         @include box-shadow-2(rgb(var(--font-color)));
         @include rounded-lg;
+        z-index: 2;
         min-width: 30%;
         max-width: 30%;
         height: fit-content;
@@ -76,10 +77,8 @@
             @include flex;
             @include align-center;
             @include child-left-m(var(--base-size));
-            &:not(:has(.mini-view)) {
-                @media only screen and (min-width: 500px) {
-                    @include child-left-m(0);
-                }
+            @media only screen and (min-width: 500px) {
+                @include child-left-m(0);
             }
 
             font-size: calc(var(--base-size) * 0.7);
@@ -93,6 +92,10 @@
                     @include flex;
                     @include align-center;
                     font-size: calc(var(--base-size) * 1.5);
+
+                    &.info-card-template__title--pointer {
+                        @include pointer;
+                    }
                 }
             }
         }
