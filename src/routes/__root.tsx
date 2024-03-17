@@ -6,7 +6,7 @@ import { getScrollKey } from '$lib/utils/route/getScrollKey'
 import ModalController from './-global/-modal';
 
 import Layout from '$lib/layout/Layout'
-import LeftSideBar from '$lib/components/NavigationBar/LeftSideBar'
+import NavigationBar from '$feature/navigate/components/NavigationBar'
 
 export type RootSearch = {
     nodeUpsertId: string | undefined
@@ -43,7 +43,7 @@ export const Route = rootRouteWithContext<{
 
 function RootComponent() {
     return (
-        <Layout left={<LeftSideBar />} >
+        <Layout left={<NavigationBar />} >
             <ScrollRestoration 
                 getKey={(location) => getScrollKey(location)}
             />
