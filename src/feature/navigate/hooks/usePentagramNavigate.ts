@@ -1,11 +1,13 @@
 import type { PentagramUpdateRoute } from "routes/_auth/pentagram/$pentagramId/update"
 import type { PentagramInsertRoute } from "routes/_auth/pentagram/create"
 import type { FeedViewRoute } from "routes/_auth/feed"
+import type { ProfileSelectRoute } from "routes/_public/profile/$mutableId"
+import type { OeuvreSelectRoute } from "routes/_public/oeuvre/$id"
 import type { PentagramSelectRoute } from "routes/_public/pentagram/$pentagramId/view"
 import { useNavigate } from "@tanstack/react-router"
 import { useCallback } from "react"
 
-type ViewRoutes = PentagramSelectRoute | FeedViewRoute
+type ViewRoutes = PentagramSelectRoute | FeedViewRoute | OeuvreSelectRoute | ProfileSelectRoute
 type UpsertRoutes = PentagramUpdateRoute | PentagramInsertRoute 
 
 export function usePentagramNavigate() {
@@ -74,7 +76,7 @@ export function usePentagramNavigate() {
     const nodeSelectDetailNavigator = useCallback((
         nodeViewId: string,
         from: ViewRoutes["fullPath"],
-        params?: { pentagramId: string } | undefined
+        params?: { pentagramId: string } | { id: string } | { mutableId: string } | undefined
     ) => {
         navigate({
             from,
@@ -92,7 +94,7 @@ export function usePentagramNavigate() {
     const revisionSelectDetailNavigator = useCallback((
         revisionViewId: string,
         from: ViewRoutes["fullPath"], 
-        params?: { pentagramId: string } | undefined
+        params?: { pentagramId: string } | { id: string } | { mutableId: string } | undefined
     )=> {
         navigate({
             from,
@@ -110,7 +112,7 @@ export function usePentagramNavigate() {
     const pentagramSelectDetailNavigator = useCallback((
         pentagramInteractionId: string,
         from: ViewRoutes["fullPath"], 
-        params?: { pentagramId: string } | undefined
+        params?: { pentagramId: string } | { id: string } | { mutableId: string } | undefined
     ) => {
         navigate({
             from,
@@ -126,9 +128,9 @@ export function usePentagramNavigate() {
     }, [navigate])
 
     return {
-        createPentagram: pentagramInsertNavigator,
-        viewPentagram: pentagramSelectNavigator,
-        updatePentagram: pentagramUpdateNavigator,
+        select: pentagramSelectNavigator,
+        create: pentagramInsertNavigator,
+        update: pentagramUpdateNavigator,
 
         pentagramSelectDetail: pentagramSelectDetailNavigator,
         revisionSelectDetail: revisionSelectDetailNavigator,

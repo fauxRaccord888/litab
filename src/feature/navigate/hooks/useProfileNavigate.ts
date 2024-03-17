@@ -24,12 +24,24 @@ export function useProfileNavigate() {
         navigate({to: '/profile/$mutableId/followers', params: { mutableId }})
     }, [navigate])
 
+    const pentagramTabNavigator = useCallback((mutableId: string)=> {
+        navigate({to: '/profile/$mutableId/pentagram', params: { mutableId }})
+    }, [navigate])
+
+    const feedTabNavigator = useCallback((mutableId: string)=> {
+        navigate({to: '/profile/$mutableId/feed', params: { mutableId }})
+    }, [navigate])
+
+
     return {
         profileSelect: profileSelectNavigator,
 
         profileSelectDetail: profileSelectDetailNavigator,
         mutualFollowersDetail: mutualFollowersDetailNavigator,
         followingsDetail: followingsDetailHandler,
-        followersDetail:followersDetailHandler
+        followersDetail:followersDetailHandler,
+
+        pentagramTabNavigator: pentagramTabNavigator,
+        feedTab: feedTabNavigator
     }
 }

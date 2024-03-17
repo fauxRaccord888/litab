@@ -1,2 +1,5 @@
+export * from './useArtistNavigate'
+export * from './useGenreNavigate'
+export * from './useOeuvreNavigate'
 export * from './usePentagramNavigate'
 export * from './useProfileNavigate'
