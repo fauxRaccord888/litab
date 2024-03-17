@@ -13,18 +13,18 @@ const queryOption = (followerId: string, followingId: string) => ({
     ]
 })
 
-export function useFollowMutation(currentUser: DBAuthUser | null | undefined) {
+export function useFollowMutation() {
     const [follow] = useMutation<InsertFollowingsMutation>(insertFollowings_MUTATION)
-    const followHandler = useCallback((id: string) => {
+    const followHandler = useCallback((id: string, currentUser: DBAuthUser | null | undefined) => {
         if (!currentUser || currentUser?.id === id) return
         follow(queryOption(currentUser.id, id))
-    }, [follow, currentUser])
+    }, [follow])
 
     const [unfollow] = useMutation<DeleteFollowingsMutation>(deleteFollowings_MUTATION)
-    const unfollowHandler = useCallback((id: string) => {
+    const unfollowHandler = useCallback((id: string, currentUser: DBAuthUser | null | undefined) => {
         if (!currentUser || currentUser?.id === id) return
         unfollow(queryOption(currentUser.id, id))
-    }, [unfollow, currentUser])
+    }, [unfollow])
 
     return {
         follow: followHandler,
