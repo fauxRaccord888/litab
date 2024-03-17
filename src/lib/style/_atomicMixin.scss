@@ -33,6 +33,11 @@
     border-radius: 8px;
 }
 
+
+@mixin rounded-full {
+    border-radius: 100%;
+}
+
 @mixin w-full {
     width: 100%;
 }
@@ -73,6 +78,10 @@
 
 @mixin padding-($size) {
     padding: #{$size}
+}
+
+@mixin margin-($size) {
+    margin: #{$size}
 }
 
 @mixin padding-wide-($size) {
