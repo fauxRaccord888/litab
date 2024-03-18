@@ -2,3 +2,7 @@ import type { GenresInfoFragment, GenresMinimalInfoFragment } from '$lib/graphql
 
 export type DBGenre = GenresInfoFragment
 export type DBMiniGenre = GenresMinimalInfoFragment
+
+export type GenreEventHandler = {
+    selectGenre?: (genreId: string) => void
+}
