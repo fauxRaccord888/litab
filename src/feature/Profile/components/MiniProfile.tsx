@@ -1,20 +1,20 @@
 import type { RouterContext } from '$lib/types/components';
-import type { DBMiniProfile } from "$feature/Profile/types";
+import type { DBMiniProfile, ProfileInfoCardOptions } from "../types";
 
 import { useHandleFollow } from '../hooks';
 import { useProfileNavigate } from '$feature/navigate/hooks';
-import UserInfoCard from './UserInfoCard';
+import ProfileInfoCard from './UserInfoCard';
 
 import "./style/miniProfile.scss"
 
 type MiniProfileProps = {
     item: DBMiniProfile,
     context: RouterContext,
-    displayFollow?: boolean 
+    options: ProfileInfoCardOptions
 }
 
 export default function MiniProfile(props: MiniProfileProps) {
-    const { item, context, displayFollow } = props
+    const { item, context, options } = props
     const navigate = useProfileNavigate()
     const handleFollow = useHandleFollow()
 
@@ -24,7 +24,7 @@ export default function MiniProfile(props: MiniProfileProps) {
 
     return (
         <div className="mini-profile-component">
-            <UserInfoCard 
+            <ProfileInfoCard 
                 item={item}
                 renderConfig={{
                     coverImage: true,
@@ -33,14 +33,14 @@ export default function MiniProfile(props: MiniProfileProps) {
                     subInfo: false,
                 }}
                 options={{
-                    displayFollow: Boolean(displayFollow),
+                    ...options,
                     roundedCover: true,
                     miniView: true,
                     displayInteraction: false,
                 }}
                 eventHandler={{
-                    handleFollow: onFollow,
-                    showProfile: navigate.profileSelect
+                    follow: onFollow,
+                    selectProfile: navigate.profileSelect
                 }}
                 context={context}
             />

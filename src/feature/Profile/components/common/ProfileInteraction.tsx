@@ -1,6 +1,7 @@
 /* types */
-import type { DBProfiles } from '$feature/Profile/types';
 import type { MouseEvent } from 'react';
+import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions } from "../../types"
+import type { RouterContext } from '$lib/types/components';
 /* hooks */
 import { useTranslation } from "react-i18next";
 /* components */
@@ -10,34 +11,34 @@ import MoreIcon from "$lib/components/icons/MoreIcon";
 import "./style/profileInteraction.scss"
 
 type ProfileInteractionsProps = {
+    id: DBProfiles["id"]
     mutable_id: DBProfiles["mutable_id"]
     isMe?: boolean | undefined,
     followed?: boolean | undefined,
-    displayFollow?: boolean
-    displayMoreInteraction?: boolean
-    handleFollow?: () => void
-    handleShowInteraction?: (mutableId: string) => void
+    context: RouterContext
+    eventHandler: ProfileEventHandler
+    options: ProfileInfoCardOptions
 }
 
 export default function ProfileInteraction(props: ProfileInteractionsProps ) {
-    const { mutable_id, isMe, followed, displayFollow, displayMoreInteraction, handleFollow, handleShowInteraction } = props
+    const { id, mutable_id, isMe, followed, context, eventHandler, options } = props
     const { t } = useTranslation()
 
     const onClickFollow = (e:MouseEvent) => {
         e.stopPropagation()
-        if (handleFollow) handleFollow()
+        if (eventHandler.follow) eventHandler.follow(id, context.currentUser)
     }
 
     const onClickInteraction = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowInteraction) handleShowInteraction(mutable_id)
+        if (eventHandler.profileInteractionModal) eventHandler.profileInteractionModal(mutable_id)
     }
 
     return (
         <>
-            {(displayFollow || displayMoreInteraction) && 
+            {(options.displayFollow || options.displayInteraction) && 
                 <div className="profile-interaction-component">
-                    {displayFollow && !isMe &&
+                    {options.displayFollow && !isMe &&
                         <div className="profile-interaction-component__follow">
                             <Button 
                                 danger={followed}
@@ -48,12 +49,12 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
                             </Button>
                         </div>
                     }
-                    {displayMoreInteraction &&
+                    {options.displayInteraction &&
                         <div 
                             onClick={onClickInteraction}
                             className={[
                                 "profile-interaction-component__more-interaction",
-                                handleShowInteraction ? "profile-interaction-component__more-interaction--pointer" : ""
+                                eventHandler.profileInteractionModal ? "profile-interaction-component__more-interaction--pointer" : ""
                             ].join(" ")}
                         >
                             <MoreIcon />

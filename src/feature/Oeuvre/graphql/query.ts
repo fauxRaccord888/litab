@@ -13,3 +13,17 @@ export const searchOeuvres_QUERY = graphql(/* GraphQL */ `
         }
     }
 `)
+
+export const getOeuvreExtensiveInfoById_QUERY = graphql(/* GraphQL */ `
+    query getOeuvreExtensiveInfoById($id: UUID!) {
+        oeuvresCollection(
+            filter: { id: { eq: $id } }
+        ) {
+            edges {
+                node {
+                    ...OeuvresExtensiveInfo
+                }
+            }
+        }
+    }
+`)

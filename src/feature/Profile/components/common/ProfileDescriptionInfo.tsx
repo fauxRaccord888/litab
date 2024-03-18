@@ -1,10 +1,10 @@
 /* types */
-import type { DBProfiles } from "$feature/Profile/types"
 import type { MouseEvent, PropsWithChildren } from "react";
+import type { DBProfiles, ProfileEventHandler } from "../../types"
 import type { calcMutualFollowers } from "$feature/Profile/util/calcMutualFollower";
 /* utils */
 import { Trans } from 'react-i18next';
-import PROFILE from "$feature/Profile/constants"
+import { PROFILE } from "$feature/Profile/constants"
 /* styles */
 import "./style/profileDescriptionInfo.scss"
 
@@ -14,13 +14,12 @@ type ProfileDescriptionInfoProps = {
     description: DBProfiles["description"]
     mutualFollowers: ReturnType<typeof calcMutualFollowers>
 
-    handleShowMutualFollowers?: (mutableId: string) => void
+    eventHandler: ProfileEventHandler
 }
 
 export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProps) {
-    const { mutable_id, nickname, mutualFollowers, description, handleShowMutualFollowers } = props
-    
-    const mutualFollowerDisplayCount = PROFILE.DEFAULT_VALUES.mutualFollowerDisplayCount
+    const { mutable_id, nickname, mutualFollowers, description, eventHandler } = props
+    const mutualFollowerDisplayCount = PROFILE.MUTUAL_FOLLOWER_DISPLAY_COUNT
     const totalMutualFollowerCount = mutualFollowers.length
     const displayedMutualFollowers = mutualFollowers
         .slice(0, mutualFollowerDisplayCount)
@@ -29,7 +28,7 @@ export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProp
 
     const onClickMutualFollowing = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowMutualFollowers) handleShowMutualFollowers(mutable_id)
+        if (eventHandler.mutualFollowersModal) eventHandler.mutualFollowersModal(mutable_id)
     }
 
     return (
