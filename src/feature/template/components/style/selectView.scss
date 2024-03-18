@@ -1,0 +1,13 @@
+@import "src/lib/style/atomicMixin";
+
+.select-view-template {
+    min-width: min(600px, 100vw);
+    .select-view-template__info-card-container {
+        @include margin-(calc(var(--base-size) * 1.5))
+    }
+
+    .select-view-template__tab-container {
+        margin-top:(calc(var(--base-size) * 1.5));
+        margin-bottom:(calc(var(--base-size) * 1.5))
+    }
+}
