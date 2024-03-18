@@ -1,6 +1,6 @@
 /* types */
-import type { DBProfiles } from "$feature/Profile/types"
 import type { MouseEvent } from "react";
+import type { DBProfiles, ProfileEventHandler } from "../../types"
 /* hooks */
 import { useTranslation } from "react-i18next"
 /* utils */
@@ -13,12 +13,11 @@ type ProfileFollowingInfoProps = {
     followingsCollection: DBProfiles["followingsCollection"]
     followersCollection: DBProfiles["followersCollection"]
 
-    handleShowFollowings?: (mutableId: string) => void
-    handleShowFollowers?: (mutableId: string) => void
+    eventHandler: ProfileEventHandler
 }
 
 export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
-    const { mutable_id, followingsCollection, followersCollection, handleShowFollowings, handleShowFollowers } = props
+    const { mutable_id, followingsCollection, followersCollection, eventHandler } = props
     const { t } = useTranslation()
 
     const onClickCountButton = (
@@ -35,7 +34,7 @@ export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
                 <button 
                     className="profile-following-info-component__count-button"
                     disabled={!followingsCollection?.edges.length} 
-                    onClick={(e) => onClickCountButton(e, handleShowFollowings)}
+                    onClick={(e) => onClickCountButton(e, eventHandler.followingsModal)}
                 >
                     <span>{t(`header.count.followings`)}</span>
                     <span>{calcCollectionLength(followingsCollection)}</span>
@@ -46,7 +45,7 @@ export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
                 <button 
                     className="profile-following-info-component__count-button"
                     disabled={(!followersCollection?.edges.length)} 
-                    onClick={(e) => onClickCountButton(e, handleShowFollowers)}
+                    onClick={(e) => onClickCountButton(e, eventHandler.followersModal)}
                 >
                     <span>{t(`header.count.followers`)}</span>
                     <span>{calcCollectionLength(followersCollection)}</span>

@@ -23,7 +23,9 @@ export default function MiniProfileModal(props: MiniProfileModalProps) {
                         key={item.id}
                         item={item}
                         context={context}
-                        displayFollow={true}
+                        options={{
+                            displayFollow: true
+                        }}
                     />
                 ))}
             </div>

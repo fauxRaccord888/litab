@@ -1,6 +1,6 @@
 /* types */
 import type { MouseEvent } from "react"
-import type { DBProfiles } from "$feature/Profile/types"
+import type { DBProfiles, ProfileEventHandler } from "../../types"
 /* components */
 import UserIcon from "$lib/components/icons/UserIcon"
 import BucketImage from "$lib/components/common/BucketImage"
@@ -8,16 +8,16 @@ import BucketImage from "$lib/components/common/BucketImage"
 type ProfileCoverImageProps = {
     id: DBProfiles["id"]
     mutable_id: DBProfiles["mutable_id"]
+    eventHandler: ProfileEventHandler
     className?: string,
-    handleShowProfile?: (mutableId: string) => void
 }
 
 export default function ProfileCoverImage(props: ProfileCoverImageProps) {
-    const { id, mutable_id, className, handleShowProfile } = props
+    const { id, mutable_id, eventHandler, className } = props
     
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowProfile) handleShowProfile(mutable_id)
+        if (eventHandler.selectProfile) eventHandler.selectProfile(mutable_id)
     }
 
     return (

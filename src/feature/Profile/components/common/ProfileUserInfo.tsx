@@ -1,36 +1,36 @@
 /* types */
 import type { MouseEvent } from 'react';
-import type { DBProfiles } from "$feature/Profile/types"
+import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions } from "../../types"
 /* styles */
 import "./style/profileUserInfo.scss"
 
 type ProfileUserInfoProps = {
     mutable_id: DBProfiles["mutable_id"]
     nickname: DBProfiles["nickname"]
-    miniView?: boolean,
-    handleShowProfile?: (mutableId: string) => void
+    eventHandler: ProfileEventHandler
+    options: ProfileInfoCardOptions
 }
 
 export default function ProfileUserInfo(props: ProfileUserInfoProps) {
-    const { mutable_id, nickname, miniView, handleShowProfile } = props
+    const { mutable_id, nickname, eventHandler, options } = props
 
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleShowProfile) handleShowProfile(mutable_id)
+        if (eventHandler.selectProfile) eventHandler.selectProfile(mutable_id)
     }
 
     return (
         <div 
             className={[
                 "profile-user-info-component",
-                handleShowProfile ? "profile-user-info-component--pointer" : ""
+                eventHandler.selectProfile ? "profile-user-info-component--pointer" : ""
             ].join(" ")}
             onClick={onClickProfile}
         >
             <span className="profile-user-info-component__mutable-id">
                 {mutable_id}
             </span>
-            {miniView &&
+            {options.miniView &&
                 <span className="profile-user-info-component__nickname">
                     {nickname}
                 </span>

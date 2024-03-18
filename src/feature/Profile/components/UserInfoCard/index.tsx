@@ -1,7 +1,5 @@
-import type { DBProfiles } from "$feature/Profile/types"
+import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions, ProfileInfoCardRenderOptions } from "../../types"
 import type { RouterContext } from '$lib/types/components';
-import type { ISlotRenderConfig } from "$feature/template/type";
-import type { InfoCardOptions } from "$feature/template/components/InfoCardTemplate";
 import { calcFollowings, calcMutualFollowers } from "$feature/Profile/util";
 
 import ProfileCoverImage from "../common/ProfileCoverImage";
@@ -13,27 +11,15 @@ import InfoCardTemplate from "$feature/template/components/InfoCardTemplate";
 
 import './style/userInfoCard.scss'
 
-type UserInfoCardKeys = "coverImage" | "title" | "mainInfo" | "subInfo"
-type UserInfoCardOptionKey = "displayFollow" | "displayInteraction"
-type UserInfoCardEventHandler = {
-    showProfile?: (mutableId: string) => void
-    showMutualFollowers?: (mutableId: string) => void
-    showFollowings?: (mutableId: string) => void
-    showFollowers?: (mutableId: string) => void
-    showInteraction?: (mutableId: string) => void
-    
-    handleFollow?: () => void
-}
-
-type UserInfoCardProps = {
+type ProfileInfoCardProps = {
     item: DBProfiles
     context: RouterContext,
-    renderConfig: ISlotRenderConfig<UserInfoCardKeys>
-    options: InfoCardOptions & ISlotRenderConfig<UserInfoCardOptionKey>
-    eventHandler: UserInfoCardEventHandler
+    renderConfig: ProfileInfoCardRenderOptions
+    options: ProfileInfoCardOptions
+    eventHandler: ProfileEventHandler
 }
 
-export default function UserInfoCard(props: UserInfoCardProps) {
+export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const { item, context, renderConfig, options, eventHandler } = props
     const { id, mutable_id, nickname, description, followersCollection, followingsCollection } = item
 
@@ -46,7 +32,7 @@ export default function UserInfoCard(props: UserInfoCardProps) {
         <ProfileCoverImage 
             id={id} 
             mutable_id={mutable_id}
-            handleShowProfile={eventHandler.showProfile}
+            eventHandler={eventHandler}
         />
     )
 
@@ -55,17 +41,17 @@ export default function UserInfoCard(props: UserInfoCardProps) {
             <ProfileUserInfo
                 mutable_id={mutable_id}
                 nickname={nickname}
-                miniView={options.miniView}
-                handleShowProfile={eventHandler.showProfile}
+                eventHandler={eventHandler}
+                options={options}
             />
             <ProfileInteraction 
+                id={id}
                 mutable_id={mutable_id}
                 isMe={isMe}
                 followed={followed}
-                displayFollow={options.displayFollow}
-                displayMoreInteraction={options.displayInteraction}
-                handleFollow={eventHandler.handleFollow}
-                handleShowInteraction={eventHandler.showInteraction}
+                context={context}
+                eventHandler={eventHandler}
+                options={options}
             />
         </div>
     )
@@ -78,15 +64,14 @@ export default function UserInfoCard(props: UserInfoCardProps) {
                 mutable_id={mutable_id}
                 followersCollection={followersCollection}
                 followingsCollection={followingsCollection}
-                handleShowFollowings={eventHandler.showFollowings}
-                handleShowFollowers={eventHandler.showFollowers}
+                eventHandler={eventHandler}
             />
             <ProfileDescriptionInfo
                 mutable_id={mutable_id}
                 nickname={nickname}
                 description={description}
                 mutualFollowers={mutualFollowers}
-                handleShowMutualFollowers={eventHandler.showMutualFollowers}
+                eventHandler={eventHandler}
             />
         </>
     )
