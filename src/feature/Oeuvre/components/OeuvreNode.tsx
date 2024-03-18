@@ -3,12 +3,12 @@ import { useRef } from "react";
 import { useHover } from '$lib/hooks';
 import BucketImage from "$lib/components/common/BucketImage";
 import FallbackIcon from "$lib/components/icons/FallbackIcon";
-import OeuvreMainInfo from "./common/OeuvreMainInfo";
+import OeuvreInfoCard from "./common/OeuvreInfoCard";
 import HoverCard from "$feature/portal/components/HoverCard";
 
 import "./style/oeuvreNode.scss"
 
-interface OeuvreNodeProps {
+type OeuvreNodeProps = {
     item: DBOeuvre
     enableHover?: boolean | undefined
 }
@@ -24,7 +24,7 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
             ref={ref}
             onMouseOver={handleMouseOver}
             onMouseLeave={handleMouseLeave}
-            className="oeuvre-node-container"
+            className="oeuvre-node-component"
         >
             {enableHover &&
                 <HoverCard
@@ -33,17 +33,26 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
                     handleMouseOver={handleMouseOver}
                     handleMouseLeave={handleMouseLeave} 
                 >
-                    <div className="oeuvre-hover-card-container">
-                        <OeuvreMainInfo mini item={item}/>
+                    <div className="oeuvre-node-component__hover-card-inner-container">
+                        <OeuvreInfoCard
+                            item={item}
+                            renderConfig={{
+                                coverImage: false,
+                                title: true,
+                                mainInfo: true,
+                                subInfo: false
+                            }}
+                            eventHandler={{}}
+                        />
                     </div>
                 </HoverCard>
             }
 
-            <div className="oeuvre-cover-container">
+            <div className="oeuvre-node-component__cover-container">
                 <BucketImage 
                     bucket="oeuvres"
                     id={item.id}
-                    fallback={<FallbackIcon className="fallback-icon"/>}
+                    fallback={<FallbackIcon />}
                 />
             </div>
         </div>

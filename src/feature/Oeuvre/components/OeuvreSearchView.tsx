@@ -29,7 +29,9 @@ export default function OeuvreSearchView(props: OeuvreSearchViewProps) {
                         key={item.id}
                         item={item}
                         renderConfig={oeuvreInfoCardRenderConfig}
-                        handleClickItem={handleClickResult}
+                        eventHandler={{
+                            selectOeuvre: () => handleClickResult(item)
+                        }}
                     />
                 ))}
             </div>

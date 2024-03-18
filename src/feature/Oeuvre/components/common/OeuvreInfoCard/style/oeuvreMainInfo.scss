@@ -9,15 +9,23 @@
     .oeuvre-main-info-component__artist-container {
         @include child-left-m(calc(var(--base-size) * 0.5));
         word-break: break-all;
+        
+        .oeuvre-main-info-component__artist--pointer {
+            @include pointer
+        }
     }
     
     .oeuvre-main-info-component__genre-container {
         @include child-left-m(calc(var(--base-size) * 0.5));
+        
+        .oeuvre-main-info-component__genre--pointer {
+            @include pointer
+        }
     }
 
     .oeuvre-main-info-component__artist, .oeuvre-main-info-component__genre {
         @include padding-wide-(calc(var(--base-size) * 0.25));
         @include rounded-lg;
-        @include custom-background
+        @include custom-background;
     }
 }

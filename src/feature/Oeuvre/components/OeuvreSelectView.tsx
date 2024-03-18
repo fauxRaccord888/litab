@@ -1,35 +1,75 @@
-import type { DBOeuvre } from '../types';
-import type { ISlotRenderConfig } from '$feature/template/type';
-import type { InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
-import type { TabItem } from '$lib/components/common/Tab';
+import type { DBOeuvre, OeuvreEventHandler } from '../types';
+import type { RouterContext } from '$lib/types/components';
+import type { PentagramEventHandler } from '$feature/Pentagram/types';
+import { useTranslation } from 'react-i18next';
+import { TIME } from '$feature/Pentagram/constants';
 
+import SelectViewTemplate from '$feature/template/components/SelectViewTemplate';
 import OeuvreInfoCard from './common/OeuvreInfoCard';
+import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
 import Tab from '$lib/components/common/Tab';
-
-import "./style/oeuvreSelectView.scss"
 
 type OeuvreSelectViewProps = {
     item: DBOeuvre
-    renderConfig: ISlotRenderConfig<InfoCardRenderConfigKey>
-    handleClickItem?: (item: DBOeuvre) => void
-
-    tabItems?: TabItem[]
+    context: RouterContext,
+    eventHandler: OeuvreEventHandler & PentagramEventHandler
 }
 
 export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
-    const { item, renderConfig, handleClickItem, tabItems } = props
+    const { item, context, eventHandler } = props
+    const { t } = useTranslation()
+    
+    const infoCardComponent = (
+        <OeuvreInfoCard
+            key={item.id}
+            item={item}
+            renderConfig={{
+                coverImage: true,
+                title: true,
+                mainInfo: true,
+                subInfo: true
+            }}
+            eventHandler={eventHandler}
+        />
+    )
+
+    const tabComponent = (
+        <Tab
+            items={[
+                {
+                    label: t("oeuvre.tab.pentagram"),
+                    items: item?.pentagram_nodesCollection?.edges.map((edge) => (
+                        <PentagramSelectView
+                            item={edge.node.pentagrams}
+                            renderConfig={{
+                                metaInfo: true,
+                                mainPentagon: true,
+                                description: false,
+                                revision: false
+                            }}
+                            eventHandler={eventHandler}
+                            options={{}}
+                            timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
+                            context={context}
+                        />
+                    )) || []
+                },
+                {
+                    label: t("oeuvre.tab.user"),
+                    items: [<span>미구현</span>]
+                },        
+            ]}
+        />
+    )
 
     return (
         <div className="oeuvre-select-view-component">
-            <OeuvreInfoCard
-                key={item.id}
-                item={item}
-                renderConfig={renderConfig}
-                handleClickItem={handleClickItem}
+            <SelectViewTemplate
+                components={{
+                    infoCard: infoCardComponent,
+                    tab: tabComponent
+                }}
             />
-            {tabItems &&
-                <Tab items={tabItems} />
-            }
         </div>
     )
 }
