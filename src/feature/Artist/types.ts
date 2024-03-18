@@ -2,3 +2,7 @@ import type { ArtistsInfoFragment, ArtistsMinimalInfoFragment } from '$lib/graph
 
 export type DBArtist = ArtistsInfoFragment
 export type DBMiniArtist = ArtistsMinimalInfoFragment
+
+export type ArtistEventHandler = {
+    selectArtist?: (artistId: string) => void
+}
