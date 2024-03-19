@@ -32,6 +32,9 @@ export default function OeuvreSearchView(props: OeuvreSearchViewProps) {
                         eventHandler={{
                             selectOeuvre: () => handleClickResult(item)
                         }}
+                        options={{
+                            enableSelect: true
+                        }}
                     />
                 ))}
             </div>

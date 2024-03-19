@@ -47,7 +47,8 @@ export default function OeuvreSearchView(props: GenreSelectViewProps) {
                                 subInfo: false
                             }}
                             options={{
-                                miniView: true
+                                miniView: true,
+                                enableSelect: true,
                             }}
                         />
                     )) || []

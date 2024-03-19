@@ -43,6 +43,9 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
                                 subInfo: false
                             }}
                             eventHandler={{}}
+                            options={{
+                                enableSelect: true
+                            }}
                         />
                     </div>
                 </HoverCard>

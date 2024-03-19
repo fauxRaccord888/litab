@@ -24,7 +24,8 @@ export default function MiniProfileModal(props: MiniProfileModalProps) {
                         item={item}
                         context={context}
                         options={{
-                            displayFollow: true
+                            displayFollow: true,
+                            enableSelect: true
                         }}
                     />
                 ))}
