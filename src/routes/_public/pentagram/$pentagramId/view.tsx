@@ -1,13 +1,14 @@
 import type { GetPentagramSelectInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 
 import { useQuery } from '@apollo/client';
-import { usePentagramNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getProcessedContext } from '$feature/navigate/utils';
+import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { TIME } from '$feature/Pentagram/constants';
 
 import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
@@ -28,11 +29,13 @@ function PentagramSelect() {
 
     const firstNode = getFirstNodeOfCollection(data?.pentagramsCollection)
     const navigate = usePentagramNavigate();
+    const oeuvreNavigate = useOeuvreNavigate();
 
-    const eventHandler = {
-        node: (nodeId: string) => navigate.nodeSelectDetail(nodeId, Route.fullPath, params),
-        interaction: (pentagramId: string) => navigate.pentagramSelectDetail(pentagramId, Route.fullPath, params),
-        revision: (revisionId: string) => navigate.revisionSelectDetail(revisionId, Route.fullPath, params)
+    const eventHandler: PentagramEventHandler & OeuvreEventHandler = {
+        pentagramInteractionModal: (pentagramId: string) => navigate.pentagramSelectDetail(pentagramId, Route.fullPath, params),
+        nodeDetailModal: (nodeId: string) => navigate.nodeSelectDetail(nodeId, Route.fullPath, params),
+        revisionDetailModal: (revisionId: string) => navigate.revisionSelectDetail(revisionId, Route.fullPath, params),
+        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
     // TODO THROW ERROR + AUTH

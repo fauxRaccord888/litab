@@ -1,10 +1,11 @@
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { GetPentagramUpdateInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
-import { usePentagramNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 import { 
     useInitialize, 
     useMutationHandler,
@@ -64,6 +65,7 @@ function PentagramUpdate() {
     const { t } = useTranslation()
     const errorToast = useThrottledErrorToast()
     const navigate = usePentagramNavigate()
+    const oeuvreNavigate = useOeuvreNavigate();
 
     useInitialize(pentagram)
     useMerge()
@@ -92,8 +94,12 @@ function PentagramUpdate() {
         errorToast(async () => {
             await handleUpdatePentagram(pentagramId)
             toast.success(t("pentagram.toast.success.updatePentagram"))
-            navigate.viewPentagram(pentagramId)
+            navigate.select(pentagramId)
         })
+    }
+
+    const oeuvreEventHandler: OeuvreEventHandler = {
+        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
     return (
@@ -123,6 +129,8 @@ function PentagramUpdate() {
                 handleDragAndTouchMove={handleDragAndTouchMove}
 
                 handleClickRevert={handleClickRevert}
+
+                eventHandler={oeuvreEventHandler}
             />
             <Outlet />
         </>

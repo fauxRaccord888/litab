@@ -2,7 +2,7 @@ import type { GetOeuvreExtensiveInfoByIdQuery } from "$lib/graphql/__generated__
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import type { PentagramEventHandler } from "$feature/Pentagram/types";
 import { useQuery } from "@apollo/client";
-import { useArtistNavigate, useGenreNavigate, usePentagramNavigate } from "$feature/navigate/hooks";
+import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks";
 import { getOeuvreExtensiveInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -20,6 +20,7 @@ function Oeuvre() {
     const unprocessedContext = Route.useRouteContext()
     const context = getProcessedContext(unprocessedContext)
     const pentagramNavigate = usePentagramNavigate()
+    const oeuvreNavigate = useOeuvreNavigate()
     const artistNavigate = useArtistNavigate()
     const genreNavigate = useGenreNavigate()
     const { data } = useQuery<GetOeuvreExtensiveInfoByIdQuery>(getOeuvreExtensiveInfoById_QUERY, {
@@ -33,6 +34,7 @@ function Oeuvre() {
         pentagramInteractionModal: (id: string) => pentagramNavigate.pentagramSelectDetail(id, Route.fullPath, params),
         nodeDetailModal: (nodeId: string) => pentagramNavigate.nodeSelectDetail(nodeId, Route.fullPath, params),
         revisionDetailModal: (revisionId: string) => pentagramNavigate.revisionSelectDetail(revisionId, Route.fullPath, params),
+        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
         selectGenreTag: (genreId: string) => genreNavigate.select(genreId)
     }

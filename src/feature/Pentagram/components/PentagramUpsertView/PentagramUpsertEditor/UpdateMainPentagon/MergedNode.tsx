@@ -1,4 +1,5 @@
 import type { DragEvent, MouseEvent, TouchEvent } from 'react';
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { IMergedNode } from '../../../../store/pentagramUpsertSlice/interface';
 import PositionAdjuster from '../../../common/PositionAdjuster';
 import OeuvreNode from '$feature/Oeuvre/components/OeuvreNode';
@@ -10,10 +11,11 @@ type MergedNodeProps = {
     handleClickNode?: (id: string) => void
     handleClickSelectedNode?: (id: string) => void
     handleDragAndTouchMove?:(e: DragEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => void
+    eventHandler: OeuvreEventHandler
 }
 
 export default function MergedNode(props: MergedNodeProps) {
-    const { item, handleClickNode, handleClickSelectedNode, handleDragAndTouchMove } = props
+    const { item, handleClickNode, handleClickSelectedNode, handleDragAndTouchMove, eventHandler } = props
     const { id, angle, distance, oeuvres, selected, deleted } = item
 
     const onClickNode = (e: MouseEvent<HTMLDivElement>) => {
@@ -53,7 +55,7 @@ export default function MergedNode(props: MergedNodeProps) {
                         onDragStart={onDragStart}
                         onDragOver={(e) => e.preventDefault()}
                     >
-                        <OeuvreNode item={oeuvres} enableHover={!selected} />
+                        <OeuvreNode item={oeuvres} enableHover={!selected} eventHandler={eventHandler} />
                     </div>
                 </PositionAdjuster>
             }

@@ -1,5 +1,6 @@
 import type { MouseEvent, TouchEvent, MutableRefObject, ForwardedRef, ChangeEvent } from 'react';
 import type { IMergedNode, IUnmergedChangeInfo } from '../../../store/pentagramUpsertSlice/interface';
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { forwardRef } from 'react';
 
 import UpdateMainPentagon from './UpdateMainPentagon';
@@ -28,6 +29,7 @@ export type PentagramUpsertEditorProps = {
     handleClickRevert?: (id: string) => void;
 
     handleSetDescription: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+    eventHandler: OeuvreEventHandler
 }
 
 export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertEditorProps, ref: ForwardedRef<HTMLDivElement>) {
@@ -47,7 +49,8 @@ export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertE
 
         handleClickRevert,
 
-        handleSetDescription
+        handleSetDescription,
+        eventHandler
     } = props
 
     
@@ -66,6 +69,8 @@ export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertE
                     handleClickSelectedPosition={handleClickSelectedPosition}
                     handleSetNewPosition={handleSetNewPosition}
                     handleDragAndTouchMove={handleDragAndTouchMove}
+
+                    eventHandler={eventHandler}
                 />
                 <PentagramDescription
                     description={description}

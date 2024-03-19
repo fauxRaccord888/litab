@@ -1,4 +1,4 @@
-import type { DBPentagram_SELECT } from "../../../types";
+import type { DBPentagram_SELECT, PentagramEventHandler } from "../../../types";
 import OeuvrePentagonWrapper from "../../common/OeuvrePentagonWrapper";
 import PentagramNode from "./PentagramNode";
 
@@ -7,11 +7,11 @@ import './style/selectMainPentagon.scss'
 type SelectMainPentagonProps = {
     timestamp: Date,
     pentagram_nodesCollection: DBPentagram_SELECT["pentagram_nodesCollection"],
-    handleClickNode?: (id: string) => void
+    eventHandler: PentagramEventHandler
 }
 
 export default function SelectMainPentagon(props: SelectMainPentagonProps) {
-    const { timestamp, pentagram_nodesCollection, handleClickNode } = props
+    const { timestamp, pentagram_nodesCollection, eventHandler } = props
     const items = pentagram_nodesCollection?.edges.map((edge) => edge.node)
 
     return pentagram_nodesCollection && (
@@ -21,9 +21,8 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
                     <PentagramNode 
                         key={item.id}
                         item={item}
-                        handleClickNode={handleClickNode}
+                        eventHandler={eventHandler}
                         timestamp={timestamp}
-
                     />
                 ))}
             </OeuvrePentagonWrapper>

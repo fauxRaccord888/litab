@@ -27,7 +27,7 @@ export default function PentagramSelectDetailModal(props: {
     const title = t("modal.title.interaction");
 
     const handleClickUpdate = () => {
-        if (pentagramId) pentagramNavigate.updatePentagram(pentagramId);
+        if (pentagramId) pentagramNavigate.update(pentagramId);
     };
 
     return (

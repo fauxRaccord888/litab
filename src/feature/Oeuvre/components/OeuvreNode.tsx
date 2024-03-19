@@ -1,4 +1,4 @@
-import type { DBOeuvre } from "../types";
+import type { DBOeuvre, OeuvreEventHandler } from "../types";
 import { useRef } from "react";
 import { useHover } from '$lib/hooks';
 import BucketImage from "$lib/components/common/BucketImage";
@@ -11,10 +11,11 @@ import "./style/oeuvreNode.scss"
 type OeuvreNodeProps = {
     item: DBOeuvre
     enableHover?: boolean | undefined
+    eventHandler: OeuvreEventHandler
 }
 
 export default function OeuvreNode(props: OeuvreNodeProps) {
-    const { item, enableHover } = props
+    const { item, enableHover, eventHandler } = props
     const { status, handleMouseLeave, handleMouseOver } = useHover()
     const ref = useRef<HTMLDivElement | null>(null)
     const position = ref.current?.getBoundingClientRect()
@@ -42,7 +43,7 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
                                 mainInfo: true,
                                 subInfo: false
                             }}
-                            eventHandler={{}}
+                            eventHandler={eventHandler}
                             options={{
                                 enableSelect: true
                             }}

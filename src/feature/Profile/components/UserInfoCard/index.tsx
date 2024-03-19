@@ -80,6 +80,7 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
         <div className="user-info-card-component">
             <InfoCardTemplate 
                 id={item.id}
+                onClick={eventHandler.selectProfile}
                 renderConfig={renderConfig}
                 components={{
                     coverImage,

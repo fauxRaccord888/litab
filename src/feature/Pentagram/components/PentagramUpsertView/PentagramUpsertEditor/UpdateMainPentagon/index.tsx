@@ -1,4 +1,5 @@
 import type { IMergedNode } from "../../../../store/pentagramUpsertSlice/interface";
+import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import type { ForwardedRef, MouseEvent, TouchEvent } from 'react';
 
 import { forwardRef } from 'react';
@@ -20,6 +21,7 @@ interface UpdateMainPentagonProps {
     handleClickSelectedPosition?: () => void,
     handleSetNewPosition?: (e: MouseEvent<HTMLDivElement>) => void,
     handleDragAndTouchMove?: (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => void
+    eventHandler: OeuvreEventHandler
 }
 
 export default forwardRef(function UpdateMainPentagon(props: UpdateMainPentagonProps, ref: ForwardedRef<HTMLDivElement>) {
@@ -31,7 +33,8 @@ export default forwardRef(function UpdateMainPentagon(props: UpdateMainPentagonP
         handleClickSelectedNode,
         handleClickSelectedPosition,
         handleSetNewPosition,
-        handleDragAndTouchMove
+        handleDragAndTouchMove,
+        eventHandler
     } = props
 
     return (
@@ -48,6 +51,7 @@ export default forwardRef(function UpdateMainPentagon(props: UpdateMainPentagonP
                             handleDragAndTouchMove={handleDragAndTouchMove}
                             handleClickSelectedNode={handleClickSelectedNode}
                             handleClickNode={handleClickNode}
+                            eventHandler={eventHandler}
                         />
                     ))
                 }

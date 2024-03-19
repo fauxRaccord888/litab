@@ -1,6 +1,7 @@
 import type { ProcessedContext } from '$lib/types/components';
 import type { DBProfiles, ProfileEventHandler } from "../types";
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 
 import { useTranslation } from 'react-i18next';
 import { TIME } from '$feature/Pentagram/constants';
@@ -16,7 +17,7 @@ import "./style/profileSelectView.scss"
 export default function ProfileSelectView(props: {
     item: DBProfiles
     context: ProcessedContext,
-    eventHandler: ProfileEventHandler & PentagramEventHandler
+    eventHandler: ProfileEventHandler & PentagramEventHandler & OeuvreEventHandler
 }) {
     const { item, context, eventHandler } = props
     const { t } = useTranslation()
