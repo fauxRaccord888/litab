@@ -1,4 +1,4 @@
-import type { RouterContext } from '$lib/types/components';
+import type { ProcessedContext } from '$lib/types/components';
 import type { DBMiniProfile, ProfileInfoCardOptions } from "../types";
 
 import { useHandleFollow } from '../hooks';
@@ -9,7 +9,7 @@ import "./style/miniProfile.scss"
 
 type MiniProfileProps = {
     item: DBMiniProfile,
-    context: RouterContext,
+    context: ProcessedContext,
     options: ProfileInfoCardOptions
 }
 

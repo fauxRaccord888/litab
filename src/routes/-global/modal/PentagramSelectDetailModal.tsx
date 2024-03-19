@@ -1,5 +1,5 @@
 import type { GetPentagramsSelectUserInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
-import type { DBAuthUser } from '$feature/auth/type';
+import type { ProcessedContext } from '$lib/types/components';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { usePentagramNavigate } from "$feature/navigate/hooks"

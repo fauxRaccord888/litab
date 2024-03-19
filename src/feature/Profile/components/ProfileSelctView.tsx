@@ -1,4 +1,4 @@
-import type { RouterContext } from '$lib/types/components';
+import type { ProcessedContext } from '$lib/types/components';
 import type { DBProfiles, ProfileEventHandler } from "../types";
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 
@@ -15,7 +15,7 @@ import "./style/profileSelectView.scss"
 
 export default function ProfileSelectView(props: {
     item: DBProfiles
-    context: RouterContext,
+    context: ProcessedContext,
     eventHandler: ProfileEventHandler & PentagramEventHandler
 }) {
     const { item, context, eventHandler } = props
