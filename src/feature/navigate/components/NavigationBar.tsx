@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next'
+import { Link } from '@tanstack/react-router'
 import HomeIcon from '$lib/components/icons/HomeIcon'
 import SearchIcon from '$lib/components/icons/SearchIcon'
 import UserIcon from '$lib/components/icons/UserIcon'
 import PentagonIcon from '$lib/components/icons/PentagonIcon'
 import PlusIcon from '$lib/components/icons/PlusIcon'
 
-import { Link } from '@tanstack/react-router'
-
 import "./style/navigationBar.scss"
+
 export default function NavigationBar() {
     const { t } = useTranslation()
     return (

@@ -8,17 +8,7 @@ export function useArtistNavigate() {
         navigate({ to: '/artist/$id', params: { id } })
     }, [navigate])
 
-    const oeuvreTabNavigator = useCallback((id: string) => {
-        navigate({ to: '/artist/$id/oeuvre', params: { id } })
-    }, [navigate])
-
-    const followerTabNavigator = useCallback((id: string) => {
-        navigate({ to: '/artist/$id/follower', params: { id } })
-    }, [navigate])
-
     return {
         select: selectNavigator,
-        oeuvreTab: oeuvreTabNavigator,
-        followerTab: followerTabNavigator
     }
 }

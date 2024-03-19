@@ -3,7 +3,6 @@
 .tab-component {
     @include flex;
     @include flex-col;
-    margin-top: calc(var(--base-size) * 1.5);
 
     .tab-component__header {
         @include flex;
@@ -31,11 +30,11 @@
     }
 
     .tab-component__body {
-        @include child-top-m(calc(var(--base-size) * 0.75));
         border-top: 2px solid rgba(var(--font-color), 0.5);
 
-        .tab-component__item {
-            @include padding-(calc(var(--base-size) * 0.75));
+        > * {
+            @include padding-(calc(var(--base-size) * 1.25));
+            width: calc(100% - calc(var(--base-size) * 2.5));
             border-bottom: 2px solid rgba(var(--font-color), 0.5);
         }
     }
