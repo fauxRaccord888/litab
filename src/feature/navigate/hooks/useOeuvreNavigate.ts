@@ -8,17 +8,7 @@ export function useOeuvreNavigate() {
         navigate({ to: '/oeuvre/$id', params: { id } })
     }, [navigate])
 
-    const pentagramTabNavigator = useCallback((id: string) => {
-        navigate({ to: '/oeuvre/$id/pentagram', params: { id } })
-    }, [navigate])
-
-    const followerTabNavigator = useCallback((id: string) => {
-        navigate({ to: '/oeuvre/$id/follower', params: { id } })
-    }, [navigate])
-
     return {
         select: selectNavigator,
-        pentagramTab: pentagramTabNavigator,
-        followerTab: followerTabNavigator
     }
 }
