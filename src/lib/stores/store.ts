@@ -12,14 +12,17 @@ import {
 import storage from 'redux-persist/lib/storage' 
 
 import pentagramUpsertReducer from "$feature/Pentagram/store/pentagramUpsertSlice";
+import authReducer from "$feature/auth/store/authSlice";
 
 const baseReducer = combineReducers({
     pentagramUpsert: pentagramUpsertReducer,
+    auth: authReducer
 })
 
 const persistConfig = {
     key: 'root',
-    storage
+    storage,
+    blacklist: ["auth"]
 }
 
 const persistedReducer  = persistReducer(
