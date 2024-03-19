@@ -11,6 +11,7 @@ import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { getProcessedContext } from '$feature/navigate/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
@@ -36,7 +37,8 @@ function FollowersModalComponent(props: {
     items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
+    const unprocessedContext = Route.useRouteContext()
+    const context = getProcessedContext(unprocessedContext)
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 

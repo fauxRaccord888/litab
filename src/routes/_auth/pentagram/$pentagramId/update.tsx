@@ -22,6 +22,7 @@ import {
 import toast from 'react-hot-toast';
 import { getPentagramUpdateInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { getProcessedContext } from '$feature/navigate/utils';
 
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
@@ -32,6 +33,7 @@ export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
     // COMMENT 검증 및 redirect 로직은 tanstack router로 통일
     // 로더에서 fetch는 최소화(이중 fetch되는 경우에 한해서만 lodaer에서 fetch => refetch가 까다로워짐 등)
     loader: async ({ context, params }) => {
+        const { currentUser } = getProcessedContext(context)
         const queryOption = { query: getPentagramUpdateInfoById_QUERY,
             variables: { id: params.pentagramId }
         }
@@ -44,7 +46,7 @@ export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
             })
         }
 
-        if (pentagram?.users.id !== context?.sessionUser?.id) {
+        if (pentagram?.users.id !== currentUser?.id) {
             throw redirect({
                 to: '/error',
             })

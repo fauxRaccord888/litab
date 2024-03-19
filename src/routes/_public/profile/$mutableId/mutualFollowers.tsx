@@ -7,6 +7,7 @@ import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
 import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
+import { getProcessedContext } from '$feature/navigate/utils';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
@@ -21,7 +22,8 @@ export const Route = createFileRoute('/_public/profile/$mutableId/mutualFollower
 
 function FollowersModal() {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
+    const unprocessedContext = Route.useRouteContext()
+    const context = getProcessedContext(unprocessedContext)
     const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const targetUser = getFirstNodeOfCollection(data?.usersCollection)
 
@@ -41,7 +43,8 @@ function MutualFollowingModalComponent(props: {
     items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
+    const unprocessedContext = Route.useRouteContext()
+    const context = getProcessedContext(unprocessedContext)
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
