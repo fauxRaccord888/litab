@@ -40,6 +40,7 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                     label: t("oeuvre.tab.pentagram"),
                     items: item?.pentagram_nodesCollection?.edges.map((edge) => (
                         <PentagramSelectView
+                            key={edge.node.pentagrams.id}
                             item={edge.node.pentagrams}
                             renderConfig={{
                                 metaInfo: true,

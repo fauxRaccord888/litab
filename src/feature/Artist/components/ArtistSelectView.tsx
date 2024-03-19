@@ -37,6 +37,7 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
                     label: t("genre.tab.oeuvre"),
                     items: item?.oeuvres_artistsCollection?.edges.map((edge) => (
                         <OeuvreInfoCard
+                            key={edge.node.oeuvres.id}
                             item={edge.node.oeuvres}
                             renderConfig={{
                                 coverImage: true,
