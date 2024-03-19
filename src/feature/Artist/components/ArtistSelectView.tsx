@@ -47,7 +47,8 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
                             }}
                             eventHandler={eventHandler}
                             options={{
-                                miniView: true
+                                miniView: true,
+                                enableSelect: true,
                             }}
                         />
                     )) || []

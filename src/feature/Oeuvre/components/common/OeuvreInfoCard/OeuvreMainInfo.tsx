@@ -32,7 +32,7 @@ export default function OeuvreMainInfo(props: OeuvreMainInfoProps) {
                 eventHandler.selectArtistTag ? "oeuvre-main-info-component__artist--pointer" : ""
             ].join(" ")}
             key={edge.node.artists.id}
-            onClick={(e) => onClickArtist(e, edge.node.artists.id)}
+            onClickCapture={(e) => onClickArtist(e, edge.node.artists.id)}
         >
             {edge.node.artists.name}
         </span>
@@ -46,7 +46,7 @@ export default function OeuvreMainInfo(props: OeuvreMainInfoProps) {
         return (
             <span 
                 key={edge.node.genres.id}
-                onClick={(e) => onClickGenre(e, edge.node.genres.id)}
+                onClickCapture={(e) => onClickGenre(e, edge.node.genres.id)}
                 className={[
                     "oeuvre-main-info-component__artist",
                     isLightFont ? "light-font-color" : "",
