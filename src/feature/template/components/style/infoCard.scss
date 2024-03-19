@@ -15,6 +15,10 @@
         @include child-left-m(calc(var(--base-size) * 1.25));
     }
 
+    &.info-card-template__main-container--pointer {
+        @include pointer;
+    }
+
     .info-card-template__cover-container {
         @include flex;
         @include align-center;
@@ -92,10 +96,6 @@
                     @include flex;
                     @include align-center;
                     font-size: calc(var(--base-size) * 1.5);
-
-                    &.info-card-template__title--pointer {
-                        @include pointer;
-                    }
                 }
             }
         }

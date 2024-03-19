@@ -1,5 +1,5 @@
 import type { ISlotComponent, ISlotRenderConfig } from "../type"
-import type { MouseEventHandler } from "react"
+import type { MouseEvent } from "react"
 import { filterComponents } from "../util"
 import "./style/infoCard.scss"
 
@@ -7,7 +7,10 @@ export type InfoCardRenderConfigKey = "coverImage" | "title" | "mainInfo" | "sub
 
 export type InfoCardOptions = {
     miniView?: boolean,
-    roundedCover?: boolean    
+    roundedCover?: boolean,
+    // COMMENT Oeuvre 컴포넌트의 경우, Oeuvre 엔티티가 2번 사용됨(작품 자체, 작품 관련 펜타그램의 호버카드)
+    // 이 경우, 동일한 이벤트 핸들러를 사용하므로 아이템 클릭 가능 여부를 이벤트 핸들러만으로 판단할 수 없음
+    enableSelect?: boolean 
 }
 
 type InfoCardProps = {
@@ -15,12 +18,17 @@ type InfoCardProps = {
     components: ISlotComponent<InfoCardRenderConfigKey>,
     renderConfig: ISlotRenderConfig<InfoCardRenderConfigKey>,
     options?: InfoCardOptions,
-    onClick?: MouseEventHandler<HTMLDivElement>
+    onClick?: ((id: string) => void) | undefined | null
 }
 
 export default function InfoCardTemplate(props: InfoCardProps) {
-    const { components, renderConfig, options, onClick, ...restProps } = props
+    const { id, components, renderConfig, options, onClick, ...restProps } = props
     const filteredComponents = filterComponents<InfoCardRenderConfigKey>(components, renderConfig)
+
+    const onClickItem = (e: MouseEvent) => {
+        e.preventDefault()
+        if (onClick && options?.enableSelect) onClick(id)
+    }
 
     return (
         <div 
@@ -28,7 +36,9 @@ export default function InfoCardTemplate(props: InfoCardProps) {
             className={[
                 "info-card-template",
                 options?.miniView ? "mini-view" : "",
+                (onClick && options?.enableSelect) ? "info-card-template__main-container--pointer" :""
             ].join(" ")}
+            onClick={onClickItem}
         >
             {filteredComponents?.coverImage &&
                 <div 
@@ -68,13 +78,7 @@ export default function InfoCardTemplate(props: InfoCardProps) {
                                 filteredComponents.mainInfo) &&
                                     <div className="info-card-template__main-info-container" >
                                         {filteredComponents.title &&                                    
-                                            <div 
-                                                className={[
-                                                    "info-card-template__title",
-                                                    onClick ? "info-card-template__title--pointer" :""
-                                                ].join(" ")}
-                                                onClick={onClick}
-                                            >
+                                            <div className="info-card-template__title">
                                                 {filteredComponents.title}
                                             </div>
                                         }
