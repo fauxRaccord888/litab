@@ -1,16 +1,16 @@
 import type { MouseEvent } from "react";
-import type { DBPentagramRevisions } from "../../../types";
+import type { DBPentagramRevisions, PentagramEventHandler } from "../../../types";
 import { useTranslatedRelativeTime } from "$lib/hooks";
 import { Trans } from "react-i18next";
 import "./style/revision.scss"
 
 type RevisionProps = {
     item: DBPentagramRevisions,
-    handleClickRevision?: (id: string) => void
+    eventHandler?: PentagramEventHandler
 }
 
 export default function Revision(props: RevisionProps) {
-    const { item, handleClickRevision } = props
+    const { item, eventHandler } = props
     const {
         created_at,
         pentagram_revision_upsert_recordsCollection: upsert, 
@@ -24,7 +24,7 @@ export default function Revision(props: RevisionProps) {
 
     const onClickRevision = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleClickRevision) handleClickRevision(item.id)
+        if (eventHandler?.revisionDetailModal) eventHandler.revisionDetailModal(item.id)
     }
 
     return (

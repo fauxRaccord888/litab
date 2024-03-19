@@ -1,8 +1,9 @@
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
-import { usePentagramNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 import { 
     useMutationHandler,
     useMainPentagonEventHandler, 
@@ -32,6 +33,7 @@ function PentagramInsert() {
     const { t } = useTranslation()
     const errorToast = useThrottledErrorToast()
     const navigate = usePentagramNavigate()
+    const oeuvreNavigate = useOeuvreNavigate();
 
     useInitialize(null)
     useMerge()
@@ -60,8 +62,12 @@ function PentagramInsert() {
         errorToast(async () => {
             const result = await handleInsertPentagram()
             toast.success(t("pentagram.toast.success.createPentagram"))
-            navigate.viewPentagram(result)
+            navigate.select(result)
         })
+    }
+
+    const oeuvreEventHandler: OeuvreEventHandler = {
+        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
     return (
@@ -91,6 +97,8 @@ function PentagramInsert() {
                 handleDragAndTouchMove={handleDragAndTouchMove}
 
                 handleClickRevert={handleClickRevert}
+
+                eventHandler={oeuvreEventHandler}
             />
             <Outlet />
         </>

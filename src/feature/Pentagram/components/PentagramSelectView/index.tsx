@@ -1,32 +1,18 @@
-import type { DBPentagram_SELECT } from "../../types";
-import type { ISlotRenderConfig } from '$feature/template/type';
-import type { RouterContext } from "$lib/types/components";
-
+import type { DBPentagram_SELECT, PentagramEventHandler, PentagramSelectOptions, PentagramSelectRenderConfig } from "../../types";
 import type { ProcessedContext } from "$lib/types/components";
+import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
+
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
 import SelectDescription from "./SelectDescription";
 import SelectRevisionList from "./SelectRevisionList";
 import './style/pentagramSelectView.scss'
 
-type PentagramSelectRenderConfigKey = "metaInfo" | "mainPentagon" | "description" | "revision"
-type PentagramSelectRenderConfig = ISlotRenderConfig<PentagramSelectRenderConfigKey>
-type PentagramSelectOptions = {
-    horizontalMain?: boolean | null | undefined,
-    displayRevisionIds?: string[] | null | undefined
-}
-
-export type PentagramEventHandler = {
-    'node'?: (nodeId: string) => void,
-    'interaction'?: (pentagramId: string) => void,
-    'revision'?: (revisionId: string) => void 
-}
-
 export type PentagramSelectViewProps = {
     item: DBPentagram_SELECT,
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
-    eventHandler: PentagramEventHandler,
+    eventHandler: PentagramEventHandler & OeuvreEventHandler,
     context: ProcessedContext,
     timestamp: Date
 }
@@ -41,14 +27,14 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
                 id={id}
                 users={users} 
                 created_at={created_at} 
-                handleClickInteraction={eventHandler.interaction}
+                eventHandler={eventHandler}
                 context={context}
             />
             <div className="pentagram-select-view-component__main-container">
                 {renderConfig.mainPentagon && 
                     <SelectMainPentagon 
                         timestamp={timestamp}
-                        handleClickNode={eventHandler.node}
+                        eventHandler={eventHandler}
                         pentagram_nodesCollection={pentagram_nodesCollection}
                     />
                 }
@@ -65,9 +51,9 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
             }
             {renderConfig.revision &&
                 <SelectRevisionList 
-                    displayRevisionIds={options.displayRevisionIds}
                     pentagram_revisionsCollection={pentagram_revisionsCollection}
-                    handleClickRevision={eventHandler.revision}
+                    eventHandler={eventHandler}
+                    options={options}
                 />
             }
         </div>

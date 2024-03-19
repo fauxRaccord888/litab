@@ -4,9 +4,10 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import type { GetProfileByMutableIdQuery } from "$lib/graphql/__generated__/graphql";
 import type { ProfileEventHandler } from "$feature/Profile/types";
 import type { PentagramEventHandler } from "$feature/Pentagram/types";
+import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 /* hooks */
 import { useQuery } from "@apollo/client";
-import { usePentagramNavigate, useProfileNavigate } from "$feature/navigate/hooks";
+import { useOeuvreNavigate, usePentagramNavigate, useProfileNavigate } from "$feature/navigate/hooks";
 import { useHandleFollow } from "$feature/Profile/hooks";
 /* fetch */
 import { getProfileByMutableId_QUERY } from "$feature/Profile/graphql";
@@ -27,6 +28,7 @@ function Profile() {
     const unprocessedContext = Route.useRouteContext()
     const context = getProcessedContext(unprocessedContext)
     const navigate = useProfileNavigate()
+    const oeuvreNavigate = useOeuvreNavigate()
     const pentagramNavigate = usePentagramNavigate()
     const follow = useHandleFollow()
 
@@ -35,7 +37,7 @@ function Profile() {
     
     if (!item) return null
 
-    const eventHandler: ProfileEventHandler & PentagramEventHandler = {
+    const eventHandler: ProfileEventHandler & PentagramEventHandler & OeuvreEventHandler = {
         follow,
         profileInteractionModal: navigate.profileSelectDetail,
         followersModal: navigate.followersDetail,
@@ -43,7 +45,8 @@ function Profile() {
         mutualFollowersModal: navigate.mutualFollowersDetail,
         pentagramInteractionModal: (id: string) => pentagramNavigate.pentagramSelectDetail(id, Route.fullPath, params),
         nodeDetailModal: (nodeId: string) => pentagramNavigate.nodeSelectDetail(nodeId, Route.fullPath, params),
-        revisionDetailModal: (revisionId: string) => pentagramNavigate.revisionSelectDetail(revisionId, Route.fullPath, params)
+        revisionDetailModal: (revisionId: string) => pentagramNavigate.revisionSelectDetail(revisionId, Route.fullPath, params),
+        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
     return (
