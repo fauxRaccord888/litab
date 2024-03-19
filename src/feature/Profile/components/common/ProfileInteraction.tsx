@@ -1,7 +1,7 @@
 /* types */
 import type { MouseEvent } from 'react';
 import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions } from "../../types"
-import type { RouterContext } from '$lib/types/components';
+import type { ProcessedContext } from '$lib/types/components';
 /* hooks */
 import { useTranslation } from "react-i18next";
 /* components */
@@ -15,7 +15,7 @@ type ProfileInteractionsProps = {
     mutable_id: DBProfiles["mutable_id"]
     isMe?: boolean | undefined,
     followed?: boolean | undefined,
-    context: RouterContext
+    context: ProcessedContext
     eventHandler: ProfileEventHandler
     options: ProfileInfoCardOptions
 }

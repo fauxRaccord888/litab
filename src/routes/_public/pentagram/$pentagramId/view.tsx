@@ -1,4 +1,5 @@
 import type { GetPentagramSelectInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
+import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 import { useQuery } from '@apollo/client';
@@ -6,6 +7,7 @@ import { usePentagramNavigate } from "$feature/navigate/hooks"
 
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { getProcessedContext } from '$feature/navigate/utils';
 import { TIME } from '$feature/Pentagram/constants';
 
 import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
@@ -18,7 +20,8 @@ export const Route = createFileRoute('/_public/pentagram/$pentagramId/view')({
 
 function PentagramSelect() {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
+    const unprocessedContext = Route.useRouteContext()
+    const context = getProcessedContext(unprocessedContext)
     const { data } = useQuery<GetPentagramSelectInfoByIdQuery>(getPentagramSelectInfoById_QUERY, {
         variables: { id: params.pentagramId }
     })

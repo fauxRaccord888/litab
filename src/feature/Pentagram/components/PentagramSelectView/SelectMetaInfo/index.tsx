@@ -12,7 +12,7 @@ type SelectMetaInfoProps = {
     created_at: string
     users: DBMiniProfile
     handleClickInteraction?: (pentagramId: string) => void
-    context: RouterContext
+    context: ProcessedContext
 }
 
 export default function SelectMetaInfo(props: SelectMetaInfoProps) {

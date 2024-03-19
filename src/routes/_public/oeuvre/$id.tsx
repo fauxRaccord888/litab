@@ -6,6 +6,7 @@ import { useArtistNavigate, useGenreNavigate, usePentagramNavigate } from "$feat
 import { getOeuvreExtensiveInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { getProcessedContext } from "$feature/navigate/utils";
 import OeuvreSelectView from "$feature/Oeuvre/components/OeuvreSelectView";
 
 export type OeuvreSelectRoute = typeof Route
@@ -16,7 +17,8 @@ export const Route = createFileRoute('/_public/oeuvre/$id')({
 
 function Oeuvre() {
     const params = Route.useParams()
-    const context = Route.useRouteContext() 
+    const unprocessedContext = Route.useRouteContext()
+    const context = getProcessedContext(unprocessedContext)
     const pentagramNavigate = usePentagramNavigate()
     const artistNavigate = useArtistNavigate()
     const genreNavigate = useGenreNavigate()

@@ -1,5 +1,6 @@
 import type { Route } from 'routes/__root';
 import { useNavigate } from '@tanstack/react-router'
+import { getProcessedContext } from '$feature/navigate/utils'
 
 import PentagramSelectDetailModal from './modal/PentagramSelectDetailModal';
 import NodeUpsertDetailModal from './modal/NodeUpsertDetailModal';
@@ -12,7 +13,8 @@ export default function ModalController(props: {
 }) {
     const { route } = props
     const { nodeUpsertId, insertNode, pentagramInteractionId, nodeViewId, revisionViewId } = route.useSearch()
-    const { currentUser } = route.useRouteContext()
+    const unprocessedContext = route.useRouteContext()
+    const context = getProcessedContext(unprocessedContext)
     const navigate = useNavigate({ from: route.fullPath })
 
     const handleClickClose = () => {
@@ -54,7 +56,7 @@ export default function ModalController(props: {
             }
             {pentagramInteractionId &&
                 <PentagramSelectDetailModal
-                    currentUser={currentUser}
+                    context={context}
                     pentagramId={pentagramInteractionId}
                     handleClickClose={handleClickClose}
                 />

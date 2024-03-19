@@ -1,17 +1,12 @@
+import { getProcessedContext } from '$feature/navigate/utils'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth')({
     beforeLoad: async ({ context }) => {
-        const { sessionUser, currentUser } = context
-        if (!sessionUser) {
-            throw redirect({
-                to: '/account/signIn',
-            })
-        }
-
+        const { currentUser } = getProcessedContext(context)
         if (!currentUser) {
             throw redirect({
-                to: '/error',
+                to: '/account/signin',
             })
         }
     },

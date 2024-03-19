@@ -2,6 +2,7 @@ import type { DBPentagram_SELECT } from "../../types";
 import type { ISlotRenderConfig } from '$feature/template/type';
 import type { RouterContext } from "$lib/types/components";
 
+import type { ProcessedContext } from "$lib/types/components";
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
 import SelectDescription from "./SelectDescription";
@@ -26,7 +27,7 @@ export type PentagramSelectViewProps = {
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
     eventHandler: PentagramEventHandler,
-    context: RouterContext,
+    context: ProcessedContext,
     timestamp: Date
 }
 

@@ -1,4 +1,4 @@
-import type { RouterContext } from "$lib/types/components"
+import type { ProcessedContext } from "$lib/types/components"
 import type { DBMiniProfile } from "../../types";
 
 import Modal from "$feature/portal/components/Modal";
@@ -9,7 +9,7 @@ import './style/miniProfileModal.scss'
 type MiniProfileModalProps = {
     items: DBMiniProfile[]
     title: string,
-    context: RouterContext,
+    context: ProcessedContext,
     handleClickClose: () => void
 }
 

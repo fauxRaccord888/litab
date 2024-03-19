@@ -1,11 +1,11 @@
 import type { AppStore } from '$lib/stores/store'
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { Outlet, rootRouteWithContext, ScrollRestoration } from '@tanstack/react-router'
-import { checkSessionUser, getTableUserOrRegister } from '$feature/auth/function'
 import { getScrollKey } from '$lib/utils/route/getScrollKey'
-import ModalController from './-global/-modal';
+import { getUserObservable } from '$feature/auth/utils';
 
 import Layout from '$lib/layout/Layout'
+import ModalController from './-global/-modal';
 import NavigationBar from '$feature/navigate/components/NavigationBar'
 
 export type RootSearch = {
@@ -22,12 +22,10 @@ export const Route = rootRouteWithContext<{
 }>()({
     component: RootComponent,
     beforeLoad: async ({context}) => {
-        const { apolloClient } = context
-        const sessionUser = await checkSessionUser()
-        const currentUser = await getTableUserOrRegister({ sessionUser, apolloClient })
+        const { store, apolloClient } = context
+        const userObservable = await getUserObservable(store, apolloClient)
         return {
-            sessionUser,
-            currentUser
+            userObservable
         }
     },
     validateSearch: (search: Record<string, unknown>): RootSearch => {

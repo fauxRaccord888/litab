@@ -1,5 +1,5 @@
 import type { DBOeuvre, OeuvreEventHandler } from '../types';
-import type { RouterContext } from '$lib/types/components';
+import type { ProcessedContext } from '$lib/types/components';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import { useTranslation } from 'react-i18next';
 import { TIME } from '$feature/Pentagram/constants';
@@ -11,7 +11,7 @@ import Tab from '$lib/components/common/Tab';
 
 type OeuvreSelectViewProps = {
     item: DBOeuvre
-    context: RouterContext,
+    context: ProcessedContext,
     eventHandler: OeuvreEventHandler & PentagramEventHandler
 }
 

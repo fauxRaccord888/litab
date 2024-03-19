@@ -1,5 +1,5 @@
 import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions, ProfileInfoCardRenderOptions } from "../../types"
-import type { RouterContext } from '$lib/types/components';
+import type { ProcessedContext } from '$lib/types/components';
 import { calcFollowings, calcMutualFollowers } from "$feature/Profile/util";
 
 import ProfileCoverImage from "../common/ProfileCoverImage";
@@ -13,7 +13,7 @@ import './style/userInfoCard.scss'
 
 type ProfileInfoCardProps = {
     item: DBProfiles
-    context: RouterContext,
+    context: ProcessedContext,
     renderConfig: ProfileInfoCardRenderOptions
     options: ProfileInfoCardOptions
     eventHandler: ProfileEventHandler
