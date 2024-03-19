@@ -47,6 +47,7 @@ export default function ProfileSelectView(props: {
                 label: t("user.tab.pentagram"),
                 items: item?.pentagramsCollection?.edges.map((edge) => (
                     <PentagramSelectView
+                        key={edge.node.id}
                         item={edge.node}
                         renderConfig={{
                             metaInfo: true,
@@ -67,6 +68,7 @@ export default function ProfileSelectView(props: {
                 label: t("user.tab.feed"),
                 items: item?.pentagram_revisionsCollection?.edges.map((edge) => (
                     <FeedItem
+                        key={edge.node.id}
                         item={edge.node}
                         renderConfig={{
                             item: true,

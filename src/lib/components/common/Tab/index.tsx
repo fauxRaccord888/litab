@@ -25,6 +25,7 @@ export default function Tab(props: TabProps) {
             <div className="tab-component__header">
                 {items.map((item, idx) => (
                     <span 
+                        key={idx}
                         className={[
                             "tab-component__header-label",
                             idx === selected ? "tab-component__header-label--selected" : ""
@@ -40,11 +41,7 @@ export default function Tab(props: TabProps) {
                     {items.map((item, idx) => {
                         if (idx !== selected) return null
                         return (
-                            item.items.map((it) => (
-                                <div className="tab-component__item">
-                                    {it}
-                                </div>
-                            ))
+                            item.items.map((it) => it)
                         )
                     })}
             </div>

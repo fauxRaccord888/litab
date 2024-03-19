@@ -37,6 +37,7 @@ export default function OeuvreSearchView(props: GenreSelectViewProps) {
                     label: t("genre.tab.oeuvre"),
                     items: item?.oeuvres_genresCollection?.edges.map((edge) => (
                         <OeuvreInfoCard
+                            key={edge.node.oeuvres.id}
                             item={edge.node.oeuvres}
                             eventHandler={eventHandler}
                             renderConfig={{
