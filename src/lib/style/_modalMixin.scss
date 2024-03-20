@@ -1,0 +1,18 @@
+@import "src/lib/style/atomicMixin";
+
+@mixin menu-modal {
+    @include flex-col;
+    @include flex-center;
+    @include w-full;
+    @include child-top-m(calc(var(--base-size) * 1));
+
+    .button-component {
+        @include flex;
+        @include flex-center;
+        @include rounded-lg;
+        @include pointer;
+        @include padding-(calc(var(--base-size) * 0.4));
+        @include w-full;
+        background-color: rgb(var(--dark-gray));
+    }
+}

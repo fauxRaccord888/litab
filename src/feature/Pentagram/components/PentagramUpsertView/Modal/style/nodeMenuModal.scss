@@ -1,0 +1,14 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/modalMixin";
+
+.node-menu-modal-component__inner-cotainer {
+    @include menu-modal;
+
+    .node-menu-modal-component__button--recover {
+        background-color: rgba(var(--success), 0.5);
+    }
+
+    .node-menu-modal-component__button--remove {
+        background-color: rgba(var(--danger), 0.5);
+    }
+}
