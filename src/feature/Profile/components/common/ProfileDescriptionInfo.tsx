@@ -45,7 +45,7 @@ export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProp
                     className="profile-description-info-component__mutual-followers-list"
                 >
                     <Trans
-                        i18nKey="header.followedBy" 
+                        i18nKey="profile.header.followedBy" 
                         values={{ 
                             additionalCount,
                             mutualFollowers: displayedMutualFollowers, 

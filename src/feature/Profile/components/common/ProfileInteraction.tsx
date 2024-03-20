@@ -45,7 +45,7 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
                                 primary={!followed}
                                 onClick={onClickFollow}
                             >
-                                {followed ? t('header.followButtonLabel.unfollow') : t('header.followButtonLabel.follow')}
+                                {followed ? t('profile.header.followButtonLabel.unfollow') : t('profile.header.followButtonLabel.follow')}
                             </Button>
                         </div>
                     }
