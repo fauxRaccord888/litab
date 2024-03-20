@@ -31,7 +31,7 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
 
     const onClickInteraction = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.profileInteractionModal) eventHandler.profileInteractionModal(mutable_id)
+        if (eventHandler.profileSelectMenuModal) eventHandler.profileSelectMenuModal(mutable_id)
     }
 
     return (
@@ -54,7 +54,7 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
                             onClick={onClickInteraction}
                             className={[
                                 "profile-interaction-component__more-interaction",
-                                eventHandler.profileInteractionModal ? "profile-interaction-component__more-interaction--pointer" : ""
+                                eventHandler.profileSelectMenuModal ? "profile-interaction-component__more-interaction--pointer" : ""
                             ].join(" ")}
                         >
                             <MoreIcon />

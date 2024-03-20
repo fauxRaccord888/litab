@@ -24,7 +24,7 @@ export default function Revision(props: RevisionProps) {
 
     const onClickRevision = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler?.revisionDetailModal) eventHandler.revisionDetailModal(item.id)
+        if (eventHandler?.revisionSelectModal) eventHandler.revisionSelectModal(item.id)
     }
 
     return (

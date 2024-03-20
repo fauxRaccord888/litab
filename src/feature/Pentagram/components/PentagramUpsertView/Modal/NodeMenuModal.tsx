@@ -1,9 +1,10 @@
+import type { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "$feature/portal/components/Modal";
-import "./style/nodeInteractionModal.scss"
-import { MouseEvent } from "react";
+import Button from "$lib/components/common/Button";
+import "./style/nodeMenuModal.scss"
 
-type NodeInteractionModalProps = {
+type NodeMenuModalProps = {
     title: string,
     isDeleted?: boolean | null | undefined
     handleClickClose: () => void
@@ -11,7 +12,7 @@ type NodeInteractionModalProps = {
     handleClickRemove: () => void,
 }
 
-export default function NodeInteractionModal(props: NodeInteractionModalProps) {
+export default function NodeMenuModal(props: NodeMenuModalProps) {
     const { title, isDeleted, handleClickClose, handleClickRecover, handleClickRemove } = props
     const { t } = useTranslation()
 
@@ -27,30 +28,28 @@ export default function NodeInteractionModal(props: NodeInteractionModalProps) {
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
-            <div className="node-innteraction-modal-component__inner-cotainer">
+            <div className="node-menu-modal-component__inner-cotainer">
                 {
                     isDeleted &&
-                    <span 
+                    <Button 
                         className={[
-                            "node-innteraction-modal-component__interaction-button",
-                            "node-innteraction-modal-component__interaction-button--recover"
+                            "node-menu-modal-component__button--recover"
                         ].join(' ')}
                         onClick={onClickRecover}
                     >
-                        {t("pentagram.changes.recover")}
-                    </span>
+                        {t("node.menu.recover")}
+                    </Button>
                 }
                 {
                     !isDeleted &&
-                    <span 
+                    <Button 
                         className={[
-                            "node-innteraction-modal-component__interaction-button",
-                            "node-innteraction-modal-component__interaction-button--remove"
+                            "node-menu-modal-component__button--remove"
                         ].join(' ')}
                         onClick={onClickRemove}
                     >
-                        {t("pentagram.changes.remove")}
-                    </span>
+                        {t("node.menu.remove")}
+                    </Button>
                 }
             </div>
         </Modal>

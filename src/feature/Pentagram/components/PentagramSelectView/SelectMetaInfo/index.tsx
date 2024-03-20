@@ -21,7 +21,7 @@ export default function SelectMetaInfo(props: SelectMetaInfoProps) {    const { 
 
     const onClickIcon = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.pentagramInteractionModal) eventHandler.pentagramInteractionModal(id)
+        if (eventHandler.pentagramMenuModal) eventHandler.pentagramMenuModal(id)
     }
 
     return (
