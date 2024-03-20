@@ -1,21 +1,21 @@
 import { useTranslation } from 'react-i18next';
 import { useThrottledErrorToast } from '$lib/hooks';
-import { useMergedNodeById, useNodeById, usePentagramInteractionEventHandler, useQuadtreeRef } from '$feature/Pentagram/hooks';
+import { useMergedNodeById, useNodeById, usePentagramModalEventHandler, useQuadtreeRef } from '$feature/Pentagram/hooks';
 import toast from 'react-hot-toast';
-import NodeInteractionModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/NodeInteractionModal';
+import NodeMenuModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/NodeMenuModal';
 
-export default function NodeUpsertDetailModal(props: { nodeId: string; handleClickClose: () => void; }) {
+export default function NodeUpsert(props: { nodeId: string; handleClickClose: () => void; }) {
     const { nodeId, handleClickClose } = props;
     const node = useNodeById(nodeId);
     const mergedNode = useMergedNodeById(nodeId);
     const quadtreeRef = useQuadtreeRef();
 
-    const { handleRecover, handleRemoveNode } = usePentagramInteractionEventHandler(quadtreeRef);
+    const { handleRecover, handleRemoveNode } = usePentagramModalEventHandler(quadtreeRef);
 
     const { t } = useTranslation();
     const errorToast = useThrottledErrorToast();
 
-    const title = t("modal.title.nodeInteraction");
+    const title = t("modal.title.nodeMenu");
     const isDeleted = mergedNode.deleted;
 
     const handleClickRecover = () => {
@@ -35,7 +35,7 @@ export default function NodeUpsertDetailModal(props: { nodeId: string; handleCli
     };
 
     return (
-        <NodeInteractionModal
+        <NodeMenuModal
             title={title}
             isDeleted={isDeleted}
             handleClickRecover={handleClickRecover}
