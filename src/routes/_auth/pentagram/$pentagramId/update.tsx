@@ -28,8 +28,6 @@ import { getProcessedContext } from '$feature/navigate/utils';
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 
-export type PentagramUpdateRoute = typeof Route
-
 export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
     // COMMENT 검증 및 redirect 로직은 tanstack router로 통일
     // 로더에서 fetch는 최소화(이중 fetch되는 경우에 한해서만 lodaer에서 fetch => refetch가 까다로워짐 등)
@@ -123,8 +121,8 @@ function PentagramUpdate() {
                 handleSetDescription={handleSetDescription}
                 
                 handleClickNode={handleSelectNode}
-                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertDetail(nodeId, Route.fullPath ,params)}
-                handleClickSelectedPosition={() => navigate.nodeInsertDetail(Route.fullPath ,params)}
+                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertModal(nodeId)}
+                handleClickSelectedPosition={() => navigate.nodeInsertModal()}
                 handleSetNewPosition={handleSetNewPosition}
                 handleDragAndTouchMove={handleDragAndTouchMove}
 

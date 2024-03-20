@@ -21,7 +21,7 @@ export default function PentagramNode(props: PentagramNodeProps) {
 
     const onClickNode: MouseEventHandler<HTMLDivElement> = (e) => {
         e.stopPropagation()
-        if (eventHandler?.nodeDetailModal) eventHandler.nodeDetailModal(id)
+        if (eventHandler?.nodeSelectModal) eventHandler.nodeSelectModal(id)
     }
 
     return (

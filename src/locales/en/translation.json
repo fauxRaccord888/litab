@@ -7,19 +7,26 @@
             "pentagram": "Pentagram"
         }
     },
-    "header": {
-        "count": {
-            "followings": "following",
-            "followers": "follower",
-            "posts": "post"
+
+    "profile": {
+        "header": {
+            "count": {
+                "followings": "following",
+                "followers": "follower",
+                "posts": "post"
+            },
+            "followButtonLabel": {
+                "follow": "follow",
+                "unfollow": "unfollow"
+            },
+        
+            "followedBy_zero": "Followed By <0>{{ mutualFollowers }}</0>",
+            "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
         },
-        "followButtonLabel": {
-            "follow": "follow",
-            "unfollow": "unfollow"
-        },
-    
-        "followedBy_zero": "Followed By <0>{{ mutualFollowers }}</0>",
-        "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
+        "tab": {
+            "pentagram": "Pentagrams",
+            "feed": "Revisions"
+        }
     },
 
     "genre": {
@@ -43,22 +50,8 @@
         }
     },
 
-    "user": {
-        "tab": {
-            "pentagram": "Pentagrams",
-            "feed": "Revisions"
-        }
-    },
-
-
     "pentagram": {
-        "changes": {
-            "upsert": "Add",
-            "update": "Edited",
-            "remove": "Delete",
-            "recover": "Recover"
-        },
-        "interaction": {
+        "menu": {
             "update": "Edit Pentagram",
             "remove": "Delete Pentagram"
         },
@@ -98,6 +91,15 @@
         }
     },
 
+    "node": {
+        "menu": {
+            "upsert": "Add",
+            "update": "Edited",
+            "remove": "Delete",
+            "recover": "Recover"
+        }
+    },
+
     "register": {
         "title": "register"
     },
@@ -132,9 +134,9 @@
             "followers": "Followers",
             "followings": "Followings",
             "mutualFollowers": "Mutual followers",
-            "interaction": "Interaction",
+            "pentagramSelectMenu": "Pentagram Menu",
             "addNode": "New oeuvre",
-            "nodeInteraction": "Oeuvre Interaction",
+            "nodeMenu": "Oeuvre Menu",
             "details": "Details"
         }
     },

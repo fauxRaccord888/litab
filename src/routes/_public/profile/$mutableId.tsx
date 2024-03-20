@@ -17,8 +17,6 @@ import { getProcessedContext } from '$feature/navigate/utils';
 /* components */
 import ProfileSelectView from "$feature/Profile/components/ProfileSelctView";
 
-export type ProfileSelectRoute = typeof Route
-
 export const Route = createFileRoute('/_public/profile/$mutableId')({
     component: Profile
 })
@@ -39,13 +37,13 @@ function Profile() {
 
     const eventHandler: ProfileEventHandler & PentagramEventHandler & OeuvreEventHandler = {
         follow,
-        profileInteractionModal: navigate.profileSelectDetail,
-        followersModal: navigate.followersDetail,
-        followingsModal: navigate.followingsDetail,
-        mutualFollowersModal: navigate.mutualFollowersDetail,
-        pentagramInteractionModal: (id: string) => pentagramNavigate.pentagramSelectDetail(id, Route.fullPath, params),
-        nodeDetailModal: (nodeId: string) => pentagramNavigate.nodeSelectDetail(nodeId, Route.fullPath, params),
-        revisionDetailModal: (revisionId: string) => pentagramNavigate.revisionSelectDetail(revisionId, Route.fullPath, params),
+        profileSelectMenuModal: navigate.profileSelectMenuModal,
+        followersModal: navigate.followersModal,
+        followingsModal: navigate.followingsModal,
+        mutualFollowersModal: navigate.mutualFollowersModal,
+        pentagramMenuModal: (id: string) => pentagramNavigate.pentagramSelectModal(id),
+        nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
+        revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 

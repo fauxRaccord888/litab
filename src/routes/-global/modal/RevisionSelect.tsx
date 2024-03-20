@@ -6,7 +6,7 @@ import { getUnionedChanges } from '$feature/Pentagram/utils';
 import { getPentagramRevisionsInfoById_QUERY } from '$feature/Pentagram/graphql';
 import ChangeLogModal from '$feature/Pentagram/components/PentagramSelectView/Modal/ChangeLogModal';
 
-export default function RevisionSelectDetailModal(props: {
+export default function RevisionSelect(props: {
     revisionId: string;
     handleClickClose: () => void;
 }) {

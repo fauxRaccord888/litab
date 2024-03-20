@@ -1,16 +1,17 @@
 import type { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "$feature/portal/components/Modal";
-import "./style/pentagramInteractionModal.scss"
+import Button from "$lib/components/common/Button";
+import "./style/pentagramMenuModal.scss"
 
-type PentagramInteractionModalProps = {
+type PentagramMenuModalProps = {
     title: string,
     isAuthor?: boolean,
     handleClickClose: () => void
     handleClickUpdate: () => void,
 }
 
-export default function PentagramInteractionModal(props: PentagramInteractionModalProps) {
+export default function PentagramMenuModal(props: PentagramMenuModalProps) {
     const { title, isAuthor, handleClickClose, handleClickUpdate } = props
     const { t } = useTranslation()
 
@@ -21,18 +22,17 @@ export default function PentagramInteractionModal(props: PentagramInteractionMod
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
-            <div className="pentagram-innteraction-modal-component__inner-cotainer">
+            <div className="pentagram-menu-modal-component__inner-cotainer">
                 {
                     isAuthor &&
-                    <span 
+                    <Button 
                         className={[
-                            "pentagram-innteraction-modal-component__interaction-button",
-                            "pentagram-innteraction-modal-component__interaction-button--update"
+                            "pentagram-menu-modal-component__button--update"
                         ].join(' ')}
                         onClick={onClickUpdate}
                     >
-                        {t("pentagram.interaction.update")}
-                    </span>
+                        {t("pentagram.menu.update")}
+                    </Button>
                 }
             </div>
         </Modal>

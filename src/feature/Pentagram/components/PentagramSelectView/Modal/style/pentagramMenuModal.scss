@@ -1,0 +1,10 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/modalMixin";
+
+.pentagram-menu-modal-component__inner-cotainer {
+    @include menu-modal;
+    
+    .pentagram-menu-modal-component__button--update {
+        background-color: rgba(var(--info), 0.5);
+    }
+}

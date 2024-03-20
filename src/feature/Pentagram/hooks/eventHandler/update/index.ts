@@ -1,5 +1,5 @@
 export * from './useMainPentagonEventHandler'
 export * from './usePendingChangeListEventHandler'
 export * from './usePentagramAddModalEventHandler'
-export * from './usePentagramInteractionEventHandler'
+export * from './usePentagramModalEventHandler'
 export * from './useSetPentagramDescription'

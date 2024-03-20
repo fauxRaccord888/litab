@@ -8,7 +8,7 @@ import { mergedNodeSelector, nodeSelector, recoverNode, removeNode, unselectSele
 import { checkCollidingOrThrow, checkOeuvreUniqueOrThrow } from "../../../utils";
 
 
-export function usePentagramInteractionEventHandler(quadtreeRef: MutableRefObject<QuadtreeNode | null>) {
+export function usePentagramModalEventHandler(quadtreeRef: MutableRefObject<QuadtreeNode | null>) {
     const dispatch = useDispatch()
     const insertSelected = useInsertSelectedInQuadtree(quadtreeRef)
     const mergedNodes = useSelector((state: AppRootState) => mergedNodeSelector.selectEntities(state))

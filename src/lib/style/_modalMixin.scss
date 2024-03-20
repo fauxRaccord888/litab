@@ -1,12 +1,12 @@
 @import "src/lib/style/atomicMixin";
 
-.node-innteraction-modal-component__inner-cotainer {
+@mixin menu-modal {
     @include flex-col;
     @include flex-center;
     @include w-full;
     @include child-top-m(calc(var(--base-size) * 1));
 
-    .node-innteraction-modal-component__interaction-button {
+    .button-component {
         @include flex;
         @include flex-center;
         @include rounded-lg;
@@ -14,13 +14,5 @@
         @include padding-(calc(var(--base-size) * 0.4));
         @include w-full;
         background-color: rgb(var(--dark-gray));
-    }
-
-    .node-innteraction-modal-component__interaction-button--recover {
-        background-color: rgba(var(--success), 0.5);
-    }
-
-    .node-innteraction-modal-component__interaction-button--remove {
-        background-color: rgba(var(--danger), 0.5);
     }
 }

@@ -36,7 +36,7 @@ export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
                     disabled={!followingsCollection?.edges.length} 
                     onClick={(e) => onClickCountButton(e, eventHandler.followingsModal)}
                 >
-                    <span>{t(`header.count.followings`)}</span>
+                    <span>{t(`profile.header.count.followings`)}</span>
                     <span>{calcCollectionLength(followingsCollection)}</span>
                 </button>
             </div>
@@ -47,7 +47,7 @@ export default function ProfileFollowingInfo(props: ProfileFollowingInfoProps) {
                     disabled={(!followersCollection?.edges.length)} 
                     onClick={(e) => onClickCountButton(e, eventHandler.followersModal)}
                 >
-                    <span>{t(`header.count.followers`)}</span>
+                    <span>{t(`profile.header.count.followers`)}</span>
                     <span>{calcCollectionLength(followersCollection)}</span>
                 </button>
             </div>

@@ -26,15 +26,15 @@ export default function Form<K extends string> (props: FormProps<K>) {
     })
 
     return (
-        <div className="input-form-outer-container">
+        <div className="form-component">
             <form onSubmit={handleSubmit}>
-                <div className="field-container">
+                <div className="form-component__field-container">
                     {...inputFields}
                 </div>
-                <div className="validation-message-container">
+                <div className="form-component__validation-message-container">
                     {...validationMessages}
                 </div>
-                <Button disabled={disabled}>
+                <Button className="form-component__button-component" disabled={disabled}>
                     {t("button.submit")}
                 </Button>
             </form>

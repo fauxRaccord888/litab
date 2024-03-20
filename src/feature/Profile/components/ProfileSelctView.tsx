@@ -45,7 +45,7 @@ export default function ProfileSelectView(props: {
     const tabComponent = (
         <Tab items={[
             {
-                label: t("user.tab.pentagram"),
+                label: t("profile.tab.pentagram"),
                 items: item?.pentagramsCollection?.edges.map((edge) => (
                     <PentagramSelectView
                         key={edge.node.id}
@@ -66,7 +66,7 @@ export default function ProfileSelectView(props: {
                 )) || []
             },
             {
-                label: t("user.tab.feed"),
+                label: t("profile.tab.feed"),
                 items: item?.pentagram_revisionsCollection?.edges.map((edge) => (
                     <FeedItem
                         key={edge.node.id}

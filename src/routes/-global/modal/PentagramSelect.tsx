@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { usePentagramNavigate } from "$feature/navigate/hooks"
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getPentagramsSelectUserInfoById_QUERY } from '$feature/Pentagram/graphql';
-import PentagramInteractionModal from '$feature/Pentagram/components/PentagramSelectView/Modal/PentagramInteractionModal';
+import PentagramMenuModal from '$feature/Pentagram/components/PentagramSelectView/Modal/PentagramMenuModal';
 
-export default function PentagramSelectDetailModal(props: {
+export default function PentagramSelect(props: {
     pentagramId: string;
     context: ProcessedContext;
     handleClickClose: () => void;
@@ -24,14 +24,14 @@ export default function PentagramSelectDetailModal(props: {
     const { t } = useTranslation();
     const pentagramNavigate = usePentagramNavigate();
 
-    const title = t("modal.title.interaction");
+    const title = t("modal.title.pentagramSelectMenu");
 
     const handleClickUpdate = () => {
         if (pentagramId) pentagramNavigate.update(pentagramId);
     };
 
     return (
-        <PentagramInteractionModal
+        <PentagramMenuModal
             title={title}
             handleClickClose={handleClickClose}
             isAuthor={isAuthor}
