@@ -23,8 +23,6 @@ import toast from 'react-hot-toast';
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 
-export type PentagramInsertRoute = typeof Route
-
 export const Route = createFileRoute('/_auth/pentagram/create')({
     component: PentagramInsert
 })
@@ -91,8 +89,8 @@ function PentagramInsert() {
                 handleSetDescription={handleSetDescription}
                 
                 handleClickNode={handleSelectNode}
-                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertDetail(nodeId, Route.fullPath)}
-                handleClickSelectedPosition={() => navigate.nodeInsertDetail(Route.fullPath)}
+                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertModal(nodeId)}
+                handleClickSelectedPosition={() => navigate.nodeInsertModal()}
                 handleSetNewPosition={handleSetNewPosition}
                 handleDragAndTouchMove={handleDragAndTouchMove}
 

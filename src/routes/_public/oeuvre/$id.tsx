@@ -9,8 +9,6 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { getProcessedContext } from "$feature/navigate/utils";
 import OeuvreSelectView from "$feature/Oeuvre/components/OeuvreSelectView";
 
-export type OeuvreSelectRoute = typeof Route
-
 export const Route = createFileRoute('/_public/oeuvre/$id')({
     component: Oeuvre
 })
@@ -31,9 +29,9 @@ function Oeuvre() {
     if (!item) return <></>
 
     const eventHandler: OeuvreEventHandler & PentagramEventHandler = {
-        pentagramInteractionModal: (id: string) => pentagramNavigate.pentagramSelectDetail(id, Route.fullPath, params),
-        nodeDetailModal: (nodeId: string) => pentagramNavigate.nodeSelectDetail(nodeId, Route.fullPath, params),
-        revisionDetailModal: (revisionId: string) => pentagramNavigate.revisionSelectDetail(revisionId, Route.fullPath, params),
+        pentagramMenuModal: (id: string) => pentagramNavigate.pentagramSelectModal(id),
+        nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
+        revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
         selectGenreTag: (genreId: string) => genreNavigate.select(genreId)

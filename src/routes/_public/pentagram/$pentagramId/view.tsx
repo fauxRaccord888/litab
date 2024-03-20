@@ -13,8 +13,6 @@ import { TIME } from '$feature/Pentagram/constants';
 
 import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
 
-export type PentagramSelectRoute = typeof Route
-
 export const Route = createFileRoute('/_public/pentagram/$pentagramId/view')({
     component: PentagramSelect,
 })
@@ -32,9 +30,9 @@ function PentagramSelect() {
     const oeuvreNavigate = useOeuvreNavigate();
 
     const eventHandler: PentagramEventHandler & OeuvreEventHandler = {
-        pentagramInteractionModal: (pentagramId: string) => navigate.pentagramSelectDetail(pentagramId, Route.fullPath, params),
-        nodeDetailModal: (nodeId: string) => navigate.nodeSelectDetail(nodeId, Route.fullPath, params),
-        revisionDetailModal: (revisionId: string) => navigate.revisionSelectDetail(revisionId, Route.fullPath, params),
+        pentagramMenuModal: (pentagramId: string) => navigate.pentagramSelectModal(pentagramId),
+        nodeSelectModal: (nodeId: string) => navigate.nodeSelectModal(nodeId),
+        revisionSelectModal: (revisionId: string) => navigate.revisionSelectModal(revisionId),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
