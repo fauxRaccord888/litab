@@ -13,7 +13,7 @@ export type PentagramSelectOptions = {
     displayRevisionIds?: string[] | null | undefined
 }
 export type PentagramEventHandler = {
-    pentagramInteractionModal?: (pentagramId: string) => void,
-    nodeDetailModal?: (nodeId: string) => void,
-    revisionDetailModal?: (revisionId: string) => void 
+    pentagramMenuModal?: (pentagramId: string) => void,
+    nodeSelectModal?: (nodeId: string) => void,
+    revisionSelectModal?: (revisionId: string) => void 
 }

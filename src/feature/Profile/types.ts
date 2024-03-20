@@ -19,5 +19,5 @@ export type ProfileEventHandler = {
     mutualFollowersModal?: (mutableId: string) => void
     followingsModal?: (mutableId: string) => void
     followersModal?: (mutableId: string) => void
-    profileInteractionModal?: (mutableId: string) => void
+    profileSelectMenuModal?: (mutableId: string) => void
 }
