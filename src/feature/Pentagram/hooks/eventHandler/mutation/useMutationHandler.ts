@@ -4,10 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useApolloClient } from "@apollo/client";
 import { useUnmergedChangeInfo } from "../..";
 import { supabaseClient } from "$lib/supabase/client";
+
 import { abortChanges } from "../../../store/pentagramUpsertSlice";
-import { InsertPentagramTransactionError, PendingError, UpdatePentagramTransactionError } from "../../../error";
 import { filterChanges, formatChanges } from '../../../utils';
+
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
+import { getOeuvreExtensiveInfoById_QUERY } from "$feature/Oeuvre/graphql";
+import { getProfileByMutableId_QUERY } from "$feature/Profile/graphql";
+import { getFeedById_QUERY } from "$feature/feed/graphql";
+
+import { InsertPentagramTransactionError, PendingError, UpdatePentagramTransactionError } from "../../../error";
 
 export function useMutationHandler() {
     const dispatch = useDispatch()
@@ -64,7 +70,12 @@ export function useMutationHandler() {
 
         if (data) {
             client.refetchQueries({
-                include: [getPentagramSelectInfoById_QUERY],
+                include: [
+                    getPentagramSelectInfoById_QUERY,
+                    getOeuvreExtensiveInfoById_QUERY,
+                    getProfileByMutableId_QUERY,
+                    getFeedById_QUERY,
+                ],
             })
         }
 
