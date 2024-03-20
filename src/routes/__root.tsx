@@ -11,7 +11,7 @@ import NavigationBar from '$feature/navigate/components/NavigationBar'
 export type RootSearch = {
     nodeUpsertId: string | undefined
     insertNode: boolean | undefined
-    pentagramInteractionId: string | undefined
+    pentagramMenuId: string | undefined
     nodeViewId: string | undefined
     revisionViewId: string | undefined
 }
@@ -32,7 +32,7 @@ export const Route = rootRouteWithContext<{
         return {
             nodeUpsertId: (search.nodeUpsertId as string) || undefined,
             insertNode: (search.insertNode as boolean) || undefined,
-            pentagramInteractionId: (search.pentagramInteractionId as string) || undefined,
+            pentagramMenuId: (search.pentagramMenuId as string) || undefined,
             nodeViewId: (search.nodeViewId as string) || undefined,
             revisionViewId: (search.revisionViewId as string) || undefined,
         }
