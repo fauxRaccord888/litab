@@ -22,7 +22,7 @@
         }
         @media only screen and (min-width: 800px) {
             display: inline;
-            min-width: 250px;
+            min-width: 200px;
        }
     }
 
@@ -30,12 +30,11 @@
         padding-bottom: calc(var(--base-size) * 5);
         border-left: solid 2px rgba(var(--font-color), 0.5);
         border-right: solid 2px rgba(var(--font-color), 0.5);
+        min-width: min(600px, 100vw);
+        max-width: 600px;
         @media only screen and (min-width: 500px) {
             border-right: solid 1px rgba(var(--font-color), 0.5);
             display: inline;
-            width: 400px;
-            max-width: 600px;
-            flex-grow: 1;
             padding-bottom: 0;
         }
     }
