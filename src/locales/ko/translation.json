@@ -7,19 +7,26 @@
             "pentagram": "펜타그램"
         }
     },
-    "header": {
-        "count": {
-            "followings": "팔로우",
-            "followers": "팔로워",
-            "posts": "게시물"
+
+    "profile": {
+        "header": {
+            "count": {
+                "followings": "팔로우",
+                "followers": "팔로워",
+                "posts": "게시물"
+            },
+            "followButtonLabel": {
+                "follow": "팔로우",
+                "unfollow": "언팔로우"
+            },
+            
+            "followedBy_zero": "<0>{{ mutualFollowers }}</0>이 팔로우하고 있습니다",
+            "followedBy": "<0>{{ mutualFollowers }}</0> 외 {{ additionalCount }}명이 팔로우하고 있습니다."
         },
-        "followButtonLabel": {
-            "follow": "팔로우",
-            "unfollow": "언팔로우"
-        },
-        
-        "followedBy_zero": "<0>{{ mutualFollowers }}</0>이 팔로우하고 있습니다",
-        "followedBy": "<0>{{ mutualFollowers }}</0> 외 {{ additionalCount }}명이 팔로우하고 있습니다."
+        "tab": {
+            "pentagram": "펜타그램",
+            "feed": "피드"
+        }
     },
 
     "genre": {
@@ -43,21 +50,8 @@
         }
     },
 
-    "user": {
-        "tab": {
-            "pentagram": "펜타그램",
-            "feed": "피드"
-        }
-    },
-
     "pentagram": {
-        "changes": {
-            "upsert": "추가",
-            "update": "수정",
-            "remove": "삭제",
-            "recover": "복원"
-        },
-        "interaction": {
+        "menu": {
             "update": "펜타그램 수정",
             "remove": "펜타그램 삭제"
         },
@@ -96,6 +90,15 @@
             "edit":"펜타그램 수정"
         }
     },
+
+    "node": {
+        "menu": {
+            "upsert": "추가",
+            "update": "수정",
+            "remove": "삭제",
+            "recover": "복원"
+        }
+    },
     
     "register": {
         "title": "회원가입"
@@ -131,9 +134,9 @@
             "followers": "팔로워",
             "followings": "팔로잉",
             "mutualFollowers": "함께 아는 사람",
-            "interaction": "추가 상호작용",
+            "pentagramSelectMenu": "펜타그램 메뉴",
             "addNode": "새 작품 추가",
-            "nodeInteraction": "작품 추가 상호작용",
+            "nodeMenu": "작품 메뉴",
             "details": "상세 정보"
         }
     },
