@@ -1,0 +1,20 @@
+{
+    "header": {
+        "count": {
+            "followings": "following",
+            "followers": "follower",
+            "posts": "post"
+        },
+        "followButtonLabel": {
+            "follow": "follow",
+            "unfollow": "unfollow"
+        },
+    
+        "followedBy_zero": "Followed By <0>{{ mutualFollowers }}</0>",
+        "followedBy": "Followed By <0>{{ mutualFollowers }}</0> + {{ additionalCount }} more"
+    },
+    "tab": {
+        "pentagram": "Pentagrams",
+        "feed": "Revisions"
+    }
+}

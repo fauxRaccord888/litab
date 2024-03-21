@@ -1,0 +1,8 @@
+{
+    "route": {
+        "home": "Home",
+        "search": "Search",
+        "account": "Account",
+        "pentagram": "Pentagram"
+    }
+}

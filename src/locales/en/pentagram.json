@@ -1,0 +1,40 @@
+{
+    "menu": {
+        "update": "Edit Pentagram",
+        "remove": "Delete Pentagram"
+    },
+    "toast": {
+        "success": {
+            "recoverNode": "Selected oeuvre will be recovered after you finalize changes",
+            "removeNode": "Selected oeuvre will be permanently deleted after you finalize changes",
+            "revertChange": "Your change has been reverted",
+            "addNode": "New oeuvre has been added",
+            "updatePentagram": "Pentagram has successfully updated",
+            "createPentagram": "Pentagram has been successfully added"
+        },
+        "error": {
+            "invalidPosition": "Selected position isn't valid. Please try placing it somewhere else",
+            "notUniqueOeuvre": "A duplicate oeuvre already exists in this Pentagram",
+            "insertTransactionFailed": "Pentagram update failed. Please contact us if the same issue persists.", 
+            "updateTransactionFailed": "Pentagram registration failed. Please contact us if the same issue persists."
+        }
+    },
+    "dialog": {
+        "title": {
+            "temp": "Unmerged changes"
+        },
+        "message": {
+            "loadOrDiscard": "Unmerged changes have been detected in this pentagram. Do you want to load them?",
+            "navigateOrDiscard": "Unmerged changes for another pentagram have been detected. Do you want to discard those changes?"
+        },
+        "button": {
+            "discardChanges": "Discard unmerged changes",
+            "loadChanges": "Load unmerged changes",
+            "navigateRelated": "Navigate to the related Pentagram"
+        }
+    },
+    "title": {
+        "create": "Add new Pentagram",
+        "edit":"edit your Pentagram"
+    }
+}

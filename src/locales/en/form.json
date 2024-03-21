@@ -1,0 +1,30 @@
+{
+    "email": {
+        "error": "Please enter a valid email address.",
+        "label": "Email"
+    },
+    "password": {
+        "error": "Your password must be at least 8 characters and include uppercase and lowercase letters, and a number.",
+        "label": "Password"
+    },
+    "newPassword": {
+        "error": "Your new password must be at least 8 characters and include uppercase and lowercase letters, and a number.",
+        "label": "New Password"
+    },
+    "mutableId": {
+        "error": "Your username must be between 1 and 15 characters and include letters or numbers.",
+        "label": "Username"
+    },
+    "nickname": {
+        "error": "Your nickname must be between 8 and 15 characters and include letters or numbers.",
+        "label": "Nickname"
+    },
+    "description": {
+        "error": "Your description must be between 0 and 31 characters and include letters or numbers",
+        "label": "description"
+    },
+    "search": {
+        "error": "something went wrong",
+        "label": "enter your query here"
+    }
+}

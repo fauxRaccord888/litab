@@ -1,0 +1,20 @@
+{
+    "header": {
+        "count": {
+            "followings": "팔로우",
+            "followers": "팔로워",
+            "posts": "게시물"
+        },
+        "followButtonLabel": {
+            "follow": "팔로우",
+            "unfollow": "언팔로우"
+        },
+        
+        "followedBy_zero": "<0>{{ mutualFollowers }}</0>이 팔로우하고 있습니다",
+        "followedBy": "<0>{{ mutualFollowers }}</0> 외 {{ additionalCount }}명이 팔로우하고 있습니다."
+    },
+    "tab": {
+        "pentagram": "펜타그램",
+        "feed": "피드"
+    }
+}
