@@ -1,0 +1,12 @@
+{
+    "title": {
+        "followers": "팔로워",
+        "followings": "팔로잉",
+        "mutualFollowers": "함께 아는 사람",
+        "addNode": "새 작품 추가",
+        "details": "상세 정보",
+        "nodeMenu": "작품 메뉴",
+        "pentagramSelectMenu": "펜타그램 메뉴",
+        "profileSelectMenu": "프로필 메뉴"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "menu": {
+        "upsert": "추가",
+        "update": "수정",
+        "remove": "삭제",
+        "recover": "복원"
+    }
+}

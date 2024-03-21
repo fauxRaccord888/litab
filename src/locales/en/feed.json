@@ -1,0 +1,6 @@
+{
+    "message": {
+        "new": "{{ user }} posted a new Pentagram",
+        "edit": "{{ user }} edited a Pentagram"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "menu": {
+        "upsert": "Add",
+        "update": "Edited",
+        "remove": "Delete",
+        "recover": "Recover"
+    }
+}

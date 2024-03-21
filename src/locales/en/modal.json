@@ -1,0 +1,12 @@
+{
+    "title": {
+        "followers": "Followers",
+        "followings": "Followings",
+        "mutualFollowers": "Mutual followers",
+        "addNode": "New oeuvre",
+        "details": "Details",
+        "pentagramSelectMenu": "Pentagram Menu",
+        "nodeMenu": "Oeuvre Menu",
+        "profileSelectMenu": "Profile Menu"
+    }
+}
