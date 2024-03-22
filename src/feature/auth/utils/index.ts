@@ -1,2 +1,3 @@
 export * from './getUserObservable'
-export * from './getCurrentUserFromContext'
+export * from './getCurrentUserFromObservable'
+export * from './checkUserAndStore'

@@ -1,6 +1,6 @@
-import type { Route } from 'routes/__root';
+import type { UnprocessedContext } from '$lib/types/components';
+import type { RootSearch } from 'routes/__root';
 import { useNavigate } from '@tanstack/react-router'
-import { getProcessedContext } from '$feature/navigate/utils'
 
 import PentagramSelect from './modal/PentagramSelect';
 import NodeUpsert from './modal/NodeUpsert';
@@ -10,13 +10,13 @@ import NodeSelect from './modal/NodeSelect';
 import AccountMenu from './modal/AccountMenu';
 
 export default function ModalController(props: {
-    route: typeof Route
+    context: UnprocessedContext,
+    search: RootSearch
 }) {
-    const { route } = props
-    const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId } = route.useSearch()
-    const unprocessedContext = route.useRouteContext()
-    const context = getProcessedContext(unprocessedContext)
-    const navigate = useNavigate({ from: route.fullPath })
+    const { search, context } = props
+    const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId, accountMenu } = search
+
+    const navigate = useNavigate()
 
     const handleClickClose = () => {
         navigate({

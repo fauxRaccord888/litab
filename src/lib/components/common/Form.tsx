@@ -1,14 +1,13 @@
+import type { FormEvent, FormEventHandler } from "react"
+import type { InputProps } from "./Input"
 import { useTranslation } from "react-i18next"
-
-import type { FormEventHandler } from "react"
-import type { PropsWithValueAction } from "./Input"
 
 import Button from "./Button"
 import Input from "./Input"
 import "./style/form.scss"
 
 interface FormProps<K extends string> {
-    fields: PropsWithValueAction<K>[],
+    fields: InputProps<K>[],
     handleSubmit: FormEventHandler<HTMLFormElement>
     disabled?: boolean
 }
@@ -16,6 +15,11 @@ interface FormProps<K extends string> {
 export default function Form<K extends string> (props: FormProps<K>) {
     const { t } = useTranslation()
     const { fields, handleSubmit, disabled } = props
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        handleSubmit(e)
+    }
 
     const inputFields = fields.map((props) => {
         return <Input key={props.label} {...props} />
@@ -27,7 +31,7 @@ export default function Form<K extends string> (props: FormProps<K>) {
 
     return (
         <div className="form-component">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
                 <div className="form-component__field-container">
                     {...inputFields}
                 </div>
@@ -43,7 +47,7 @@ export default function Form<K extends string> (props: FormProps<K>) {
 }
   
 
-function ValidationMessage<K extends string>(props: PropsWithValueAction<K>) {
+function ValidationMessage<K extends string>(props: InputProps<K>) {
     const { label, invalid } = props
     const { t } = useTranslation()
 

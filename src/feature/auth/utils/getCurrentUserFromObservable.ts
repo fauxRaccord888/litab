@@ -1,8 +1,7 @@
 import type { UnprocessedContext } from "$lib/types/components";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 
-export function getCurrentUserFromContext(context: UnprocessedContext) {
-    const userObservable = context.userObservable;
+export function getCurrentUserFromObservable(userObservable: UnprocessedContext["userObservable"]) {
     if (!userObservable) return null;
 
     const { data } = userObservable.getCurrentResult();

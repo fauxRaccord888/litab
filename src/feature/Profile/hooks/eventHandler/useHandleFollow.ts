@@ -1,5 +1,7 @@
-import type { DBAuthUser } from "$feature/auth/type"
+import { useCurrentUser } from "$feature/auth/hooks/useCurrentUser"
 import { useFollowMutation } from ".."
+import { useApolloClient } from "@apollo/client";
+import { getCurrentUserFromObservable, getUserObservable } from "$feature/auth/utils"
 import { calcFollowings } from "../../util"
 
 export function useHandleFollow() {
@@ -7,13 +9,17 @@ export function useHandleFollow() {
         follow: followMutation,
         unfollow: unfollowMutation
     } = useFollowMutation()
+    const currentUser = useCurrentUser()
+    const apolloClient = useApolloClient()
     
-    const handleFollow = (id: string, currentUser: DBAuthUser | null | undefined) => {
-        const followings = calcFollowings(currentUser)
+    const handleFollow = async (id: string) => {
+        const userObservable = await getUserObservable(currentUser, apolloClient)
+        const currentUserInfo = getCurrentUserFromObservable(userObservable)
+        const followings = calcFollowings(currentUserInfo)
         const followed = followings.has(id)
     
-        if (followed) unfollowMutation(id, currentUser)
-        else followMutation(id, currentUser)
+        if (followed) unfollowMutation(id, currentUserInfo)
+        else followMutation(id, currentUserInfo)
     }
 
     return handleFollow

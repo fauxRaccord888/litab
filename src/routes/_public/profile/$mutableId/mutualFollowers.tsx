@@ -7,12 +7,12 @@ import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
 import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
-import { getProcessedContext } from '$feature/navigate/utils';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { calcFollowings, calcMutualFollowers } from '$feature/Profile/util';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
+import { getCurrentUserFromObservable } from '$feature/auth/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
@@ -22,13 +22,13 @@ export const Route = createFileRoute('/_public/profile/$mutableId/mutualFollower
 
 function FollowersModal() {
     const params = Route.useParams()
-    const unprocessedContext = Route.useRouteContext()
-    const context = getProcessedContext(unprocessedContext)
+    const context = Route.useRouteContext()
     const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const targetUser = getFirstNodeOfCollection(data?.usersCollection)
+    const currentUser = getCurrentUserFromObservable(context.userObservable)
 
-    const followings = calcFollowings(context.currentUser)
-    const mutualFollowers = calcMutualFollowers(context.currentUser, targetUser, followings)
+    const followings = calcFollowings(currentUser)
+    const mutualFollowers = calcMutualFollowers(currentUser, targetUser, followings)
     
     if (!mutualFollowers) return null
 
@@ -43,8 +43,7 @@ function MutualFollowingModalComponent(props: {
     items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
-    const unprocessedContext = Route.useRouteContext()
-    const context = getProcessedContext(unprocessedContext)
+    const context = Route.useRouteContext()
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 

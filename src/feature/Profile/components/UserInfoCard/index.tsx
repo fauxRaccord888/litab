@@ -1,6 +1,7 @@
 import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions, ProfileInfoCardRenderOptions } from "../../types"
-import type { ProcessedContext } from '$lib/types/components';
+import type { UnprocessedContext } from '$lib/types/components';
 import { calcFollowings, calcMutualFollowers } from "$feature/Profile/util";
+import { getCurrentUserFromObservable } from "$feature/auth/utils";
 
 import ProfileCoverImage from "../common/ProfileCoverImage";
 import ProfileUserInfo from "../common/ProfileUserInfo";
@@ -13,7 +14,7 @@ import './style/userInfoCard.scss'
 
 type ProfileInfoCardProps = {
     item: DBProfiles
-    context: ProcessedContext,
+    context: UnprocessedContext,
     renderConfig: ProfileInfoCardRenderOptions
     options: ProfileInfoCardOptions
     eventHandler: ProfileEventHandler
@@ -22,10 +23,11 @@ type ProfileInfoCardProps = {
 export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const { item, context, renderConfig, options, eventHandler } = props
     const { id, mutable_id, nickname, description, updated_at, followersCollection, followingsCollection } = item
+    const currentUser = getCurrentUserFromObservable(context.userObservable)
 
-    const followings = calcFollowings(context.currentUser)
-    const mutualFollowers = calcMutualFollowers(context.currentUser, item, followings)
-    const isMe = context.currentUser?.id === id
+    const followings = calcFollowings(currentUser)
+    const mutualFollowers = calcMutualFollowers(currentUser, item, followings)
+    const isMe = currentUser?.id === id
     const followed = followings?.has(id)
 
     const coverImage = (
@@ -50,7 +52,6 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
                 mutable_id={mutable_id}
                 isMe={isMe}
                 followed={followed}
-                context={context}
                 eventHandler={eventHandler}
                 options={options}
             />

@@ -13,7 +13,6 @@ import { useHandleFollow } from "$feature/Profile/hooks";
 import { getProfileByMutableId_QUERY } from "$feature/Profile/graphql";
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
-import { getProcessedContext } from '$feature/navigate/utils';
 /* components */
 import ProfileSelectView from "$feature/Profile/components/ProfileSelctView";
 
@@ -23,8 +22,7 @@ export const Route = createFileRoute('/_public/profile/$mutableId')({
 
 function Profile() {
     const params = Route.useParams()
-    const unprocessedContext = Route.useRouteContext()
-    const context = getProcessedContext(unprocessedContext)
+    const context = Route.useRouteContext()
     const navigate = useProfileNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
     const pentagramNavigate = usePentagramNavigate()

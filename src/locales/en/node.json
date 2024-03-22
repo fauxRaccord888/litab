@@ -1,5 +1,5 @@
 {
-    "menu": {
+    "change": {
         "upsert": "Add",
         "update": "Edited",
         "remove": "Delete",
