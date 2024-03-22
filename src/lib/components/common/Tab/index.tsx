@@ -7,12 +7,17 @@ export type TabItem = {
     items: JSX.Element[]
 }
 
+type TabOptions = {
+    vertical?: true
+}
+
 type TabProps = {
     items: TabItem[]
+    options?: TabOptions
 }
 
 export default function Tab(props: TabProps) {
-    const { items } = props
+    const { items, options } = props
     const [selected, setSelected] = useState(0)
 
     const handleClickItem = (e: MouseEvent, idx: number) => {
@@ -21,7 +26,10 @@ export default function Tab(props: TabProps) {
     }
 
     return (
-        <div className="tab-component">
+        <div className={[
+            "tab-component",
+            options?.vertical ? "tab-component--vertical" : ""
+        ].join(" ")}>
             <div className="tab-component__header">
                 {items.map((item, idx) => (
                     <span 
