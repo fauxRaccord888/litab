@@ -37,7 +37,7 @@ export default function Revision(props: RevisionProps) {
                     return Boolean(value?.totalCount) && (
                         <span key={key} className="revision-component__change-count-container">
                             <span className="revision-component__change-type">
-                                <Trans i18nKey={`pentagram.changes.${key}`}/>
+                                <Trans i18nKey={`node.change.${key}`}/>
                             </span>
                             <span className="revision-component__change-count">
                                 {value?.totalCount}
