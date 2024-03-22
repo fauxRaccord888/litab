@@ -1,0 +1,20 @@
+{
+    "title": {
+        "register": "Register",
+        "signIn": "Sign in",
+        "update": {
+            "profile": "Profile",
+            "cover": "Profile Image",
+            "auth": "Change Password"
+        }
+    },
+    "modal": {
+        "menu": {
+            "register": "Register",
+            "signIn": "Sign in",
+            "profile": "Profile",
+            "update": "Update Profile",
+            "signOut": "Sign out"
+        }
+    }
+}
