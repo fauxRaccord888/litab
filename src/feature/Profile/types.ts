@@ -14,7 +14,7 @@ export type ProfileInfoCardOptions = InfoCardOptions & {
     displayInteraction?: boolean
 }
 export type ProfileEventHandler = {
-    follow?: (id: string, user: DBAuthUser | null | undefined) => void
+    follow?: (id: string) => Promise<void>
     selectProfile?: (mutableId: string) => void
     mutualFollowersModal?: (mutableId: string) => void
     followingsModal?: (mutableId: string) => void
