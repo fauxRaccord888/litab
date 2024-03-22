@@ -1,0 +1,6 @@
+@import "src/lib/style/atomicMixin";
+
+.fallback-root-component {
+    @include w-full;
+    background-color: rgb(var(--background-color));
+}

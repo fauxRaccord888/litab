@@ -5,8 +5,10 @@ import { getScrollKey } from '$lib/utils/route/getScrollKey'
 import { getUserObservable } from '$feature/auth/utils';
 
 import Layout from '$lib/layout/Layout'
+import FallbackRoot from '$lib/components/common/FallbackRoot';
 import ModalController from './-global/-modal';
 import NavigationBar from '$feature/navigate/components/NavigationBar'
+import { Suspense } from 'react';
 
 export type RootSearch = {
     nodeUpsertId: string | undefined
@@ -41,6 +43,7 @@ export const Route = rootRouteWithContext<{
 
 function RootComponent() {
     return (
+        <Suspense fallback={<FallbackRoot />}>
         <Layout left={<NavigationBar />} >
             <ScrollRestoration 
                 getKey={(location) => getScrollKey(location)}
@@ -48,5 +51,6 @@ function RootComponent() {
             <ModalController route={Route} />
             <Outlet />
         </Layout>
+        </Suspense>
   )
 }
