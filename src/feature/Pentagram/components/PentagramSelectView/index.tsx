@@ -1,5 +1,5 @@
 import type { DBPentagram_SELECT, PentagramEventHandler, PentagramSelectOptions, PentagramSelectRenderConfig } from "../../types";
-import type { ProcessedContext } from "$lib/types/components";
+import type { UnprocessedContext } from "$lib/types/components";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 
 import SelectMetaInfo from "./SelectMetaInfo";
@@ -13,7 +13,7 @@ export type PentagramSelectViewProps = {
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
     eventHandler: PentagramEventHandler & OeuvreEventHandler,
-    context: ProcessedContext,
+    context: UnprocessedContext,
     timestamp: Date
 }
 

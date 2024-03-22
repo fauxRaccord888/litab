@@ -1,5 +1,5 @@
 import type { DeleteFollowingsMutation, InsertFollowingsMutation } from "$lib/graphql/__generated__/graphql"
-import type { DBAuthUser } from "$feature/auth/type"
+import type { DBAuthUser } from "$feature/auth/types"
 import { useCallback } from "react"
 import { useMutation } from "@apollo/client"
 import { getProfileByMutableId_QUERY, deleteFollowings_MUTATION, insertFollowings_MUTATION } from "../graphql"

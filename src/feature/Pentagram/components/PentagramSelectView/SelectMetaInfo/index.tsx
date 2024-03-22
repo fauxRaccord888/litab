@@ -1,4 +1,4 @@
-import type { ProcessedContext } from "$lib/types/components";
+import type { UnprocessedContext } from "$lib/types/components";
 import type { MouseEvent } from "react";
 import type { DBMiniProfile } from "$feature/Profile/types";
 import type { PentagramEventHandler } from "../../../types";
@@ -13,7 +13,7 @@ type SelectMetaInfoProps = {
     created_at: string
     users: DBMiniProfile
     eventHandler: PentagramEventHandler
-    context: ProcessedContext
+    context: UnprocessedContext
 }
 
 export default function SelectMetaInfo(props: SelectMetaInfoProps) {    const { id, created_at, users, eventHandler, context } = props

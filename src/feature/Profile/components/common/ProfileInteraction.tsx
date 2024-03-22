@@ -1,7 +1,6 @@
 /* types */
 import type { MouseEvent } from 'react';
 import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions } from "../../types"
-import type { ProcessedContext } from '$lib/types/components';
 /* hooks */
 import { useTranslation } from "react-i18next";
 /* components */
@@ -15,18 +14,17 @@ type ProfileInteractionsProps = {
     mutable_id: DBProfiles["mutable_id"]
     isMe?: boolean | undefined,
     followed?: boolean | undefined,
-    context: ProcessedContext
     eventHandler: ProfileEventHandler
     options: ProfileInfoCardOptions
 }
 
 export default function ProfileInteraction(props: ProfileInteractionsProps ) {
-    const { id, mutable_id, isMe, followed, context, eventHandler, options } = props
+    const { id, mutable_id, isMe, followed, eventHandler, options } = props
     const { t } = useTranslation()
 
     const onClickFollow = (e:MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.follow) eventHandler.follow(id, context.currentUser)
+        if (eventHandler.follow) eventHandler.follow(id)
     }
 
     const onClickInteraction = (e: MouseEvent) => {
