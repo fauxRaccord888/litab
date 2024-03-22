@@ -7,6 +7,7 @@
         "details": "상세 정보",
         "nodeMenu": "작품 메뉴",
         "pentagramSelectMenu": "펜타그램 메뉴",
-        "profileSelectMenu": "프로필 메뉴"
+        "profileSelectMenu": "프로필 메뉴",
+        "accountMenu": "계정 메뉴"
     }
 }
