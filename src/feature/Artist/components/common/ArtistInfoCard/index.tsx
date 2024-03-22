@@ -14,11 +14,11 @@ type ArtistInfoCardProps = {
 
 export default function ArtistInfoCard(props: ArtistInfoCardProps) {
     const { item, renderConfig, eventHandler } = props
-    const { id, name, abstract, bio } = item
+    const { id, name, abstract, bio, updated_at } = item
 
     const coverImage = useMemo(() => (
-        <BucketImage bucket="artists" id={id} fallback={<FallbackIcon />} />
-    ), [id])
+        <BucketImage bucket="artists" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
+    ), [id, updated_at])
 
     return (
         <div className="artist-info-card-component">
