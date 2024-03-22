@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react"
 import { useTranslation } from "react-i18next"
-import { CustomError } from "$lib/error"
+import { isCustomError, isError } from "$lib/utils"
 import toast from "react-hot-toast"
 
 export function useThrottledErrorToast<T>(ms: number=1000) {
@@ -22,11 +22,11 @@ export function useThrottledErrorToast<T>(ms: number=1000) {
                 timeoutRef.current = null
             }
 
-            if (error instanceof CustomError) {
+            if (isCustomError(error)) {
                 toast.error(t(error.i18nKey))
                 return
             }
-            if (error instanceof Error) {
+            if (isError(error)) {
                 toast.error(t(error.message))
                 return
             }
