@@ -1,15 +1,16 @@
 import { supabaseClient } from "./client"
 
 export const getURLfromBucket = ( payload: {
-    bucket: string
+    bucket: string,
     id: string,
-    file: string,
+    timeStamp: string
 }) => {
-    const { bucket, id, file } = payload
+    const { bucket, id, timeStamp } = payload
+    const t = new Date(timeStamp).getTime() 
     const { data } = supabaseClient
         .storage
         .from(bucket)
-        .getPublicUrl(`${id}/${file}`)
+        .getPublicUrl(`public/${id}?t=${t}`)
     
     return data.publicUrl
 }
