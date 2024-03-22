@@ -4,7 +4,8 @@ graphql(/* GraphQL */ `
     fragment MiniProfile on users {
         mutable_id,
         nickname,
-        id
+        id,
+        updated_at
     }
 `)
 

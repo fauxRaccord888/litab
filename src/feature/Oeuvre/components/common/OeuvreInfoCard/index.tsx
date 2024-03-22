@@ -16,11 +16,11 @@ type OeuvreInfoProps = {
 
 export default function OeuvreInfoCard(props: OeuvreInfoProps) {
     const { item, renderConfig, options, eventHandler } = props
-    const { id, title, description } = item
+    const { id, title, description, updated_at } = item
 
     const coverImage = useMemo(() => (
-        <BucketImage bucket="oeuvres" id={id} fallback={<FallbackIcon />} />
-    ), [id])
+        <BucketImage bucket="oeuvres" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
+    ), [id, updated_at])
 
     const mainInfo = useMemo(() => (
         <OeuvreMainInfo 

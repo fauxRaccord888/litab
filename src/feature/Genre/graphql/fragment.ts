@@ -4,6 +4,7 @@ graphql(/* GraphQL */ `
     fragment GenresMinimalInfo on genres {
         id
         name
+        updated_at
     }
 `)
 

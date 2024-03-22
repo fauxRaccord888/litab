@@ -21,7 +21,7 @@ type ProfileInfoCardProps = {
 
 export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const { item, context, renderConfig, options, eventHandler } = props
-    const { id, mutable_id, nickname, description, followersCollection, followingsCollection } = item
+    const { id, mutable_id, nickname, description, updated_at, followersCollection, followingsCollection } = item
 
     const followings = calcFollowings(context.currentUser)
     const mutualFollowers = calcMutualFollowers(context.currentUser, item, followings)
@@ -32,6 +32,7 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
         <ProfileCoverImage 
             id={id} 
             mutable_id={mutable_id}
+            updated_at={updated_at}
             eventHandler={eventHandler}
         />
     )
