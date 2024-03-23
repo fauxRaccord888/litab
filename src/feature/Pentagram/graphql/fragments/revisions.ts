@@ -8,6 +8,7 @@ graphql(/* GraphQL */ `
             id
         }
         pentagram_revision_update_recordsCollection {
+            totalCount
             edges {
                 node {
                     ...UpdateRecordInfo
@@ -15,6 +16,7 @@ graphql(/* GraphQL */ `
             }
         }
         pentagram_revision_upsert_recordsCollection {
+            totalCount
             edges {
                 node {
                     ...UpsertRecordInfo
@@ -22,6 +24,7 @@ graphql(/* GraphQL */ `
             }
         }
         pentagram_revision_remove_recordsCollection {
+            totalCount
             edges {
                 node {
                     ...RemoveRecordInfo
@@ -29,6 +32,7 @@ graphql(/* GraphQL */ `
             }
         }
         pentagram_revision_recover_recordsCollection {
+            totalCount
             edges {
                 node {
                     ...RecoverRecordInfo
