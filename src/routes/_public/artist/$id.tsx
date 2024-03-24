@@ -2,6 +2,7 @@ import type { GetArtistInfoByIdQuery } from "$lib/graphql/__generated__/graphql"
 import type { ArtistEventHandler } from "$feature/Artist/types";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import { useQuery } from "@apollo/client";
+import { useNavigate } from "@tanstack/react-router";
 import { useOeuvreNavigate } from "$feature/navigate/hooks";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -14,13 +15,21 @@ export const Route = createFileRoute('/_public/artist/$id')({
 
 function Artist() {
     const params = Route.useParams()
+    const navigate = useNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
-    const { data } = useQuery<GetArtistInfoByIdQuery>(getArtistInfoById_QUERY, {
+    const { data, error } = useQuery<GetArtistInfoByIdQuery>(getArtistInfoById_QUERY, {
         variables: { id: params.id }
     })
     const item = getFirstNodeOfCollection(data?.artistsCollection)
 
-    if (!item) return <></>
+    if (!item) {
+        if (error) {
+            navigate({
+                to: "/error"
+            })
+        }
+        return null
+    }
 
     const eventHandler: ArtistEventHandler & OeuvreEventHandler = {
         selectOeuvre: (id: string) => oeuvreNavigate.select(id)

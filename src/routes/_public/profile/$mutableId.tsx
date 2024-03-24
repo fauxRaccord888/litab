@@ -7,6 +7,7 @@ import type { PentagramEventHandler } from "$feature/Pentagram/types";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 /* hooks */
 import { useQuery } from "@apollo/client";
+import { useNavigate } from "@tanstack/react-router";
 import { useOeuvreNavigate, usePentagramNavigate, useProfileNavigate } from "$feature/navigate/hooks";
 import { useHandleFollow } from "$feature/Profile/hooks";
 /* fetch */
@@ -23,22 +24,30 @@ export const Route = createFileRoute('/_public/profile/$mutableId')({
 function Profile() {
     const params = Route.useParams()
     const context = Route.useRouteContext()
-    const navigate = useProfileNavigate()
+    const navigate = useNavigate()
+    const profileNavigate = useProfileNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
     const pentagramNavigate = usePentagramNavigate()
     const follow = useHandleFollow()
 
-    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data, error } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
     const item = getFirstNodeOfCollection(data?.usersCollection)
     
-    if (!item) return null
+    if (!item) {
+        if (error) {
+            navigate({
+                to: "/error"
+            })
+        }
+        return null
+    }
 
     const eventHandler: ProfileEventHandler & PentagramEventHandler & OeuvreEventHandler = {
         follow,
-        profileSelectMenuModal: navigate.profileSelectMenuModal,
-        followersModal: navigate.followersModal,
-        followingsModal: navigate.followingsModal,
-        mutualFollowersModal: navigate.mutualFollowersModal,
+        profileSelectMenuModal: profileNavigate.profileSelectMenuModal,
+        followersModal: profileNavigate.followersModal,
+        followingsModal: profileNavigate.followingsModal,
+        mutualFollowersModal: profileNavigate.mutualFollowersModal,
         pentagramMenuModal: (id: string) => pentagramNavigate.pentagramSelectModal(id),
         nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
