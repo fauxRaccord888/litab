@@ -1,8 +1,8 @@
-import type { DBOeuvre } from "$feature/Oeuvre/types"
+import type { DBMiniOeuvre } from "$feature/Oeuvre/types"
 
 export interface INode {
     id: string
-    oeuvres: DBOeuvre,
+    oeuvres: DBMiniOeuvre,
     angle: number,
     distance: number,
     deleted?: boolean | null
@@ -15,7 +15,7 @@ export interface IMergedNode extends INode {
 export type IPendingChange = (UpsertChange | UpdateChange | RemoveChange | RecoverChange) 
 
 
-type ChangeBase = { id: string, oeuvres: DBOeuvre }
+type ChangeBase = { id: string, oeuvres: DBMiniOeuvre }
 export type UpsertChange = ChangeBase & { changeType: 'upsert', angle: number, distance: number }
 export type UpdateChange = ChangeBase & { changeType: 'update', angle: number, distance: number }
 export type RemoveChange = ChangeBase & { changeType: 'remove', deleted: true }
