@@ -2,18 +2,17 @@
 
 .navigation-bar-component {
     @include flex;
-    @include padding-wide-(calc(var(--base-size) * 1));
+    @include w-full;
     justify-content: space-between;
     align-items: end;
     
     @media only screen and (min-width: 500px) {
         @include flex-col;
-        @include align-center;
+        align-items: end;
         min-height: 300px;
     }
     @media only screen and (min-width: 800px) {
         align-items: end;
-        padding-right: calc(var(--base-size) * 1.5);
     }
     
     .navigation-bar-component__link-container {
