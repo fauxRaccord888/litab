@@ -1,7 +1,7 @@
 /* route */
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 /* types */
-import type { GetProfileByMutableIdQuery } from "$lib/graphql/__generated__/graphql";
+import type { SearchUsersQuery } from "$lib/graphql/__generated__/graphql";
 import type { ProfileEventHandler } from "$feature/Profile/types";
 import type { PentagramEventHandler } from "$feature/Pentagram/types";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
@@ -11,7 +11,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useOeuvreNavigate, usePentagramNavigate, useProfileNavigate } from "$feature/navigate/hooks";
 import { useHandleFollow } from "$feature/Profile/hooks";
 /* fetch */
-import { getProfileByMutableId_QUERY } from "$feature/Profile/graphql";
+import { searchUsers_QUERY } from "$feature/search/graphql";
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
@@ -30,7 +30,7 @@ function Profile() {
     const pentagramNavigate = usePentagramNavigate()
     const follow = useHandleFollow()
 
-    const { data, error } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data, error } = useQuery<SearchUsersQuery>(searchUsers_QUERY, {variables: {keyword: params.mutableId }})
     const item = getFirstNodeOfCollection(data?.usersCollection)
     
     if (!item) {

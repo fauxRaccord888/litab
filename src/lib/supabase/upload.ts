@@ -9,7 +9,6 @@ import { CustomUnknownError } from '$lib/error';
 // 하나의 transaction으로 묶을 수 없지만 그럼에도 클라이언트에서 처리하는 것이 바람직할 것으로 판단됨
 
 
-// TODO 
 // REFACTOR
 // 둘로 나뉜 업데이트 과정(table, storage)에 대한 에러 핸들링이 적절히 이루어지지 않음
 // 현실적으로 storage가 성공했을 때 table update가 실패할 확률은 낮지만 문제
