@@ -22,7 +22,8 @@ export function usePentagramNavigate() {
     const nodeUpsertModalNavigator = useCallback((
         nodeUpsertId: string,
     ) => {
-        navigate({ 
+        navigate({
+            params: {},
             search: {
                 nodeUpsertId,
             },
@@ -31,7 +32,8 @@ export function usePentagramNavigate() {
 
     const nodeInsertNavigator =  useCallback((
     )=> {
-        navigate({ 
+        navigate({
+            params: {},
             search: {
                 insertNode: true,
             },
@@ -51,6 +53,7 @@ export function usePentagramNavigate() {
         nodeViewId: string,
     ) => {
         navigate({
+            params: {},
             search: {
                 nodeViewId,
             },
@@ -61,6 +64,7 @@ export function usePentagramNavigate() {
         revisionViewId: string,
     )=> {
         navigate({
+            params: {},
             search: {
                 revisionViewId,
             },
@@ -71,6 +75,7 @@ export function usePentagramNavigate() {
         pentagramMenuId: string,
     ) => {
         navigate({
+            params: {},
             search: {
                 pentagramMenuId,
             },

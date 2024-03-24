@@ -1,3 +1,4 @@
+export * from './useAccountNavigate'
 export * from './useArtistNavigate'
 export * from './useGenreNavigate'
 export * from './useOeuvreNavigate'
