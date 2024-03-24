@@ -11,11 +11,11 @@ body {
     overflow: hidden;
 }
 
-button, button:disabled {
+select, button, button:disabled {
     font-family: inherit;
+    color: inherit;
     background-color: transparent;
     border: 0;
-    color: inherit;
     padding-block: 0;
     padding-inline: 0;
     font-size: inherit;

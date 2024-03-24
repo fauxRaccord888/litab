@@ -6,6 +6,6 @@
     .info-card-template {
         @include box-shadow-2(rgb(var(--font-color)));
         @include rounded-lg;
-        @include padding-(calc(var(--base-size) * 1.1));
+        @include padding-(calc(var(--base-size) * 0.75));
     }
 }

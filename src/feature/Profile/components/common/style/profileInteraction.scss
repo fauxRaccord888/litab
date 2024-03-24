@@ -11,6 +11,7 @@
         @include w-full;
         .button-component {
             @include w-full;
+            min-width: 80px;
             font-size: calc(var(--base-size) * 0.9);
         }
     }
