@@ -27,14 +27,16 @@ export default function Modal(props: ModalProps) {
                 <div className="modal-component" onClick={onClickClose}>
                     <div className="modal-component__main-container" onClick={(e) => e.stopPropagation()} >
                         <div className="modal-component__title-container">
-                            <div className="modal-component__title-placeholder">{}</div>
-                            <div className="modal-component__title">{title}</div>
-                            <div className="modal-component__title-placeholder">
-                                {handleClickClose &&
-                                    <button className="modal-component__close-button" onClick={onClickClose}>
-                                        <CloseIcon />
-                                    </button>
-                                }
+                            <div className="modal-component__title-inner-container">
+                                <div className="modal-component__title-placeholder">{}</div>
+                                <div className="modal-component__title">{title}</div>
+                                <div className="modal-component__title-placeholder">
+                                    {handleClickClose &&
+                                        <button className="modal-component__close-button" onClick={onClickClose}>
+                                            <CloseIcon />
+                                        </button>
+                                    }
+                                </div>
                             </div>
                         </div>
 
