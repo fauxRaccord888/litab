@@ -2,14 +2,17 @@ import type { DeleteFollowingsMutation, InsertFollowingsMutation } from "$lib/gr
 import type { DBAuthUser } from "$feature/auth/types"
 import { useCallback } from "react"
 import { useMutation } from "@apollo/client"
-import { getProfileByMutableId_QUERY, deleteFollowings_MUTATION, insertFollowings_MUTATION } from "../graphql"
+import { deleteFollowings_MUTATION, insertFollowings_MUTATION } from "../graphql"
 import { getUserById_QUERY } from "$feature/auth/graphql"
+import { searchUsers_QUERY } from "$feature/search/graphql"
+import { getFeedById_QUERY } from "$feature/feed/graphql"
 
 const queryOption = (followerId: string, followingId: string) => ({
     variables: { followerId, followingId },
     refetchQueries: [
         getUserById_QUERY,
-        getProfileByMutableId_QUERY
+        searchUsers_QUERY,
+        getFeedById_QUERY
     ]
 })
 

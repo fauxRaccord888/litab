@@ -1,3 +1,10 @@
-.mini-profile-component {
+@import "src/lib/style/atomicMixin";
 
+.mini-profile-component {
+    .profile-user-info-component {
+        @include child-top-m(calc(var(--base-size) * 0.25));
+        .profile-user-info-component__nickname {
+            font-size: calc(var(--base-size) * 1.05);
+        }
+    }
 }
