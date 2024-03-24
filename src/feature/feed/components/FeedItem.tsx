@@ -5,7 +5,7 @@ import type { UnprocessedContext } from '$lib/types/components';
 import type { FeedItemOptions, FeedItemRenderConfig, FeedItems } from '../types';
 
 import FeedMessage from "./common/FeedMessage";
-import PentagramCard from '$feature/Pentagram/components/PentagramSelectView';
+import PentagramCard from '$feature/Pentagram/components/PentagramCard';
 
 import "./style/feedItem.scss"
 

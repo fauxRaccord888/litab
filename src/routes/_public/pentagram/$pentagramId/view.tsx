@@ -11,7 +11,7 @@ import { getProcessedContext } from '$feature/navigate/utils';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { TIME } from '$feature/Pentagram/constants';
 
-import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
+import PentagramCard from '$feature/Pentagram/components/PentagramCard';
 
 export const Route = createFileRoute('/_public/pentagram/$pentagramId/view')({
     component: PentagramSelect,
@@ -41,7 +41,7 @@ function PentagramSelect() {
 
     return (
         <>
-            <PentagramSelectView 
+            <PentagramCard 
                 item={firstNode} 
                 renderConfig={{
                     metaInfo: true,

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { TIME } from '$feature/Pentagram/constants';
 
 import SelectViewTemplate from '$feature/template/components/SelectViewTemplate';
-import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
+import PentagramCard from '$feature/Pentagram/components/PentagramCard';
 import FeedItem from '$feature/feed/components/FeedItem';
 import ProfileInfoCard from './UserInfoCard';
 import Tab from '$lib/components/common/Tab';
@@ -47,7 +47,7 @@ export default function ProfileSelectView(props: {
             {
                 label: t("profile.tab.pentagram"),
                 items: item?.pentagramsCollection?.edges.map((edge) => (
-                    <PentagramSelectView
+                    <PentagramCard
                         key={edge.node.id}
                         item={edge.node}
                         renderConfig={{
@@ -74,6 +74,9 @@ export default function ProfileSelectView(props: {
                         renderConfig={{
                             item: true,
                             message: false,
+                        }}
+                        options={{
+                            showMessage: false
                         }}
                         eventHandler={eventHandler}
                         context={context}

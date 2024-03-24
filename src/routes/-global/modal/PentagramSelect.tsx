@@ -6,7 +6,7 @@ import { usePentagramNavigate } from "$feature/navigate/hooks"
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getCurrentUserFromObservable } from '$feature/auth/utils';
 import { getPentagramsSelectUserInfoById_QUERY } from '$feature/Pentagram/graphql';
-import PentagramMenuModal from '$feature/Pentagram/components/PentagramSelectView/Modal/PentagramMenuModal';
+import PentagramMenuModal from '$feature/Pentagram/components/Modal/PentagramMenuModal';
 
 export default function PentagramSelect(props: {
     pentagramId: string;
