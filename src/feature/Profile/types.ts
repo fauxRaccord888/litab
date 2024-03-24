@@ -1,11 +1,10 @@
-import type { DBAuthUser } from '$feature/auth/type';
 import type { InfoCardOptions, InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
 import type { ISlotRenderConfig } from '$feature/template/type';
-import type { GetProfileByMutableIdQuery, MiniProfileFragment } from '$lib/graphql/__generated__/graphql';
+import type { MiniProfileInfoFragment, SearchUsersQuery } from '$lib/graphql/__generated__/graphql';
 import type { FirstNodeOfCollection } from '$lib/types/graphql';
 
-export type DBProfiles = FirstNodeOfCollection<GetProfileByMutableIdQuery["usersCollection"]>
-export type DBMiniProfile = MiniProfileFragment
+export type DBProfiles = FirstNodeOfCollection<SearchUsersQuery["usersCollection"]>
+export type DBMiniProfile = MiniProfileInfoFragment
 export type ProfileForeignTableKeys = 'followings' | 'followers' | 'posts';
 
 export type ProfileInfoCardRenderOptions = ISlotRenderConfig<InfoCardRenderConfigKey>

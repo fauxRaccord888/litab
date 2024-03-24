@@ -1,7 +1,7 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment MiniProfile on users {
+    fragment MiniProfileInfo on users {
         mutable_id,
         nickname,
         id,
@@ -14,7 +14,7 @@ graphql(/* GraphQL */ `
         edges {
             node {
                 following_id {
-                    ...MiniProfile
+                    ...MiniProfileInfo
                 }
             }
         }
@@ -26,7 +26,7 @@ graphql(/* GraphQL */ `
         edges {
             node {
                 follower_id {
-                    ...MiniProfile
+                    ...MiniProfileInfo
                 }
             }
         }
@@ -34,25 +34,32 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment ProfileData on users {
-        ...MiniProfile,
+    fragment ProfilesInfo on users {
+        ...MiniProfileInfo,
         description,
         nickname,
-        preference,
         followersCollection {
             ...FollowersMiniProfile
         },
         followingsCollection {
             ...FollowingsMiniProfile
         }
-        pentagramsCollection {
+        pentagramsCollection(
+            orderBy: {
+                created_at: DescNullsLast
+            }
+        ) {
             edges {
                 node {
                     ...PentagramsSelectInfo
                 }
             }
         }
-        pentagram_revisionsCollection {
+        pentagram_revisionsCollection(
+            orderBy: {
+                created_at: DescNullsLast
+            }
+        ) {
             edges {
                 node {
                     ...FeedInfo
