@@ -8,7 +8,7 @@ import SelectDescription from "./SelectDescription";
 import SelectRevisionList from "./SelectRevisionList";
 import './style/pentagramSelectView.scss'
 
-export type PentagramSelectViewProps = {
+export type PentagramCardProps = {
     item: DBPentagram_SELECT,
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
@@ -17,12 +17,12 @@ export type PentagramSelectViewProps = {
     timestamp: Date
 }
 
-export default function PentagramSelectView(props: PentagramSelectViewProps) {
+export default function PentagramCard(props: PentagramCardProps) {
     const { item, renderConfig, options, eventHandler, timestamp, context } = props
     const { id, users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
 
     return (
-        <div className="pentagram-select-view-component">
+        <div className="pentagram-card-component">
             <SelectMetaInfo 
                 id={id}
                 users={users} 
@@ -30,7 +30,7 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
                 eventHandler={eventHandler}
                 context={context}
             />
-            <div className="pentagram-select-view-component__main-container">
+            <div className="pentagram-card-component__main-container">
                 {renderConfig.mainPentagon && 
                     <SelectMainPentagon 
                         timestamp={timestamp}
@@ -39,13 +39,13 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
                     />
                 }
                 {(renderConfig.description && !options.horizontalMain) &&
-                    <div className="pentagram-select-view-component__description-container">
+                    <div className="pentagram-card-component__description-container">
                         <SelectDescription description={description}/>
                     </div>
                 }
             </div>
             {(renderConfig.description && options.horizontalMain) &&
-                <div className="pentagram-select-view-component__description-container">
+                <div className="pentagram-card-component__description-container">
                     <SelectDescription description={description}/>
                 </div>
             }
