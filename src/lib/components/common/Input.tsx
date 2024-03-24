@@ -24,6 +24,8 @@ export default function Input<K extends string>(props: InputProps<K>) {
                 {icon()}
             </div>
             <input
+                className="input-component__input"
+                name={label}
                 type={type}
                 placeholder={placeholder}
                 value={value}

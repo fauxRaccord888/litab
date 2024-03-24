@@ -1,0 +1,9 @@
+@import '/src/lib/style/atomicMixin';
+
+.dropdown-component {
+    @include rounded-lg;
+    @include padding-wide-(calc(var(--base-size) * 0.5));
+    @include box-shadow-2(rgba(var(--font-color), 0.5));
+    background-color: rgb(var(--background-color));
+    font-size: calc(var(--base-size) * 1.2);
+}
