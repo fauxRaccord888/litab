@@ -33,10 +33,16 @@
     .tab-component__body {
         border-top: 2px solid rgba(var(--font-color), 0.5);
 
-        > * {
-            @include padding-(calc(var(--base-size) * 1.25));
-            width: calc(100% - calc(var(--base-size) * 2.5));
+        .tab-component__item-container {
+            @include flex;
+            @include w-full;
             border-bottom: 2px solid rgba(var(--font-color), 0.5);
+            .tab-component__item-inner-container {
+                @include flex;
+                @include flex-col;
+                @include w-full;
+                @include margin-(calc(var(--base-size) * 1));
+            }
         }
     }
 

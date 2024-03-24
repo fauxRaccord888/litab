@@ -46,12 +46,18 @@ export default function Tab(props: TabProps) {
             </div>
 
             <div className="tab-component__body">
-                    {items.map((item, idx) => {
-                        if (idx !== selected) return null
-                        return (
-                            item.items.map((it) => it)
-                        )
-                    })}
+                {items.map((item, idx) => {
+                    if (idx !== selected) return null
+                    return (
+                        item.items.map((it) => (
+                            <div key={it.key} className="tab-component__item-container">
+                                <div className="tab-component__item-inner-container">
+                                    {it}
+                                </div>
+                            </div>
+                        ))
+                    )
+                })}
             </div>
         </div>
     )   
