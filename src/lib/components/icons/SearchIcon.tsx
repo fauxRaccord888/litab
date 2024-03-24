@@ -1,7 +1,10 @@
 export default function SearchIcon(props?: {className?: string}) {
     return (
         <svg 
-            className={`search-icon-component  ${props?.className}`}
+            className={[
+                "search-icon-component",
+                props?.className ? props.className : ""
+            ].join(" ")}
             viewBox="0 0 24 24"
         >
             <path 

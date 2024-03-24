@@ -1,7 +1,10 @@
 export default function UserIcon(props?: {className?: string}) {
     return (
         <svg
-            className={`user-icon-component  ${props?.className}`}
+            className={[
+                "user-icon-component",
+                props?.className ? props.className : ""
+            ].join(" ")}
             viewBox="0 0 24 24"
             fill="none"
         >

@@ -1,26 +1,27 @@
 @import "src/lib/style/atomicMixin";
 @import "src/lib/style/mixin";
 
-.button-component {
+.button-component, .button-component:disabled {
     @include padding-wide-(calc(var(--base-size) * 0.5));
+    @include flex;
     @include justify-center;
     @include pointer;
     @include rounded-lg;
     font-size: inherit;
 
-    &.primary {
+    &.button-component__primary {
         background-color: rgb(var(--primary));
     }
 
-    &.danger {
+    &.button-component__danger {
         background-color: rgb(var(--danger), 0.75);
     }
 
-    &.success {
+    &.button-component__success {
         background-color: rgb(var(--success), 0.75);
     }
 
-    &.info {
+    &.button-component__info {
         background-color: rgb(var(--info), 0.75);
     }
 }

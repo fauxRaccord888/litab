@@ -17,15 +17,15 @@ export default function Button(props: ButtonProps) {
     return (
         <button 
             className={[
+                className ? className : "",
                 'button-component',
-                className,
-                (primary ? 'primary' : ''),
-                (danger ? 'danger' : ''),
-                (success ? 'success' : ''),
-                (info ? 'info' : ''),
-                (icon ? 'icon' : ''),
-                (disabled ? 'disabled' : '')
+                (primary ? 'button-component__primary' : ''),
+                (danger ? 'button-component__danger' : ''),
+                (success ? 'button-component__success' : ''),
+                (info ? 'button-component__info' : ''),
+                (icon ? 'button-component__icon' : ''),
             ].join(' ')} 
+            disabled={disabled}
             {...restProps}
         >
             {children}
