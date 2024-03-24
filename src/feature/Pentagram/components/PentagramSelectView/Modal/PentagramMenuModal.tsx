@@ -9,10 +9,11 @@ type PentagramMenuModalProps = {
     isAuthor?: boolean,
     handleClickClose: () => void
     handleClickUpdate: () => void,
+    handleClickNavigate: () => void
 }
 
 export default function PentagramMenuModal(props: PentagramMenuModalProps) {
-    const { title, isAuthor, handleClickClose, handleClickUpdate } = props
+    const { title, isAuthor, handleClickClose, handleClickUpdate, handleClickNavigate } = props
     const { t } = useTranslation()
 
     const onClickUpdate = (e: MouseEvent) => {
@@ -20,9 +21,22 @@ export default function PentagramMenuModal(props: PentagramMenuModalProps) {
         handleClickUpdate()
     }
 
+    const onClickNavigate = (e: MouseEvent) => {
+        e.stopPropagation()
+        handleClickNavigate()
+    }
+
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
             <div className="pentagram-menu-modal-component__inner-cotainer">
+                <Button 
+                    className={[
+                        "pentagram-menu-modal-component__button"
+                    ].join(' ')}
+                    onClick={onClickNavigate}
+                >
+                    {t("pentagram.menu.navigate")}
+                </Button>
                 {
                     isAuthor &&
                     <Button 
