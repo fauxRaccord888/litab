@@ -26,5 +26,11 @@
     "search": {
         "error": "something went wrong",
         "label": "enter your query here"
+    },
+    "dropdown": {
+        "users": "users",
+        "oeuvres": "oeuvres",
+        "artists": "artists",
+        "genres": "genres"
     }
 }
