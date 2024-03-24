@@ -1,40 +1,44 @@
+import type { SignInPayload } from '$feature/auth/types';
 /* route */
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 /* hooks */
-import { useEffect } from 'react'
-import { useDispatch } from "react-redux"
-import { useLazyQuery } from "@apollo/client"
+import { useTranslation } from 'react-i18next'
 /* Mutation (hooks)*/
-import { useSignInOnAuthMutation } from '$feature/auth/hooks'
-import { getUserById_QUERY } from "$feature/auth/graphql"
-/* types */
-import type { AppDispatch } from "$lib/stores/store"
-import type { GetUserByIdQuery } from "$lib/graphql/__generated__/graphql"
-/* components */
-import SignInComponent from "$feature/SignIn"
+import { useAuthMutationHandler } from '$feature/auth/hooks'
 
-export const Route = createFileRoute('/_guest/account/signIn/')({
+import { CustomError } from '$lib/error'
+import { signInErrorHandler } from '$feature/Account/errorHandler/signInErrorHandlert'
+/* components */
+import AccountSignIn from "$feature/Account/components/SignIn"
+import toast from 'react-hot-toast'
+
+export const Route = createFileRoute('/_guest/account/signin/')({
     component: SignIn
 })
 
 export default function SignIn() {
-    const dispatch = useDispatch<AppDispatch>()
-    const [signIn, authStatus] = useSignInOnAuthMutation()
-    const [tableQuery, tableStatus] = useLazyQuery<GetUserByIdQuery>(getUserById_QUERY)
+    const { signIn } = useAuthMutationHandler()
+    const [signInHandler] = signIn
+    const { t } = useTranslation()
+    const navigate = useNavigate()
+    
+    const handleSignIn = async (payload: SignInPayload) => {
+        const response = signInErrorHandler(
+            () => signInHandler(payload)
+        )
 
-    const { loading: authLoading, error: authError, data: authData } = authStatus 
-    const { loading: tableLoading, error: tableError } = tableStatus
+        toast.promise(response, {
+            loading: t('account.toast.loading.signIn'),
+            success: t('account.toast.success.signIn'),
+            error: (error: CustomError) => t(error.i18nKey),
+        })
 
-    useEffect(() => {
-        if (authData?.id) {
-            tableQuery({ variables: { id: authData.id } })
-        }
-    }, [authData, dispatch, tableQuery])
-
-    if (authLoading || tableLoading) return null
-    if (authError || tableError) return null
+        response.then(() => {
+            navigate({to: '/feed'})
+        })
+    }
 
     return (
-        <SignInComponent handleSignIn={signIn}/>
+        <AccountSignIn handleSignIn={handleSignIn}/>
     )
 }
