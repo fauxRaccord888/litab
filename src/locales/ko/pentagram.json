@@ -1,5 +1,6 @@
 {
     "menu": {
+        "navigate": "이 펜타그램으로 이동",
         "update": "펜타그램 수정",
         "remove": "펜타그램 삭제"
     },
@@ -17,6 +18,10 @@
             "notUniqueOeuvre": "중복된 작품이 이 펜타그램에 이미 존재해요",
             "insertTransactionFailed": "펜타그램 업데이트에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요.", 
             "updateTransactionFailed": "펜타그램 등록에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요."
+        },
+        "loading": {
+            "updatePentagram": "펜타그램 업데이트를 기다리고 있어요.",
+            "createPentagram": "펜타그램 생성을 기다리고 있어요."
         }
     },
     "dialog": {

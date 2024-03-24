@@ -4,5 +4,8 @@
         "search": "Search",
         "account": "Account",
         "pentagram": "Pentagram"
+    },
+    "error": {
+        "redirect": "Something went wrong. redirect..."
     }
 }

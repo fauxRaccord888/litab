@@ -1,5 +1,6 @@
 {
     "menu": {
+        "navigate": "Move to this Pentagram",
         "update": "Edit Pentagram",
         "remove": "Delete Pentagram"
     },
@@ -17,6 +18,10 @@
             "notUniqueOeuvre": "A duplicate oeuvre already exists in this Pentagram",
             "insertTransactionFailed": "Pentagram update failed. Please contact us if the same issue persists.", 
             "updateTransactionFailed": "Pentagram registration failed. Please contact us if the same issue persists."
+        },
+        "loading": {
+            "updatePentagram": "Waiting for Pentagram to be updated.",
+            "createPentagram": "Waiting for Pentagram to be added."
         }
     },
     "dialog": {
