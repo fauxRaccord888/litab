@@ -24,16 +24,18 @@ export default forwardRef(function PentagramUpsertView(props: PentagramUpsertVie
 
     return (
         <div className="pentagram-upsert-view-component">
-            <span className="pentagram-upsert-view-component__title">
-                {title}
-            </span>
-            <PentagramUpsertEditor 
-                ref={ref}
-                {...editorProps} 
-            />
-            <Button className="pentagram-upsert-view-component__submit-button" primary onClick={onClickSubmit}>
-                {t('button.submit')}
-            </Button>
+            <div className="pentagram-upsert-view-component__inner-container">
+                <span className="pentagram-upsert-view-component__title">
+                    {title}
+                </span>
+                <PentagramUpsertEditor 
+                    ref={ref}
+                    {...editorProps} 
+                />
+                <Button className="pentagram-upsert-view-component__submit-button" primary onClick={onClickSubmit}>
+                    {t('button.submit')}
+                </Button>
+            </div>
         </div>
     )
 })
