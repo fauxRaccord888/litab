@@ -10,30 +10,38 @@
         width: 100vw;
         bottom: 0;
         background-color: rgb(var(--background-color));
-        border-top: solid 1px rgba(var(--font-color), 0.5);
+        border-top: solid 2px rgba(var(--font-color), 0.5);
         z-index: 98;
         @media only screen and (min-width: 500px) {
-            top: 0;
-            min-width: calc(var(--base-size) * 4.5);
-            position: relative;
+            @include flex;
             width: auto;
+            justify-content: flex-end;
+            position: relative;
+            min-width: calc(var(--base-size) * 5);
             flex-grow: 1;
             border-top: 0;
         }
         @media only screen and (min-width: 800px) {
-            display: inline;
-            min-width: 200px;
-       }
+            min-width: 216px;
+        }
+
+        .left-sidebar-section__inner-container {
+            @include flex;
+            @include margin-(calc(var(--base-size) * 1.25));
+            @media only screen and (min-width: 500px) {
+                position: fixed;
+                width: auto;
+            }
+        }
     }
 
     .main-section {
         padding-bottom: calc(var(--base-size) * 5);
-        border-left: solid 2px rgba(var(--font-color), 0.5);
-        border-right: solid 2px rgba(var(--font-color), 0.5);
         min-width: min(600px, 100vw);
         max-width: 600px;
         @media only screen and (min-width: 500px) {
-            border-right: solid 1px rgba(var(--font-color), 0.5);
+            border-left: solid 2px rgba(var(--font-color), 0.5);
+            border-right: solid 2px rgba(var(--font-color), 0.5);
             display: inline;
             padding-bottom: 0;
         }
@@ -41,7 +49,7 @@
     
     .right-sidebar-section {
         display: none;
-        flex-grow: 2;
+        flex-grow: 1;
         @media only screen and (min-width: 800px) {
             display: inline;
             min-width: 250px;

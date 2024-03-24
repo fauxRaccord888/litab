@@ -12,7 +12,9 @@ export default function Layout(props: LayoutProps) {
             <div id="portal-root" className="portal-root"></div>
             <div className="main-container">
                 <div className="left-sidebar-section">
-                    {props.left}
+                    <div className="left-sidebar-section__inner-container">
+                            {props.left}
+                    </div>
                 </div>
 
                 <div className="main-section">
