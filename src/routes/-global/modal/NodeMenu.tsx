@@ -4,7 +4,7 @@ import { useMergedNodeById, useNodeById, usePentagramModalEventHandler, useQuadt
 import toast from 'react-hot-toast';
 import NodeMenuModal from '$feature/Pentagram/components/PentagramUpsertView/Modal/NodeMenuModal';
 
-export default function NodeUpsert(props: { nodeId: string; handleClickClose: () => void; }) {
+export default function NodeMenu(props: { nodeId: string; handleClickClose: () => void; }) {
     const { nodeId, handleClickClose } = props;
     const node = useNodeById(nodeId);
     const mergedNode = useMergedNodeById(nodeId);
