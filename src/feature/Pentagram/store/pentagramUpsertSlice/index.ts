@@ -42,7 +42,7 @@ const pentagramUpsertSlice = createSlice({
     },
     reducers: {
         initialize(state, action: PayloadAction<{
-            nodes: DBPentagram_UPDATE["pentagram_nodesCollection"] | undefined
+            nodes: DBPentagram_UPDATE["pentagram_nodesCollection"] | null
         }>) {
             initializeNode(state, action)
         },
