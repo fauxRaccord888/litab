@@ -1,26 +1,28 @@
-import type { AppRootState } from "$lib/stores/store";
 import { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useApolloClient } from "@apollo/client";
-import { useUnmergedChangeInfo } from "../..";
-import { supabaseClient } from "$lib/supabase/client";
+import { useCurrentUser } from "$feature/auth/hooks/useCurrentUser";
+import { useDescription, useUnmergedChangeInfo } from "../..";
 
+import { supabaseClient } from "$lib/supabase";
 import { abortChanges } from "../../../store/pentagramUpsertSlice";
 import { filterChanges, formatChanges } from '../../../utils';
-
-import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
+import { evictCacheById } from "$lib/utils";
+import { InsertPentagramTransactionError, UpdatePentagramTransactionError } from "../../../error";
+import { PendingError } from "$lib/error";
 import { getOeuvreExtensiveInfoById_QUERY } from "$feature/Oeuvre/graphql";
-import { getProfileByMutableId_QUERY } from "$feature/Profile/graphql";
-import { getFeedById_QUERY } from "$feature/feed/graphql";
+import { getUserById_QUERY } from "$feature/auth/graphql";
 
-import { InsertPentagramTransactionError, PendingError, UpdatePentagramTransactionError } from "../../../error";
 
 export function useMutationHandler() {
     const dispatch = useDispatch()
-    const client = useApolloClient()
-    const { description } = useSelector((state: AppRootState) => state.pentagramUpsert)
+    const apolloClient = useApolloClient()
+    const currentUser = useCurrentUser()
+
     const changes = useUnmergedChangeInfo()
     const filteredChanges = filterChanges(changes)
+
+    const description = useDescription()
     const {
         processedUpsertChanges,
         processedUpdateChanges,
@@ -40,14 +42,30 @@ export function useMutationHandler() {
                 },
                 upsert_changes: processedUpsertChanges,
             })
+
         if (data || error) {
             setPending(false)
         }
     
         if (error) throw new UpdatePentagramTransactionError()
+
+        if (data) {
+            evictCacheById({
+                cache: apolloClient.cache, 
+                entity: 'users', 
+                id: currentUser?.id
+            })
+            apolloClient.refetchQueries({
+                include: [
+                    getOeuvreExtensiveInfoById_QUERY,
+                    getUserById_QUERY
+                ],
+            })
+        }
+
         dispatch(abortChanges())
         return data
-    }, [description, dispatch, processedUpsertChanges, pending])
+    }, [pending, description, processedUpsertChanges, apolloClient, currentUser, dispatch])
 
     const handleUpdatePentagram = useCallback(async (pentagramId: string) => {
         if (pending) throw new PendingError()
@@ -68,21 +86,25 @@ export function useMutationHandler() {
             setPending(false)
         }
 
+        if (error) throw new InsertPentagramTransactionError()
+
         if (data) {
-            client.refetchQueries({
+            evictCacheById({
+                cache: apolloClient.cache, 
+                entity: 'users', 
+                id: currentUser?.id
+            })
+            apolloClient.refetchQueries({
                 include: [
-                    getPentagramSelectInfoById_QUERY,
                     getOeuvreExtensiveInfoById_QUERY,
-                    getProfileByMutableId_QUERY,
-                    getFeedById_QUERY,
+                    getUserById_QUERY
                 ],
             })
         }
 
-        if (error) throw new InsertPentagramTransactionError()
         dispatch(abortChanges())
         return data
-    }, [client, description, dispatch, pending, processedRecoverChanges, processedRemoveChanges, processedUpdateChanges, processedUpsertChanges])
+    }, [apolloClient, currentUser, description, dispatch, pending, processedRecoverChanges, processedRemoveChanges, processedUpdateChanges, processedUpsertChanges])
 
 
     return { handleInsertPentagram, handleUpdatePentagram }
