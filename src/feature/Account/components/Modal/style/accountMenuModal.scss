@@ -1,0 +1,14 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/modalMixin";
+
+.account-menu-modal-component__inner-cotainer{
+    @include menu-modal;
+    
+    .account-menu-modal-component__button--update {
+        background-color: rgba(var(--info), 0.5);
+    }
+
+    .account-menu-modal-component__button--sign-out {
+        background-color: rgba(var(--danger), 0.5);
+    }
+}

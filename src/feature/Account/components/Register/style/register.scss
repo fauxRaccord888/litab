@@ -1,9 +1,16 @@
 @import "src/lib/style/atomicMixin";
 
 .account-register-component {
-    @include padding-(calc(var(--base-size) * 1.5));
-    .account-register-component__title {
-        @include margin-(0);
-        margin-bottom: calc(var(--base-size) * 1.5);
+    @include flex;
+    @include w-full;
+    .account-register-component__inner-container {
+        @include flex;
+        @include flex-col;
+        @include w-full;
+        @include margin-(calc(var(--base-size) * 1.5));
+        .account-register-component__title {
+            @include margin-(0);
+            margin-bottom: calc(var(--base-size) * 1.5);
+        }
     }
 }

@@ -42,12 +42,14 @@ export default function AccountSignIn(props: AccountSignInProps) {
 
     return (
         <div className="account-sign-in-component">
-            <h2 className="account-sign-in-component__title">{t('account.title.signIn')}</h2>
-            <Form
-                fields={fields}
-                handleSubmit={handleSubmit}
-                disabled={!submitable}
-            />
+            <div className="account-sign-in-component__inner-container">
+                <h2 className="account-sign-in-component__title">{t('account.title.signIn')}</h2>
+                <Form
+                    fields={fields}
+                    handleSubmit={handleSubmit}
+                    disabled={!submitable}
+                />
+            </div>
         </div>
     )
 }

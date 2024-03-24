@@ -1,40 +1,44 @@
+import type { RegisterPayload } from '$feature/auth/types'
 /* route */
 import { createFileRoute } from '@tanstack/react-router'
 /* hooks */
-import { useEffect } from 'react'
-import { useDispatch } from "react-redux"
-import { useMutation } from "@apollo/client"
 /* Mutation (hooks)*/
-import { useRegisterOnAuthMutation } from "$feature/auth/hooks"
-import { registerUser_GRAPHQL } from "$feature/auth/graphql"
-/* types */
-import type { AppDispatch } from "$lib/stores/store"
-import type { RegisterUserMutation } from "$lib/graphql/__generated__/graphql"
+import { useAuthMutationHandler } from "$feature/auth/hooks"
+import { useNavigate } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
+import toast from 'react-hot-toast'
+import { CustomError } from '$lib/error'
+import { registerErrorHandler } from '$feature/Account/errorHandler/registerErrorHandler'
 /* components */
-import RegisterComponent from "$feature/Register"
+import RegisterComponent from "$feature/Account/components/Register"
 
 export const Route = createFileRoute('/_guest/account/register/')({
     component: Register
 })
 
 export default function Register() {
-    const dispatch = useDispatch<AppDispatch>()
-    const [register, authStatus] = useRegisterOnAuthMutation()
-    const [tableMutation, tableStatus] = useMutation<RegisterUserMutation>(registerUser_GRAPHQL)
+    const { register } = useAuthMutationHandler()
+    const [ registerHandler ] = register
+    const { t } = useTranslation()
+    const navigate = useNavigate()
+    
+    const handleRegister = async (payload: RegisterPayload) => {
+        const response = registerErrorHandler(
+            () => registerHandler(payload)
+        )
 
-    const { loading: authLoading, error: authError, data: authData } = authStatus 
-    const { loading: tableLoading, error: tableError } = tableStatus
+        toast.promise(response, {
+            loading: t('account.toast.loading.register'),
+            success: t('account.toast.success.register'),
+            error: (error: CustomError) => t(error.i18nKey),
+        })
 
-    useEffect(() => {
-        if (authData?.id) {
-            tableMutation({ variables: { id: authData.id } })
-        }
-    }, [authData, dispatch, tableMutation])        
-
-    if (authLoading || tableLoading) return null
-    if (authError || tableError) return null
+        response.then(()=> {
+            navigate({to: '/account/update'})
+        })
+    }
 
     return (
-        <RegisterComponent handleRegister={register}/>
+        <RegisterComponent handleRegister={handleRegister}/>
     )
 }

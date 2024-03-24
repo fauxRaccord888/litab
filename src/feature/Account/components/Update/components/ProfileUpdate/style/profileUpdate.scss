@@ -1,0 +1,11 @@
+@import "src/lib/style/atomicMixin";
+
+.account-profile-update-component {
+    @include flex;
+    @include flex-col;
+    @include w-full;
+    .account-profile-update-component__title {
+        @include margin-(0);
+        margin-bottom: calc(var(--base-size) * 1.5);
+    }
+}
