@@ -1,16 +1,17 @@
+import type { RegisterPayload } from "$feature/auth/types"
 import type { AuthError, User } from "@supabase/supabase-js"
 import { useCallback, useState } from "react"
-import { signIn_SUPABASE } from "../supabase"
+import { register_SUPABASE } from "../../supabase"
 
-export function useSignInOnAuthMutation(): [typeof mutation, typeof status] {
+export function useRegisterOnAuthMutation(): [typeof mutation, typeof status] {
     const [data, setData] = useState<User | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<AuthError | null>(null)
-    const status = { data, loading, error }
-    
-    const mutation = useCallback((email: string, password: string) => {
+    const status = { data, loading, error}
+
+    const mutation = useCallback((payload: RegisterPayload) => {
         setLoading(true)
-        const response = signIn_SUPABASE({email, password})
+        const response = register_SUPABASE(payload)
         response.then((response) => {
             const { data: supabaseData, error: supabaseError } = response
             setLoading(false)

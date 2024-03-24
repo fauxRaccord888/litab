@@ -1,11 +1,9 @@
-import { supabaseClient } from "$lib/supabase/client"
+import type { SignInPayload } from "../types"
+import { supabaseClient } from "$lib/supabase"
 
 export const signIn_SUPABASE = async (
-    payload: { email: string, password: string },
+    payload: SignInPayload,
 ) => {
-    const res = await supabaseClient.auth.signInWithPassword({
-        email: payload.email,
-        password: payload.password,
-    })
+    const res = await supabaseClient.auth.signInWithPassword(payload)
     return res
 }
