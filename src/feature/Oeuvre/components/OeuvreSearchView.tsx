@@ -1,7 +1,8 @@
 import type { DBOeuvre } from '../types';
 import type { ISlotRenderConfig } from '$feature/template/type';
 import type { InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
-import { useOeuvresQuery } from '../hooks';
+import { useSearchQuery } from '$feature/search/hooks';
+import { SEARCH } from '$feature/search/constants';
 
 import OeuvreInfoCard from './common/OeuvreInfoCard';
 import SearchPanel from '$lib/components/common/SearchPanel';
@@ -15,13 +16,19 @@ type OeuvreSearchViewProps = {
 
 export default function OeuvreSearchView(props: OeuvreSearchViewProps) {
     const { handleClickResult, oeuvreInfoCardRenderConfig } = props
-    const [searchOeuvres, {data}] = useOeuvresQuery()
+    const [searchOeuvres, {data}] = useSearchQuery().oeuvres
     const items = data?.oeuvresCollection?.edges.map((edge) => edge.node) || []
+
+    const handleSearchOeuvres = (formData: FormData) => {
+        const keyword = formData.get(SEARCH.inputName)?.toString()
+        if (!keyword) return
+        searchOeuvres(keyword)
+    }
 
     return (
         <div className="oeuvre-search-view-component">
             <SearchPanel
-                submitFunction={searchOeuvres}
+                submitFunction={handleSearchOeuvres}
             />
             <div className="oeuvre-search-view-component__result-container">
                 {items.map((item) => (
