@@ -1,6 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
+import { t } from 'i18next'
+import toast from 'react-hot-toast'
 
-// TODO ERROR PAGE NOT FOUND
 export const Route = createFileRoute('/error')({
-    component: () => <div>Hello /error!</div>
+    beforeLoad: (() => {
+        toast.error(t('navigate.error.redirect'))
+        throw redirect({
+            to: '/home'
+        })
+    })
 })

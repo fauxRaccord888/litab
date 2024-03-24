@@ -1,12 +1,12 @@
 /* types */
 import type { DBMiniProfile } from '$feature/Profile/types';
-import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
+import type { SearchUsersQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
 import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
-import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
+import { searchUsers_QUERY } from '$feature/search/graphql';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
@@ -23,7 +23,7 @@ export const Route = createFileRoute('/_public/profile/$mutableId/mutualFollower
 function FollowersModal() {
     const params = Route.useParams()
     const context = Route.useRouteContext()
-    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data } = useQuery<SearchUsersQuery>(searchUsers_QUERY, {variables: {keyword: params.mutableId }})
     const targetUser = getFirstNodeOfCollection(data?.usersCollection)
     const currentUser = getCurrentUserFromObservable(context.userObservable)
 

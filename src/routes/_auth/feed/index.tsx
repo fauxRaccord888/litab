@@ -1,6 +1,7 @@
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
+import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { useFeed } from '$feature/feed/hooks';
-import { usePentagramNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 import FeedList from '$feature/feed/components/FeedList';
@@ -12,12 +13,14 @@ export const Route = createFileRoute('/_auth/feed/')({
 function Feed() {
     const { feed, recommendedUsers } = useFeed()
     const navigate = usePentagramNavigate();
+    const oeuvreNavigate = useOeuvreNavigate()
     const context = Route.useRouteContext()
 
-    const eventHandler: PentagramEventHandler = {
+    const eventHandler: PentagramEventHandler & OeuvreEventHandler = {
         pentagramMenuModal: (pentagramId: string) => navigate.pentagramSelectModal(pentagramId),
         nodeSelectModal: (nodeId: string) => navigate.nodeSelectModal(nodeId),
-        revisionSelectModal: (revisionId: string) => navigate.revisionSelectModal(revisionId)
+        revisionSelectModal: (revisionId: string) => navigate.revisionSelectModal(revisionId),
+        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId)
     }
 
     const items = feed ? feed.edges.map((edge) => edge.node) : []

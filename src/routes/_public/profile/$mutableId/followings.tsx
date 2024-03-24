@@ -1,17 +1,16 @@
 /* types */
 import type { DBMiniProfile } from '$feature/Profile/types';
-import type { GetProfileByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
+import type { SearchUsersQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
 import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
-import { getProfileByMutableId_QUERY } from '$feature/Profile/graphql';
+import { searchUsers_QUERY } from '$feature/search/graphql';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
-import { getProcessedContext } from '$feature/navigate/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
@@ -21,7 +20,7 @@ export const Route = createFileRoute('/_public/profile/$mutableId/followings')({
 
 function FollowersModal() {
     const params = Route.useParams()
-    const { data } = useQuery<GetProfileByMutableIdQuery>(getProfileByMutableId_QUERY, {variables: {mutableId: params.mutableId }})
+    const { data } = useQuery<SearchUsersQuery>(searchUsers_QUERY, {variables: {keyword: params.mutableId }})
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     
     if (!firstNode?.followingsCollection) return null
@@ -37,8 +36,7 @@ function FollowingsModalComponent(props: {
     items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
-    const unprocessedContext = Route.useRouteContext()
-    const context = getProcessedContext(unprocessedContext)
+    const context = Route.useRouteContext()
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 

@@ -3,7 +3,7 @@ import type { RootSearch } from 'routes/__root';
 import { useNavigate } from '@tanstack/react-router'
 
 import PentagramSelect from './modal/PentagramSelect';
-import NodeUpsert from './modal/NodeUpsert';
+import NodeMenu from './modal/NodeMenu';
 import NodeInsert from './modal/NodeInsert';
 import RevisionSelect from './modal/RevisionSelect';
 import NodeSelect from './modal/NodeSelect';
@@ -20,12 +20,14 @@ export default function ModalController(props: {
 
     const handleClickClose = () => {
         navigate({
+            params: {},
             search: () => ({
                 nodeUpsertId: undefined,
                 insertNode: undefined,
                 pentagramMenuId: undefined,
                 nodeViewId: undefined,
                 revisionViewId: undefined,
+                accountMenu: undefined,
             }),
         })
     }
@@ -33,7 +35,7 @@ export default function ModalController(props: {
     return (
         <>
             {nodeUpsertId &&
-                <NodeUpsert 
+                <NodeMenu 
                     nodeId={nodeUpsertId}
                     handleClickClose={handleClickClose}
                 />
@@ -59,6 +61,12 @@ export default function ModalController(props: {
                 <PentagramSelect
                     context={context}
                     pentagramId={pentagramMenuId}
+                    handleClickClose={handleClickClose}
+                />
+            }
+            {accountMenu &&
+                <AccountMenu 
+                    context={context}
                     handleClickClose={handleClickClose}
                 />
             }
