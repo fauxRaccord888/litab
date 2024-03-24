@@ -1,6 +1,7 @@
 @import "src/lib/style/atomicMixin";
 
 .load-stored-change-dialog__inner-container{
+    @include flex;
     @include flex-col;
     @include w-full;
     @include child-top-m(calc(var(--base-size) * 0.75));

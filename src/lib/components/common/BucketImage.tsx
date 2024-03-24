@@ -21,7 +21,10 @@ export default function BucketImage(props: BucketImageProps) {
     return (
         <div 
             onClick={onClick} 
-            className={`${className || ""} bucket-image-component`}
+            className={[
+                "bucket-image-component",
+                className ? className : ""
+            ].join(" ")}
         >
             {(!error && url )&&
                 <img draggable={false} className="image" {...restProps} src={url} loading="lazy" onError={() => setError(true)}/>

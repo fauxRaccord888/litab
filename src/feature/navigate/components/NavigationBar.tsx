@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useAccountNavigate } from '../hooks'
 import { Link } from '@tanstack/react-router'
 import HomeIcon from '$lib/components/icons/HomeIcon'
 import SearchIcon from '$lib/components/icons/SearchIcon'
@@ -10,6 +11,7 @@ import "./style/navigationBar.scss"
 
 export default function NavigationBar() {
     const { t } = useTranslation()
+    const accountNavigate = useAccountNavigate()
     return (
         <div className="navigation-bar-component">
             <Link to="/home" className="navigation-bar-component__link-container">
@@ -26,12 +28,12 @@ export default function NavigationBar() {
                 </span>
             </Link>
 
-            <Link to="/account/menu" className="navigation-bar-component__link-container">
+            <a onClick={accountNavigate.accountMenuModal} className="navigation-bar-component__link-container">
                 <UserIcon />
                 <span className="navigation-bar-component__link-description">
                     {t("navigate.route.account")}
                 </span>
-            </Link>
+            </a>
 
             <Link to="/pentagram/create" className="navigation-bar-component__link-container">
                 <div className="pentagram-icon-place-holder">

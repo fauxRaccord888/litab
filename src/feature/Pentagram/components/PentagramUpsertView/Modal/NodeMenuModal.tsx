@@ -37,7 +37,7 @@ export default function NodeMenuModal(props: NodeMenuModalProps) {
                         ].join(' ')}
                         onClick={onClickRecover}
                     >
-                        {t("node.menu.recover")}
+                        {t("node.change.recover")}
                     </Button>
                 }
                 {
@@ -48,7 +48,7 @@ export default function NodeMenuModal(props: NodeMenuModalProps) {
                         ].join(' ')}
                         onClick={onClickRemove}
                     >
-                        {t("node.menu.remove")}
+                        {t("node.change.remove")}
                     </Button>
                 }
             </div>

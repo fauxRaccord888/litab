@@ -6,7 +6,7 @@ graphql(/* GraphQL */ `
         description
         created_at
         users {
-            ...MiniProfile
+            ...MiniProfileInfo
         }
         pentagram_nodesCollection {
             edges {
@@ -24,7 +24,7 @@ graphql(/* GraphQL */ `
         description
         created_at
         users {
-            ...MiniProfile
+            ...MiniProfileInfo
         }
         pentagram_nodesCollection {
             edges {
@@ -49,7 +49,7 @@ graphql(/* GraphQL */ `
     fragment PentagramsSelectUserInfo on pentagrams {
         id
         users {
-            ...MiniProfile
+            ...MiniProfileInfo
         }
     }
 `)

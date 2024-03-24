@@ -3,7 +3,7 @@ import "./style/input.scss"
 
 export interface InputMinimalProps<K extends string> {
     label: K,
-    icon: () => JSX.Element
+    iconFunction: () => JSX.Element
     type?: "password"
     invalid?: boolean,
 }
@@ -11,17 +11,22 @@ export interface InputMinimalProps<K extends string> {
 export type InputProps<K extends string> = InputMinimalProps<K> & {
     onChange: (value: string) => void,
     value: string,
+    className?: string,
+    regex?: string
 }
 
 export default function Input<K extends string>(props: InputProps<K>) {
     const { t } = useTranslation()
-    const { value, label, onChange, invalid, type, icon } = props
+    const { value, label, className, onChange, regex, invalid, type, iconFunction } = props
     const placeholder = t(`form.${label}.label`)
 
     return (
-        <div className={`input-with-icon-container ${invalid ? 'invalid' : ''}`}>
-            <div className="icon">
-                {icon()}
+        <div className={[
+            "input-component",
+            className ? className : "",
+        ].join(" ")}>
+            <div className="input-component__icon">
+                {iconFunction()}
             </div>
             <input
                 className="input-component__input"
@@ -31,6 +36,14 @@ export default function Input<K extends string>(props: InputProps<K>) {
                 value={value}
                 onChange={(e) => onChange(e.currentTarget.value)}
             />
+            {regex &&
+                <span className={[
+                    "input-component__indicator",
+                    invalid ? "input-component__indicator--invalid" : "input-component__indicator--valid"
+                ].join(" ")}>
+                    {invalid ? "!" : "✔"}
+                </span>
+            }
         </div>
     )
 }

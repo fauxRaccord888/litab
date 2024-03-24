@@ -22,7 +22,7 @@ export default function Form<K extends string> (props: FormProps<K>) {
     }
 
     const inputFields = fields.map((props) => {
-        return <Input key={props.label} {...props} />
+        return <Input key={props.label} className="form-component__field" {...props} />
     })
     
     const validationMessages = fields.map((props) => {
@@ -31,7 +31,7 @@ export default function Form<K extends string> (props: FormProps<K>) {
 
     return (
         <div className="form-component">
-            <form onSubmit={onSubmit}>
+            <form className="form-component__form" onSubmit={onSubmit}>
                 <div className="form-component__field-container">
                     {...inputFields}
                 </div>
@@ -52,5 +52,5 @@ function ValidationMessage<K extends string>(props: InputProps<K>) {
     const { t } = useTranslation()
 
     if (!invalid) return null
-    return <span>{t(`form.${label}.error`)}</span>
+    return <span className="form-component__validation-message">{t(`form.${label}.error`)}</span>
 }

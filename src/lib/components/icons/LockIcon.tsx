@@ -1,8 +1,10 @@
 export default function LockIcon(props?: {className?: string}) {
     return (
         <svg 
-            className={`lock-icon-component  ${props?.className}`}
-            xmlns="http://www.w3.org/2000/svg" 
+            className={[
+                "lock-icon-component",
+                props?.className ? props.className : ""
+            ].join(" ")}
             viewBox="0 0 24 24" 
             fill="none"
         >

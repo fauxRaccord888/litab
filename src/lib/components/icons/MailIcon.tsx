@@ -1,7 +1,10 @@
 export default function MailIcon(props?: {className?: string}) {
      return (
         <svg
-            className={`mail-icon-component  ${props?.className}`}
+            className={[
+                "mail-icon-component",
+                props?.className ? props.className : ""
+            ].join(" ")}
             viewBox="0 0 24 24" 
             fill="none"
         >

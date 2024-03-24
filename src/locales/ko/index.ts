@@ -11,6 +11,7 @@ import node from './node.json'
 import oeuvre from './oeuvre.json'
 import pentagram from './pentagram.json'
 import profile from './profile.json'
+import search from './search.json'
 
 export default {
     account,
@@ -25,5 +26,6 @@ export default {
     node,
     oeuvre,
     pentagram,
-    profile
+    profile,
+    search
 }

@@ -1,5 +1,6 @@
 import type { DBGenre, GenreEventHandler } from '../types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
+import type { InfoCardOptions } from '$feature/template/components/InfoCardTemplate';
 import { useTranslation } from 'react-i18next';
 
 import GenreInfoCard from './common/GenreInfoCard';
@@ -10,10 +11,11 @@ import Tab from '$lib/components/common/Tab';
 type GenreSelectViewProps = {
     item: DBGenre
     eventHandler: GenreEventHandler & OeuvreEventHandler
+    options?: InfoCardOptions
 }
 
-export default function OeuvreSearchView(props: GenreSelectViewProps) {
-    const { item, eventHandler } = props
+export default function GenreSelectView(props: GenreSelectViewProps) {
+    const { item, eventHandler, options } = props
     const { t } = useTranslation()
 
     const infoCardComponent = (
@@ -27,6 +29,7 @@ export default function OeuvreSearchView(props: GenreSelectViewProps) {
                 mainInfo: true,
                 subInfo: true
             }}
+            options={options}
         />
     )
 

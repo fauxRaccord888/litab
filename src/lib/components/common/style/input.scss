@@ -1,49 +1,44 @@
-.input-with-icon-container {
+@import '/src/lib/style/atomicMixin';
+
+.input-component {
+    @include flex;
+    @include align-center;
+    @include padding-(calc(var(--base-size) * 0.5));
+    @include child-left-m(calc(var(--base-size) * 0.5));
     position: relative;
-    display: flex;
-    padding: 0.5rem;
 
-    &::after {
-        pointer-events: none;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        content: '';
-        border: 1px solid rgb(var(--dark-gray));
-        border-radius: inherit;
-    }
-
-    &:first-of-type {
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-    }
-    
-    &:last-of-type {
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-    }
-
-    &.invalid {
-        &::after {
-            z-index: 1;
-            border: 2px solid rgb(var(--danger));
-        }
-    }
-    
-    .icon {
+    .input-component__icon {
+        @include stroke-lg(rgb(var(--font-color)));
         width: 2rem;
         height: 2rem;
-        padding-right: 0.5rem;
     }
     
-    
-    input {
-        width: 100%;
+    .input-component__input {
+        @include w-full;
+        @include rounded-lg;
+        @include padding-(calc(var(--base-size) * 0.25));
         border: 0px;
         height: 2rem;
         background-color: transparent;
+
+    }
+
+    .input-component__indicator {
+        @include flex;
+        @include flex-center;
+        border-radius: 4px;
+        width: var(--base-size);
+        height: var(--base-size);
+        font-size: calc(var(--base-size) * 0.8);
+
+        &.input-component__indicator--invalid {
+            background-color: rgba(var(--danger), 0.6);
+        }
+
+        &.input-component__indicator--valid {
+            font-size: calc(var(--base-size) * 0.5);
+            background-color: rgba(var(--success), 0.6);
+        }
     }
 }
 

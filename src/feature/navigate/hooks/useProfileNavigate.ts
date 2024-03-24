@@ -8,10 +8,6 @@ export function useProfileNavigate() {
         navigate({ to: '/profile/$mutableId', params: { mutableId } })
     }, [navigate])
 
-    const profileUpdateNavigator = useCallback((mutableId: string) => {
-        navigate({ to: '/profile/$mutableId/update', params: { mutableId } })
-    }, [navigate])
-
     const profileSelectMenuModalNavigator = useCallback((mutableId: string) => {
         navigate({ to: '/profile/$mutableId/menu', params: { mutableId } })
     }, [navigate])
@@ -30,7 +26,6 @@ export function useProfileNavigate() {
 
     return {
         profileSelect: profileSelectNavigator,
-        profileUpdate: profileUpdateNavigator,
 
         profileSelectMenuModal: profileSelectMenuModalNavigator,
         mutualFollowersModal: mutualFollowersModalNavigator,

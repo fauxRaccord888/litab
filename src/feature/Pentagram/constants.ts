@@ -11,5 +11,5 @@ export const PENTAGRAM = {
 }
 
 export const TIME = {
-    NOW_OFFSET: 3000
+    NOW_OFFSET: 10000
 }

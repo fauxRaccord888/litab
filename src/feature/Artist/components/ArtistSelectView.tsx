@@ -1,5 +1,6 @@
 import type { DBArtist, ArtistEventHandler } from '../types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
+import type { InfoCardOptions } from '$feature/template/components/InfoCardTemplate';
 import { useTranslation } from 'react-i18next';
 
 import ArtistInfoCard from './common/ArtistInfoCard';
@@ -10,10 +11,11 @@ import Tab from '$lib/components/common/Tab';
 type ArtistSelectViewProps = {
     item: DBArtist
     eventHandler: ArtistEventHandler & OeuvreEventHandler
+    options?: InfoCardOptions
 }
 
 export default function ArtistSelectView(props: ArtistSelectViewProps) {
-    const { item, eventHandler } = props
+    const { item, eventHandler, options } = props
     const { t } = useTranslation()
 
     const infoCardComponent = (
@@ -27,6 +29,7 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
                 mainInfo: true,
                 subInfo: true
             }}
+            options={options}
         />
     )
 

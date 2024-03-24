@@ -32,7 +32,7 @@ export default function SelectMetaInfo(props: SelectMetaInfoProps) {    const { 
                         item={users} 
                         context={context}
                         options={{
-                            displayFollow: true
+                            displayFollow: false
                         }}
                     />
                 </div>

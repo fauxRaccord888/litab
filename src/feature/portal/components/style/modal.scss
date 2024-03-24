@@ -25,30 +25,32 @@
         }
         
         .modal-component__title-container {
-            @include flex;
-            @include flex-center;
-            @include padding-(calc(var(--base-size) * 0.5));
-            width: 100%;
-            font-weight: bold;
-            .modal-component__title-placeholder {
+            @include w-full;
+            border-bottom: rgba(var(--true-gray), 0.5) 0.25px solid;
+            .modal-component__title-inner-container {
                 @include flex;
                 @include flex-center;
-                width: 15%;
-            }
-
-            .modal-component__title {
-                @include flex;
-                @include flex-center;
-                width: 70%;
-            }
-
-            .modal-component__close-button {
-                @include flex;
-                @include flex-center;
-
-                width: 1rem;
-                height: 1rem;
-                fill: rgb(var(--font-color))
+                @include margin-(calc(var(--base-size) * 0.5));
+                .modal-component__title-placeholder {
+                    @include flex;
+                    @include flex-center;
+                    width: 15%;
+                }
+    
+                .modal-component__title {
+                    @include flex;
+                    @include flex-center;
+                    width: 70%;
+                }
+    
+                .modal-component__close-button {
+                    @include flex;
+                    @include flex-center;
+    
+                    width: calc(var(--base-size) * 0.75);
+                    height: calc(var(--base-size) * 0.75);
+                    fill: rgba(var(--font-color), 0.8)
+                }
             }
         }
         
@@ -57,11 +59,10 @@
             @include w-full;
             @include h-full;
             flex-grow: 1;
-            border-top: rgba(var(--true-gray), 0.5) 0.25px solid;
             
             .modal-component__body-inner-container {
                 @include flex;
-                @include padding-(calc(var(--base-size) * 1.5));
+                @include margin-(calc(var(--base-size) * 1.5));
             }
         }
     }   

@@ -1,17 +1,25 @@
 @import "src/lib/style/_atomicMixin";
 
 .pentagram-upsert-view-component {
-    @include child-top-m(calc(var(--base-size) * 2));
-    @include padding-(calc(var(--base-size) * 1.5));
-    .pentagram-upsert-view-component__title {
+    @include flex;
+    @include w-full;
+    .pentagram-upsert-view-component__inner-container {
         @include flex;
-        @include flex-center;
-        margin: calc(var(--base-size) * 1.5);
-        font-size: calc(var(--base-size) * 2);
-    }
-
-    .pentagram-upsert-view-component__submit-button {
+        @include flex-col;
         @include w-full;
-        font-size: calc(var(--base-size) * 1.5);
+        @include margin-(calc(var(--base-size) * 1.5));
+        @include child-top-m(calc(var(--base-size) * 2));
+
+        .pentagram-upsert-view-component__title {
+            @include flex;
+            @include flex-center;
+            margin: calc(var(--base-size) * 1.5);
+            font-size: calc(var(--base-size) * 2);
+        }
+    
+        .pentagram-upsert-view-component__submit-button {
+            @include w-full;
+            font-size: calc(var(--base-size) * 1.5);
+        }
     }
 }

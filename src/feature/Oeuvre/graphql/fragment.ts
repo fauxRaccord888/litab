@@ -37,7 +37,11 @@ graphql(/* GraphQL */ `
 graphql(/* GraphQL */ `
     fragment OeuvresExtensiveInfo on oeuvres {
         ...OeuvresInfo
-        pentagram_nodesCollection {
+        pentagram_nodesCollection(
+            orderBy: {
+                created_at: DescNullsLast
+            },
+        ) {
             edges {
                 node {
                     pentagrams {
@@ -46,6 +50,5 @@ graphql(/* GraphQL */ `
                 }
             }
         }
-
     }
 `)

@@ -1,7 +1,10 @@
 export default function FallbackIcon(props?: {className?: string}) {
     return (
         <svg 
-            className={`fallback-icon-component  ${props?.className}`}
+            className={[
+                "fallback-icon-component",
+                props?.className ? props.className : ""
+            ].join(" ")}
             viewBox="0 0 512 512"
         >
             <g>

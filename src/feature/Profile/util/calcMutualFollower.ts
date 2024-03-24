@@ -1,4 +1,4 @@
-import type { DBAuthUser } from "$feature/auth/type";
+import type { DBAuthUser } from "$feature/auth/types";
 import type { DBProfiles } from "../types";
 import { calcFollowings } from '.';
 

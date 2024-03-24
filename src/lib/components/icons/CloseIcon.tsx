@@ -1,8 +1,10 @@
 export default function CloseIcon(props?: {className?: string}) {
     return (
         <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className={`close-icon-component  ${props?.className}`}
+            className={[
+                "close-icon-component",
+                props?.className ? props.className : ""
+            ].join(" ")}
             viewBox="0 0 460.775 460.775"
         >
             <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55

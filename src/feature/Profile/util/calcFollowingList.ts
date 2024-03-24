@@ -1,4 +1,4 @@
-import type { DBAuthUser } from "$feature/auth/type";
+import type { DBAuthUser } from "$feature/auth/types";
 
 export const calcFollowings = (
     currentUser: DBAuthUser | null | undefined,   
