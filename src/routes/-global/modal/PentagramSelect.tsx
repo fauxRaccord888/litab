@@ -6,7 +6,7 @@ import { usePentagramNavigate } from "$feature/navigate/hooks"
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getCurrentUserFromObservable } from '$feature/auth/utils';
 import { getPentagramsSelectUserInfoById_QUERY } from '$feature/Pentagram/graphql';
-import PentagramMenuModal from '$feature/Pentagram/components/PentagramSelectView/Modal/PentagramMenuModal';
+import PentagramMenuModal from '$feature/Pentagram/components/Modal/PentagramMenuModal';
 
 export default function PentagramSelect(props: {
     pentagramId: string;
@@ -28,6 +28,10 @@ export default function PentagramSelect(props: {
 
     const title = t("modal.title.pentagramSelectMenu");
 
+    const handleClickNavigate = () => {
+        if (pentagramId) pentagramNavigate.select(pentagramId)
+    }
+
     const handleClickUpdate = () => {
         if (pentagramId) pentagramNavigate.update(pentagramId);
     };
@@ -37,6 +41,7 @@ export default function PentagramSelect(props: {
             title={title}
             handleClickClose={handleClickClose}
             isAuthor={isAuthor}
+            handleClickNavigate={handleClickNavigate}
             handleClickUpdate={handleClickUpdate} 
         />
     );

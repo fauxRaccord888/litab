@@ -1,8 +1,10 @@
+import type { CustomError } from '$lib/error';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
-import { Outlet, createFileRoute } from '@tanstack/react-router'
-import { useRef } from 'react';
+import type { MouseEvent, TouchEvent } from 'react';
+import { useRef } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next';
-import { useThrottledErrorToast } from '$lib/hooks';
+import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 import { 
     useMutationHandler,
@@ -19,6 +21,7 @@ import {
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
+import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
@@ -29,8 +32,10 @@ export const Route = createFileRoute('/_auth/pentagram/create')({
 
 function PentagramInsert() {
     const { t } = useTranslation()
+    const throttle = useThrottle();
     const errorToast = useThrottledErrorToast()
-    const navigate = usePentagramNavigate()
+    const navigate = useNavigate()
+    const pentgramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate();
 
     useInitialize(null)
@@ -46,6 +51,20 @@ function PentagramInsert() {
 
     const { handleSetDescription } = useSetPentagramDescription()
     const { handleSelectNode, handleSetNewPosition, handleDragAndTouchMove } = useMainPentagonEventHandler(parentRef, quadtreeRef)
+    
+    const handleSetNewPositionWithErrorToast = (e: MouseEvent<HTMLDivElement>) => {
+        const throttled = () => throttle(
+            () => handleSetNewPosition(e)
+        )
+        errorToast(async () => await throttled())
+    }
+
+    const handleDragAndTouchMoveWithErrorToast = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+        const throttled = () => throttle(
+            () => handleDragAndTouchMove(e)
+        )
+        errorToast(async () => await throttled())
+    }
 
     const { handleRevertChange } = usePendingChangeListEventHandler(quadtreeRef)
     const handleClickRevert = (id: string) => {
@@ -57,11 +76,13 @@ function PentagramInsert() {
 
     const { handleInsertPentagram } = useMutationHandler()
     const handleClickSubmit = () => {
-        errorToast(async () => {
-            const result = await handleInsertPentagram()
-            toast.success(t("pentagram.toast.success.createPentagram"))
-            navigate.select(result)
+        const response = handleInsertPentagram()
+        toast.promise(response, {
+            loading: t("pentagram.toast.loading.createPentagram"),
+            success: t("pentagram.toast.success.createPentagram"),
+            error: (error: CustomError) => t(error.i18nKey)
         })
+        response.then(() => navigate({ to: '/feed' }))
     }
 
     const oeuvreEventHandler: OeuvreEventHandler = {
@@ -89,10 +110,10 @@ function PentagramInsert() {
                 handleSetDescription={handleSetDescription}
                 
                 handleClickNode={handleSelectNode}
-                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertModal(nodeId)}
-                handleClickSelectedPosition={() => navigate.nodeInsertModal()}
-                handleSetNewPosition={handleSetNewPosition}
-                handleDragAndTouchMove={handleDragAndTouchMove}
+                handleClickSelectedNode={(nodeId: string) => pentgramNavigate.nodeUpsertModal(nodeId)}
+                handleClickSelectedPosition={() => pentgramNavigate.nodeInsertModal()}
+                handleSetNewPosition={handleSetNewPositionWithErrorToast}
+                handleDragAndTouchMove={handleDragAndTouchMoveWithErrorToast}
 
                 handleClickRevert={handleClickRevert}
 

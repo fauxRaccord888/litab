@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getUnionedChanges } from '$feature/Pentagram/utils';
 import { getPentagramRevisionsInfoById_QUERY } from '$feature/Pentagram/graphql';
-import ChangeLogModal from '$feature/Pentagram/components/PentagramSelectView/Modal/ChangeLogModal';
+import ChangeLogModal from '$feature/Pentagram/components/Modal/ChangeLogModal';
 
 export default function RevisionSelect(props: {
     revisionId: string;

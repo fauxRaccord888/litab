@@ -18,8 +18,8 @@ export function useQuadtreeRef() {
         ) {
             const root = Quadtree.createRoot()
             const nodes = unfilteredNodes
-                .filter((n) => n.id !== selectedId)
-                .filter((n) => n.deleted !== true)
+                .filter((n) => n?.id !== selectedId)
+                .filter((n) => n?.deleted !== true)
             nodes.forEach((n) => {
                 Quadtree.insertNodeByPosition(root, n)
             })

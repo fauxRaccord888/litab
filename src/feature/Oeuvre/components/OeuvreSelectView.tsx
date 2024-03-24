@@ -6,7 +6,7 @@ import { TIME } from '$feature/Pentagram/constants';
 
 import SelectViewTemplate from '$feature/template/components/SelectViewTemplate';
 import OeuvreInfoCard from './common/OeuvreInfoCard';
-import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectView';
+import PentagramCard from '$feature/Pentagram/components/PentagramCard';
 import Tab from '$lib/components/common/Tab';
 
 type OeuvreSelectViewProps = {
@@ -39,7 +39,7 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                 {
                     label: t("oeuvre.tab.pentagram"),
                     items: item?.pentagram_nodesCollection?.edges.map((edge) => (
-                        <PentagramSelectView
+                        <PentagramCard
                             key={edge.node.pentagrams.id}
                             item={edge.node.pentagrams}
                             renderConfig={{

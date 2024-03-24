@@ -1,6 +1,6 @@
-import type { TPentagramChange } from "../../common/PentagramChange";
+import type { TPentagramChange } from "../common/PentagramChange";
 import Modal from "$feature/portal/components/Modal";
-import PentagramChange from "../../common/PentagramChange";
+import PentagramChange from "../common/PentagramChange";
 import './style/changeLogModal.scss'
 
 type ChangeLogModalProps = {
