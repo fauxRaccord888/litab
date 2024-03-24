@@ -1,0 +1,33 @@
+@import "src/lib/style/atomicMixin";
+
+.follow-recommendation-component {
+    @include flex;
+    @include w-full;
+    .follow-recommendation-component__inner-container {
+        @include flex;
+        @include flex-col;
+        @include w-full;    
+        @include margin-(1rem);
+        @include child-top-m(calc(var(--base-size) * 1.5));
+
+        .follow-recommendation-component__message {
+            font-size: calc(var(--base-size) * 1.25);
+        }
+
+        .follow-recommendation-component__user-list-container {
+            @include rounded-lg;
+            border: solid 2px rgba(var(--font-color), 0.5);
+            .follow-recommendation-component__user-container {
+                border-bottom: solid 2px rgba(var(--font-color), 0.5);
+                &:last-of-type {
+                    border-bottom: 0;
+                }
+    
+                .follow-recommendation-component__user-inner-container {
+                    @include margin-(calc(var(--base-size)  * 1.5));
+                }
+            }
+        
+        }
+    }
+}

@@ -5,7 +5,7 @@ graphql(/* GraphQL */ `
         id
         created_at
         users {
-            ...MiniProfile
+            ...MiniProfileInfo
         }
         pentagrams {
             ...PentagramsSelectInfo

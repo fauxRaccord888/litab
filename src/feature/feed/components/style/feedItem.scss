@@ -1,17 +1,9 @@
-.feed-item-container {
-    max-width: 100%;
-    width: min(600px, 100vw);
-    display: flex;
-    justify-items: center;
-    
-    .inner-container {
-        width: calc(100% - 2rem);
-        border: rgba(var(--font-color), 0.8) solid 1px;
-        border-radius: 8px;
-        padding: 1rem;
-        
-        > :not(:first-child) {
-            margin-top: 0.5rem;
-        }
-    }
+@import "src/lib/style/atomicMixin";
+
+.feed-item-component {
+    @include flex;
+    @include flex-col;
+    @include justify-center;
+    @include w-full;
+    @include child-top-m(calc(var(--base-size) * 0.75));
 }
