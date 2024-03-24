@@ -43,12 +43,14 @@ export default function AccountRegister(props: AccountRegisterProps) {
 
     return (
         <div className="account-register-component">
-            <h2 className="account-register-component__title">{t('account.title.register')}</h2>
-            <Form
-                fields={fields}
-                handleSubmit={handleSubmit}
-                disabled={!submitable}
-            />
+            <div className="account-register-component__inner-container">
+                <h2 className="account-register-component__title">{t('account.title.register')}</h2>
+                <Form
+                    fields={fields}
+                    handleSubmit={handleSubmit}
+                    disabled={!submitable}
+                />
+            </div>
         </div>
     )
 }
