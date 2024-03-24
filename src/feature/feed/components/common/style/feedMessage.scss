@@ -1,20 +1,18 @@
-.feed-message-container {
-    display: flex;
-    align-items: center;
+@import '/src/lib/style/atomicMixin';
 
-    :not(:first-child){
-        margin-left: 0.25rem;
-    }
+.feed-message-component {
+    @include flex;
+    @include align-center;
+    @include child-left-m(calc(var(--base-size) * 0.5));
 
-    .icon-container {
-        stroke: rgba(var(--font-color), 0.5);
-        stroke-width: 2;
+    .feed-message-component__icon-container {
+        @include stroke-lg(rgba(var(--font-color), 0.5));
         fill: none;
         width: 1rem;
         height: 1rem;
     }
     
-    .meta-info {
+    .feed-message-component__message {
         color: rgba(var(--font-color), 0.5);
     }
 }
