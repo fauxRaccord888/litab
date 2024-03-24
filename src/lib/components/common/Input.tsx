@@ -36,6 +36,14 @@ export default function Input<K extends string>(props: InputProps<K>) {
                 value={value}
                 onChange={(e) => onChange(e.currentTarget.value)}
             />
+            {regex &&
+                <span className={[
+                    "input-component__indicator",
+                    invalid ? "input-component__indicator--invalid" : "input-component__indicator--valid"
+                ].join(" ")}>
+                    {invalid ? "!" : "✔"}
+                </span>
+            }
         </div>
     )
 }
