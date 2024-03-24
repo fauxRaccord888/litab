@@ -16,12 +16,12 @@ export default function NodeMenu(props: { nodeId: string; handleClickClose: () =
     const errorToast = useThrottledErrorToast();
 
     const title = t("modal.title.nodeMenu");
-    const isDeleted = mergedNode.deleted;
+    const isDeleted = mergedNode?.deleted;
 
     const handleClickRecover = () => {
         errorToast(() => {
             handleRecover(nodeId);
-            if (!node.deleted) toast.success(t("pentagram.toast.success.revertChange"));
+            if (!node?.deleted) toast.success(t("pentagram.toast.success.revertChange"));
             else toast.success(t("pentagram.toast.success.recoverNode"));
             handleClickClose();
         });
