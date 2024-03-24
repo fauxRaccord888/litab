@@ -16,5 +16,35 @@
             "update": "Update Profile",
             "signOut": "Sign out"
         }
+    },
+    "message": {
+        "browseFile": "browe file"
+    },
+    "toast": {
+        "loading": {
+            "updateAuth": "Updating account information.",
+            "updateProfile": "Updating profile.",
+            "uploadCover": "Uploading cover image.",
+            "register": "Waiting for account creation.",
+            "signIn": "Checking account information on the server."
+        },
+        "success": {
+            "signOut": "Logged out successfully.",
+            "updateAuth": "Account information update completed.",
+            "updateProfile": "Profile update completed.",
+            "uploadCover": "Cover image uploaded.",
+            "register": "Account created.",
+            "signIn": "Logged in successfully."
+        },
+        "error": {
+            "signOut": "Failed to log out.",
+            "invalidCredential": "Please check your ID and password.",
+            "notUniqueMutableId": "This ID already exists.",
+            "rateLimit": "The request frequency is limited for security reasons.",
+            "samePassword": "The new password cannot be the same as the old password.",
+            "weakPassword": "The password is too simple. Please enter a password with the correct combination.",
+            "notUniqueEmail": "This email is already registered.",
+            "exceedMaximumSize": "Exceeded maximum uploadable size."
+       }
     }
 }
