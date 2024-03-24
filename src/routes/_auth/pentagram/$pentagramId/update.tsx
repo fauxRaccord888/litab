@@ -1,10 +1,12 @@
+import type { CustomError } from '$lib/error';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { GetPentagramUpdateInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
-import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
+import type { MouseEvent, TouchEvent } from 'react';
 
 import { useRef } from 'react';
+import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next';
-import { useThrottledErrorToast } from '$lib/hooks';
+import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 import { 
     useInitialize, 
@@ -21,6 +23,7 @@ import {
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
+import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 import { getPentagramUpdateInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getCurrentUserFromObservable } from '$feature/auth/utils';
@@ -60,10 +63,12 @@ function PentagramUpdate() {
     const params = Route.useParams()
     const { pentagramId } = params
     const { pentagram } = Route.useLoaderData()
+    
     const { t } = useTranslation()
     const throttle = useThrottle();
     const errorToast = useThrottledErrorToast()
-    const navigate = usePentagramNavigate()
+    const navigate = useNavigate()
+    const pentagramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate();
 
     useInitialize(pentagram)
@@ -80,6 +85,20 @@ function PentagramUpdate() {
     const { handleSetDescription } = useSetPentagramDescription()
     const { handleSelectNode, handleSetNewPosition, handleDragAndTouchMove } = useMainPentagonEventHandler(parentRef, quadtreeRef)
 
+    const handleSetNewPositionWithErrorToast = (e: MouseEvent<HTMLDivElement>) => {
+        const throttled = () => throttle(
+            () => handleSetNewPosition(e)
+        )
+        errorToast(async () => await throttled())
+    }
+
+    const handleDragAndTouchMoveWithErrorToast = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+        const throttled = () => throttle(
+            () => handleDragAndTouchMove(e)
+        )
+        errorToast(async () => await throttled())
+    }
+
     const { handleRevertChange } = usePendingChangeListEventHandler(quadtreeRef)
     const handleClickRevert = (id: string) => {
         errorToast(() => {
@@ -90,11 +109,13 @@ function PentagramUpdate() {
 
     const { handleUpdatePentagram } = useMutationHandler()
     const handleClickSubmit = () => {
-        errorToast(async () => {
-            await handleUpdatePentagram(pentagramId)
-            toast.success(t("pentagram.toast.success.updatePentagram"))
-            navigate.select(pentagramId)
+        const response = handleUpdatePentagram(pentagramId)
+        toast.promise(response, {
+            loading: t("pentagram.toast.loading.updatePentagram"),
+            success: t("pentagram.toast.success.updatePentagram"),
+            error: (error: CustomError) => t(error.i18nKey)
         })
+        response.then(() => navigate({ to: '/feed' }))
     }
 
     const oeuvreEventHandler: OeuvreEventHandler = {
@@ -122,10 +143,10 @@ function PentagramUpdate() {
                 handleSetDescription={handleSetDescription}
                 
                 handleClickNode={handleSelectNode}
-                handleClickSelectedNode={(nodeId: string) => navigate.nodeUpsertModal(nodeId)}
-                handleClickSelectedPosition={() => navigate.nodeInsertModal()}
-                handleSetNewPosition={handleSetNewPosition}
-                handleDragAndTouchMove={handleDragAndTouchMove}
+                handleClickSelectedNode={(nodeId: string) => pentagramNavigate.nodeUpsertModal(nodeId)}
+                handleClickSelectedPosition={() => pentagramNavigate.nodeInsertModal()}
+                handleSetNewPosition={handleSetNewPositionWithErrorToast}
+                handleDragAndTouchMove={handleDragAndTouchMoveWithErrorToast}
 
                 handleClickRevert={handleClickRevert}
 
