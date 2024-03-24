@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useCurrentUser } from "$feature/auth/hooks/useCurrentUser";
 import { useApolloClient, useMutation } from "@apollo/client";
 import { useUpdateAuthMutation, useUploadCoverMutation } from "..";
-import { updateProfile_MUTATION } from "../../graphql/updateProfile";
+import { updateProfile_MUTATION } from "../../graphql";
 import { evictCacheById } from "$lib/utils";
 import { PendingError } from "$lib/error";
 import { getUserById_QUERY } from "$feature/auth/graphql";
