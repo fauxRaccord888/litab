@@ -28,6 +28,10 @@ export default function PentagramSelect(props: {
 
     const title = t("modal.title.pentagramSelectMenu");
 
+    const handleClickNavigate = () => {
+        if (pentagramId) pentagramNavigate.select(pentagramId)
+    }
+
     const handleClickUpdate = () => {
         if (pentagramId) pentagramNavigate.update(pentagramId);
     };
@@ -37,6 +41,7 @@ export default function PentagramSelect(props: {
             title={title}
             handleClickClose={handleClickClose}
             isAuthor={isAuthor}
+            handleClickNavigate={handleClickNavigate}
             handleClickUpdate={handleClickUpdate} 
         />
     );
