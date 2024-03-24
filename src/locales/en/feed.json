@@ -1,6 +1,7 @@
 {
     "message": {
-        "new": "{{ user }} posted a new Pentagram",
-        "edit": "{{ user }} edited a Pentagram"
+        "create": "{{ user }} posted a new Pentagram",
+        "edit": "{{ user }} edited a Pentagram",
+        "empty": "Your feed is empty. Follow other users to see their Pentagrams"
     }
 }
