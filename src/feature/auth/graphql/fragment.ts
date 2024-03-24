@@ -5,6 +5,7 @@ graphql(/* GraphQL */ `
         id,
         mutable_id,
         nickname,
+        description,
         followingsCollection {
             ...FollowingsMiniProfile
         },
