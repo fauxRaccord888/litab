@@ -27,7 +27,7 @@ export default function PentagramChange(props: PentagramChangeProps) {
         <div className="pentagram-change-component">
             <div className="pentagram-change-component__main-info-container">
                 <span className="pentagram-change-component__change-type">
-                    <Trans i18nKey={`node.menu.${changeType}`}/>
+                    <Trans i18nKey={`node.change.${changeType}`}/>
                 </span>
                 <span className="pentagram-change-component__title">{oeuvres?.title}</span>
             </div>
