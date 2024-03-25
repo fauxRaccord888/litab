@@ -28,6 +28,7 @@
       "$feature/*": ["feature/*"],
     }
   },
+  "exclude": ["**/graphql/__generated__/**"],
   "include": ["src", "src/vite-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
