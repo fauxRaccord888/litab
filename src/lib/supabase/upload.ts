@@ -27,17 +27,20 @@ export const upload_SUPABASE = async (
     const { data: storageData, error: storageError } = await supabaseClient
         .storage
         .from(bucket)
-        .upload(`public/${id}?t=${t.getTime()}`, file, {
+        .upload(`public/${id}`, file, {
             cacheControl: '3600',
             upsert: true
         })
     if (storageError) return { data: null, error: storageError }
 
-    const { error: tableError } = await supabaseClient
-        .from(bucket)
-        .update({'updated_at': String(t.toISOString()) })
-        .eq('id', id)
-    if (tableError) return { data: null, error: tableError}
+    if (storageData) {
+        const { error: tableError } = await supabaseClient
+            .from(bucket)
+            .update({'updated_at': String(t.toISOString()) })
+            .eq('id', id)
+        if (tableError) return { data: null, error: tableError}
+    }
+
 
     return {
         data: storageData, error: null

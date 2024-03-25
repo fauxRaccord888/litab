@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRef } from 'react';
+import { isMobile } from '$lib/utils';
 
 export function useHover() {
     const [status, setStatus] = useState(false)
@@ -7,6 +8,7 @@ export function useHover() {
     const hideTimeOutRef = useRef<null |(() => void)>(null)
 
     const handleMouseOver = () => {
+        if (isMobile(window.navigator.userAgent)) return
         const timeOut = setTimeout(() => {
             setStatus(true)
         }, 400)
@@ -15,6 +17,7 @@ export function useHover() {
     }
 
     const handleMouseLeave = () => {
+        if (isMobile(window.navigator.userAgent)) return
         const timeOut = setTimeout(() => {
             setStatus(false)
         }, 400)
