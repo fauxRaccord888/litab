@@ -12,6 +12,7 @@ import oeuvre from './oeuvre.json'
 import pentagram from './pentagram.json'
 import profile from './profile.json'
 import search from './search.json'
+import error from './error.json'
 
 export default {
     account,
@@ -27,5 +28,6 @@ export default {
     oeuvre,
     pentagram,
     profile,
-    search
+    search,
+    error
 }
