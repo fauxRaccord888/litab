@@ -4,13 +4,19 @@ import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import { useQuery } from "@apollo/client";
 import { useNavigate } from "@tanstack/react-router";
 import { useOeuvreNavigate } from "$feature/navigate/hooks";
+import { t as translate } from 'i18next'
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { getArtistInfoById_QUERY } from "$feature/Artist/graphql/query";
 import ArtistSelectView from "$feature/Artist/components/ArtistSelectView";
 
 export const Route = createFileRoute('/_public/artist/$id')({
-    component: Artist
+    component: Artist,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('artist.title.index')
+        }
+    }
 })
 
 function Artist() {

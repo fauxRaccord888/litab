@@ -1,4 +1,7 @@
 {
+    "title": {
+        "index": "Feed"
+    },
     "message": {
         "create": "{{ user }} posted a new Pentagram",
         "edit": "{{ user }} edited a Pentagram",

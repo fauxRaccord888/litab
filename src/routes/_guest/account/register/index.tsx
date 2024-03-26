@@ -7,13 +7,19 @@ import { useAuthMutationHandler } from "$feature/auth/hooks"
 import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
+import { t as translate } from 'i18next'
 import { CustomError } from '$lib/error'
 import { registerErrorHandler } from '$feature/Account/errorHandler/registerErrorHandler'
 /* components */
 import RegisterComponent from "$feature/Account/components/Register"
 
 export const Route = createFileRoute('/_guest/account/register/')({
-    component: Register
+    component: Register,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('account.title.register')
+        }
+    },
 })
 
 export default function Register() {

@@ -4,6 +4,7 @@ import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { useQuery } from '@apollo/client';
 import { useNavigate } from "@tanstack/react-router"
 import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
+import { t as translate } from 'i18next'
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
@@ -11,6 +12,11 @@ import PentagramSelectView from '$feature/Pentagram/components/PentagramSelectVi
 
 export const Route = createFileRoute('/_public/pentagram/$pentagramId/view')({
     component: PentagramSelect,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('pentagram.title.view')
+        }
+    },
 })
 
 function PentagramSelect() {

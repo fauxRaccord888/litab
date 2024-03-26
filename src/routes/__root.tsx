@@ -1,5 +1,6 @@
 import type { AppStore } from '$lib/stores/store'
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { useMatches } from "@tanstack/react-router"
 import { Outlet, rootRouteWithContext, ScrollRestoration } from '@tanstack/react-router'
 import { getScrollKey } from '$lib/utils/route/getScrollKey'
 import { checkUserAndStore, getUserObservable } from '$feature/auth/utils';
@@ -10,6 +11,12 @@ import ModalController from './-global/-modal';
 import NavigationBar from '$feature/navigate/components/NavigationBar'
 import { Suspense } from 'react';
 
+type RootContext = {
+    store: AppStore
+    apolloClient: ApolloClient<NormalizedCacheObject>
+    getTitle?: () => string
+}  
+
 export type RootSearch = {
     nodeUpsertId?: string | undefined
     insertNode?: boolean | undefined
@@ -19,10 +26,7 @@ export type RootSearch = {
     accountMenu?: boolean | undefined
 }
 
-export const Route = rootRouteWithContext<{
-    store: AppStore
-    apolloClient: ApolloClient<NormalizedCacheObject>
-}>()({
+export const Route = rootRouteWithContext<RootContext>()({
     component: RootComponent,
     beforeLoad: async ({context}) => {
         const { store, apolloClient } = context
@@ -45,6 +49,18 @@ export const Route = rootRouteWithContext<{
 function RootComponent() {
     const context = Route.useRouteContext()
     const search = Route.useSearch()
+    const matches = useMatches();
+
+    const breadcrumbs = matches
+        .map((match) => {
+            const { routeContext } = match
+            if (!('getTitle' in routeContext)) return ''
+            if (typeof routeContext.getTitle === 'undefined') return ''
+            return routeContext.getTitle()
+        })
+        .filter(Boolean)
+
+    document.title = breadcrumbs.join("/") || "Pentagram"
 
     return (
         <Suspense fallback={<FallbackRoot />}>

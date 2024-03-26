@@ -24,7 +24,7 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
             item={item}
             eventHandler={eventHandler}
             renderConfig={{
-                coverImage: true,
+                coverImage: false,
                 title: true,
                 mainInfo: true,
                 subInfo: true

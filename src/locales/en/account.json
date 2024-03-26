@@ -3,6 +3,7 @@
         "register": "Register",
         "signIn": "Sign in",
         "update": {
+            "index": "Account Update",
             "profile": "Profile",
             "cover": "Profile Image",
             "auth": "Change Password"

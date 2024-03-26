@@ -21,13 +21,19 @@ import {
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
+import { t as translate } from 'i18next';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 
 export const Route = createFileRoute('/_auth/pentagram/create')({
-    component: PentagramInsert
+    component: PentagramInsert,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('pentagram.title.create')
+        }
+    },
 })
 
 function PentagramInsert() {

@@ -1,4 +1,7 @@
 {
+    "title": {
+        "index": "Genre"
+    },
     "tab": {
         "oeuvre": "Oeuvres",
         "user": "Followers"

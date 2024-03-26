@@ -4,10 +4,16 @@ import { useTranslation } from 'react-i18next'
 import { useUpdateProfileHandler } from '$feature/Account/hooks'
 import { updateAccountErrorHandler } from '$feature/Account/errorHandler'
 import toast from 'react-hot-toast'
+import { t as translate} from 'i18next'
 import { createFileRoute } from '@tanstack/react-router'
 import AcocuntUpdate from '$feature/Account/components/Update'
 
 export const Route = createFileRoute('/_auth/account/update')({
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('account.title.update.index')
+        }
+    },
     component: Register
 })
 

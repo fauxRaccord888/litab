@@ -1,19 +1,20 @@
 import type { SignInPayload } from '$feature/auth/types';
-/* route */
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-/* hooks */
 import { useTranslation } from 'react-i18next'
-/* Mutation (hooks)*/
 import { useAuthMutationHandler } from '$feature/auth/hooks'
-
+import toast from 'react-hot-toast'
+import { t as translate } from 'i18next'
 import { CustomError } from '$lib/error'
 import { signInErrorHandler } from '$feature/Account/errorHandler/signInErrorHandlert'
-/* components */
 import AccountSignIn from "$feature/Account/components/SignIn"
-import toast from 'react-hot-toast'
 
 export const Route = createFileRoute('/_guest/account/signin/')({
-    component: SignIn
+    component: SignIn,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('account.title.signIn')
+        }
+    },
 })
 
 export default function SignIn() {

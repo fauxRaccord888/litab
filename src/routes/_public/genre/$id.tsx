@@ -4,13 +4,19 @@ import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import { useQuery } from "@apollo/client";
 import { useNavigate } from "@tanstack/react-router";
 import { useOeuvreNavigate } from "$feature/navigate/hooks";
+import { t as translate } from 'i18next'
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { getGenreInfoById_QUERY } from "$feature/Genre/graphql/query";
 import GenreSelectView from "$feature/Genre/components/GenreSelectView";
 
 export const Route = createFileRoute('/_public/genre/$id')({
-    component: Genre
+    component: Genre,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('genre.title.index')
+        }
+    },
 })
 
 function Genre() {

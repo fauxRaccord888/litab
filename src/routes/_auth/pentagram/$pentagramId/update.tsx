@@ -23,6 +23,7 @@ import {
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
+import { t as translate } from 'i18next';
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 import { getPentagramUpdateInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
@@ -32,6 +33,11 @@ import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertVi
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 
 export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('pentagram.title.update')
+        }
+    },
     // COMMENT 검증 및 redirect 로직은 tanstack router로 통일
     // 로더에서 fetch는 최소화(이중 fetch되는 경우에 한해서만 lodaer에서 fetch => refetch가 까다로워짐 등)
     loader: async ({ context, params }) => {
@@ -53,7 +59,6 @@ export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
                 to: '/error',
             })
         }
-
         return { pentagram }
     },
     component: PentagramUpdate
@@ -128,7 +133,7 @@ function PentagramUpdate() {
             <PentagramUpdateView
                 ref={parentRef}
 
-                title={t("pentagram.title.edit")}
+                title={t("pentagram.title.update")}
                 description={description}
                 handleSubmit={handleClickSubmit}
 

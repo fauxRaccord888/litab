@@ -23,7 +23,7 @@ export default function GenreInfoCard(props: GenreInfoCardProps) {
 
 
     return (
-        <div className="artist-info-card-component">
+        <div className="genre-info-card-component">
             <InfoCardTemplate
                 id={id}
                 onClick={eventHandler.selectGenre}

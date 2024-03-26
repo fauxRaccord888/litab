@@ -1,4 +1,7 @@
 {
+    "title": {
+        "index": "피드"
+    },
     "message": {
         "create": "{{ user }}님이 새로운 펜타그램을 작성했어요",
         "edit": "{{ user }}님이 펜타그램을 수정했어요",

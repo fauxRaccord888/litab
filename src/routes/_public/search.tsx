@@ -1,12 +1,18 @@
 import type { SearchDropdownKey } from '$feature/search/types'
 import { useSearchQuery } from '$feature/search/hooks'
 import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate } from '$feature/navigate/hooks'
+import { t as translate} from "i18next"
 import { createFileRoute } from '@tanstack/react-router'
 import { SEARCH } from '$feature/search/constants'
 import MainSearchView from '$feature/search/components/MainSearchView'
 
 export const Route = createFileRoute('/_public/search')({
-    component: Search
+    component: Search,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('search.title.index')
+        }
+    },
 })
 
 function Search() {
