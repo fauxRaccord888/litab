@@ -15,7 +15,6 @@ type MainSearchViewProps = {
 
 export default function MainSearchView(props: MainSearchViewProps) {
     const { searchResult, dropdownProps, context, eventHandler } = props
-    console.log(searchResult)
 
     const handleSearch = (formData: FormData) => {
         const keyword = formData.get(SEARCH.inputName)?.toString()
