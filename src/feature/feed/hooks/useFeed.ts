@@ -1,5 +1,5 @@
 import type { GetFeedByIdQuery, GetFollowRecommendationQuery } from "$lib/graphql/__generated__/graphql";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery, useLazyQuery } from "@apollo/client";
 import { useCurrentUser } from "$feature/auth/hooks/useCurrentUser";
 import { getFeedById_QUERY, getFollowRecommendation_QUERY } from "../graphql";
@@ -17,8 +17,7 @@ export function useFeed() {
         if (!user) return null
         const feed = user?.feed
         if (feed?.edges.length) return feed
-        queryFollowRecommendation()
-    }, [data, queryFollowRecommendation])
+    }, [data])
 
     const recommendedUsers = useMemo(() => {
         const user = getFirstNodeOfCollection(recommendData?.usersCollection)
@@ -26,6 +25,12 @@ export function useFeed() {
         const recommendation = user.recommendation
         return recommendation?.edges.map((edge) => edge.node)
     }, [recommendData?.usersCollection])
+
+    useEffect(() => {
+        if (!feed && data) {
+            queryFollowRecommendation()
+        }
+    }, [feed, data, queryFollowRecommendation])
 
     return { feed, recommendedUsers }
 }
