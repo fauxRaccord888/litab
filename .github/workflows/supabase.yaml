@@ -12,29 +12,36 @@ jobs:
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_PROJECT_ID: ${{ secrets.PRODUCTION_PROJECT_ID }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: checkout project
+        uses: actions/checkout@v3
         with:
-          persist-credentials: false
+          persist-credentials: true
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - name: Set up supabase cli
+        uses: supabase/setup-cli@v1
         with:
-          node-version: 20
-      - run: |
-          npm add supabase@latest 
-          npm run update-types
-      - name: check for file changes
-        id: git_status
+          version: latest
+      - name: "Generate database typescript types"
+        shell: bash
         run: |
-          echo "status=$(git status -s)" >> $GITHUB_OUTPUT
-      - name: Commit files
-        if: ${{contains(steps.git_status.outputs.status, ' ')}}
-        run: |
-          git add src/lib/types/supabase.ts -f
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "CI/CD: Supabase 타입 업데이트" -a
+          if [ ! -f supabase/config.toml ]; then
+            supabase init && supabase start
+          fi
+          supabase link --project-ref ${SUPABASE_PROJECT_ID} --password ${DB_PASSWORD}
+          supabase gen types typescript --db-url "postgres://postgres.${SUPABASE_PROJECT_ID}:${DB_PASSWORD}@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres" > src/lib/types/supabase.ts
+      - name: Check for file changes & commit files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: src/lib/types/supabase.ts
+          commit_message: "CI/CD: Supabase 타입 업데이트"
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          branch: main
+          create_branch: true
       - name: Push changes
         if: ${{contains(steps.git_status.outputs.status, ' ')}}
         uses: ad-m/github-push-action@master
