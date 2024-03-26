@@ -1,4 +1,7 @@
 {
+    "title": {
+        "index": "작품"
+    },
     "tab" : {
         "pentagram": "펜타그램",
         "user": "팔로워"

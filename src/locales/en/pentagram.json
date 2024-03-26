@@ -39,7 +39,8 @@
         }
     },
     "title": {
+        "view": "Pentagram",
         "create": "Add new Pentagram",
-        "edit":"edit your Pentagram"
+        "update":"edit your Pentagram"
     }
 }

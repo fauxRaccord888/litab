@@ -1,4 +1,7 @@
 {
+    "title": {
+        "index": "Aritst"
+    },
     "tab": {
         "oeuvre": "Oeuvres",
         "user": "Followers"
