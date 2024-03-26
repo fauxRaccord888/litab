@@ -87,7 +87,7 @@ export default function SearchResult(props: MainSearchViewProps) {
                 item={genre.node}
                 eventHandler={eventHandler}
                 renderConfig={{
-                    coverImage: true,
+                    coverImage: false,
                     title: true,
                     mainInfo: false,
                     subInfo: false

@@ -15,6 +15,10 @@
             @include margin-(calc(var(--base-size) * 0.5));
         }
 
+        .genre-info-card-component {
+            @include margin-(calc(var(--base-size) * 1.25));
+        }
+
         &:last-of-type {
             border-bottom: 0;
         }
