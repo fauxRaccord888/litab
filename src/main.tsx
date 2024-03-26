@@ -16,8 +16,8 @@ import './locales/i18n.ts'
 const router = createRouter({
     routeTree,
     context: {
+        store,
         apolloClient,
-        store: store,
     },
     defaultPreload: 'intent',
 })  
