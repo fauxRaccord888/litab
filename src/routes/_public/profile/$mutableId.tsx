@@ -18,7 +18,12 @@ import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import ProfileSelectView from "$feature/Profile/components/ProfileSelctView";
 
 export const Route = createFileRoute('/_public/profile/$mutableId')({
-    component: Profile
+    component: Profile,
+    beforeLoad: ({params}) => {
+        return {
+            getTitle: () => `@${params.mutableId}`
+        }
+    },
 })
 
 function Profile() {

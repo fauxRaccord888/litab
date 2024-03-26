@@ -4,13 +4,19 @@ import type { PentagramEventHandler } from "$feature/Pentagram/types";
 import { useQuery } from "@apollo/client";
 import { useNavigate } from "@tanstack/react-router";
 import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks";
+import { t as translate } from 'i18next'
 import { getOeuvreExtensiveInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import OeuvreSelectView from "$feature/Oeuvre/components/OeuvreSelectView";
 
 export const Route = createFileRoute('/_public/oeuvre/$id')({
-    component: Oeuvre
+    component: Oeuvre,
+    beforeLoad: () => {
+        return {
+            getTitle: () => translate('oeuvre.title.index')
+        }
+    },
 })
 
 function Oeuvre() {
