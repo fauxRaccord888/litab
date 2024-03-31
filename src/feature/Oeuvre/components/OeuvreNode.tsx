@@ -40,7 +40,7 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
                             renderConfig={{
                                 coverImage: false,
                                 title: true,
-                                mainInfo: true,
+                                mainInfo: false,
                                 subInfo: false
                             }}
                             eventHandler={eventHandler}

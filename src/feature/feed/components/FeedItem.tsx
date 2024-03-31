@@ -37,7 +37,6 @@ export default function FeedItem(props: FeedItemProps) {
                     revision: true
                 }}
                 options={{
-                    horizontalMain: true,
                     displayRevisionIds: [id],
                 }}
                 timestamp={new Date(item.created_at)}

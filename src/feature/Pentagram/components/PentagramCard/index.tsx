@@ -38,13 +38,8 @@ export default function PentagramCard(props: PentagramCardProps) {
                         pentagram_nodesCollection={pentagram_nodesCollection}
                     />
                 }
-                {(renderConfig.description && !options.horizontalMain) &&
-                    <div className="pentagram-card-component__description-container">
-                        <SelectDescription description={description}/>
-                    </div>
-                }
             </div>
-            {(renderConfig.description && options.horizontalMain) &&
+            {renderConfig.description &&
                 <div className="pentagram-card-component__description-container">
                     <SelectDescription description={description}/>
                 </div>

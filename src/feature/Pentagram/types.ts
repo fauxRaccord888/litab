@@ -9,7 +9,6 @@ export type DBPentagramRevisions = PentagramRevisionsMinimalInfoFragment
 
 export type PentagramSelectRenderConfig = ISlotRenderConfig<"metaInfo" | "mainPentagon" | "description" | "revision">
 export type PentagramSelectOptions = {
-    horizontalMain?: boolean | null | undefined,
     displayRevisionIds?: string[] | null | undefined
 }
 export type PentagramEventHandler = {

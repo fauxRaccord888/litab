@@ -1,6 +1,7 @@
 @import "src/lib/style/atomicMixin";
 
 .mini-profile-component {
+    --base-size: 0.8rem;
     .profile-user-info-component {
         @include child-top-m(calc(var(--base-size) * 0.25));
         .profile-user-info-component__nickname {
