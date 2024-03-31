@@ -1,57 +1,78 @@
 import type { SearchArtistsQuery, SearchGenresQuery, SearchOeuvresQuery, SearchUsersQuery } from "$lib/graphql/__generated__/graphql";
-import type { SearchResults } from "../types";
-import { useCallback, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
+import { useCallback } from "react";
+import { useQuery } from "@apollo/client";
 import { searchArtists_QUERY, searchGenres_QUERY, searchOeuvres_QUERY, searchUsers_QUERY } from "../graphql";
+import { NETWORK } from "$lib/constants";
 
-export function useSearchQuery() {
-    const [result, setResult] = useState<SearchResults | null>(null)
-    const [userQuery, userStatus] = useLazyQuery<SearchUsersQuery>(searchUsers_QUERY)
-    const [oeuvreQuery, oeuvreStatus] = useLazyQuery<SearchOeuvresQuery>(searchOeuvres_QUERY)
-    const [artistQuery, artistStatus] = useLazyQuery<SearchArtistsQuery>(searchArtists_QUERY)
-    const [geneQuery, genreStatus] = useLazyQuery<SearchGenresQuery>(searchGenres_QUERY)
+const initialOptions = (keyword: string) => ({
+    variables: {
+        keyword: `%${keyword}%`,
+        limit: 0
+    }
+})
+
+// COMMENT 
+// keyword를 hook 초기화 시에 받지만 이후 핸들러에서 또 받는 이유는 
+// -> 리액트 렌더링 특성 상, state 업데이트가 다음 hooks 호출에서 업데이트 되기 때문에 이전 keyword로 검색되는 문제로 인함
+
+export function useSearchQuery(keyword: string) {
+    const userQuery = useQuery<SearchUsersQuery>(searchUsers_QUERY, initialOptions(keyword))
+    const oeuvreQuery = useQuery<SearchOeuvresQuery>(searchOeuvres_QUERY, initialOptions(keyword))
+    const artistQuery = useQuery<SearchArtistsQuery>(searchArtists_QUERY, initialOptions(keyword))
+    const genreQuery = useQuery<SearchGenresQuery>(searchGenres_QUERY, initialOptions(keyword))
     
     const isPending = (
-        userStatus.loading || oeuvreStatus.loading || artistStatus.loading || genreStatus.loading
+        userQuery.loading || oeuvreQuery.loading || artistQuery.loading || genreQuery.loading
     )
 
-    const searchUserHandler = useCallback((keyword: string) => {
+    const searchUserHandler = useCallback((keyword: string, includeCursor?: boolean) => {
         if (isPending) return
-        userQuery({
-            variables: { keyword: `%${keyword}%`},
-            onCompleted: (data) => setResult(data)
+        userQuery.fetchMore({
+            variables: { 
+                keyword: `%${keyword}%`,
+                cursor: includeCursor ? userQuery?.data?.usersCollection?.pageInfo.endCursor : null,
+                limit: NETWORK.readLimit
+            },
         })
     }, [isPending, userQuery]) 
 
-    const searchOeuvresHandler = useCallback((keyword: string) => {
+    const searchOeuvresHandler = useCallback((keyword: string, includeCursor?: boolean) => {
         if (isPending) return
-        oeuvreQuery({
-            variables: { keyword: `%${keyword}%`},
-            onCompleted: (data) => setResult(data)
+        oeuvreQuery.fetchMore({
+            variables: { 
+                keyword: `%${keyword}%`,
+                cursor: includeCursor ? oeuvreQuery?.data?.oeuvresCollection?.pageInfo.endCursor : null,
+                limit: NETWORK.readLimit
+            },
         })
     }, [isPending, oeuvreQuery]) 
 
-    const searchArtistHandler = useCallback((keyword: string) => {
+    const searchArtistHandler = useCallback((keyword: string, includeCursor?: boolean) => {
         if (isPending) return
-        artistQuery({
-            variables: { keyword: `%${keyword}%`},
-            onCompleted: (data) => setResult(data)
+        artistQuery.fetchMore({
+            variables: { 
+                keyword: `%${keyword}%`,
+                cursor: includeCursor ? artistQuery?.data?.artistsCollection?.pageInfo.endCursor : null,
+                limit: NETWORK.readLimit
+            },
         })
     }, [isPending, artistQuery]) 
 
-    const searchGenreHandler = useCallback((keyword: string) => {
+    const searchGenreHandler = useCallback(async (keyword: string, includeCursor?: boolean) => {
         if (isPending) return
-        geneQuery({
-            variables: { keyword: `%${keyword}%`},
-            onCompleted: (data) => setResult(data)
+        genreQuery.fetchMore({
+            variables: { 
+                keyword: `%${keyword}%`,
+                cursor: includeCursor ? genreQuery?.data?.genresCollection?.pageInfo.endCursor : null,
+                limit: NETWORK.readLimit
+            },
         })
-    }, [isPending, geneQuery]) 
+    }, [isPending, genreQuery]) 
 
     return {
-        result: result,
-        users: [searchUserHandler, userStatus] as [typeof searchUserHandler, typeof userStatus],
-        oeuvres: [searchOeuvresHandler, oeuvreStatus] as [typeof searchOeuvresHandler, typeof oeuvreStatus],
-        artists: [searchArtistHandler, artistStatus] as [typeof searchArtistHandler, typeof artistStatus],
-        genres: [searchGenreHandler, genreStatus] as [typeof searchGenreHandler, typeof genreStatus],
+        users: [searchUserHandler, userQuery] as [typeof searchUserHandler, typeof userQuery],
+        oeuvres: [searchOeuvresHandler, oeuvreQuery] as [typeof searchOeuvresHandler, typeof oeuvreQuery],
+        artists: [searchArtistHandler, artistQuery] as [typeof searchArtistHandler, typeof artistQuery],
+        genres: [searchGenreHandler, genreQuery] as [typeof searchGenreHandler, typeof genreQuery],
     }
 }
