@@ -26,10 +26,7 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
                         revision: true
                     }}
                     eventHandler={eventHandler}
-                    options={{
-                        ...options,
-                        horizontalMain: true
-                    }}
+                    options={{...options}}
                     timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
                     context={context}
                 />
