@@ -51,7 +51,21 @@ export type Database = {
             foreignKeyName: "public_followings_follower_id_fkey"
             columns: ["follower_id"]
             isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_followings_follower_id_fkey"
+            columns: ["follower_id"]
+            isOneToOne: false
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_followings_following_id_fkey"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "feed"
             referencedColumns: ["id"]
           },
           {
@@ -400,6 +414,13 @@ export type Database = {
             foreignKeyName: "public_pentagram_revision_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_pentagram_revision_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -429,6 +450,13 @@ export type Database = {
             foreignKeyName: "public_pentagrams_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_pentagrams_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -441,8 +469,6 @@ export type Database = {
           mutable_id: string
           nickname: string | null
           updated_at: string | null
-          feed: unknown | null
-          recommendation: unknown | null
         }
         Insert: {
           description?: string | null
@@ -470,7 +496,26 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      feed: {
+        Row: {
+          id: string | null
+        }
+        Insert: {
+          id?: string | null
+        }
+        Update: {
+          id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       _insert_node:
@@ -559,7 +604,13 @@ export type Database = {
         }
         Returns: string
       }
-      feed: {
+      get_followings: {
+        Args: {
+          uid: string
+        }
+        Returns: string[]
+      }
+      items: {
         Args: {
           "": unknown
         }
@@ -569,12 +620,6 @@ export type Database = {
           pentagram_id: string
           user_id: string
         }[]
-      }
-      get_followings: {
-        Args: {
-          uid: string
-        }
-        Returns: string[]
       }
       recommendation: {
         Args: {
