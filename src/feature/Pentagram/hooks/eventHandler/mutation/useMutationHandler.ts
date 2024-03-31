@@ -10,7 +10,7 @@ import { filterChanges, formatChanges } from '../../../utils';
 import { evictCacheById } from "$lib/utils";
 import { InsertPentagramTransactionError, UpdatePentagramTransactionError } from "../../../error";
 import { PendingError } from "$lib/error";
-import { getOeuvreExtensiveInfoById_QUERY } from "$feature/Oeuvre/graphql";
+import { getOeuvreInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getUserById_QUERY } from "$feature/auth/graphql";
 
 
@@ -55,9 +55,14 @@ export function useMutationHandler() {
                 entity: 'users', 
                 id: currentUser?.id
             })
+            evictCacheById({
+                cache: apolloClient.cache, 
+                entity: 'feed', 
+                id: currentUser?.id
+            })
             apolloClient.refetchQueries({
                 include: [
-                    getOeuvreExtensiveInfoById_QUERY,
+                    getOeuvreInfoById_QUERY,
                     getUserById_QUERY
                 ],
             })
@@ -94,9 +99,14 @@ export function useMutationHandler() {
                 entity: 'users', 
                 id: currentUser?.id
             })
+            evictCacheById({
+                cache: apolloClient.cache, 
+                entity: 'feed', 
+                id: currentUser?.id
+            })
             apolloClient.refetchQueries({
                 include: [
-                    getOeuvreExtensiveInfoById_QUERY,
+                    getOeuvreInfoById_QUERY,
                     getUserById_QUERY
                 ],
             })
