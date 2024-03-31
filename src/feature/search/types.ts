@@ -1,3 +1,4 @@
+import type { QueryResult } from "@apollo/client"
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types"
 import type { ArtistEventHandler } from "$feature/Artist/types"
 import type { GenreEventHandler } from "$feature/Genre/types"
@@ -10,7 +11,7 @@ export type MainSearchViewEventHandler = (
     OeuvreEventHandler & 
     ArtistEventHandler & 
     GenreEventHandler & {
-        search: (key: SearchDropdownKey, keyword: string) => void
+        search: (key: SearchDropdownKey, keyword: string, includeCursor?: boolean) => void
     }
 )
 
@@ -19,12 +20,12 @@ export type SearchDropdownProps = {
     keys: typeof searchDropdownKey
 }
 
-export type SearchResults = (
+export type QueryResults = Record<SearchDropdownKey, QueryResult<
     SearchUsersQuery | 
     SearchOeuvresQuery | 
     SearchArtistsQuery | 
     SearchGenresQuery
-)
+>>
 
 export function isSearchDropDownKey(k: unknown): k is SearchDropdownKey {
     return (
