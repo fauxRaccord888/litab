@@ -1,20 +1,16 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 export const getFeedById_QUERY = graphql(/* GraphQL */ `
-    query GetFeedById($id: UUID!) {
-        usersCollection(filter: { id: {eq: $id } }) {
+    query GetFeedById(
+        $id: UUID!,
+        $limit: Int,
+        $cursor: Cursor
+    ) {
+        feedCollection(filter: { id: {eq: $id } }) {
             edges {
                 node {
                     id,
-                    feed (orderBy: {
-                        created_at: DescNullsLast
-                    }) {
-                        edges {
-                            node {
-                                ...FeedInfo
-                            }
-                        }
-                    }
+                    ...FeedInfo
                 }
             }
         }
@@ -23,16 +19,10 @@ export const getFeedById_QUERY = graphql(/* GraphQL */ `
 
 export const getFollowRecommendation_QUERY = graphql(/* GraphQL */ `
     query GetFollowRecommendation($id: UUID!) {
-        usersCollection(filter: { id: {eq: $id } }) {
+        feedCollection(filter: { id: {eq: $id } }) {
             edges {
                 node {
-                    recommendation {
-                        edges {
-                            node {
-                                ...ProfilesInfo
-                            }
-                        }
-                    }
+                    ...FollowRecommendationInfo
                 }
             }
         }

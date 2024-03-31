@@ -10,59 +10,79 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment FollowingsMiniProfile on followingsConnection {
-        edges {
-            node {
-                following_id {
-                    ...MiniProfileInfo
-                }
-            }
-        }
-    }
-`)
-
-graphql(/* GraphQL */ `
-    fragment FollowersMiniProfile on followingsConnection {
-        edges {
-            node {
-                follower_id {
-                    ...MiniProfileInfo
-                }
-            }
-        }
-    }
-`)
-
-graphql(/* GraphQL */ `
     fragment ProfilesInfo on users {
         ...MiniProfileInfo,
         description,
         nickname,
-        followersCollection {
-            ...FollowersMiniProfile
-        },
+        ...ProfileFollowInfo,
+        ...ProfilePentagramInfo,
+        ...ProfileRevisionInfo
+    }
+`)
+
+graphql(/* GraphQL */ `
+    fragment ProfileFollowInfo on users {
         followingsCollection {
-            ...FollowingsMiniProfile
+            edges {
+                node {
+                    following_id {
+                        ...MiniProfileInfo
+                    }
+                }
+            }
         }
+        followersCollection {
+            edges {
+                node {
+                    follower_id {
+                        ...MiniProfileInfo
+                    }
+                }
+            }
+        }
+    }
+`)
+
+graphql(/* GraphQL */ `
+    fragment ProfilePentagramInfo on users {
         pentagramsCollection(
             orderBy: {
                 created_at: DescNullsLast
             }
+            first: $pentagramLimit
+            after: $pentagramCursor
         ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
                     ...PentagramsSelectInfo
                 }
             }
         }
+    }
+`)
+
+graphql(/* GraphQL */ `
+    fragment ProfileRevisionInfo on users {
         pentagram_revisionsCollection(
             orderBy: {
                 created_at: DescNullsLast
             }
+            first: $revisionLimit
+            after: $revisionCursor
         ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
-                    ...FeedInfo
+                    ...PentagramRevisionFeedInfo
                 }
             }
         }

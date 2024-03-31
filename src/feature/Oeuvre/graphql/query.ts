@@ -1,13 +1,18 @@
 import { graphql } from "$lib/graphql/__generated__"
 
-export const getOeuvreExtensiveInfoById_QUERY = graphql(/* GraphQL */ `
-    query getOeuvreExtensiveInfoById($id: UUID!) {
+export const getOeuvreInfoById_QUERY = graphql(/* GraphQL */ `
+    query getOeuvreInfoById(
+        $id: UUID!
+        $limit: Int,
+        $cursor: Cursor
+    ) {
         oeuvresCollection(
+            first: 1,
             filter: { id: { eq: $id } }
         ) {
             edges {
                 node {
-                    ...OeuvresExtensiveInfo
+                    ...OeuvresInfo
                 }
             }
         }

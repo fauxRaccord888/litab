@@ -1,13 +1,27 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 export const searchOeuvres_QUERY = graphql(/* GraphQL */ `
-    query searchOeuvres($keyword: String!) {
+    query searchOeuvres(
+        $keyword: String!,
+        $limit: Int,
+        $cursor : Cursor
+    ) {
         oeuvresCollection(
+            orderBy: {
+                id: DescNullsLast
+            }
+            first: $limit
+            after: $cursor
             filter: { title: { ilike: $keyword } }
         ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
-                    ...OeuvresInfo
+                    ...OeuvresMinimalInfo
                 }
             }
         }
@@ -15,13 +29,27 @@ export const searchOeuvres_QUERY = graphql(/* GraphQL */ `
 `)
 
 export const searchUsers_QUERY = graphql(/* GraphQL */ `
-    query searchUsers($keyword: String!) {
-        usersCollection  (
+    query searchUsers(
+        $keyword: String!,
+        $limit: Int,
+        $cursor: Cursor
+    ) {
+        usersCollection(
+            orderBy: {
+                mutable_id: DescNullsLast
+            }
+            first: $limit
+            after: $cursor
             filter: { mutable_id: { ilike: $keyword } }
         ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
-                    ...ProfilesInfo
+                    ...MiniProfileInfo
                 }
             }
         }
@@ -29,13 +57,27 @@ export const searchUsers_QUERY = graphql(/* GraphQL */ `
 `)
 
 export const searchArtists_QUERY = graphql(/* GraphQL */ `
-    query searchArtists($keyword: String!) {
+    query searchArtists(
+        $keyword: String!,
+        $limit: Int,
+        $cursor: Cursor
+    ) {
         artistsCollection(
+            orderBy: {
+                id: DescNullsLast
+            }
+            first: $limit
+            after: $cursor
             filter: { name: { ilike: $keyword } }
         ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
-                    ...ArtistsInfo
+                    ...ArtistsMinimalInfo
                 }
             }
         }
@@ -43,13 +85,27 @@ export const searchArtists_QUERY = graphql(/* GraphQL */ `
 `)
 
 export const searchGenres_QUERY = graphql(/* GraphQL */ `
-    query searchGenres($keyword: String!) {
+    query searchGenres(
+        $keyword: String!,
+        $limit: Int,
+        $cursor: Cursor
+    ) {
         genresCollection(
+            orderBy: {
+                id: DescNullsLast
+            }
+            first: $limit
+            after: $cursor
             filter: { name: { ilike: $keyword } }
         ) {
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
-                    ...GenresInfo
+                    ...GenresMinimalInfo
                 }
             }
         }
