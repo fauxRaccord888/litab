@@ -1,4 +1,5 @@
 import type { SearchDropdownKey } from '$feature/search/types'
+import { useState } from 'react'
 import { useSearchQuery } from '$feature/search/hooks'
 import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate } from '$feature/navigate/hooks'
 import { t as translate} from "i18next"
@@ -17,15 +18,25 @@ export const Route = createFileRoute('/_public/search')({
 
 function Search() {
     const context = Route.useRouteContext()
-    const searchQuery = useSearchQuery()
-    const { result } = searchQuery
+    
+    const [keyword, setKeyword] = useState('')
+
+    const searchQuery = useSearchQuery(keyword)
     const oeuvreNavigate = useOeuvreNavigate()
     const genreNavigate = useGenreNavigate()
     const artistNavigate = useArtistNavigate()
 
-    const handleSearch = async (key: SearchDropdownKey, keyword: string) => {
+    const queryResults = {
+        users: searchQuery.users[1],
+        oeuvres: searchQuery.oeuvres[1],
+        artists: searchQuery.artists[1],
+        genres: searchQuery.genres[1]
+    }
+
+    const handleSearch = async (key: SearchDropdownKey, keywordParam: string, includeCursor?: boolean) => {
         const [queryFunction] = searchQuery[key]
-        queryFunction(keyword)
+        setKeyword(keywordParam)
+        queryFunction(keywordParam, includeCursor)
     }
 
     const eventHandler = {
@@ -36,8 +47,8 @@ function Search() {
     }
 
     return (
-        <MainSearchView 
-            searchResult={result}
+        <MainSearchView
+            queryResults={queryResults}
             context={context}
             dropdownProps={{
                 keys: ["users", "oeuvres", "artists", "genres"],
