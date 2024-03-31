@@ -1,11 +1,13 @@
 import type { DBOeuvre } from '../types';
 import type { ISlotRenderConfig } from '$feature/template/type';
 import type { InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
+import { useState } from 'react';
 import { useSearchQuery } from '$feature/search/hooks';
 import { SEARCH } from '$feature/search/constants';
 
 import OeuvreInfoCard from './common/OeuvreInfoCard';
 import SearchPanel from '$lib/components/common/SearchPanel';
+import InfiniteScrollTrigger from '$lib/components/common/InfiniteScrollTrigger';
 
 import "./style/oeuvreSearchView.scss"
 
@@ -16,14 +18,30 @@ type OeuvreSearchViewProps = {
 
 export default function OeuvreSearchView(props: OeuvreSearchViewProps) {
     const { handleClickResult, oeuvreInfoCardRenderConfig } = props
-    const [searchOeuvres, {data}] = useSearchQuery().oeuvres
+    const [keyword, setKeyword] = useState("")
+    const [searchOeuvres, {data}] = useSearchQuery(keyword).oeuvres
     const items = data?.oeuvresCollection?.edges.map((edge) => edge.node) || []
+    const hasNextPage = data?.oeuvresCollection?.pageInfo.hasNextPage
 
     const handleSearchOeuvres = (formData: FormData) => {
-        const keyword = formData.get(SEARCH.inputName)?.toString()
-        if (!keyword) return
-        searchOeuvres(keyword)
+        setKeyword("")
+        const formKeyword = formData.get(SEARCH.inputName)?.toString()
+        if (!formKeyword) return
+        setKeyword(formKeyword)
+        searchOeuvres(formKeyword)
     }
+
+    const handleFetchMore = () => {
+        if (!keyword) return
+        searchOeuvres(keyword, true)
+    }
+
+    const loader = (
+        <InfiniteScrollTrigger 
+            handleLoadMore={handleFetchMore}
+            hasNextPage={hasNextPage}
+        />
+    )
 
     return (
         <div className="oeuvre-search-view-component">
@@ -44,6 +62,7 @@ export default function OeuvreSearchView(props: OeuvreSearchViewProps) {
                         }}
                     />
                 ))}
+                {data?.oeuvresCollection?.edges.length !== 0 && loader}
             </div>
         </div>
     )
