@@ -1,9 +1,9 @@
 import type { InfoCardOptions, InfoCardRenderConfigKey } from '$feature/template/components/InfoCardTemplate';
 import type { ISlotRenderConfig } from '$feature/template/type';
-import type { MiniProfileInfoFragment, SearchUsersQuery } from '$lib/graphql/__generated__/graphql';
+import type { GetUserByMutableIdQuery, MiniProfileInfoFragment } from '$lib/graphql/__generated__/graphql';
 import type { FirstNodeOfCollection } from '$lib/types/graphql';
 
-export type DBProfiles = FirstNodeOfCollection<SearchUsersQuery["usersCollection"]>
+export type DBProfiles = FirstNodeOfCollection<GetUserByMutableIdQuery["usersCollection"]>
 export type DBMiniProfile = MiniProfileInfoFragment
 export type ProfileForeignTableKeys = 'followings' | 'followers' | 'posts';
 
@@ -19,4 +19,9 @@ export type ProfileEventHandler = {
     followingsModal?: (mutableId: string) => void
     followersModal?: (mutableId: string) => void
     profileSelectMenuModal?: (mutableId: string) => void
+}
+
+export type ProfileLoadMorePayload = {
+    pentagramLimit: number, 
+    revisionLimit: number
 }

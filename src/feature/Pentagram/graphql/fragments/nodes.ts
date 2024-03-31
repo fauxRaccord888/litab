@@ -4,7 +4,7 @@ graphql(/* GraphQL */ `
     fragment PentagramNodesInfo on pentagram_nodes {
         id
         oeuvres {
-            ...OeuvresInfo
+            ...OeuvresMinimalInfo
         }
         pentagram_revision_update_recordsCollection {
             edges {

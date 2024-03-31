@@ -16,3 +16,7 @@ export type UnprocessedContext = {
     apolloClient: ApolloClient<object>,
     userObservable: Awaited<ReturnType<typeof getUserObservable>>
 }
+
+export type BaseEventHandler<T = void> = {
+    handleLoadMore: (param: T) => void
+}

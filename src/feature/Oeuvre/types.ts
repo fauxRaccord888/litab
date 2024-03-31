@@ -1,6 +1,6 @@
-import type { OeuvresExtensiveInfoFragment, OeuvresMinimalInfoFragment } from '$lib/graphql/__generated__/graphql';
+import type { OeuvresInfoFragment, OeuvresMinimalInfoFragment } from '$lib/graphql/__generated__/graphql';
 
-export type DBOeuvre = OeuvresExtensiveInfoFragment
+export type DBOeuvre = OeuvresInfoFragment
 export type DBMiniOeuvre = OeuvresMinimalInfoFragment
 
 export type OeuvreEventHandler = {

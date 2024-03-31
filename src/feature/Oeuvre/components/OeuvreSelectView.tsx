@@ -1,6 +1,7 @@
 import type { DBOeuvre, OeuvreEventHandler } from '../types';
-import type { UnprocessedContext } from '$lib/types/components';
+import type { BaseEventHandler, UnprocessedContext } from '$lib/types/components';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TIME } from '$feature/Pentagram/constants';
 
@@ -8,11 +9,12 @@ import SelectViewTemplate from '$feature/template/components/SelectViewTemplate'
 import OeuvreInfoCard from './common/OeuvreInfoCard';
 import PentagramCard from '$feature/Pentagram/components/PentagramCard';
 import Tab from '$lib/components/common/Tab';
+import InfiniteScrollTrigger from '$lib/components/common/InfiniteScrollTrigger';
 
 type OeuvreSelectViewProps = {
     item: DBOeuvre
     context: UnprocessedContext,
-    eventHandler: OeuvreEventHandler & PentagramEventHandler
+    eventHandler: BaseEventHandler & OeuvreEventHandler & PentagramEventHandler
 }
 
 export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
@@ -33,27 +35,38 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
         />
     )
 
+    const pentagramComponents = useMemo(() => (
+        item?.pentagram_nodesCollection?.edges.map((edge) => (
+            <PentagramCard
+                key={edge.node.pentagrams.id}
+                item={edge.node.pentagrams}
+                renderConfig={{
+                    metaInfo: true,
+                    mainPentagon: true,
+                    description: false,
+                    revision: false
+                }}
+                eventHandler={eventHandler}
+                options={{}}
+                timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
+                context={context}
+            />
+        )) || []
+    ), [context, eventHandler, item?.pentagram_nodesCollection?.edges])
+
+    const loader = useMemo(() => (
+        <InfiniteScrollTrigger
+            hasNextPage={item.pentagram_nodesCollection?.pageInfo.hasNextPage}
+            handleLoadMore={eventHandler.handleLoadMore}
+        />
+    ), [eventHandler.handleLoadMore, item.pentagram_nodesCollection?.pageInfo.hasNextPage])
+
     const tabComponent = (
         <Tab
             items={[
                 {
                     label: t("oeuvre.tab.pentagram"),
-                    items: item?.pentagram_nodesCollection?.edges.map((edge) => (
-                        <PentagramCard
-                            key={edge.node.pentagrams.id}
-                            item={edge.node.pentagrams}
-                            renderConfig={{
-                                metaInfo: true,
-                                mainPentagon: true,
-                                description: false,
-                                revision: false
-                            }}
-                            eventHandler={eventHandler}
-                            options={{}}
-                            timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
-                            context={context}
-                        />
-                    )) || []
+                    items: pentagramComponents.concat(loader)
                 },
                 {
                     label: t("oeuvre.tab.user"),

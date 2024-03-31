@@ -1,0 +1,12 @@
+@import "src/lib/style/atomicMixin";
+
+.infinite-scroll-trigger-component {
+    @include flex;
+    @include flex-center;
+
+    .infinite-scroll-trigger-component__inner-container {
+        position: relative;
+        min-width: 36px;
+        min-height: 36px;
+    }
+}

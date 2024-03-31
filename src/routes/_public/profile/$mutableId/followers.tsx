@@ -1,15 +1,16 @@
 /* types */
 import type { DBMiniProfile } from '$feature/Profile/types';
-import type { SearchUsersQuery } from '$lib/graphql/__generated__/graphql';
+import type { GetUserByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
 import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
-import { searchUsers_QUERY } from '$feature/search/graphql';
+import { getUserByMutableId_QUERY } from '$feature/Profile/graphql';
 /* router */
 import { createFileRoute } from '@tanstack/react-router';
 /* utils */
+import { NETWORK } from '$lib/constants';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
@@ -20,7 +21,15 @@ export const Route = createFileRoute('/_public/profile/$mutableId/followers')({
 
 function FollowersModal() {
     const params = Route.useParams()
-    const { data } = useQuery<SearchUsersQuery>(searchUsers_QUERY, {variables: {keyword: params.mutableId }})
+    const { data } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
+        variables: { 
+            mutableId: params.mutableId, 
+            pentagramLimit: NETWORK.readLimit,
+            pentagramCursor: null,
+            revisionLimit: NETWORK.readLimit,
+            revisionCursor: null,
+        }
+    })
     const firstNode = getFirstNodeOfCollection(data?.usersCollection)
     
     if (!firstNode?.followersCollection) return null

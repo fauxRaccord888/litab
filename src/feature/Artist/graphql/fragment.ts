@@ -9,12 +9,20 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment ArtistsInfo on artists {
-        ...ArtistsMinimalInfo
-        abstract
-        bio
-        oeuvres_artistsCollection {
+    fragment ArtistOeuvresInfo on artists {
+        oeuvres_artistsCollection(
+            orderBy: {
+                oeuvre_id: DescNullsLast
+            }
+            first: $limit
+            after: $cursor
+        ) {
+          	pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
+                cursor
                 node {
                     oeuvres {
                         ...OeuvresMinimalInfo
@@ -22,5 +30,14 @@ graphql(/* GraphQL */ `
                 }
             }
         }
+    }
+`)
+
+graphql(/* GraphQL */ `
+    fragment ArtistsInfo on artists {
+        ...ArtistsMinimalInfo
+        ...ArtistOeuvresInfo
+        abstract
+        bio
     }
 `)

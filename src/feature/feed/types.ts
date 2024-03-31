@@ -1,6 +1,6 @@
-import type { FeedInfoFragment } from "$lib/graphql/__generated__/graphql";
+import type { PentagramRevisionFeedInfoFragment } from "$lib/graphql/__generated__/graphql";
 
-export type FeedItems = FeedInfoFragment
+export type FeedItems = PentagramRevisionFeedInfoFragment
 
 export type FeedItemRenderConfig = "message" | "item"
 export type FeedItemOptions = {

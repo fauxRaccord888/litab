@@ -1,10 +1,12 @@
 @import "src/lib/style/atomicMixin";
 
 .search-result-component {
-    @include rounded-lg;
-    border: 2px solid rgba(var(--font-color), 0.5);
+    .search-result-component__inner-container {
+        @include rounded-lg;
+        border: 2px solid rgba(var(--font-color), 0.5);
+    }
 
-    &.search-result-component--disabled {
+    &.search-result-component__inner-container--disabled {
         display: none;
     }
 

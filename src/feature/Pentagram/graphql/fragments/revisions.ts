@@ -63,3 +63,16 @@ graphql(/* GraphQL */ `
         }
     }
 `)
+
+graphql(/* GraphQL */ `
+    fragment PentagramRevisionFeedInfo on pentagram_revisions {
+        id
+        created_at
+        users {
+            ...MiniProfileInfo
+        }
+        pentagrams {
+            ...PentagramsSelectInfo
+        }
+    }
+`)

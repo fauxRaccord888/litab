@@ -9,8 +9,34 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
+      fragment OeuvrePentagramsInfo on oeuvres {
+        pentagram_nodesCollection(
+            orderBy: {
+                created_at: DescNullsLast
+            }
+            first: $limit
+            after: $cursor
+        ) {
+          	pageInfo {
+                hasNextPage
+                endCursor
+            }
+            edges {
+              	cursor
+                node {
+                    pentagrams {
+                        ...PentagramsSelectInfo
+                    }
+                }
+            }
+        }
+    }
+`)
+
+graphql(/* GraphQL */ `
     fragment OeuvresInfo on oeuvres {
         ...OeuvresMinimalInfo
+        ...OeuvrePentagramsInfo
         description
         oeuvres_artistsCollection {
             edges {
@@ -26,26 +52,6 @@ graphql(/* GraphQL */ `
                 node {
                     genres {
                         ...GenresMinimalInfo
-                    }
-                }
-            }
-        }
-    }
-`)
-
-
-graphql(/* GraphQL */ `
-    fragment OeuvresExtensiveInfo on oeuvres {
-        ...OeuvresInfo
-        pentagram_nodesCollection(
-            orderBy: {
-                created_at: DescNullsLast
-            },
-        ) {
-            edges {
-                node {
-                    pentagrams {
-                        ...PentagramsSelectInfo
                     }
                 }
             }

@@ -17,7 +17,7 @@ export const Route = createFileRoute('/_auth/feed/')({
 })
 
 function Feed() {
-    const { feed, recommendedUsers } = useFeed()
+    const { feed, recommendedUsers, hasNextPage, fetchMoreFeed } = useFeed()
     const navigate = usePentagramNavigate();
     const oeuvreNavigate = useOeuvreNavigate()
     const context = Route.useRouteContext()
@@ -29,12 +29,14 @@ function Feed() {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId)
     }
 
-    const items = feed ? feed.edges.map((edge) => edge.node) : []
+    const items = feed?.items ? feed.items.edges.map((edge) => edge.node) : []
 
     return (
         <>
             <FeedList
                 items={items}
+                hasNextPage={hasNextPage}
+                fetchMoreFeed={fetchMoreFeed}
                 recommendedUsers={recommendedUsers}
                 renderConfig={{
                     message: true,
