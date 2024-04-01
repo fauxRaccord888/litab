@@ -27,7 +27,6 @@ import { t as translate } from 'i18next';
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 import { getPentagramUpdateInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
-import { getCurrentUserFromObservable } from '$feature/auth/utils';
 
 import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
@@ -41,7 +40,7 @@ export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
     // COMMENT 검증 및 redirect 로직은 tanstack router로 통일
     // 로더에서 fetch는 최소화(이중 fetch되는 경우에 한해서만 lodaer에서 fetch => refetch가 까다로워짐 등)
     loader: async ({ context, params }) => {
-        const currentUser = getCurrentUserFromObservable(context.userObservable)
+        const currentUser = context.user
         const queryOption = { query: getPentagramUpdateInfoById_QUERY,
             variables: { id: params.pentagramId }
         }

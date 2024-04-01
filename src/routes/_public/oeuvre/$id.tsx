@@ -23,7 +23,6 @@ export const Route = createFileRoute('/_public/oeuvre/$id')({
 
 function Oeuvre() {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
     const navigate = useNavigate()
     const pentagramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
@@ -69,7 +68,6 @@ function Oeuvre() {
         <div className="profile-container">
             <OeuvreSelectView
                 item={item}
-                context={context}
                 eventHandler={eventHandler}
             />
             <Outlet />

@@ -20,7 +20,6 @@ function Feed() {
     const { feed, recommendedUsers, hasNextPage, fetchMoreFeed } = useFeed()
     const navigate = usePentagramNavigate();
     const oeuvreNavigate = useOeuvreNavigate()
-    const context = Route.useRouteContext()
 
     const eventHandler: PentagramEventHandler & OeuvreEventHandler = {
         pentagramMenuModal: (pentagramId: string) => navigate.pentagramSelectModal(pentagramId),
@@ -46,7 +45,6 @@ function Feed() {
                     showMessage: true
                 }}
                 eventHandler={eventHandler}
-                context={context}
             />
             <Outlet />
         </>

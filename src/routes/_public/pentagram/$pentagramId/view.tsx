@@ -21,7 +21,6 @@ export const Route = createFileRoute('/_public/pentagram/$pentagramId/view')({
 
 function PentagramSelect() {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
     const { data, error } = useQuery<GetPentagramSelectInfoByIdQuery>(getPentagramSelectInfoById_QUERY, {
         variables: { id: params.pentagramId }
     })
@@ -52,7 +51,6 @@ function PentagramSelect() {
             <PentagramSelectView 
                 item={firstNode} 
                 eventHandler={eventHandler}
-                context={context}
             />
             <Outlet />
         </>

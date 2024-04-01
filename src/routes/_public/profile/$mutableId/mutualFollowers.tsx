@@ -5,6 +5,7 @@ import type { GetUserByMutableIdQuery } from '$lib/graphql/__generated__/graphql
 import { useQuery } from '@apollo/client';
 import { useProfileNavigate } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
+import { useCurrentUser } from '$feature/auth/hooks';
 /* query */
 import { getUserByMutableId_QUERY } from '$feature/Profile/graphql';
 /* router */
@@ -13,7 +14,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import { NETWORK } from '$lib/constants';
 import { calcFollowings, calcMutualFollowers } from '$feature/Profile/util';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
-import { getCurrentUserFromObservable } from '$feature/auth/utils';
 /* components */
 import MiniProfileModal from '$feature/Profile/components/modal/MiniProfileModal';
 
@@ -23,7 +23,6 @@ export const Route = createFileRoute('/_public/profile/$mutableId/mutualFollower
 
 function FollowersModal() {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
     const { data } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
         variables: { 
             mutableId: params.mutableId, 
@@ -34,7 +33,7 @@ function FollowersModal() {
         }
     })
     const targetUser = getFirstNodeOfCollection(data?.usersCollection)
-    const currentUser = getCurrentUserFromObservable(context.userObservable)
+    const currentUser = useCurrentUser()
 
     const followings = calcFollowings(currentUser)
     const mutualFollowers = calcMutualFollowers(currentUser, targetUser, followings)
@@ -52,7 +51,6 @@ function MutualFollowingModalComponent(props: {
     items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
@@ -66,7 +64,6 @@ function MutualFollowingModalComponent(props: {
             title={title} 
             handleClickClose={handleClickClose}
             items={props.items}
-            context={context}
         />
     )
 }
