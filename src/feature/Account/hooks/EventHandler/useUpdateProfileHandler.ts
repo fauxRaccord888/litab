@@ -7,7 +7,6 @@ import { useUpdateAuthMutation, useUploadCoverMutation } from "..";
 import { updateProfile_MUTATION } from "../../graphql";
 import { evictCacheById } from "$lib/utils";
 import { PendingError } from "$lib/error";
-import { getUserById_QUERY } from "$feature/auth/graphql";
 
 export function useUpdateProfileHandler() {
     const apolloClient = useApolloClient()
@@ -35,9 +34,6 @@ export function useUpdateProfileHandler() {
                     id: currentUser?.id
                 })
             },
-            refetchQueries: [
-                getUserById_QUERY
-            ],
         })
         return response
     }, [isPending, profileMutation, currentUser])
@@ -72,9 +68,6 @@ export function useUpdateProfileHandler() {
                         id: currentUser?.id
                     })
                 },
-                include: [
-                    getUserById_QUERY
-                ]
             })
         }
         return response
