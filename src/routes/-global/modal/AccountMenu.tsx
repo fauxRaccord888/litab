@@ -1,6 +1,5 @@
 /* types */
 import type { AccountMenuModalEventHandler } from '$feature/Account/types';
-import type { UnprocessedContext } from '$lib/types/components';
 /* hooks */
 import { useTranslation } from 'react-i18next';
 import { useProfileNavigate, useAccountNavigate } from '$feature/navigate/hooks';
@@ -8,11 +7,10 @@ import { useProfileNavigate, useAccountNavigate } from '$feature/navigate/hooks'
 import AccountMenuModal from '$feature/Account/components/Modal/AccountMenuModal';
 
 export default function AccountMenu(props: { 
-    context: UnprocessedContext
     handleClickClose: () => void; 
 }) {
     const { t } = useTranslation();
-    const { context, handleClickClose } = props
+    const { handleClickClose } = props
     const profileNavigate = useProfileNavigate()
     const accountNavigate = useAccountNavigate()
 
@@ -35,7 +33,6 @@ export default function AccountMenu(props: {
     return (
         <AccountMenuModal
             title={title}
-            context={context}
             eventHandler={eventHandler}
         />
     )

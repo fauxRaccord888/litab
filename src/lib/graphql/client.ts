@@ -97,6 +97,11 @@ const cache = new InMemoryCache({
         },
         users: {
             fields: {
+                followingsCollection: {
+                    merge(_existing, incoming) {
+                        return incoming
+                    }
+                },
                 pentagramsCollection: {
                     keyArgs: false,
                     merge(existing: IConnection, incoming: IConnection){

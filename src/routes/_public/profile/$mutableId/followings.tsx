@@ -45,7 +45,6 @@ function FollowingsModalComponent(props: {
     items : DBMiniProfile[]
 }) {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
@@ -59,7 +58,6 @@ function FollowingsModalComponent(props: {
             title={title} 
             handleClickClose={handleClickClose}
             items={props.items}
-            context={context}
         />
     )
 }

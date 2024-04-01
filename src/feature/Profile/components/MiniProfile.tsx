@@ -1,4 +1,3 @@
-import type { UnprocessedContext } from '$lib/types/components';
 import type { DBMiniProfile, ProfileInfoCardOptions } from "../types";
 
 import { useHandleFollow } from '../hooks';
@@ -9,17 +8,16 @@ import "./style/miniProfile.scss"
 
 type MiniProfileProps = {
     item: DBMiniProfile,
-    context: UnprocessedContext,
     options: ProfileInfoCardOptions
 }
 
 export default function MiniProfile(props: MiniProfileProps) {
-    const { item, context, options } = props
+    const { item, options } = props
     const navigate = useProfileNavigate()
     const handleFollow = useHandleFollow()
 
-    const onFollow = async () => {
-        await handleFollow(item.id)
+    const onFollow = () => {
+        handleFollow(item.id)
     }
 
     return (
@@ -42,7 +40,6 @@ export default function MiniProfile(props: MiniProfileProps) {
                     follow: onFollow,
                     selectProfile: navigate.profileSelect
                 }}
-                context={context}
             />
         </div>
     )

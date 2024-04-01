@@ -16,9 +16,7 @@ export const Route = createFileRoute('/_public/search')({
     },
 })
 
-function Search() {
-    const context = Route.useRouteContext()
-    
+function Search() {   
     const [keyword, setKeyword] = useState('')
 
     const searchQuery = useSearchQuery(keyword)
@@ -49,7 +47,6 @@ function Search() {
     return (
         <MainSearchView
             queryResults={queryResults}
-            context={context}
             dropdownProps={{
                 keys: ["users", "oeuvres", "artists", "genres"],
                 name: SEARCH.dropdownName

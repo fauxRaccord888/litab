@@ -1,7 +1,6 @@
 import type { ISlotRenderConfig } from '$feature/template/type';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
-import type { UnprocessedContext } from '$lib/types/components';
 import type { FeedItemOptions, FeedItemRenderConfig, FeedItems } from '../types';
 
 import FeedMessage from "./common/FeedMessage";
@@ -13,7 +12,6 @@ export type FeedItmeConfigProps = {
     renderConfig: ISlotRenderConfig<FeedItemRenderConfig>,
     options: FeedItemOptions,
     eventHandler: PentagramEventHandler & OeuvreEventHandler
-    context: UnprocessedContext
 }
 
 type FeedItemProps = FeedItmeConfigProps & {
@@ -21,7 +19,7 @@ type FeedItemProps = FeedItmeConfigProps & {
 }
 
 export default function FeedItem(props: FeedItemProps) {
-    const { item, eventHandler, options, context } = props
+    const { item, eventHandler, options } = props
     let feedItem = null
 
     if (item.__typename === 'pentagram_revisions') {
@@ -41,7 +39,6 @@ export default function FeedItem(props: FeedItemProps) {
                 }}
                 timestamp={new Date(item.created_at)}
                 eventHandler={eventHandler}
-                context={context}
             />
         )
     }

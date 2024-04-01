@@ -1,4 +1,3 @@
-import type { UnprocessedContext } from '$lib/types/components';
 import type { DBProfiles, ProfileEventHandler, ProfileLoadMorePayload } from "../types";
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
@@ -20,14 +19,13 @@ import "./style/profileSelectView.scss"
 
 export default function ProfileSelectView(props: {
     item: DBProfiles
-    context: UnprocessedContext,
     eventHandler: 
         ProfileEventHandler & 
         PentagramEventHandler & 
         OeuvreEventHandler &
         BaseEventHandler<ProfileLoadMorePayload> 
 }) {
-    const { item, context, eventHandler } = props
+    const { item, eventHandler } = props
     const { t } = useTranslation()
 
     const infoCardComponent = (
@@ -46,7 +44,6 @@ export default function ProfileSelectView(props: {
                 displayInteraction: true,
             }}
             eventHandler={eventHandler}
-            context={context}
         />
     )
 
@@ -64,10 +61,9 @@ export default function ProfileSelectView(props: {
                 eventHandler={eventHandler}
                 options={{}}
                 timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
-                context={context}
             />
         )) || []
-    ), [context, eventHandler, item?.pentagramsCollection?.edges])
+    ), [eventHandler, item?.pentagramsCollection?.edges])
 
     const pentagramLoader = useMemo(() => (
         <InfiniteScrollTrigger
@@ -92,10 +88,9 @@ export default function ProfileSelectView(props: {
                     showMessage: false
                 }}
                 eventHandler={eventHandler}
-                context={context}
             />
         )) || []
-    ), [context, eventHandler, item?.pentagram_revisionsCollection?.edges])
+    ), [eventHandler, item?.pentagram_revisionsCollection?.edges])
 
     const revisionLoader = useMemo(() => (
         <InfiniteScrollTrigger

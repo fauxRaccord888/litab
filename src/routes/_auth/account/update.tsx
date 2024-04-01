@@ -23,8 +23,6 @@ export default function Register() {
     const [profileUpdate] = profile
     const [coverUpload] = cover
     const { t } = useTranslation()
-    const context = Route.useRouteContext()
-
     
     const handleUpdateAuth = (payload: UpdateAuthPayload) => {
         const response = updateAccountErrorHandler(
@@ -61,7 +59,6 @@ export default function Register() {
 
     return (
         <AcocuntUpdate 
-            context={context}
             handleUpdateAuth={handleUpdateAuth} 
             handleUpdateProfile={handleUpdateProfile} 
             handleUploadCover={handleUploadCover}

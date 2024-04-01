@@ -1,15 +1,13 @@
 import type { QueryResults } from "../../../types"
-import type { UnprocessedContext } from "$lib/types/components"
 import { useTranslation } from "react-i18next"
 import MiniProfile from "$feature/Profile/components/MiniProfile"
 
 type UserResultProps = {
     queryResults: QueryResults
-    context: UnprocessedContext
 }
 
 export default function UserResult(props: UserResultProps) {
-    const { queryResults, context } = props
+    const { queryResults } = props
     const { data } = queryResults.users
     const { t } = useTranslation()
     if (!(data && "usersCollection" in data)) return null
@@ -23,7 +21,6 @@ export default function UserResult(props: UserResultProps) {
                     <div className="search-result-component__result-inner-container">
                         <MiniProfile
                             item={user.node}
-                            context={context}
                             options={{
                                 displayFollow: true,
                             }}

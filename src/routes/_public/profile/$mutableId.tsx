@@ -31,7 +31,6 @@ export const Route = createFileRoute('/_public/profile/$mutableId')({
 
 function Profile() {
     const params = Route.useParams()
-    const context = Route.useRouteContext()
     const navigate = useNavigate()
     const profileNavigate = useProfileNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
@@ -88,7 +87,6 @@ function Profile() {
     return (
         <>
             <ProfileSelectView
-                context={context}
                 item={item}
                 eventHandler={eventHandler}
             />

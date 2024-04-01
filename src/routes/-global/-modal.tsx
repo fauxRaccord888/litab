@@ -1,4 +1,3 @@
-import type { UnprocessedContext } from '$lib/types/components';
 import type { RootSearch } from 'routes/__root';
 import { useNavigate } from '@tanstack/react-router'
 
@@ -10,10 +9,9 @@ import NodeSelect from './modal/NodeSelect';
 import AccountMenu from './modal/AccountMenu';
 
 export default function ModalController(props: {
-    context: UnprocessedContext,
     search: RootSearch
 }) {
-    const { search, context } = props
+    const { search } = props
     const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId, accountMenu } = search
 
     const navigate = useNavigate()
@@ -59,14 +57,12 @@ export default function ModalController(props: {
             }
             {pentagramMenuId &&
                 <PentagramSelect
-                    context={context}
                     pentagramId={pentagramMenuId}
                     handleClickClose={handleClickClose}
                 />
             }
             {accountMenu &&
                 <AccountMenu 
-                    context={context}
                     handleClickClose={handleClickClose}
                 />
             }

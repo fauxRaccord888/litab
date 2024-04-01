@@ -13,7 +13,7 @@ export type ProfileInfoCardOptions = InfoCardOptions & {
     displayInteraction?: boolean
 }
 export type ProfileEventHandler = {
-    follow?: (id: string) => Promise<void>
+    follow?: (id: string) => void
     selectProfile?: (mutableId: string) => void
     mutualFollowersModal?: (mutableId: string) => void
     followingsModal?: (mutableId: string) => void

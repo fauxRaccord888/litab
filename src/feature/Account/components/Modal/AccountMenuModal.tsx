@@ -1,23 +1,21 @@
 import type { MouseEvent } from "react";
-import type { UnprocessedContext } from "$lib/types/components";
 import type { AccountMenuModalEventHandler } from "../../types";
 import { useTranslation } from "react-i18next";
-import { getCurrentUserFromObservable } from "$feature/auth/utils";
+import { useCurrentUser } from "$feature/auth/hooks";
 import Modal from "$feature/portal/components/Modal";
 import Button from "$lib/components/common/Button";
 import "./style/accountMenuModal.scss"
 
 type AccountMenuModalProps = {
     title: string,
-    context: UnprocessedContext
     eventHandler: AccountMenuModalEventHandler
 }
 
 export default function AccountMenuModal(props: AccountMenuModalProps) {
-    const { title, context, eventHandler } = props
+    const { title, eventHandler } = props
     const { t } = useTranslation()
 
-    const currentUser = getCurrentUserFromObservable(context.userObservable)
+    const currentUser = useCurrentUser()
 
     const onClickHandler = (e: MouseEvent, func: (() => void)) => {
         e.preventDefault()
