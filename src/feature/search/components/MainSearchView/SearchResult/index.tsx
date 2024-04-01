@@ -1,23 +1,21 @@
 import type { MainSearchViewEventHandler, QueryResults, SearchDropdownKey } from "../../../types"
-import type { UnprocessedContext } from "$lib/types/components"
+import { useMemo } from "react"
 import UserResult from "./UserResult"
 import OeuvreResult from "./OeuvreResult"
 import ArtistResult from "./ArtistResult"
 import GenreResult from "./GenreResult"
 import InfiniteScrollTrigger from "$lib/components/common/InfiniteScrollTrigger"
 import "./style/searchResult.scss"
-import { useMemo } from "react"
 
 type SearchResultProps = {
     category: SearchDropdownKey | null | undefined
     queryResults: QueryResults
-    context: UnprocessedContext
     eventHandler: MainSearchViewEventHandler
     loadMoreFunction: () => void
 }
 
 export default function SearchResult(props: SearchResultProps) {
-    const { category, queryResults, context, eventHandler, loadMoreFunction } = props
+    const { category, queryResults, eventHandler, loadMoreFunction } = props
 
     const hasNextPage = useMemo(() => {        
         if (category === "users") {
@@ -52,7 +50,7 @@ export default function SearchResult(props: SearchResultProps) {
     return (
         <div className="search-result-component">
             {category === "users" &&
-                <UserResult queryResults={queryResults} context={context} />
+                <UserResult queryResults={queryResults} />
             }
             {category === "oeuvres" &&
                 <OeuvreResult queryResults={queryResults} eventHandler={eventHandler}/>

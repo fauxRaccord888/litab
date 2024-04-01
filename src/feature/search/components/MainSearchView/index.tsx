@@ -1,5 +1,4 @@
 import type { MainSearchViewEventHandler, QueryResults, SearchDropdownKey, SearchDropdownProps } from "../../types"
-import type { UnprocessedContext } from "$lib/types/components"
 import { useState } from "react"
 import { isSearchDropDownKey } from "../../types"
 import { SEARCH } from "$feature/search/constants"
@@ -10,12 +9,11 @@ import "./style/mainSearchView.scss"
 type MainSearchViewProps = {
     queryResults: QueryResults
     dropdownProps: SearchDropdownProps
-    context: UnprocessedContext
     eventHandler: MainSearchViewEventHandler
 }
 
 export default function MainSearchView(props: MainSearchViewProps) {
-    const { queryResults, dropdownProps, context, eventHandler } = props
+    const { queryResults, dropdownProps, eventHandler } = props
     const [keyword, setKeyword] = useState('')
     const [category, setCategory] = useState<SearchDropdownKey | null>(null)
 
@@ -46,7 +44,6 @@ export default function MainSearchView(props: MainSearchViewProps) {
                 <SearchResult 
                     category={category} 
                     queryResults={queryResults} 
-                    context={context} 
                     loadMoreFunction={handleLoadMore} 
                     eventHandler={eventHandler} 
                 />

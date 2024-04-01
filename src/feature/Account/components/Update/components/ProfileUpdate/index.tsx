@@ -1,22 +1,22 @@
-import type { UnprocessedContext } from "$lib/types/components"
 import type { AcocuntProfileUpdateKey } from "../../../../constants"
 import type { UpdateProfilePayload } from "../../../../types"
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getCurrentUserFromObservable } from "$feature/auth/utils"
+import { useCurrentUser } from "$feature/auth/hooks"
 import { accountProfileUpdateFields } from "../../../../constants"
 import Form from "$lib/components/common/Form"
 import "./style/profileUpdate.scss"
 
 type ProfileUpdateProps = {
-    context: UnprocessedContext
     handleUpdate: (payload: UpdateProfilePayload) => void
 }
 
 export default function ProfileUpdate(props: ProfileUpdateProps) {
-    const { context, handleUpdate } = props
+    const { handleUpdate } = props
     const { t } = useTranslation()
-    const currentUser = getCurrentUserFromObservable(context.userObservable)
+    
+    const currentUser = useCurrentUser()
+
     const [formData, setFormData] = useState<Record<AcocuntProfileUpdateKey, string>>({
         mutableId: currentUser?.mutable_id || '',
         nickname: currentUser?.nickname || "",

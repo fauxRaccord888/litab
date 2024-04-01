@@ -1,5 +1,4 @@
 import type { DBProfiles } from "$feature/Profile/types";
-import type { UnprocessedContext } from "$lib/types/components";
 import type { FeedItems } from "../types";
 import type { FeedItmeConfigProps } from "./FeedItem";
 import { useMemo } from "react";
@@ -12,12 +11,11 @@ type FeedListProps = FeedItmeConfigProps & {
     items: FeedItems[],
     hasNextPage?: boolean
     fetchMoreFeed: () => void,
-    context: UnprocessedContext,
     recommendedUsers: DBProfiles[] | null | undefined
 }
 
 export default function FeedList(props: FeedListProps) {
-    const { items, hasNextPage, fetchMoreFeed, renderConfig, options, eventHandler, context, recommendedUsers } = props
+    const { items, hasNextPage, fetchMoreFeed, renderConfig, options, eventHandler, recommendedUsers } = props
 
     const loader = useMemo(() => (
         <InfiniteScrollTrigger 
@@ -36,7 +34,6 @@ export default function FeedList(props: FeedListProps) {
                             renderConfig={renderConfig}
                             item={item}
                             eventHandler={eventHandler}
-                            context={context}
                             options={options}
                         />
                     </div>
@@ -45,7 +42,6 @@ export default function FeedList(props: FeedListProps) {
             {items.length === 0 &&
                 <FollowRecommendation
                     recommendedUsers={recommendedUsers}
-                    context={context}
                 />
             }
         </div>

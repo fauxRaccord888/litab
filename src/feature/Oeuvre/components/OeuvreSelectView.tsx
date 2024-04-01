@@ -1,5 +1,5 @@
 import type { DBOeuvre, OeuvreEventHandler } from '../types';
-import type { BaseEventHandler, UnprocessedContext } from '$lib/types/components';
+import type { BaseEventHandler } from '$lib/types/components';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,12 +13,11 @@ import InfiniteScrollTrigger from '$lib/components/common/InfiniteScrollTrigger'
 
 type OeuvreSelectViewProps = {
     item: DBOeuvre
-    context: UnprocessedContext,
     eventHandler: BaseEventHandler & OeuvreEventHandler & PentagramEventHandler
 }
 
 export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
-    const { item, context, eventHandler } = props
+    const { item, eventHandler } = props
     const { t } = useTranslation()
     
     const infoCardComponent = (
@@ -49,10 +48,9 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                 eventHandler={eventHandler}
                 options={{}}
                 timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
-                context={context}
             />
         )) || []
-    ), [context, eventHandler, item?.pentagram_nodesCollection?.edges])
+    ), [eventHandler, item?.pentagram_nodesCollection?.edges])
 
     const loader = useMemo(() => (
         <InfiniteScrollTrigger

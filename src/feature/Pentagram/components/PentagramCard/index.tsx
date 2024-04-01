@@ -1,5 +1,4 @@
 import type { DBPentagram_SELECT, PentagramEventHandler, PentagramSelectOptions, PentagramSelectRenderConfig } from "../../types";
-import type { UnprocessedContext } from "$lib/types/components";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 
 import SelectMetaInfo from "./SelectMetaInfo";
@@ -13,12 +12,11 @@ export type PentagramCardProps = {
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
     eventHandler: PentagramEventHandler & OeuvreEventHandler,
-    context: UnprocessedContext,
     timestamp: Date
 }
 
 export default function PentagramCard(props: PentagramCardProps) {
-    const { item, renderConfig, options, eventHandler, timestamp, context } = props
+    const { item, renderConfig, options, eventHandler, timestamp } = props
     const { id, users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
 
     return (
@@ -28,7 +26,6 @@ export default function PentagramCard(props: PentagramCardProps) {
                 users={users} 
                 created_at={created_at} 
                 eventHandler={eventHandler}
-                context={context}
             />
             <div className="pentagram-card-component__main-container">
                 {renderConfig.mainPentagon && 

@@ -1,4 +1,3 @@
-import type { UnprocessedContext } from "$lib/types/components";
 import type { MouseEvent } from "react";
 import type { DBMiniProfile } from "$feature/Profile/types";
 import type { PentagramEventHandler } from "../../../types";
@@ -13,10 +12,10 @@ type SelectMetaInfoProps = {
     created_at: string
     users: DBMiniProfile
     eventHandler: PentagramEventHandler
-    context: UnprocessedContext
 }
 
-export default function SelectMetaInfo(props: SelectMetaInfoProps) {    const { id, created_at, users, eventHandler, context } = props
+export default function SelectMetaInfo(props: SelectMetaInfoProps) {    
+    const { id, created_at, users, eventHandler } = props
     const relativeTime = useTranslatedRelativeTime(new Date(created_at))
 
     const onClickIcon = (e: MouseEvent) => {
@@ -30,7 +29,6 @@ export default function SelectMetaInfo(props: SelectMetaInfoProps) {    const { 
                 <div className="select-meta-info-component__profile-container">
                     <MiniProfile 
                         item={users} 
-                        context={context}
                         options={{
                             displayFollow: false
                         }}
