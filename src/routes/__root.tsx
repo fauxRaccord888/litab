@@ -1,9 +1,9 @@
 import type { AppStore } from '$lib/stores/store'
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import { useMatches } from "@tanstack/react-router"
-import { Outlet, rootRouteWithContext, ScrollRestoration } from '@tanstack/react-router'
+import { createRootRouteWithContext, useMatches } from "@tanstack/react-router"
+import { Outlet, ScrollRestoration } from '@tanstack/react-router'
 import { getScrollKey } from '$lib/utils/route/getScrollKey'
-import { checkUserAndStore, getUserObservable } from '$feature/auth/utils';
+import { checkUserAndStore } from '$feature/auth/utils';
 
 import Layout from '$lib/layout/Layout'
 import FallbackRoot from '$lib/components/common/FallbackRoot';
@@ -26,13 +26,12 @@ export type RootSearch = {
     accountMenu?: boolean | undefined
 }
 
-export const Route = rootRouteWithContext<RootContext>()({
+export const Route = createRootRouteWithContext<RootContext>()({
     component: RootComponent,
     beforeLoad: async ({context}) => {
-        const { store, apolloClient } = context
+        const { store } = context
         const user = await checkUserAndStore(store)
-        const userObservable = await getUserObservable(user, apolloClient)
-        return { userObservable }
+        return { user }
     },
     validateSearch: (search: Record<string, unknown>): RootSearch => {
         return {
@@ -47,7 +46,6 @@ export const Route = rootRouteWithContext<RootContext>()({
 })
 
 function RootComponent() {
-    const context = Route.useRouteContext()
     const search = Route.useSearch()
     const matches = useMatches();
 
@@ -68,7 +66,7 @@ function RootComponent() {
                 <ScrollRestoration 
                     getKey={(location) => getScrollKey(location)}
                 />
-                <ModalController context={context} search={search} />
+                <ModalController search={search} />
                 <Outlet />
             </Layout>
         </Suspense>
