@@ -30,6 +30,11 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const isMe = currentUser?.id === id
     const followed = followings?.has(id)
 
+    const handleClickProfile = () => {
+        if (!eventHandler.selectProfile) return
+        eventHandler?.selectProfile(mutable_id)
+    }
+
     const coverImage = (
         <ProfileCoverImage 
             id={id} 
@@ -82,7 +87,7 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
         <div className="user-info-card-component">
             <InfoCardTemplate 
                 id={item.id}
-                onClick={eventHandler.selectProfile}
+                onClick={handleClickProfile}
                 renderConfig={renderConfig}
                 components={{
                     coverImage,
