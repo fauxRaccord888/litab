@@ -32,7 +32,8 @@ export default function FeedItem(props: FeedItemProps) {
                     metaInfo: true,
                     mainPentagon: true,
                     description: true,
-                    revision: true
+                    revision: true,
+                    player: false
                 }}
                 options={{
                     displayRevisionIds: [id],

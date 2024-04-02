@@ -6,11 +6,12 @@ import './style/pentagramSelectView.scss'
 type PentagramSelectViewProps = {
     item: DBPentagram_SELECT,
     eventHandler: PentagramEventHandler
+    timestamp?: Date
     options?: PentagramSelectOptions,
 }
 
 export default function PentagramSelectView(props: PentagramSelectViewProps) {
-    const { item, options, eventHandler } = props
+    const { item, eventHandler, timestamp, options } = props
 
     return (
         <div className="pentagram-select-view-component">
@@ -21,11 +22,12 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
                         metaInfo: true,
                         mainPentagon: true,
                         description: true,
-                        revision: true
+                        revision: true,
+                        player: true
                     }}
                     eventHandler={eventHandler}
                     options={{...options}}
-                    timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
+                    timestamp={timestamp ?? new Date(Date.now() + TIME.NOW_OFFSET)}
                 />
             </div>
         </div>
