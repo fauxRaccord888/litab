@@ -11,5 +11,6 @@ export const PENTAGRAM = {
 }
 
 export const TIME = {
-    NOW_OFFSET: 10000
+    NOW_OFFSET: 10000,
+    PLAY_PENTAGRAM_INTERVAL: 300,
 }
