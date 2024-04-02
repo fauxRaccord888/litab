@@ -1,0 +1,38 @@
+@import "src/lib/style/atomicMixin";
+
+.select-player-component {
+    @include flex;
+    @include rounded-lg;
+    @include box-shadow-2(rgba(var(--font-color), 0.5));
+    .select-player-component__inner-container {
+        @include margin-(calc(var(--base-size) * 1.2));
+        @include w-full;
+        @include flex;
+        @include align-center;
+        @include child-left-m(calc(var(--base-size) * 1.2));
+    
+        .select-player-component__play-button {
+            fill: rgba(var(--font-color));
+            width: calc(var(--base-size) * 2.5);
+        }
+    
+        .select-player-component__progress-bar {
+            @include flex;
+            @include rounded-lg;
+            flex-grow: 1;
+            height: min-content;
+            justify-content: space-between;
+            background-color: rgba(var(--font-color), 0.2);
+            .select-player-component__progress-node {
+                @include rounded-full;
+                background-color: rgba(var(--font-color), 0.5);
+                width: calc(var(--base-size) * 0.8);
+                height: calc(var(--base-size) * 0.8);
+    
+                &.select-player-component__progress-node--current {
+                    background-color: rgba(var(--primary), 0.8);
+                }
+            }
+        }
+    }
+}
