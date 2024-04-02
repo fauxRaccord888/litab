@@ -2,8 +2,7 @@ import type { GetPentagramSelectInfoByIdQuery } from '$lib/graphql/__generated__
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { useQuery } from '@apollo/client';
-import { useNavigate } from "@tanstack/react-router"
-import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate, useRedirectOnError } from "$feature/navigate/hooks"
 import { t as translate } from 'i18next'
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
@@ -24,11 +23,14 @@ function PentagramSelect() {
     const { data, error } = useQuery<GetPentagramSelectInfoByIdQuery>(getPentagramSelectInfoById_QUERY, {
         variables: { id: params.pentagramId }
     })
+    const item = getFirstNodeOfCollection(data?.pentagramsCollection)
 
-    const firstNode = getFirstNodeOfCollection(data?.pentagramsCollection)
-    const navigate = useNavigate()
     const pentagramNavigate = usePentagramNavigate();
     const oeuvreNavigate = useOeuvreNavigate();
+    useRedirectOnError(Boolean(
+        (data && !item) 
+        || error
+    ))
 
     const eventHandler: PentagramEventHandler & OeuvreEventHandler = {
         pentagramMenuModal: (pentagramId: string) => pentagramNavigate.pentagramSelectModal(pentagramId),
@@ -37,19 +39,12 @@ function PentagramSelect() {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
-    if (!firstNode) {
-        if (error) {
-            navigate({
-                to: "/error"
-            })
-        }
-        return null
-    }
+    if (!item) return null
 
     return (
         <>
             <PentagramSelectView 
-                item={firstNode} 
+                item={item} 
                 eventHandler={eventHandler}
             />
             <Outlet />
