@@ -23,5 +23,5 @@ export function useCurrentUser() {
 
     const currentUser = getFirstNodeOfCollection(data?.usersCollection)
 
-    return currentUser
+    return sessionUser ? currentUser : null
 }
