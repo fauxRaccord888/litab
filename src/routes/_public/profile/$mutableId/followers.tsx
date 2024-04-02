@@ -3,7 +3,7 @@ import type { DBMiniProfile } from '$feature/Profile/types';
 import type { GetUserByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
-import { useProfileNavigate } from '$feature/navigate/hooks';
+import { useProfileNavigate, useRedirectOnError } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 /* query */
 import { getUserByMutableId_QUERY } from '$feature/Profile/graphql';
@@ -21,7 +21,7 @@ export const Route = createFileRoute('/_public/profile/$mutableId/followers')({
 
 function FollowersModal() {
     const params = Route.useParams()
-    const { data } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
+    const { data, error } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
         variables: { 
             mutableId: params.mutableId, 
             pentagramLimit: NETWORK.readLimit,
@@ -30,13 +30,17 @@ function FollowersModal() {
             revisionCursor: null,
         }
     })
-    const firstNode = getFirstNodeOfCollection(data?.usersCollection)
-    
-    if (!firstNode?.followersCollection) return null
+    const item = getFirstNodeOfCollection(data?.usersCollection)
+    useRedirectOnError(Boolean(
+        (data && !item) 
+        || error
+    ))
+
+    if (!item?.followersCollection) return null
 
     return (
         <FollowersModalComponent 
-            items={firstNode.followersCollection.edges.map((edge) => edge.node.follower_id)}
+            items={item.followersCollection.edges.map((edge) => edge.node.follower_id)}
         />
     )
 }

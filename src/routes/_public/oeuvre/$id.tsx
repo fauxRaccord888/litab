@@ -3,8 +3,7 @@ import type { BaseEventHandler } from "$lib/types/components";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import type { PentagramEventHandler } from "$feature/Pentagram/types";
 import { useQuery } from "@apollo/client";
-import { useNavigate } from "@tanstack/react-router";
-import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks";
+import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, usePentagramNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { t as translate } from 'i18next'
 import { getOeuvreInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
@@ -23,12 +22,6 @@ export const Route = createFileRoute('/_public/oeuvre/$id')({
 
 function Oeuvre() {
     const params = Route.useParams()
-    const navigate = useNavigate()
-    const pentagramNavigate = usePentagramNavigate()
-    const oeuvreNavigate = useOeuvreNavigate()
-    const artistNavigate = useArtistNavigate()
-    const genreNavigate = useGenreNavigate()
-
     const { data, error, fetchMore } = useQuery<GetOeuvreInfoByIdQuery>(getOeuvreInfoById_QUERY, {
         variables: { 
             id: params.id, 
@@ -36,17 +29,16 @@ function Oeuvre() {
             limit: NETWORK.readLimit
         }
     })
-
     const item = getFirstNodeOfCollection(data?.oeuvresCollection)
-
-    if (!item) {
-        if (error) {
-            navigate({
-                to: "/error"
-            })
-        }
-        return null
-    }
+    
+    const pentagramNavigate = usePentagramNavigate()
+    const oeuvreNavigate = useOeuvreNavigate()
+    const artistNavigate = useArtistNavigate()
+    const genreNavigate = useGenreNavigate()
+    useRedirectOnError(Boolean(
+        (data && !item) 
+        || error
+    ))
 
     const eventHandler: BaseEventHandler & OeuvreEventHandler & PentagramEventHandler = {
         handleLoadMore: () => fetchMore({
@@ -63,6 +55,8 @@ function Oeuvre() {
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
         selectGenreTag: (genreId: string) => genreNavigate.select(genreId)
     }
+
+    if (!item) return null
 
     return (
         <div className="profile-container">

@@ -3,8 +3,7 @@ import type { ArtistEventHandler } from "$feature/Artist/types";
 import type { BaseEventHandler } from "$lib/types/components";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import { useQuery } from "@apollo/client";
-import { useNavigate } from "@tanstack/react-router";
-import { useOeuvreNavigate } from "$feature/navigate/hooks";
+import { useOeuvreNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { t as translate } from 'i18next'
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -23,8 +22,6 @@ export const Route = createFileRoute('/_public/artist/$id')({
 
 function Artist() {
     const params = Route.useParams()
-    const navigate = useNavigate()
-    const oeuvreNavigate = useOeuvreNavigate()
     const { data, error, fetchMore } = useQuery<GetArtistInfoByIdQuery>(getArtistInfoById_QUERY, {
         variables: { 
             id: params.id, 
@@ -34,15 +31,12 @@ function Artist() {
     })
     const item = getFirstNodeOfCollection(data?.artistsCollection)
 
-    if (!item) {
-        if (error) {
-            navigate({
-                to: "/error"
-            })
-        }
-        return null
-    }
-
+    const oeuvreNavigate = useOeuvreNavigate()
+    useRedirectOnError(Boolean(
+        (data && !item) 
+        || error
+    ))
+    
     const eventHandler: BaseEventHandler & ArtistEventHandler & OeuvreEventHandler = {
         handleLoadMore: () => fetchMore({
             variables: {
@@ -53,6 +47,8 @@ function Artist() {
         }),
         selectOeuvre: (id: string) => oeuvreNavigate.select(id)
     }
+
+    if (!item) return null
     
     return (
         <div className="profile-container">

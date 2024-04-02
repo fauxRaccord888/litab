@@ -9,8 +9,7 @@ import type { BaseEventHandler } from "$lib/types/components";
 /* hooks */
 import { useCallback } from "react";
 import { useQuery } from "@apollo/client";
-import { useNavigate } from "@tanstack/react-router";
-import { useOeuvreNavigate, usePentagramNavigate, useProfileNavigate } from "$feature/navigate/hooks";
+import { useOeuvreNavigate, usePentagramNavigate, useProfileNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { useHandleFollow } from "$feature/Profile/hooks";
 /* fetch */
 import { getUserByMutableId_QUERY } from "$feature/Profile/graphql";
@@ -29,14 +28,13 @@ export const Route = createFileRoute('/_public/profile/$mutableId')({
     },
 })
 
+type EventHandler = BaseEventHandler<ProfileLoadMorePayload> 
+    & ProfileEventHandler 
+    & PentagramEventHandler 
+    & OeuvreEventHandler 
+
 function Profile() {
     const params = Route.useParams()
-    const navigate = useNavigate()
-    const profileNavigate = useProfileNavigate()
-    const oeuvreNavigate = useOeuvreNavigate()
-    const pentagramNavigate = usePentagramNavigate()
-    const follow = useHandleFollow()
-
     const { data, error, fetchMore } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
         variables: { 
             mutableId: params.mutableId, 
@@ -47,6 +45,15 @@ function Profile() {
         }
     })
     const item = getFirstNodeOfCollection(data?.usersCollection)
+
+    const profileNavigate = useProfileNavigate()
+    const oeuvreNavigate = useOeuvreNavigate()
+    const pentagramNavigate = usePentagramNavigate()
+    const follow = useHandleFollow()
+    useRedirectOnError(Boolean(
+        (data && !item) 
+        || error
+    ))
 
     const handleLoadMore = useCallback((payload: {
         pentagramLimit: number, 
@@ -62,7 +69,7 @@ function Profile() {
         })
     }, [fetchMore, item?.mutable_id, item?.pentagram_revisionsCollection?.pageInfo?.endCursor, item?.pentagramsCollection?.pageInfo?.endCursor])
 
-    const eventHandler: BaseEventHandler<ProfileLoadMorePayload> & ProfileEventHandler & PentagramEventHandler & OeuvreEventHandler = {
+    const eventHandler: EventHandler = {
         follow,
         handleLoadMore,
         profileSelectMenuModal: profileNavigate.profileSelectMenuModal,
@@ -75,14 +82,7 @@ function Profile() {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
-    if (!item) {
-        if (error) {
-            navigate({
-                to: "/error"
-            })
-        }
-        return null
-    }
+    if (!item) return null
 
     return (
         <>

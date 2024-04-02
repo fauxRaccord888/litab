@@ -3,7 +3,7 @@ import type { DBMiniProfile } from '$feature/Profile/types';
 import type { GetUserByMutableIdQuery } from '$lib/graphql/__generated__/graphql';
 /* hooks */
 import { useQuery } from '@apollo/client';
-import { useProfileNavigate } from '$feature/navigate/hooks';
+import { useProfileNavigate, useRedirectOnError } from '$feature/navigate/hooks';
 import { useTranslation } from 'react-i18next';
 import { useCurrentUser } from '$feature/auth/hooks';
 /* query */
@@ -23,7 +23,7 @@ export const Route = createFileRoute('/_public/profile/$mutableId/mutualFollower
 
 function FollowersModal() {
     const params = Route.useParams()
-    const { data } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
+    const { data, error } = useQuery<GetUserByMutableIdQuery>(getUserByMutableId_QUERY, {
         variables: { 
             mutableId: params.mutableId, 
             pentagramLimit: NETWORK.readLimit,
@@ -33,8 +33,12 @@ function FollowersModal() {
         }
     })
     const targetUser = getFirstNodeOfCollection(data?.usersCollection)
-    const currentUser = useCurrentUser()
+    useRedirectOnError(Boolean(
+        (data && !targetUser) 
+        || error
+    ))
 
+    const currentUser = useCurrentUser()
     const followings = calcFollowings(currentUser)
     const mutualFollowers = calcMutualFollowers(currentUser, targetUser, followings)
     
