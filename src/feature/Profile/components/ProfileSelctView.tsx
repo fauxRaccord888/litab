@@ -56,7 +56,8 @@ export default function ProfileSelectView(props: {
                     metaInfo: true,
                     mainPentagon: true,
                     description: false,
-                    revision: false
+                    revision: false,
+                    player: false
                 }}
                 eventHandler={eventHandler}
                 options={{}}

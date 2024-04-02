@@ -3,6 +3,7 @@ import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
+import SelectPlayer from "./SelectPlayer";
 import SelectDescription from "./SelectDescription";
 import SelectRevisionList from "./SelectRevisionList";
 import './style/pentagramSelectView.scss'
@@ -36,6 +37,15 @@ export default function PentagramCard(props: PentagramCardProps) {
                     />
                 }
             </div>
+            {renderConfig.player &&
+                <div className="pentagram-card-component__description-container">
+                    <SelectPlayer 
+                        timestamp={timestamp}
+                        pentagram_revisionsCollection={pentagram_revisionsCollection} 
+                        eventHandler={eventHandler} 
+                    />
+                </div>
+            }
             {renderConfig.description &&
                 <div className="pentagram-card-component__description-container">
                     <SelectDescription description={description}/>

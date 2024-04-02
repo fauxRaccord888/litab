@@ -2,6 +2,7 @@ import type { GetPentagramSelectInfoByIdQuery } from '$lib/graphql/__generated__
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { useQuery } from '@apollo/client';
+import { usePentagramPlayer } from '$feature/Pentagram/hooks';
 import { useOeuvreNavigate, usePentagramNavigate, useRedirectOnError } from "$feature/navigate/hooks"
 import { t as translate } from 'i18next'
 import { getPentagramSelectInfoById_QUERY } from '$feature/Pentagram/graphql';
@@ -27,6 +28,7 @@ function PentagramSelect() {
 
     const pentagramNavigate = usePentagramNavigate();
     const oeuvreNavigate = useOeuvreNavigate();
+    const { timestamp, handlePlayPentagram, handleSetTimestamp } = usePentagramPlayer(item)
     useRedirectOnError(Boolean(
         (data && !item) 
         || error
@@ -37,6 +39,8 @@ function PentagramSelect() {
         nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
+        setTimestamp: handleSetTimestamp,
+        playPentagram: handlePlayPentagram
     }
 
     if (!item) return null
@@ -45,6 +49,7 @@ function PentagramSelect() {
         <>
             <PentagramSelectView 
                 item={item} 
+                timestamp={timestamp}
                 eventHandler={eventHandler}
             />
             <Outlet />

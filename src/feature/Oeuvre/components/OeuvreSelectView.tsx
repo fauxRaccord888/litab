@@ -43,7 +43,8 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                     metaInfo: true,
                     mainPentagon: true,
                     description: false,
-                    revision: false
+                    revision: false,
+                    player: false
                 }}
                 eventHandler={eventHandler}
                 options={{}}
