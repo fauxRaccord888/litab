@@ -5,7 +5,6 @@ import type { BaseEventHandler } from '$lib/types/components';
 
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TIME } from '$feature/Pentagram/constants';
 import { NETWORK } from '$lib/constants';
 
 import SelectViewTemplate from '$feature/template/components/SelectViewTemplate';
@@ -61,7 +60,6 @@ export default function ProfileSelectView(props: {
                 }}
                 eventHandler={eventHandler}
                 options={{}}
-                timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
             />
         )) || []
     ), [eventHandler, item?.pentagramsCollection?.edges])
