@@ -1,3 +1,4 @@
+export * from './animation'
 export * from './components'
 export * from './event'
 export * from './mutation'
