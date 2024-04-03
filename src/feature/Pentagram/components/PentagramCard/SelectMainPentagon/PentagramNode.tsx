@@ -30,7 +30,7 @@ export default function PentagramNode(props: PentagramNodeProps) {
             !deleted &&
             typeof angle === 'number' &&
             typeof distance === 'number' &&
-                <PositionAdjuster angle={angle} distance={distance}>
+                <PositionAdjuster position={{angle, distance, deleted: false}}>
                     <div
                         className="pentagram-node-component"
                         onClick={onClickNode}
