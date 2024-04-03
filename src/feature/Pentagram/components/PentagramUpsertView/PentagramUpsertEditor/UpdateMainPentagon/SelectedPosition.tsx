@@ -34,7 +34,7 @@ export default function SelectedPosition(props: SelectedPositionProps) {
             {
                 typeof angle === 'number' && 
                 typeof distance === 'number' &&
-                <PositionAdjuster angle={angle} distance={distance}>
+                <PositionAdjuster position={{ angle, distance, deleted: false }}>
                     <div 
                         onClick={onClickSelectedPosition}
                         draggable={true}

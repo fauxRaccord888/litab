@@ -38,7 +38,6 @@ export default function FeedItem(props: FeedItemProps) {
                 options={{
                     displayRevisionIds: [id],
                 }}
-                timestamp={new Date(item.created_at)}
                 eventHandler={eventHandler}
             />
         )

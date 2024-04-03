@@ -1,5 +1,6 @@
-import type { DBPentagram_SELECT, PentagramEventHandler, PentagramSelectOptions, PentagramSelectRenderConfig } from "../../types";
+import type { DBPentagram_SELECT, PentagramEventHandler, PentagramPlayerEventHandler, PentagramSelectOptions, PentagramSelectRenderConfig } from "../../types";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
+import { usePentagramPlayer } from "$feature/Pentagram/hooks";
 
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
@@ -13,12 +14,17 @@ export type PentagramCardProps = {
     options: PentagramSelectOptions,
     renderConfig: PentagramSelectRenderConfig,
     eventHandler: PentagramEventHandler & OeuvreEventHandler,
-    timestamp: Date
 }
 
 export default function PentagramCard(props: PentagramCardProps) {
-    const { item, renderConfig, options, eventHandler, timestamp } = props
+    const { item, renderConfig, options, eventHandler } = props
+    const { timestamp, isPlaying, handlePlayPentagram, handleSetTimestamp } = usePentagramPlayer(item)
     const { id, users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
+
+    const playerEventHandler: PentagramPlayerEventHandler = {
+        playPentagram: handlePlayPentagram,
+        setTimestamp: handleSetTimestamp
+    }
 
     return (
         <div className="pentagram-card-component">
@@ -41,8 +47,9 @@ export default function PentagramCard(props: PentagramCardProps) {
                 <div className="pentagram-card-component__description-container">
                     <SelectPlayer 
                         timestamp={timestamp}
+                        isPlaying={isPlaying}
                         pentagram_revisionsCollection={pentagram_revisionsCollection} 
-                        eventHandler={eventHandler} 
+                        eventHandler={playerEventHandler} 
                     />
                 </div>
             }

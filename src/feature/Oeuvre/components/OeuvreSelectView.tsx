@@ -3,7 +3,6 @@ import type { BaseEventHandler } from '$lib/types/components';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TIME } from '$feature/Pentagram/constants';
 
 import SelectViewTemplate from '$feature/template/components/SelectViewTemplate';
 import OeuvreInfoCard from './common/OeuvreInfoCard';
@@ -48,7 +47,6 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                 }}
                 eventHandler={eventHandler}
                 options={{}}
-                timestamp={new Date(Date.now() + TIME.NOW_OFFSET)}
             />
         )) || []
     ), [eventHandler, item?.pentagram_nodesCollection?.edges])

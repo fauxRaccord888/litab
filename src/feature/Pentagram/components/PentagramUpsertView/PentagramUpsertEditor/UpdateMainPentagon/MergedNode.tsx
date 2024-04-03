@@ -43,7 +43,7 @@ export default function MergedNode(props: MergedNodeProps) {
     return (
         <>
             {item &&
-                <PositionAdjuster behind={deleted} angle={angle} distance={distance}>
+                <PositionAdjuster behind={deleted} position={{ angle, distance, deleted }}>
                     <div
                         className={className}
                         // selecte node event

@@ -1,4 +1,5 @@
 import type { CSSProperties, PropsWithChildren } from 'react';
+import type { PentagramNodePosition } from '../../types';
 import './style/positionAdjuster.scss'
 
 interface NodeStyle extends CSSProperties {
@@ -7,17 +8,16 @@ interface NodeStyle extends CSSProperties {
 }
 
 interface PositionAdjusterProps extends PropsWithChildren{
-    angle: number,
-    distance: number, 
+    position: PentagramNodePosition
     behind?: boolean | null | undefined
 }
 
 export default function PositionAdjuster(props: PositionAdjusterProps) {
-    const { angle, distance, behind, ...restProps } = props
+    const { position, behind, ...restProps } = props
 
     const style: NodeStyle = {
-        '--distance-multiplier': (distance || 0) / 100,
-        '--degrees': `${angle || 0}deg`
+        '--distance-multiplier': (position.distance || 0) / 100,
+        '--degrees': `${position.angle || 0}deg`
     }
 
     return (

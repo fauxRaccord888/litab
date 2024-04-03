@@ -3,12 +3,15 @@ import { getUnionedChanges } from '.';
 
 export function getSnapshot(
     unionedChanges: ReturnType<typeof getUnionedChanges>,
-    timestamp: Date
+    timestamp: Date,
+    calcBeforePosition?: boolean
 ) {
     const position = unionedChanges.find((change) => {
         if (!change) return false
         if (!change?.created_at) return false
-        if (new Date(change?.created_at) > timestamp) return false
+        const date = new Date(change?.created_at)
+        if (date > timestamp) return false
+        if (calcBeforePosition && date >= timestamp) return false
         if (typeof change?.current_angle !== 'number') return false
         if (typeof change?.current_distance !== 'number') return false
         return true

@@ -1,16 +1,17 @@
-import type { DBPentagram_SELECT, PentagramEventHandler } from "../../../types";
+import type { DBPentagram_SELECT, PentagramPlayerEventHandler } from "../../../types";
 import { useMemo } from "react";
 import PlayIcon from '$lib/components/icons/PlayIcon';
 import "./style/selectPlayer.scss"
 
 type SelectPlayerProps = {
     timestamp: Date
+    isPlaying: boolean
     pentagram_revisionsCollection: DBPentagram_SELECT["pentagram_revisionsCollection"],
-    eventHandler: PentagramEventHandler
+    eventHandler: PentagramPlayerEventHandler
 }
 
 export default function SelectPlayer(props: SelectPlayerProps) {    
-    const { timestamp, pentagram_revisionsCollection, eventHandler } = props
+    const { timestamp, isPlaying, pentagram_revisionsCollection, eventHandler } = props
 
     const timestamps = useMemo(() => (
         pentagram_revisionsCollection?.edges
@@ -33,7 +34,13 @@ export default function SelectPlayer(props: SelectPlayerProps) {
     return (
         <div className="select-player-component">
             <div className="select-player-component__inner-container">
-                <div className="select-player-component__play-button" onClick={onClickPlay}>
+                <div 
+                    className={[
+                        "select-player-component__play-button",
+                        isPlaying ? "select-player-component__play-button--playing" : ""
+                    ].join(" ")}
+                    onClick={onClickPlay}
+                >
                     <PlayIcon />
                 </div>
                 <div className="select-player-component__progress-bar">
