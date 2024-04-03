@@ -1,4 +1,5 @@
 import type { CSSProperties, PropsWithChildren } from 'react';
+import type { PentagramNodePosition } from '../../types';
 import './style/positionAdjuster.scss'
 
 interface NodeStyle extends CSSProperties {
