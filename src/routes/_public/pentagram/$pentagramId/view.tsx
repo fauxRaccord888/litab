@@ -46,6 +46,9 @@ function PentagramSelect() {
             <PentagramSelectView 
                 item={item} 
                 eventHandler={eventHandler}
+                options={{
+                    enableAnimation: true
+                }}
             />
             <Outlet />
         </>
