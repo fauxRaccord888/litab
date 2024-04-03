@@ -10,6 +10,7 @@ export type DBPentagramRevisions = PentagramRevisionsMinimalInfoFragment
 export type PentagramSelectRenderConfig = ISlotRenderConfig<"metaInfo" | "mainPentagon" | "description" | "revision" | "player">
 export type PentagramSelectOptions = {
     displayRevisionIds?: string[] | null | undefined,
+    forcedTimestamp?: Date | null | undefined
     enableAnimation?: boolean
 }
 
