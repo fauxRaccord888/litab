@@ -1,35 +1,38 @@
-import type { CSSProperties, PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import type { PentagramNodePosition } from '../../types';
+import { useSpring } from '@react-spring/web';
+import { useCSSVariables } from '$lib/hooks/useCSSVariables';
+import { animated } from '@react-spring/web';
+import { calcPositionAdjusterAnimation } from './animation';
 import './style/positionAdjuster.scss'
-
-interface NodeStyle extends CSSProperties {
-    '--distance-multiplier': number,
-    '--degrees': string
-}
 
 interface PositionAdjusterProps extends PropsWithChildren{
     position: PentagramNodePosition
+    prevPosition?: PentagramNodePosition
     behind?: boolean | null | undefined
+    enableAnimation?: boolean
 }
 
 export default function PositionAdjuster(props: PositionAdjusterProps) {
-    const { position, behind, ...restProps } = props
+    const { position, prevPosition, behind, enableAnimation, ...restProps } = props
+    const STYLE = useCSSVariables()
 
-    const style: NodeStyle = {
-        '--distance-multiplier': (position.distance || 0) / 100,
-        '--degrees': `${position.angle || 0}deg`
-    }
-
+    const positionAdjusterAnimation = calcPositionAdjusterAnimation({
+        position, prevPosition, enableAnimation, STYLE
+    })
+    
+    const springProps = useSpring(positionAdjusterAnimation)
+    
     return (
-        <div 
+        <animated.div
             {...restProps}
-            style={style}
+            style={springProps}
             className={[
                 "position-adjuster-component", 
                 behind ? "position-adjuster-component--behind" : ""
             ].join(" ")}
         >
             {props.children}
-        </div>
+        </animated.div>
     )
 }
