@@ -16,6 +16,15 @@ export type PentagramEventHandler = {
     pentagramMenuModal?: (pentagramId: string) => void,
     nodeSelectModal?: (nodeId: string) => void,
     revisionSelectModal?: (revisionId: string) => void,
+}
+
+export type PentagramPlayerEventHandler = {
     setTimestamp?: (date: Date) => void
     playPentagram?: (interval?: number) => void
+}
+
+export type PentagramNodePosition = {
+    angle: number | null | undefined;
+    distance: number | null | undefined;
+    deleted: boolean | null | undefined;
 }
