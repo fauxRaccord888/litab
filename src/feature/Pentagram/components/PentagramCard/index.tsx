@@ -38,6 +38,7 @@ export default function PentagramCard(props: PentagramCardProps) {
                 {renderConfig.mainPentagon && 
                     <SelectMainPentagon 
                         timestamp={timestamp}
+                        options={options}
                         eventHandler={eventHandler}
                         pentagram_nodesCollection={pentagram_nodesCollection}
                     />

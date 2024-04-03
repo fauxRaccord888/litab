@@ -56,10 +56,12 @@ export default function ProfileSelectView(props: {
                     mainPentagon: true,
                     description: false,
                     revision: false,
-                    player: false
+                    player: true
                 }}
                 eventHandler={eventHandler}
-                options={{}}
+                options={{
+                    enableAnimation: true
+                }}
             />
         )) || []
     ), [eventHandler, item?.pentagramsCollection?.edges])
