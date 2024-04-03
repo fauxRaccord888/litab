@@ -26,34 +26,53 @@ export function usePentagramPlayer(pentagram: DBPentagram_SELECT | undefined | n
     const timestampRef = useRef<DoubleLinkedNode<Date>>(initialTimestamp)
     const intervalRef = useRef<(() => void) | null>(null)
     const [timestamp, setTimestamp] = useState<Date>(timestampRef.current.value)
+    const [isPlaying, setIsPlaying] = useState(false)
 
     const slideNext = useCallback(() => {
-        const { value, next } = timestampRef.current
-        if (value) setTimestamp(value)
-
-        if (next) timestampRef.current = next
-        else if (intervalRef.current) intervalRef.current()
+        const { next } = timestampRef.current
+        
+        if (next) {
+            timestampRef.current = next
+            if (next.value) setTimestamp(next.value)
+        } else if (intervalRef.current) {
+            intervalRef.current()
+            intervalRef.current = null
+            setIsPlaying(false)
+        }
     }, [])
 
-    const handlePlayPentagram = useCallback((playInterval = TIME.PLAY_PENTAGRAM_INTERVAL) => {
+    const handlePlayPentagram = useCallback(() => {
         if (!timestamps) return
-        if (intervalRef.current) intervalRef.current()
+        if (intervalRef.current) {
+            intervalRef.current()
+            intervalRef.current = null
+            setIsPlaying(false)
+            return
+        }
 
+        setIsPlaying(true)
         if (!timestampRef.current.next) {
             timestampRef.current = timestamps[0]
         }
+        if (timestampRef.current.value) {
+            setTimestamp(timestampRef.current.value)
+        }
 
-        const interval = setInterval(() => slideNext(), playInterval)        
+        const interval = setInterval(() => slideNext(), TIME.PLAY_PENTAGRAM_INTERVAL)        
         intervalRef.current = () => clearInterval(interval)
     }, [slideNext, timestamps])
 
     const handleSetTimestamp = (date: Date) => {
-        if (intervalRef.current) intervalRef.current()
+        if (intervalRef.current) {
+            intervalRef.current()
+            intervalRef.current = null
+            setIsPlaying(false)
+        }
         const timestampDLN = timestampMap.get(date.getTime().toString())
         if (!timestampDLN) return
         timestampRef.current = timestampDLN
         setTimestamp(timestampRef.current.value)
     }
 
-    return { timestamp, handlePlayPentagram, handleSetTimestamp }
+    return { timestamp, isPlaying, handlePlayPentagram, handleSetTimestamp }
 }
