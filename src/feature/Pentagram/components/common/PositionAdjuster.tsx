@@ -9,12 +9,12 @@ import './style/positionAdjuster.scss'
 interface PositionAdjusterProps extends PropsWithChildren{
     position: PentagramNodePosition
     prevPosition?: PentagramNodePosition
-    behind?: boolean | null | undefined
     enableAnimation?: boolean
+    shadowDeleted?: boolean | null | undefined
 }
 
 export default function PositionAdjuster(props: PositionAdjusterProps) {
-    const { position, prevPosition, behind, enableAnimation, ...restProps } = props
+    const { position, prevPosition, enableAnimation, shadowDeleted, ...restProps } = props
     const STYLE = useCSSVariables()
 
     const positionAdjusterAnimation = calcPositionAdjusterAnimation({
@@ -29,7 +29,7 @@ export default function PositionAdjuster(props: PositionAdjusterProps) {
             style={springProps}
             className={[
                 "position-adjuster-component", 
-                behind ? "position-adjuster-component--behind" : ""
+                shadowDeleted ? "position-adjuster-component--shadowDeleted" : ""
             ].join(" ")}
         >
             {props.children}
