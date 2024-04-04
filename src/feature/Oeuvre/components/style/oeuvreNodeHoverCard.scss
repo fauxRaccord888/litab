@@ -1,0 +1,21 @@
+@use "src/lib/style/variables";
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/mixin";
+
+
+.oeuvre-node-hover-card-component {
+    position: absolute;
+    left: 0;
+    top:0;
+}
+
+.oeuvre-node-hover-card-component__hover-card-inner-container {
+    --node: #{variables.$node_small}px;
+    --base-size: 0.5rem;
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include wide-hovercard(var(--node));
+    @media only screen and (min-width: 500px) {
+        --node: #{variables.$node_medium}px;
+        --base-size: 1rem;
+    }
+}

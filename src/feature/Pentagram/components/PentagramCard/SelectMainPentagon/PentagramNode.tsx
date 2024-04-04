@@ -1,9 +1,11 @@
 import type { MouseEventHandler } from 'react';
 import type { DBPentagramNodes, PentagramEventHandler, PentagramSelectOptions } from '../../../types';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
+import { useHover } from '$lib/hooks';
 import { getSnapshot, getUnionedChanges } from '../../../utils';
 import PositionAdjuster from '../../common/PositionAdjuster';
 import OeuvreNode from '$feature/Oeuvre/components/OeuvreNode';
+import OeuvreNodeHoverCard from '$feature/Oeuvre/components/OeuvreNodeHoverCard';
 
 import "./style/pentagramNode.scss"
 
@@ -16,6 +18,8 @@ type PentagramNodeProps = {
 
 export default function PentagramNode(props: PentagramNodeProps) {
     const { item, timestamp, options, eventHandler } = props
+    const hoverHook = useHover()
+
     const unionedChanges = getUnionedChanges(item)
     const { id, oeuvres } = item
     const position= getSnapshot(unionedChanges, timestamp)
@@ -40,7 +44,8 @@ export default function PentagramNode(props: PentagramNodeProps) {
                         className="pentagram-node-component"
                         onClick={onClickNode}
                     >
-                        <OeuvreNode item={oeuvres} enableHover={true} eventHandler={eventHandler} />
+                        <OeuvreNode item={oeuvres} hoverHook={hoverHook} />
+                        <OeuvreNodeHoverCard item={oeuvres} hoverHook={hoverHook} eventHandler={eventHandler} />
                     </div>
                 </PositionAdjuster>
             }
