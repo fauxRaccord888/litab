@@ -17,10 +17,7 @@ export default function PositionAdjuster(props: PositionAdjusterProps) {
     const { position, prevPosition, enableAnimation, shadowDeleted, ...restProps } = props
     const STYLE = useCSSVariables()
 
-    const positionAdjusterAnimation = calcPositionAdjusterAnimation({
-        position, prevPosition, enableAnimation, STYLE
-    })
-    
+    const positionAdjusterAnimation = calcPositionAdjusterAnimation({ position, prevPosition, enableAnimation, shadowDeleted, STYLE })
     const springProps = useSpring(positionAdjusterAnimation)
     
     return (
