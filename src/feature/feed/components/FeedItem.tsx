@@ -31,7 +31,6 @@ export default function FeedItem(props: FeedItemProps) {
                 renderConfig={{
                     metaInfo: true,
                     mainPentagon: true,
-                    description: true,
                     revision: true,
                     player: false
                 }}

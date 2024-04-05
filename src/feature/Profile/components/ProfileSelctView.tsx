@@ -54,7 +54,6 @@ export default function ProfileSelectView(props: {
                 renderConfig={{
                     metaInfo: true,
                     mainPentagon: true,
-                    description: false,
                     revision: false,
                     player: true
                 }}

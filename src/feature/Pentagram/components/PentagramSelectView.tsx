@@ -19,7 +19,6 @@ export default function PentagramSelectView(props: PentagramSelectViewProps) {
                     renderConfig={{
                         metaInfo: true,
                         mainPentagon: true,
-                        description: true,
                         revision: true,
                         player: true
                     }}
