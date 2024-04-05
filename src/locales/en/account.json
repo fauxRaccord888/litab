@@ -27,7 +27,8 @@
             "updateProfile": "Updating profile.",
             "uploadCover": "Uploading cover image.",
             "register": "Waiting for account creation.",
-            "signIn": "Checking account information on the server."
+            "signIn": "Checking account information on the server.",
+            "follow": "Following/unfollowing..."
         },
         "success": {
             "signOut": "Logged out successfully.",
@@ -35,7 +36,8 @@
             "updateProfile": "Profile update completed.",
             "uploadCover": "Cover image uploaded.",
             "register": "Account created.",
-            "signIn": "Logged in successfully."
+            "signIn": "Logged in successfully.",
+            "follow": "Followed/unfollowed successfully"
         },
         "error": {
             "signOut": "Failed to log out.",
