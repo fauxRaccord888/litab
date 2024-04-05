@@ -9,7 +9,7 @@ import type { BaseEventHandler } from "$lib/types/components";
 /* hooks */
 import { useCallback } from "react";
 import { useQuery } from "@apollo/client";
-import { useOeuvreNavigate, usePentagramNavigate, useProfileNavigate, useRedirectOnError } from "$feature/navigate/hooks";
+import { useAccountNavigate, useOeuvreNavigate, usePentagramNavigate, useProfileNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { useHandleFollow } from "$feature/Profile/hooks";
 /* fetch */
 import { getUserByMutableId_QUERY } from "$feature/Profile/graphql";
@@ -49,7 +49,8 @@ function Profile() {
     const profileNavigate = useProfileNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
     const pentagramNavigate = usePentagramNavigate()
-    const follow = useHandleFollow()
+    const accountNavigate = useAccountNavigate()
+    const handleFollow = useHandleFollow()
     useRedirectOnError(Boolean(
         (data && !item) 
         || error
@@ -69,9 +70,16 @@ function Profile() {
         })
     }, [fetchMore, item?.mutable_id, item?.pentagram_revisionsCollection?.pageInfo?.endCursor, item?.pentagramsCollection?.pageInfo?.endCursor])
 
+    const onFollow = (id: string) => {
+        handleFollow(
+            id, 
+            () => accountNavigate.accountMenuModal()
+        )
+    }
+
     const eventHandler: EventHandler = {
-        follow,
         handleLoadMore,
+        follow: onFollow,
         profileSelectMenuModal: profileNavigate.profileSelectMenuModal,
         followersModal: profileNavigate.followersModal,
         followingsModal: profileNavigate.followingsModal,
