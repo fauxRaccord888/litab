@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useApolloClient } from "@apollo/client";
 import { useCurrentUser } from "$feature/auth/hooks/useCurrentUser";
-import { useDescription, useUnmergedChangeInfo } from "../..";
+import { useUnmergedChangeInfo } from "../..";
 
 import { supabaseClient } from "$lib/supabase";
 import { abortChanges } from "../../../store/pentagramUpsertSlice";
@@ -22,7 +22,6 @@ export function useMutationHandler() {
     const changes = useUnmergedChangeInfo()
     const filteredChanges = filterChanges(changes)
 
-    const description = useDescription()
     const {
         processedUpsertChanges,
         processedUpdateChanges,
@@ -37,9 +36,6 @@ export function useMutationHandler() {
         setPending(true)
         const { data, error } = await supabaseClient
             .rpc('batched_insert_pentagram', {
-                pentagram: {
-                    description: description || ""
-                },
                 upsert_changes: processedUpsertChanges,
             })
 
@@ -70,7 +66,7 @@ export function useMutationHandler() {
 
         dispatch(abortChanges())
         return data
-    }, [pending, description, processedUpsertChanges, apolloClient, currentUser, dispatch])
+    }, [pending, processedUpsertChanges, apolloClient, currentUser, dispatch])
 
     const handleUpdatePentagram = useCallback(async (pentagramId: string) => {
         if (pending) throw new PendingError()
@@ -78,9 +74,6 @@ export function useMutationHandler() {
         const { data, error } = await supabaseClient
             .rpc('batched_update_pentagram', {
                 pentagram_id: pentagramId,
-                pentagram: {
-                    description: description || ""
-                },
                 upsert_changes: processedUpsertChanges,
                 update_changes: processedUpdateChanges,
                 remove_changes: processedRemoveChanges,
@@ -114,7 +107,7 @@ export function useMutationHandler() {
 
         dispatch(abortChanges())
         return data
-    }, [apolloClient, currentUser, description, dispatch, pending, processedRecoverChanges, processedRemoveChanges, processedUpdateChanges, processedUpsertChanges])
+    }, [apolloClient, currentUser, dispatch, pending, processedRecoverChanges, processedRemoveChanges, processedUpdateChanges, processedUpsertChanges])
 
 
     return { handleInsertPentagram, handleUpdatePentagram }
