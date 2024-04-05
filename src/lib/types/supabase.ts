@@ -588,7 +588,6 @@ export type Database = {
           }
       batched_insert_pentagram: {
         Args: {
-          pentagram: Database["public"]["CompositeTypes"]["pentagrams_update_input"]
           upsert_changes: Database["public"]["CompositeTypes"]["pentagrams_upsert_changes"][]
         }
         Returns: string
@@ -596,7 +595,6 @@ export type Database = {
       batched_update_pentagram: {
         Args: {
           pentagram_id: string
-          pentagram: Database["public"]["CompositeTypes"]["pentagrams_update_input"]
           upsert_changes: Database["public"]["CompositeTypes"]["pentagram_upsert_changes"][]
           update_changes: Database["public"]["CompositeTypes"]["pentagram_update_changes"][]
           remove_changes: Database["public"]["CompositeTypes"]["pentagram_remove_changes"][]
@@ -676,9 +674,6 @@ export type Database = {
         previous_distance: number | null
         current_angle: number | null
         current_distance: number | null
-      }
-      pentagrams_update_input: {
-        description: string | null
       }
       pentagrams_upsert_changes: {
         current_angle: number | null
