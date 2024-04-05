@@ -9,17 +9,25 @@ import './style/positionAdjuster.scss'
 interface PositionAdjusterProps extends PropsWithChildren{
     position: PentagramNodePosition
     prevPosition?: PentagramNodePosition
+    inView: boolean
     enableAnimation?: boolean
     shadowDeleted?: boolean | null | undefined
 }
 
 export default function PositionAdjuster(props: PositionAdjusterProps) {
-    const { position, prevPosition, enableAnimation, shadowDeleted, ...restProps } = props
+    const { position, prevPosition, inView, enableAnimation, shadowDeleted, ...restProps } = props
     const STYLE = useCSSVariables()
 
-    const positionAdjusterAnimation = calcPositionAdjusterAnimation({ position, prevPosition, enableAnimation, shadowDeleted, STYLE })
+    const positionAdjusterAnimation = calcPositionAdjusterAnimation({ 
+        position, 
+        prevPosition, 
+        inView,
+        enableAnimation, 
+        shadowDeleted, 
+        STYLE 
+    })
     const springProps = useSpring(positionAdjusterAnimation)
-    
+
     return (
         <animated.div
             {...restProps}

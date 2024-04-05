@@ -11,13 +11,14 @@ import "./style/pentagramNode.scss"
 
 type PentagramNodeProps = {
     item: DBPentagramNodes,
+    inView: boolean
     timestamp: Date
     options: PentagramSelectOptions
     eventHandler: PentagramEventHandler & OeuvreEventHandler
 }
 
 export default function PentagramNode(props: PentagramNodeProps) {
-    const { item, timestamp, options, eventHandler } = props
+    const { item, inView, timestamp, options, eventHandler } = props
     const hoverHook = useHover()
 
     const unionedChanges = getUnionedChanges(item)
@@ -36,6 +37,7 @@ export default function PentagramNode(props: PentagramNodeProps) {
             typeof position.angle === 'number' &&
             typeof position.distance === 'number' &&
                 <PositionAdjuster 
+                    inView={inView}
                     enableAnimation={options.enableAnimation}
                     position={position}
                     prevPosition={prevPosition}
