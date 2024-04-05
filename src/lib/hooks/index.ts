@@ -1,4 +1,5 @@
 export * from './useHover'
 export * from './useTranslatedRelativeTime'
+export * from './useIntersectionObserver'
 export * from './useThrottle'
 export * from './toaster'
