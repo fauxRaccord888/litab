@@ -59,7 +59,7 @@ export default function MergedNode(props: MergedNodeProps) {
                         onDragOver={(e) => e.preventDefault()}
                     >
                         <OeuvreNode item={oeuvres} hoverHook={hoverHook} />
-                        <OeuvreNodeHoverCard item={oeuvres} hoverHook={hoverHook} eventHandler={eventHandler} />
+                        {!selected && <OeuvreNodeHoverCard item={oeuvres} hoverHook={hoverHook} eventHandler={eventHandler} />}
                     </div>
                 </PositionAdjuster>
             }
