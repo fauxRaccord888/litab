@@ -8,25 +8,28 @@ import { calcTransformValueFromPosition } from "../../../utils"
 export function calcPositionAdjusterAnimation(payload: {
     position: PentagramNodePosition,
     prevPosition?: PentagramNodePosition | undefined,
+    inView: boolean,
     enableAnimation?: boolean,
     shadowDeleted?: boolean | null | undefined
     STYLE: ReturnType<typeof useCSSVariables>
 }) {
-    const { position, prevPosition, enableAnimation, shadowDeleted, STYLE } = payload
+    const { position, prevPosition, inView, enableAnimation, shadowDeleted, STYLE } = payload
     const { transformX, transformY } = calcTransformValueFromPosition(position, STYLE)
     const { transformX: prevX, transformY: prevY } = calcTransformValueFromPosition(prevPosition, STYLE)
     const isValidCurPosition = typeof transformX === 'number' && typeof transformY === 'number'
     const isValidPrevPosition = typeof prevX === 'number' && typeof prevY === 'number'
 
-    const fromScale = (!isValidPrevPosition || prevPosition?.deleted) ? 0 : 1
-    const fromTranslate = (enableAnimation && isValidPrevPosition)
-        ? `${prevX}px, ${prevY}px`
-        : `${transformX}px, ${transformY}px` 
+    const prevTranslate = `${prevX}px, ${prevY}px`
+    const curTranslate = `${transformX}px, ${transformY}px` 
+
+    const fromScale = isValidPrevPosition && !prevPosition?.deleted ? 1 : 0
+    const fromTranslate = (enableAnimation && isValidPrevPosition) ? prevTranslate : curTranslate
 
     const toScale = shadowDeleted ? 1
-        : (!isValidCurPosition || position.deleted) ?  0 
-        : 1
-    const toTranslate = `${transformX}px, ${transformY}px`
+        : !inView ? fromScale
+        : isValidCurPosition && !position.deleted ?  1 
+        : 0
+    const toTranslate = (enableAnimation && isValidPrevPosition && !inView) ? prevTranslate : curTranslate
 
     return {
         from: { 

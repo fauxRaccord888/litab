@@ -2,5 +2,11 @@
 
 .select-main-pentagon-component {
     @include flex;
+    @include flex-col;
     @include flex-center;
+
+    .select-main-pentagon-component__sentinel {
+        width: 0px;
+        height: 0px;
+    }
 }
