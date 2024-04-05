@@ -21,7 +21,9 @@ export function getSnapshot(
         .find((change) => {
             if (!change) return false
             if (!change?.created_at) return false
-            if (new Date(change?.created_at) > timestamp) return false
+            const date = new Date(change?.created_at)
+            if (date > timestamp) return false
+            if (calcBeforePosition && date >= timestamp) return false
             return true
         })
         ?.changeType === 'remove'
