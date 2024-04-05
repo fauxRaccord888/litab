@@ -4,32 +4,24 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { usePentagramNavigate } from "$feature/navigate/hooks"
-import { abortChanges, pendingChangeSelector, setDescription, setPentagramId } from "$feature/Pentagram/store/pentagramUpsertSlice"
+import { abortChanges, pendingChangeSelector, setPentagramId } from "$feature/Pentagram/store/pentagramUpsertSlice"
 import Modal from "$feature/portal/components/Modal"
 import Button from "$lib/components/common/Button"
 import "./style/loadStoredChangeDialog.scss"
 
 export default function LoadStoredChangeDialog(props: { 
     pentagramId: string | null, 
-    description: string | null 
 }) {
-    const { pentagramId, description } = props
+    const { pentagramId } = props
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const [loaded, setLoaded] = useState(false)
 
     const storedPentagramId = useSelector((state: AppRootState) => state.pentagramUpsert.pentagramId)
-    const storedDescription = useSelector((state: AppRootState) => state.pentagramUpsert.description)
     const changes = useSelector((state: AppRootState) => pendingChangeSelector.selectAll(state))
     const navigate = usePentagramNavigate()
 
-    // COMMENT storedDescription이 존재하는지 확인하는 기능
-    // 공백 문자열 역시 사용자의 저장사항일 수 있음을 주의
-    const storedChangesExist = Boolean(
-        changes.length ||
-        (typeof storedDescription === 'string' &&
-        description !== storedDescription)
-    )
+    const storedChangesExist = Boolean(changes.length)
 
     const isCurrentPentagram = Boolean(
         storedPentagramId === pentagramId || 
@@ -48,7 +40,6 @@ export default function LoadStoredChangeDialog(props: {
         dispatch(abortChanges())
         setLoaded(true)
         dispatch(setPentagramId(pentagramId))
-        dispatch(setDescription(description))
     }
     
     const onClickPreserveChanges = (e: MouseEvent) => {

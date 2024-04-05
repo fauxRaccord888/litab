@@ -18,8 +18,6 @@ import {
     useQuadtreeRef, 
     useSelectedPosition, 
     useUnmergedChangeInfo, 
-    useSetPentagramDescription,
-    useDescription
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
@@ -80,13 +78,11 @@ function PentagramUpdate() {
     
     const mergedNodes = useMergedNode()
     const unmergedNodeInfos = useUnmergedChangeInfo()
-    const description = useDescription()
     const { angle, distance } = useSelectedPosition()
 
     const parentRef = useRef<HTMLDivElement | null>(null)
     const quadtreeRef = useQuadtreeRef()
 
-    const { handleSetDescription } = useSetPentagramDescription()
     const { handleSelectNode, handleSetNewPosition, handleDragAndTouchMove } = useMainPentagonEventHandler(parentRef, quadtreeRef)
 
     const handleSetNewPositionWithErrorToast = (e: MouseEvent<HTMLDivElement>) => {
@@ -128,12 +124,11 @@ function PentagramUpdate() {
 
     return (
         <>
-            <LoadStoredChangeDialog pentagramId={pentagramId} description={pentagram.description || ""}/>
+            <LoadStoredChangeDialog pentagramId={pentagramId} />
             <PentagramUpdateView
                 ref={parentRef}
 
                 title={t("pentagram.title.update")}
-                description={description}
                 handleSubmit={handleClickSubmit}
 
                 mergedNodes={mergedNodes}
@@ -143,9 +138,7 @@ function PentagramUpdate() {
 
                 angle={angle}
                 distance={distance}
-
-                handleSetDescription={handleSetDescription}
-                
+               
                 handleClickNode={handleSelectNode}
                 handleClickSelectedNode={(nodeId: string) => pentagramNavigate.nodeUpsertModal(nodeId)}
                 handleClickSelectedPosition={() => pentagramNavigate.nodeInsertModal()}

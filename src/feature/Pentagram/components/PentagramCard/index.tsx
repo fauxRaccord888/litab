@@ -5,7 +5,6 @@ import { usePentagramPlayer } from "$feature/Pentagram/hooks";
 import SelectMetaInfo from "./SelectMetaInfo";
 import SelectMainPentagon from "./SelectMainPentagon";
 import SelectPlayer from "./SelectPlayer";
-import SelectDescription from "./SelectDescription";
 import SelectRevisionList from "./SelectRevisionList";
 import './style/pentagramSelectView.scss'
 
@@ -19,7 +18,7 @@ export type PentagramCardProps = {
 export default function PentagramCard(props: PentagramCardProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { timestamp, isPlaying, handlePlayPentagram, handleSetTimestamp } = usePentagramPlayer(item)
-    const { id, users, created_at, description, pentagram_nodesCollection, pentagram_revisionsCollection } = item
+    const { id, users, created_at, pentagram_nodesCollection, pentagram_revisionsCollection } = item
 
     const playerEventHandler: PentagramPlayerEventHandler = {
         playPentagram: handlePlayPentagram,
@@ -45,18 +44,13 @@ export default function PentagramCard(props: PentagramCardProps) {
                 }
             </div>
             {renderConfig.player &&
-                <div className="pentagram-card-component__description-container">
+                <div className="pentagram-card-component__select-player-container">
                     <SelectPlayer 
                         timestamp={timestamp}
                         isPlaying={isPlaying}
                         pentagram_revisionsCollection={pentagram_revisionsCollection} 
                         eventHandler={playerEventHandler} 
                     />
-                </div>
-            }
-            {renderConfig.description &&
-                <div className="pentagram-card-component__description-container">
-                    <SelectDescription description={description}/>
                 </div>
             }
             {renderConfig.revision &&

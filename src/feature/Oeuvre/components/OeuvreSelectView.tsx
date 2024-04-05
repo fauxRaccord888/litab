@@ -41,7 +41,6 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                 renderConfig={{
                     metaInfo: true,
                     mainPentagon: true,
-                    description: false,
                     revision: false,
                     player: false
                 }}

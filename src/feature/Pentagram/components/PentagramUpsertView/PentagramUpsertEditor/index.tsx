@@ -1,10 +1,9 @@
-import type { MouseEvent, TouchEvent, MutableRefObject, ForwardedRef, ChangeEvent } from 'react';
+import type { MouseEvent, TouchEvent, MutableRefObject, ForwardedRef } from 'react';
 import type { IMergedNode, IUnmergedChangeInfo } from '../../../store/pentagramUpsertSlice/interface';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import { forwardRef } from 'react';
 
 import UpdateMainPentagon from './UpdateMainPentagon';
-import PentagramDescription from './PentagramDescription';
 import PendingChangeList from './PendingChangeList';
 
 import './style/pentagramUpsertEditor.scss'
@@ -17,7 +16,6 @@ export type PentagramUpsertEditorProps = {
 
     angle: number | null,
     distance: number | null ,
-    description: string | null,
     
     // COMMENT 이벤트 핸들러가 렌더링 중 바뀔 여지가 많고, object로 묶을 경우 전체 리렌더링 유발로 인해 나누어 전달
     handleClickNode?: (nodeId: string) => void,
@@ -28,7 +26,6 @@ export type PentagramUpsertEditorProps = {
     
     handleClickRevert?: (id: string) => void;
 
-    handleSetDescription: (e: ChangeEvent<HTMLTextAreaElement>) => void,
     eventHandler: OeuvreEventHandler
 }
 
@@ -39,7 +36,6 @@ export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertE
 
         angle,
         distance,
-        description,
 
         handleClickNode,
         handleClickSelectedNode,
@@ -49,7 +45,6 @@ export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertE
 
         handleClickRevert,
 
-        handleSetDescription,
         eventHandler
     } = props
 
@@ -71,10 +66,6 @@ export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertE
                     handleDragAndTouchMove={handleDragAndTouchMove}
 
                     eventHandler={eventHandler}
-                />
-                <PentagramDescription
-                    description={description}
-                    handleSetDescription={handleSetDescription}
                 />
             </div>
             <PendingChangeList 
