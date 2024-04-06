@@ -13,13 +13,13 @@ export function calcTransformValueFromPosition(
     ) {
         return { transformX: null, transformY: null }
     }
-    
-    const { angle, distance } = position
-    const radius = distance / 100 * STYLE.NODE * 3
-    const degreeWithOffset = (angle+STYLE.PENTAGON_ANGLE_OFFSET) * Math.PI / PENTAGRAM.HALF_CIRCLE
 
-    const transformX = Math.cos(degreeWithOffset) * radius - STYLE.NODE * 0.5
-    const transformY = Math.sin(degreeWithOffset) * radius - STYLE.NODE * 0.5
+    const { angle, distance } = position
+    const radius = distance / 100 * Number(STYLE.node) * 3
+    const degreeWithOffset = (angle+Number(STYLE.pentagonAngleOffset)) * Math.PI / Number(PENTAGRAM.HALF_CIRCLE)
+
+    const transformX = Math.cos(degreeWithOffset) * radius - Number(STYLE.node) * 0.5
+    const transformY = Math.sin(degreeWithOffset) * radius - Number(STYLE.node) * 0.5
 
     return { transformX, transformY }
 }
