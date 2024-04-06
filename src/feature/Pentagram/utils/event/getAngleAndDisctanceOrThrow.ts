@@ -1,17 +1,20 @@
+import type { useCSSVariables } from "$lib/hooks/useCSSVariables"
 import { PositionError } from "../../error"
 import { PENTAGRAM } from "../../constants"
 
 export function getAngleAndDisctanceOrThrow(
     event: {clientX: number, clientY: number}, 
     parentElem: HTMLDivElement | null, 
-    sides: number=PENTAGRAM.SIDES
+    sides: number=PENTAGRAM.SIDES,
+    STYLE: ReturnType<typeof useCSSVariables>
 ) {
     if (!parentElem) throw new PositionError()
     const rect = parentElem.getBoundingClientRect()
+
     const x = event.clientX - rect.left 
     const y = event.clientY - rect.top
 
-    const radius = rect.height // TODO 반응형으로 radius가 바뀌기 때문에 불가피하게 넣은 흑마술임 다른 방법을 고안할 필요가 있음
+    const radius = Number(STYLE.node) * Number(STYLE.pentagonRadiusMultiplier)
 
     if (!isInside(y, x, radius, sides)) throw new PositionError()
 
