@@ -1,28 +1,25 @@
-@use "src/lib/style/variables";
+@import "src/lib/style/variables.module";
 @import "src/lib/style/atomicMixin";
 
 .oeuvre-pentagon-wrapper-component {
     @include flex;
-    --node: #{variables.$node_small}px;
-    @media only screen and (min-width: 500px) {
-        --node: #{variables.$node_medium}px;
-    }
-    width: calc(var(--node) * 8);
-    height: calc(var(--node) * 8);
+    --outer-size: calc(var(--node) * var(--pentagon-outer-container-multiplier));
+    width: var(--outer-size);
+    height: var(--outer-size);
 
     .oeuvre-pentagon-wrapper-component__parent {
         position: relative;
         width: 0px;
-        height:calc(var(--node) * 3); // CSS BALCK MAGIC 반응형으로 넘기는 부모 요소의 '반지름'이 달라지는 부분 해결
+        height: 0px;
         left: 50%;
         top: 50%;
 
         .oeuvre-pentagon-wrapper-component__pentagon {
             @include stroke-sm(rgb(var(--font-color)));
             @include fill-sm(none);
-            --size: calc(var(--node) * 7.5);
-            width: var(--size);
-            height: var(--size);
+            --pentagon-size: calc(var(--node) * var(--pentagon-inner-component-multiplier));
+            width: var(--pentagon-size);
+            height: var(--pentagon-size);
             transform: translate(-50%, -53%);
         }
     }

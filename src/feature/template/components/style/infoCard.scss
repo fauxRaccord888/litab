@@ -1,8 +1,7 @@
-@use "src/lib/style/variables";
+@import "src/lib/style/variables.module";
 @import "src/lib/style/atomicMixin";
 
 .info-card-template {
-    --node: #{variables.$node_small}px;
     @include flex-col;
     flex-grow: 1;
     @media only screen and (min-width: 500px) {
@@ -49,10 +48,11 @@
         }
 
         &.info-card-template__cover-container--mini {
-            min-width: var(--node);
-            max-width: var(--node);
-            min-height: var(--node);
-            max-height: var(--node);
+            --cover-size: calc(var(--node-small) * 1px);
+            min-width: var(--cover-size);
+            max-width: var(--cover-size);
+            min-height: var(--cover-size);
+            max-height: var(--cover-size);
         }
 
         // COMMENT 다른 계층 구조에서 사용되는 선택자임을 주의
