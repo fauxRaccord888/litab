@@ -1,19 +1,18 @@
-// /_variables.scss와 반드시 함께 수정
+import VARIABLES from './_variables.module.scss';
+
 export const STYLE = {
-    BREAK_POINT: {
-        SM: 500,
-        MD: 800,
+    breakPoint: {
+        sm: VARIABLES.breakPointSmall,
+        md: VARIABLES.breakPointMedium,
     },
-    SM: {
-        NODE: 36
+    sm: {
+        node: VARIABLES.nodeSmall
     },
-    MD: {
-        NODE: 64
+    md: {
+        node: VARIABLES.nodeMedium
     },
-    LG: {
-        NODE: 64
+    lg: {
+        node: VARIABLES.nodeMedium
     },
-    COMMON: {
-        PENTAGON_ANGLE_OFFSET: 270,
-    }
+    common: VARIABLES
 }

@@ -2,25 +2,25 @@ import { useMediaQuery } from "usehooks-ts";
 import { STYLE } from "$lib/style/variables";
 
 export function useCSSVariables() {
-    const lg = useMediaQuery(`only screen and (min-width : ${STYLE.BREAK_POINT.MD}px)`);
-    const md = useMediaQuery(`only screen and (min-width : ${STYLE.BREAK_POINT.SM}px)`);
+    const lg = useMediaQuery(`only screen and (min-width : ${STYLE.breakPoint.md}px)`);
+    const md = useMediaQuery(`only screen and (min-width : ${STYLE.breakPoint.sm}px)`);
 
     if (lg) {
         return {
-            ...STYLE.COMMON,
-            ...STYLE.LG
+            ...STYLE.common,
+            ...STYLE.lg
         }
     }
 
     if (md) {
         return {
-            ...STYLE.COMMON,
-            ...STYLE.MD
+            ...STYLE.common,
+            ...STYLE.md
         }
     }
 
     return {
-        ...STYLE.COMMON,
-        ...STYLE.SM
+        ...STYLE.common,
+        ...STYLE.sm
     }
 }

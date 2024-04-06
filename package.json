@@ -8,7 +8,8 @@
     "build": "tsr generate && tsc && vite build",
     "update-types": "npx supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" > src/lib/types/supabase.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "css-module-type-gen": "pnpm typed-scss-modules src/lib/style/_variables.module.scss"
   },
   "dependencies": {
     "@apollo/client": "^3.8.10",

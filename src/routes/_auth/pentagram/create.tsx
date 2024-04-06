@@ -6,6 +6,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next';
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
+import { useCSSVariables } from '$lib/hooks/useCSSVariables';
 import { 
     useMutationHandler,
     useMainPentagonEventHandler, 
@@ -41,6 +42,7 @@ function PentagramInsert() {
     const navigate = useNavigate()
     const pentgramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate();
+    const STYLE = useCSSVariables()
 
     useInitialize(null)
     useMerge()
@@ -52,7 +54,11 @@ function PentagramInsert() {
     const parentRef = useRef<HTMLDivElement | null>(null)
     const quadtreeRef = useQuadtreeRef()
 
-    const { handleSelectNode, handleSetNewPosition, handleDragAndTouchMove } = useMainPentagonEventHandler(parentRef, quadtreeRef)
+    const { 
+        handleSelectNode, 
+        handleSetNewPosition, 
+        handleDragAndTouchMove 
+    } = useMainPentagonEventHandler(parentRef, quadtreeRef, STYLE)
     
     const handleSetNewPositionWithErrorToast = (e: MouseEvent<HTMLDivElement>) => {
         const throttled = () => throttle(
