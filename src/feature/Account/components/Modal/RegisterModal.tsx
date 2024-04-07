@@ -1,19 +1,24 @@
+import type { GuestMenuModalEventHandler } from "$feature/Account/types"
 import type { RegisterPayload } from "$feature/auth/types"
 import type { AccountInsertKeys } from "../../constants"
 /* hooks */
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next"
 /* components & data */
 import { accountInsertFields } from "../../constants"
 import Form from "$lib/components/common/Form"
-import "./style/register.scss"
+import Modal from "$feature/portal/components/Modal"
+import Button from "$lib/components/common/Button"
+import "./style/registerModal.scss"
 
-type AccountRegisterProps = {
+type RegisterModalProps = {
+    title: string,
     handleRegister: (payload: RegisterPayload) => void
+    eventHandler: GuestMenuModalEventHandler
 }
 
-export default function AccountRegister(props: AccountRegisterProps) {
-    const { handleRegister } = props
+export default function RegisterModal(props: RegisterModalProps) {
+    const { title, handleRegister, eventHandler } = props
     const { t } = useTranslation()
     const [formData, setFormData] = useState<Record<AccountInsertKeys, string>>({
         email: '',
@@ -42,15 +47,18 @@ export default function AccountRegister(props: AccountRegisterProps) {
     }
 
     return (
-        <div className="account-register-component">
-            <div className="account-register-component__inner-container">
-                <h2 className="account-register-component__title">{t('account.title.register')}</h2>
+        <Modal title={title} handleClickClose={eventHandler.closeModal}>
+            <div className="register-modal-component__inner-cotainer">
                 <Form
                     fields={fields}
                     handleSubmit={handleSubmit}
                     disabled={!submitable}
                 />
+
+                <Button onClick={eventHandler.navigateToSignIn}>
+                    {t('modal.message.switchToSignIn')}
+                </Button>
             </div>
-        </div>
+        </Modal>
     )
 }
