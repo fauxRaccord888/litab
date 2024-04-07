@@ -1,11 +1,16 @@
-export type AccountMenuModalEventHandler = {
+type IAccountModalEventHandler = {
     navigateToSignIn: () => void,
     navigateToRegister: () => void,
+    closeModal: () => void
+}
+
+export type AccountMenuModalEventHandler = IAccountModalEventHandler & {
     navigateToProfile: (mutableId: string) => void,
     navigateToUpdateAccount: () => void,
     signOut: () => void
-    closeModal: () => void
 }
+
+export type GuestMenuModalEventHandler = IAccountModalEventHandler 
 
 export type UpdateProfilePayload = {
     mutableId: string,
