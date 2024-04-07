@@ -17,7 +17,7 @@ import { getUserById_QUERY } from "$feature/auth/graphql";
 export function useMutationHandler() {
     const dispatch = useDispatch()
     const apolloClient = useApolloClient()
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
 
     const changes = useUnmergedChangeInfo()
     const filteredChanges = filterChanges(changes)

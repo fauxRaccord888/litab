@@ -16,7 +16,7 @@ export function useHandleFollow() {
         follow: followMutation,
         unfollow: unfollowMutation
     } = useFollowMutation()
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
     const { t } = useTranslation()
     
     const handleFollow = async (id: string | null | undefined) => {

@@ -7,5 +7,10 @@
     },
     "error": {
         "redirect": "Something went wrong. redirect..."
+    },
+    "authGate": {
+        "mainMessage": "Ready to dive in?",
+        "subMessage": "Sign up to unlock all that Pentagram has to offer.",
+        "button": "Join Pentagram now"
     }
 }

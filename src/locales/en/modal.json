@@ -8,6 +8,13 @@
         "pentagramSelectMenu": "Pentagram Menu",
         "nodeMenu": "Oeuvre Menu",
         "profileSelectMenu": "Profile Menu",
-        "accountMenu": "Account Menu"
+        "accountMenu": "Account Menu",
+        "register": "Register",
+        "signIn": "Sign In"
+    },
+
+    "message": {
+        "switchToRegister": "Not a member yet?",
+        "switchToSignIn": "Are you already a member?"
     }
 }

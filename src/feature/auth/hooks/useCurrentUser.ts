@@ -17,11 +17,12 @@ export function useCurrentUser() {
         }
     }, [sessionUser, store])
     
-    const { data } = useQuery<GetUserByIdQuery>(getUserById_QUERY, {
-        variables: { id: sessionUser?.id }
+    const { data, loading } = useQuery<GetUserByIdQuery>(getUserById_QUERY, {
+        variables: { id: sessionUser?.id ?? "" }
     })
 
     const currentUser = getFirstNodeOfCollection(data?.usersCollection)
 
-    return sessionUser ? currentUser : null
+    if (!sessionUser) return { loading, currentUser: null }
+    return { loading, currentUser }
 }

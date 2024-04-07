@@ -8,6 +8,13 @@
         "nodeMenu": "작품 메뉴",
         "pentagramSelectMenu": "펜타그램 메뉴",
         "profileSelectMenu": "프로필 메뉴",
-        "accountMenu": "계정 메뉴"
+        "accountMenu": "계정 메뉴",
+        "register": "회원가입",
+        "signIn": "로그인"
+    },
+
+    "message": {
+        "switchToRegister": "아직 회원이 아니신가요?",
+        "switchToSignIn": "혹시 이미 회원이신가요?"
     }
 }

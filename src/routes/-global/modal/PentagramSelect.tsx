@@ -17,7 +17,7 @@ export default function PentagramSelect(props: {
     });
 
     const pentagram = getFirstNodeOfCollection(data?.pentagramsCollection);
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
 
     const isAuthor = (currentUser?.id === pentagram?.users.id && currentUser?.id !== undefined);
 

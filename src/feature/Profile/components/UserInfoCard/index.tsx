@@ -21,7 +21,7 @@ type ProfileInfoCardProps = {
 export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { id, mutable_id, nickname, description, updated_at, followersCollection, followingsCollection } = item
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
 
     const followings = calcFollowings(currentUser)
     const mutualFollowers = calcMutualFollowers(currentUser, item, followings)

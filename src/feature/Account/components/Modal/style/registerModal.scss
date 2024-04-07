@@ -1,0 +1,9 @@
+@import "src/lib/style/atomicMixin";
+
+.register-modal-component__inner-cotainer {
+    @include flex;
+    @include flex-col;
+    @include w-full;
+    height: 300px;
+    justify-content: space-between;
+}

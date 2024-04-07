@@ -1,7 +1,5 @@
 {
     "title": {
-        "register": "회원가입",
-        "signIn": "로그인",
         "update": {
             "index": "계정 수정",
             "profile": "프로필",

@@ -7,12 +7,14 @@ import NodeInsert from './modal/NodeInsert';
 import RevisionSelect from './modal/RevisionSelect';
 import NodeSelect from './modal/NodeSelect';
 import AccountMenu from './modal/AccountMenu';
+import Register from './modal/Register';
+import SignIn from './modal/SignIn';
 
 export default function ModalController(props: {
     search: RootSearch
 }) {
     const { search } = props
-    const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId, accountMenu } = search
+    const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId, accountMenu, register, signIn } = search
 
     const navigate = useNavigate()
 
@@ -26,6 +28,8 @@ export default function ModalController(props: {
                 nodeViewId: undefined,
                 revisionViewId: undefined,
                 accountMenu: undefined,
+                register: undefined,
+                signIn: undefined
             }),
         })
     }
@@ -63,6 +67,16 @@ export default function ModalController(props: {
             }
             {accountMenu &&
                 <AccountMenu 
+                    handleClickClose={handleClickClose}
+                />
+            }
+            {register &&
+                <Register
+                    handleClickClose={handleClickClose}
+                />
+            }
+            {signIn &&
+                <SignIn 
                     handleClickClose={handleClickClose}
                 />
             }

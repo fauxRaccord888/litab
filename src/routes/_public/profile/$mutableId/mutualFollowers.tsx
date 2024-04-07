@@ -38,7 +38,7 @@ function FollowersModal() {
         || error
     ))
 
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
     const followings = calcFollowings(currentUser)
     const mutualFollowers = calcMutualFollowers(currentUser, targetUser, followings)
     
