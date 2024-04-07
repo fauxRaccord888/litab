@@ -33,7 +33,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ApolloProvider client={apolloClient}>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <Toaster />
+                    <Toaster toastOptions={{
+                        duration: 1000
+                    }} />
                     <RouterProvider router={router} />
                 </PersistGate>
             </Provider>
