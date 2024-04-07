@@ -5,11 +5,21 @@ export function useAccountNavigate() {
     const navigate = useNavigate()
 
     const registerNavigator = useCallback(() => {
-        navigate({ to: '/account/register'})
+        navigate({ 
+            params: {},
+            search: {
+                register: true
+            },
+        })
     }, [navigate])
 
     const signInNavigator = useCallback(() => {
-        navigate({ to: '/account/signin'})
+        navigate({ 
+            params: {},
+            search: {
+                signIn: true
+            },
+        })
     }, [navigate])
 
     const updateNavigator = useCallback(() => {

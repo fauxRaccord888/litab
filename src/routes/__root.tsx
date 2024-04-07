@@ -24,6 +24,8 @@ export type RootSearch = {
     nodeViewId?: string | undefined
     revisionViewId?: string | undefined
     accountMenu?: boolean | undefined
+    register?: boolean | undefined
+    signIn?: boolean | undefined
 }
 
 export const Route = createRootRouteWithContext<RootContext>()({
@@ -40,7 +42,9 @@ export const Route = createRootRouteWithContext<RootContext>()({
             pentagramMenuId: (search.pentagramMenuId as string) || undefined,
             nodeViewId: (search.nodeViewId as string) || undefined,
             revisionViewId: (search.revisionViewId as string) || undefined,
-            accountMenu: (search.accountMenu as boolean) || undefined
+            accountMenu: (search.accountMenu as boolean) || undefined,
+            register: (search.register as boolean) || undefined,
+            signIn: (search.signIn as boolean) || undefined,
         }
     },
 })
