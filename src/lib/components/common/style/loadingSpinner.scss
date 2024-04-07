@@ -3,35 +3,38 @@
 .loading-spinner-component {
     @include w-full;
     @include h-full;
-    position:absolute;
-    transform:translate(-50%, -50%);
-    top:50%;
-    left:50%;
+    @include flex;
+    @include flex-center;
 
-    .loading-spinner-component__dot {
-        border:0;
-        margin:0;
-        width:25%;
-        height:25%;
-        position:absolute;
-        border-radius: 35%;
-        animation:spin 3s ease infinite
+    .loading-spinner-component__inner-container {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        .loading-spinner-component__dot {
+            border:0;
+            margin:0;
+            width: 40%;
+            height: 40%;
+            position:absolute;
+            border-radius: 35%;
+            animation:spin 3s ease infinite
+        }
+    
+        .loading-spinner-component__dot--main {
+            background:rgba(var(--font-color), 0.6);
+            animation-delay:-3s
+        }
+    
+        .loading-spinner-component__dot--sub {
+            background:rgba(var(--font-color), 0.6);
+            animation-delay:-1.5s
+        }    
     }
-
-    .loading-spinner-component__dot--main {
-        background:rgba(var(--font-color), 0.6);
-        animation-delay:-3s
-    }
-
-    .loading-spinner-component__dot--sub {
-        background:rgba(var(--font-color), 0.6);
-        animation-delay:-1.5s
-    }    
 }
 
 @keyframes spin{
     0%,100%{transform:translate(0)}
-    25%{transform:translate(160%)}
-    50%{transform:translate(160%, 160%)}
-    75%{transform:translate(0, 160%)}
+    25%{transform:translate(150%)}
+    50%{transform:translate(150%, 150%)}
+    75%{transform:translate(0, 150%)}
   }
