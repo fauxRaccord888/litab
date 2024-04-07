@@ -10,7 +10,7 @@ import { PendingError } from "$lib/error";
 
 export function useUpdateProfileHandler() {
     const apolloClient = useApolloClient()
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
     const [profileMutation, profileResponse] = useMutation<UpdateProfileMutation>(updateProfile_MUTATION)
     const [authMutation, authResponse] = useUpdateAuthMutation() 
     const [uploadCoverMutation, coverResponse] = useUploadCoverMutation()

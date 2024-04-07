@@ -7,7 +7,7 @@ import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { NETWORK } from "$lib/constants";
 
 export function useFeed() {
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
     const { data, fetchMore } = useQuery<GetFeedByIdQuery>(getFeedById_QUERY, {
         variables: { 
             id: currentUser?.id,

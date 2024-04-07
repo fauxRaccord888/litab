@@ -15,7 +15,7 @@ export default function AccountMenuModal(props: AccountMenuModalProps) {
     const { title, eventHandler } = props
     const { t } = useTranslation()
 
-    const currentUser = useCurrentUser()
+    const { currentUser } = useCurrentUser()
 
     const onClickHandler = (e: MouseEvent, func: (() => void)) => {
         e.preventDefault()
@@ -56,7 +56,7 @@ export default function AccountMenuModal(props: AccountMenuModalProps) {
                                 "account-menu-modal-component__button--profile",
                             ].join(' ')}
                             onClick={(e) => {
-                                onClickHandler(e, () => eventHandler.navigateToProfile(currentUser.mutable_id))
+                                onClickHandler(e, () => eventHandler.navigateToProfile(currentUser?.mutable_id))
                             }}
                         >
                             {t("account.modal.menu.profile")}
