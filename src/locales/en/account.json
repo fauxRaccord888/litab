@@ -1,7 +1,5 @@
 {
     "title": {
-        "register": "Register",
-        "signIn": "Sign in",
         "update": {
             "index": "Account Update",
             "profile": "Profile",
