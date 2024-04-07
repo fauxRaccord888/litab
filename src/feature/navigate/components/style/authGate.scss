@@ -1,0 +1,47 @@
+@import 'src/lib/style/atomicMixin';
+
+.auth-gate-component {
+    @include flex;
+    @include flex-col;
+
+    .auth-gate-component__inner-container {
+        @include flex;
+        @include flex-col;
+        @include flex-center;
+        @include child-top-m(calc(var(--base-size) * 2.5));
+        @include margin-(calc(var(--base-size) * 4));
+    
+        .auth-gate-component__message-container {
+            @include flex;
+            @include flex-col;
+            @include child-top-m(calc(var(--base-size) * 0.75));
+
+            .auth-gate-component__message {
+                @include flex;
+                @include flex-center;
+                &.auth-gate-component__message--main {
+                    font-size: calc(var(--base-size) * 1.8);
+                    color: rgb(var(--primary));
+                }
+                &.auth-gate-component__message--sub {
+                    font-size: calc(var(--base-size) * 1.2);
+                }
+            }
+        }
+    
+        .auth-gate-component__icon {
+            @include stroke-sm(rgb(var(--font-color)));
+            @include fill-sm(rgb(var(--font-color)));
+            width: calc(var(--base-size) * 15);
+        }
+
+        .auth-gate-component__account-button-container {
+            font-size: calc(var(--base-size) * 1.3);
+            @include w-full;
+            .button-component {
+                @include w-full;
+            }
+        }
+
+    }
+}
