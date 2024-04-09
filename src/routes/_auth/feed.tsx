@@ -7,7 +7,7 @@ import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 import FeedList from '$feature/feed/components/FeedList';
 
-export const Route = createFileRoute('/_auth/feed/')({
+export const Route = createFileRoute('/_auth/feed')({
     beforeLoad: () => {
         return {
             getTitle: () => translate('feed.title.index')
