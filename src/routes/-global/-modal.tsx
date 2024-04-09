@@ -14,7 +14,17 @@ export default function ModalController(props: {
     search: RootSearch
 }) {
     const { search } = props
-    const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId, accountMenu, register, signIn } = search
+    const { 
+        nodeUpsertId, 
+        insertNode, 
+        pentagramMenuId, 
+        nodeViewId, 
+        revisionViewId, 
+        accountMenu, 
+        register, 
+        signIn,
+        redirect
+    } = search
 
     const navigate = useNavigate()
 
@@ -30,6 +40,7 @@ export default function ModalController(props: {
                 accountMenu: undefined,
                 register: undefined,
                 signIn: undefined,
+                redirect: undefined,
 
                 page: prev.page,
                 initiated: prev.initiated
@@ -75,11 +86,13 @@ export default function ModalController(props: {
             }
             {register &&
                 <Register
+                    redirect={redirect}
                     handleClickClose={handleClickClose}
                 />
             }
             {signIn &&
                 <SignIn 
+                    redirect={redirect}
                     handleClickClose={handleClickClose}
                 />
             }
