@@ -1,0 +1,84 @@
+@import "src/lib/style/atomicMixin";
+
+.carousel-component {
+    .carousel-component__inner-container {
+        @include flex;
+        @include justify-center;
+        max-width: 100%;
+
+        .carousel-component__body-container {
+            @include flex;
+            @include flex-col;
+            justify-content: space-between;
+            min-height:90vh;
+            flex-grow: 1;
+
+            .carousel-component__body {
+                @include flex;
+                @include w-full;
+                flex-grow: 1;
+            }
+
+            .carousel-component__indicator-container {
+                @include flex;
+                @include w-full;
+                @include flex-center;
+                @include child-left-m(calc(var(--base-size) * 0.75));
+                margin-top: calc(var(--base-size) * 1.5);
+                margin-bottom: calc(var(--base-size) * 1.5);
+
+                .carousel-component__indicator {
+                    @include flex;
+                    @include rounded-full;
+                    @include box-shadow-2(rgb(var(--font-color)));
+                    width: 1rem;
+                    height: 1rem;
+
+                    &.carousel-component__indicator--selected {
+                        background-color: rgb(var(--font-color));
+                    }
+                }
+            }
+        }
+
+        .carousel-component__button-container {
+            @include flex;
+            @include justify-center;
+            min-width: 2.75rem;
+            max-width: 2.75rem;
+
+            .carousel-component__button {
+                @include flex;
+                @include flex-center;
+                @include rounded-full;
+                @include box-shadow-2(rgb(var(--font-color)));
+                padding: 0.2rem;
+                font-size: 0.6rem;
+                position: fixed;
+                line-height: 1.2rem;
+                width: 1.6rem;
+                top: 50%;
+
+                &:disabled {
+                    color: rgba(var(--font-color), 0.3);
+                }
+
+                &.carousel-component__button--guide {
+                    background: linear-gradient(#FF8D28, #28FF7C, #B128FF);
+                    animation: rotate 3s linear infinite;
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes rotate {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      filter: hue-rotate(360deg);
+    }
+  }
+  
