@@ -29,6 +29,7 @@ export type RootSearch = {
 
     page?: number | undefined
     initiated?: boolean | undefined
+    redirect?: string | undefined
 }
 
 export const Route = createRootRouteWithContext<RootContext>()({
@@ -51,6 +52,7 @@ export const Route = createRootRouteWithContext<RootContext>()({
 
             page: (search.page as number) || undefined,
             initiated: (search.initiated as boolean) || undefined,
+            redirect: (search.redirect as string) || undefined
         }
     },
 })
