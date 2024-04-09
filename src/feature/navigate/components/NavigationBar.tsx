@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useAccountNavigate } from '../hooks'
-import { Link } from '@tanstack/react-router'
+import { useAccountNavigate, usePentagramNavigate, useUtilNavigate } from '../hooks'
 import HomeIcon from '$lib/components/icons/HomeIcon'
 import SearchIcon from '$lib/components/icons/SearchIcon'
 import UserIcon from '$lib/components/icons/UserIcon'
@@ -11,22 +10,24 @@ import "./style/navigationBar.scss"
 
 export default function NavigationBar() {
     const { t } = useTranslation()
+    const utilNavigate = useUtilNavigate()
     const accountNavigate = useAccountNavigate()
+    const pentagramNavigate = usePentagramNavigate()
     return (
         <div className="navigation-bar-component">
-            <Link to="/home" className="navigation-bar-component__link-container">
+            <a onClick={utilNavigate.home} className="navigation-bar-component__link-container">
                 <HomeIcon />
                 <span className="navigation-bar-component__link-description">
                     {t("navigate.route.home")}
                 </span>
-            </Link>
+            </a>
 
-            <Link to="/search" className="navigation-bar-component__link-container">
+            <a onClick={utilNavigate.search} className="navigation-bar-component__link-container">
                 <SearchIcon />
                 <span className="navigation-bar-component__link-description">
                     {t("navigate.route.search")}
                 </span>
-            </Link>
+            </a>
 
             <a onClick={accountNavigate.accountMenuModal} className="navigation-bar-component__link-container">
                 <UserIcon />
@@ -35,7 +36,7 @@ export default function NavigationBar() {
                 </span>
             </a>
 
-            <Link to="/pentagram/create" className="navigation-bar-component__link-container">
+            <a onClick={pentagramNavigate.create} className="navigation-bar-component__link-container">
                 <div className="pentagram-icon-place-holder">
                     <PentagonIcon />
                     <PlusIcon />
@@ -43,7 +44,7 @@ export default function NavigationBar() {
                 <span className="navigation-bar-component__link-description">
                     {t("navigate.route.pentagram")}
                 </span>
-            </Link>
+            </a>
         </div>
     )
 }

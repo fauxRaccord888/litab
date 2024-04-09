@@ -6,19 +6,21 @@ export function useAccountNavigate() {
 
     const registerNavigator = useCallback(() => {
         navigate({ 
-            params: {},
-            search: {
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
                 register: true
-            },
+            }),
         })
     }, [navigate])
 
     const signInNavigator = useCallback(() => {
-        navigate({ 
-            params: {},
-            search: {
+        navigate({
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
                 signIn: true
-            },
+            }),
         })
     }, [navigate])
 
@@ -34,10 +36,11 @@ export function useAccountNavigate() {
 
     const acocuntMenuModalNavigator = useCallback(() => {
         navigate({ 
-            params: {},
-            search: {
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
                 accountMenu: true
-            },
+            }),
         })
     }, [navigate])
 
