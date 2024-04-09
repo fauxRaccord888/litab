@@ -26,7 +26,9 @@ function Landing() {
     const accountNavigate = useAccountNavigate()
 
     const handleClickSubmit = () => {
-        accountNavigate.accountMenuModal()
+        accountNavigate.accountMenuModal({
+            redirect: "/pentagram/create"
+        })
     }
 
     const page = Route.useSearch().page ?? 0

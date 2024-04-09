@@ -4,6 +4,7 @@ import type { RegisterPayload } from '$feature/auth/types';
 import type { GuestMenuModalEventHandler } from '$feature/Account/types';
 /* hooks */
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from '@tanstack/react-router';
 import { useAccountNavigate } from '$feature/navigate/hooks';
 import { useAuthMutationHandler } from '$feature/auth/hooks';
 /* components */
@@ -13,10 +14,12 @@ import toast from 'react-hot-toast';
 import { registerErrorHandler } from '$feature/Account/errorHandler/registerErrorHandler'
 
 export default function Register(props: { 
+    redirect?: string | undefined,
     handleClickClose: () => void; 
 }) {
     const { t } = useTranslation();
-    const { handleClickClose } = props
+    const { redirect, handleClickClose } = props
+    const navigate = useNavigate()
     const accountNavigate = useAccountNavigate()
     const { register } = useAuthMutationHandler()
     const [ registerHandler ] = register
@@ -29,7 +32,10 @@ export default function Register(props: {
 
     const handleRegister = async (payload: RegisterPayload) => {
         const response = registerErrorHandler(
-            () => registerHandler(payload)
+            async () => {
+                const res = registerHandler(payload)
+                res.then(() => navigate({to: redirect}))
+            }
         )
 
         toast.promise(response, {

@@ -4,6 +4,7 @@ import type { SignInPayload } from '$feature/auth/types';
 import type { GuestMenuModalEventHandler } from '$feature/Account/types';
 /* hooks */
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from '@tanstack/react-router';
 import { useAccountNavigate } from '$feature/navigate/hooks';
 import { useAuthMutationHandler } from '$feature/auth/hooks';
 /* components */
@@ -13,10 +14,12 @@ import toast from 'react-hot-toast';
 import { signInErrorHandler } from '$feature/Account/errorHandler';
 
 export default function SignIn(props: { 
+    redirect?: string | undefined,
     handleClickClose: () => void; 
 }) {
     const { t } = useTranslation();
-    const { handleClickClose } = props
+    const { redirect, handleClickClose } = props
+    const navigate = useNavigate()
     const accountNavigate = useAccountNavigate()
     const { signIn } = useAuthMutationHandler()
     const [signInHandler] = signIn
@@ -29,7 +32,10 @@ export default function SignIn(props: {
 
     const handleSignIn = async (payload: SignInPayload) => {
         const response = signInErrorHandler(
-            () => signInHandler(payload)
+            () => {
+                const res = signInHandler(payload)
+                res.then(() => navigate({to: redirect}))
+            }
         )
     
         toast.promise(response, {
