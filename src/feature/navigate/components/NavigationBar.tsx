@@ -29,7 +29,7 @@ export default function NavigationBar() {
                 </span>
             </a>
 
-            <a onClick={accountNavigate.accountMenuModal} className="navigation-bar-component__link-container">
+            <a onClick={() => accountNavigate.accountMenuModal()} className="navigation-bar-component__link-container">
                 <UserIcon />
                 <span className="navigation-bar-component__link-description">
                     {t("navigate.route.account")}
