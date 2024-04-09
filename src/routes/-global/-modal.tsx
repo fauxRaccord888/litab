@@ -21,7 +21,7 @@ export default function ModalController(props: {
     const handleClickClose = () => {
         navigate({
             params: {},
-            search: () => ({
+            search: (prev) => ({
                 nodeUpsertId: undefined,
                 insertNode: undefined,
                 pentagramMenuId: undefined,
@@ -29,7 +29,10 @@ export default function ModalController(props: {
                 revisionViewId: undefined,
                 accountMenu: undefined,
                 register: undefined,
-                signIn: undefined
+                signIn: undefined,
+
+                page: prev.page,
+                initiated: prev.initiated
             }),
         })
     }
