@@ -9,6 +9,7 @@ export function useAccountNavigate() {
             search: (prev) => ({
                 page: prev.page,
                 initiated: prev.initiated,
+                redirect: prev.redirect,
                 register: true
             }),
         })
@@ -19,6 +20,7 @@ export function useAccountNavigate() {
             search: (prev) => ({
                 page: prev.page,
                 initiated: prev.initiated,
+                redirect: prev.redirect,
                 signIn: true
             }),
         })
@@ -34,9 +36,10 @@ export function useAccountNavigate() {
         })
     }, [navigate])
 
-    const acocuntMenuModalNavigator = useCallback(() => {
+    const acocuntMenuModalNavigator = useCallback((payload?: {redirect?: string}) => {
         navigate({ 
             search: (prev) => ({
+                redirect: payload?.redirect,
                 page: prev.page,
                 initiated: prev.initiated,
                 accountMenu: true
