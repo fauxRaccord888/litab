@@ -26,6 +26,10 @@ export type RootSearch = {
     accountMenu?: boolean | undefined
     register?: boolean | undefined
     signIn?: boolean | undefined
+
+    page?: number | undefined
+    initiated?: boolean | undefined
+    redirect?: string | undefined
 }
 
 export const Route = createRootRouteWithContext<RootContext>()({
@@ -45,6 +49,10 @@ export const Route = createRootRouteWithContext<RootContext>()({
             accountMenu: (search.accountMenu as boolean) || undefined,
             register: (search.register as boolean) || undefined,
             signIn: (search.signIn as boolean) || undefined,
+
+            page: (search.page as number) || undefined,
+            initiated: (search.initiated as boolean) || undefined,
+            redirect: (search.redirect as string) || undefined
         }
     },
 })

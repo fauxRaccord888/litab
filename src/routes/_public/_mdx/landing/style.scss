@@ -1,0 +1,53 @@
+@import 'src/lib/style/atomicMixin';
+
+.landing-mdx__section {
+    @include flex;
+    @include flex-center;
+    @include w-full;
+
+    .landing-mdx__section-inner-container {
+        @include flex;
+        @include flex-col;
+        @include w-full;
+    }
+
+    h1 {
+        font-size: calc(var(--base-size) * 2);
+        line-height: 135%;
+    }
+
+    h2 {
+        font-size: inherit;
+    }
+
+    em {
+        color: rgb(var(--primary));
+        font-style: inherit;
+    }
+
+    strong {
+        color: rgb(var(--secondary));
+    }
+
+    ul {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        padding-inline-start: calc(var(--base-size) * 1.5);
+    }
+
+    .landing-mdx__list--main {
+        font-size: calc(var(--base-size) * 1.2);
+        line-height: 210%;    
+    }
+
+    .landing-mdx__list--sub {
+        font-size: calc(var(--base-size) * 1);
+        line-height: 210%;
+    }
+
+    .landing-mdx__button {
+        @include w-full;
+        font-size: calc(var(--base-size) * 1.5);
+        margin-top: calc(var(--base-size) * 2.5); 
+    }
+}

@@ -14,14 +14,24 @@ export default function ModalController(props: {
     search: RootSearch
 }) {
     const { search } = props
-    const { nodeUpsertId, insertNode, pentagramMenuId, nodeViewId, revisionViewId, accountMenu, register, signIn } = search
+    const { 
+        nodeUpsertId, 
+        insertNode, 
+        pentagramMenuId, 
+        nodeViewId, 
+        revisionViewId, 
+        accountMenu, 
+        register, 
+        signIn,
+        redirect
+    } = search
 
     const navigate = useNavigate()
 
     const handleClickClose = () => {
         navigate({
             params: {},
-            search: () => ({
+            search: (prev) => ({
                 nodeUpsertId: undefined,
                 insertNode: undefined,
                 pentagramMenuId: undefined,
@@ -29,7 +39,11 @@ export default function ModalController(props: {
                 revisionViewId: undefined,
                 accountMenu: undefined,
                 register: undefined,
-                signIn: undefined
+                signIn: undefined,
+                redirect: undefined,
+
+                page: prev.page,
+                initiated: prev.initiated
             }),
         })
     }
@@ -72,11 +86,13 @@ export default function ModalController(props: {
             }
             {register &&
                 <Register
+                    redirect={redirect}
                     handleClickClose={handleClickClose}
                 />
             }
             {signIn &&
                 <SignIn 
+                    redirect={redirect}
                     handleClickClose={handleClickClose}
                 />
             }

@@ -1,14 +1,12 @@
-import type { CustomError } from '$lib/error';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { MouseEvent, TouchEvent } from 'react';
 import { useCallback, useRef } from 'react'
+import { useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from '@tanstack/react-router'
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
-import { useOeuvreNavigate, usePentagramNavigate, useUtilNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
 import { useCSSVariables } from '$lib/hooks/useCSSVariables';
 import { 
-    useMutationHandler,
     useMainPentagonEventHandler, 
     useMerge, 
     useMergedNode, 
@@ -20,33 +18,19 @@ import {
 } from '$feature/Pentagram/hooks';
 
 import toast from 'react-hot-toast';
-import { t as translate } from 'i18next';
-import { Outlet, createFileRoute } from '@tanstack/react-router'
 
-
-import PentagramUpdateView from '$feature/Pentagram/components/PentagramUpsertView';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
+import PentagramUpsertEditor from '$feature/Pentagram/components/PentagramUpsertView/PentagramUpsertEditor';
 
-export const Route = createFileRoute('/_auth/pentagram/create')({
-    component: PentagramInsert,
-    beforeLoad: () => {
-        return {
-            getTitle: () => translate('pentagram.title.create')
-        }
-    },
-})
-
-function PentagramInsert() {
+export default function PentagramInsertEditor(props: { initiated: boolean | undefined }) {
+    const { initiated } = props
     const { t } = useTranslation()
-    const { initiated } = Route.useSearch()
     const throttle = useThrottle();
     const errorToast = useThrottledErrorToast()
-    const STYLE = useCSSVariables()
-
     const navigate = useNavigate()
-    const utilNavigate = useUtilNavigate()
     const pentgramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate();
+    const STYLE = useCSSVariables()
 
     useInitialize(null)
     useMerge()
@@ -86,26 +70,15 @@ function PentagramInsert() {
         })
     }
 
-    const { handleInsertPentagram } = useMutationHandler()
-    const handleClickSubmit = () => {
-        const response = handleInsertPentagram()
-        toast.promise(response, {
-            loading: t("pentagram.toast.loading.createPentagram"),
-            success: t("pentagram.toast.success.createPentagram"),
-            error: (error: CustomError) => t(error.i18nKey)
-        })
-        response.then(() => utilNavigate.feed())
-    }
-
     const oeuvreEventHandler: OeuvreEventHandler = {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
-    const setInitiated = useCallback(() => {
+    const setInitiated = useCallback((initiated: boolean | undefined) => {
         navigate({
             search: (prev) => ({
                 ...prev,
-                initiated: true
+                initiated
             })
         })
     }, [navigate])
@@ -113,11 +86,8 @@ function PentagramInsert() {
     return (
         <>
             <LoadStoredChangeDialog initiated={initiated} setInitiated={setInitiated} pentagramId={null}/>
-            <PentagramUpdateView
+            <PentagramUpsertEditor
                 ref={parentRef}
-
-                title={t("pentagram.title.create")}
-                handleSubmit={handleClickSubmit}
 
                 mergedNodes={mergedNodes}
                 unmergedNodeInfos={unmergedNodeInfos}
@@ -126,7 +96,7 @@ function PentagramInsert() {
 
                 angle={angle}
                 distance={distance}
-              
+                
                 handleClickNode={handleSelectNode}
                 handleClickSelectedNode={(nodeId: string) => pentgramNavigate.nodeUpsertModal(nodeId)}
                 handleClickSelectedPosition={() => pentgramNavigate.nodeInsertModal()}
@@ -137,7 +107,6 @@ function PentagramInsert() {
 
                 eventHandler={oeuvreEventHandler}
             />
-            <Outlet />
         </>
     )
 }

@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react"
 import type { AppRootState } from "$lib/stores/store"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { usePentagramNavigate } from "$feature/navigate/hooks"
@@ -10,16 +10,17 @@ import Button from "$lib/components/common/Button"
 import "./style/loadStoredChangeDialog.scss"
 
 export default function LoadStoredChangeDialog(props: { 
+    initiated?: boolean | undefined,
+    setInitiated: (p: boolean | undefined) => void,
     pentagramId: string | null, 
 }) {
-    const { pentagramId } = props
+    const { initiated, setInitiated, pentagramId } = props
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const [loaded, setLoaded] = useState(false)
 
     const storedPentagramId = useSelector((state: AppRootState) => state.pentagramUpsert.pentagramId)
     const changes = useSelector((state: AppRootState) => pendingChangeSelector.selectAll(state))
-    const navigate = usePentagramNavigate()
+    const pentagramNavigate = usePentagramNavigate()
 
     const storedChangesExist = Boolean(changes.length)
 
@@ -29,33 +30,33 @@ export default function LoadStoredChangeDialog(props: {
     )
 
     useEffect(() => {
-        if (!storedChangesExist) {
-            setLoaded(true)
+        if (!storedChangesExist && !initiated) {
+            setInitiated(true)
             dispatch(setPentagramId(pentagramId))
         }
-    }, [dispatch, pentagramId, storedChangesExist])
-
+    }, [dispatch, initiated, pentagramId, setInitiated, storedChangesExist])
+    
     const onClickAbortChanges = (e: MouseEvent) => {
         e.stopPropagation()
         dispatch(abortChanges())
-        setLoaded(true)
+        setInitiated(true)
         dispatch(setPentagramId(pentagramId))
     }
     
     const onClickPreserveChanges = (e: MouseEvent) => {
         e.stopPropagation()
-        setLoaded(true)
+        setInitiated(true)
     }
 
     const onClickNavigateRelated = (e: MouseEvent) => {
         e.stopPropagation()
-        if (storedPentagramId) navigate.select(storedPentagramId)
-        else navigate.create()
+        if (storedPentagramId) pentagramNavigate.select(storedPentagramId)
+        else pentagramNavigate.create()
     }
 
     return (
         <>
-            {Boolean(!loaded) &&
+            {Boolean(!initiated) &&
             storedChangesExist &&
                 <Modal title={t('pentagram.dialog.title.temp')} >
                     <div className="load-stored-change-dialog__inner-container">

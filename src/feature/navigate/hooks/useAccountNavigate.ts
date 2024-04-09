@@ -6,19 +6,23 @@ export function useAccountNavigate() {
 
     const registerNavigator = useCallback(() => {
         navigate({ 
-            params: {},
-            search: {
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
+                redirect: prev.redirect,
                 register: true
-            },
+            }),
         })
     }, [navigate])
 
     const signInNavigator = useCallback(() => {
-        navigate({ 
-            params: {},
-            search: {
+        navigate({
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
+                redirect: prev.redirect,
                 signIn: true
-            },
+            }),
         })
     }, [navigate])
 
@@ -32,12 +36,14 @@ export function useAccountNavigate() {
         })
     }, [navigate])
 
-    const acocuntMenuModalNavigator = useCallback(() => {
+    const acocuntMenuModalNavigator = useCallback((payload?: {redirect?: string}) => {
         navigate({ 
-            params: {},
-            search: {
+            search: (prev) => ({
+                redirect: payload?.redirect,
+                page: prev.page,
+                initiated: prev.initiated,
                 accountMenu: true
-            },
+            }),
         })
     }, [navigate])
 

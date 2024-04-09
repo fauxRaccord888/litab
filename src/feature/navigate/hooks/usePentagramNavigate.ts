@@ -23,20 +23,22 @@ export function usePentagramNavigate() {
         nodeUpsertId: string,
     ) => {
         navigate({
-            params: {},
-            search: {
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
                 nodeUpsertId,
-            },
+            }),
         })
     }, [navigate])
 
     const nodeInsertNavigator =  useCallback((
     )=> {
         navigate({
-            params: {},
-            search: {
+            search: (prev) => ({
+                page: prev.page,
+                initiated: prev.initiated,
                 insertNode: true,
-            },
+            }),
         })
     }, [navigate])
 
@@ -53,7 +55,6 @@ export function usePentagramNavigate() {
         nodeViewId: string,
     ) => {
         navigate({
-            params: {},
             search: {
                 nodeViewId,
             },
@@ -64,7 +65,6 @@ export function usePentagramNavigate() {
         revisionViewId: string,
     )=> {
         navigate({
-            params: {},
             search: {
                 revisionViewId,
             },
@@ -75,7 +75,6 @@ export function usePentagramNavigate() {
         pentagramMenuId: string,
     ) => {
         navigate({
-            params: {},
             search: {
                 pentagramMenuId,
             },

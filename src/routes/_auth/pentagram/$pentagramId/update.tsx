@@ -3,11 +3,11 @@ import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { GetPentagramUpdateInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
 import type { MouseEvent, TouchEvent } from 'react';
 
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useNavigate } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next';
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
-import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
+import { useOeuvreNavigate, usePentagramNavigate, useUtilNavigate } from "$feature/navigate/hooks"
 import { useCSSVariables } from '$lib/hooks/useCSSVariables';
 import { 
     useInitialize, 
@@ -63,17 +63,19 @@ export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
 })
 
 function PentagramUpdate() {
-    const params = Route.useParams()
-    const { pentagramId } = params
+    const { pentagramId }  = Route.useParams()
+    const { initiated } = Route.useSearch()
     const { pentagram } = Route.useLoaderData()
     
     const { t } = useTranslation()
     const throttle = useThrottle();
     const errorToast = useThrottledErrorToast()
+    const STYLE = useCSSVariables()
+
     const navigate = useNavigate()
     const pentagramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
-    const STYLE = useCSSVariables()
+    const utilNavigate = useUtilNavigate()
 
     useInitialize(pentagram)
     useMerge()
@@ -121,16 +123,25 @@ function PentagramUpdate() {
             success: t("pentagram.toast.success.updatePentagram"),
             error: (error: CustomError) => t(error.i18nKey)
         })
-        response.then(() => navigate({ to: '/feed' }))
+        response.then(() => utilNavigate.feed())
     }
 
     const oeuvreEventHandler: OeuvreEventHandler = {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
+    const setInitiated = useCallback(() => {
+        navigate({
+            search: (prev) => ({
+                ...prev,
+                initiated: true
+            })
+        })
+    }, [navigate])
+
     return (
         <>
-            <LoadStoredChangeDialog pentagramId={pentagramId} />
+            <LoadStoredChangeDialog initiated={initiated} setInitiated={setInitiated} pentagramId={pentagramId}/>
             <PentagramUpdateView
                 ref={parentRef}
 

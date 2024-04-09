@@ -27,12 +27,14 @@ export default function PentagramCard(props: PentagramCardProps) {
 
     return (
         <div className="pentagram-card-component">
-            <SelectMetaInfo 
-                id={id}
-                users={users} 
-                created_at={created_at} 
-                eventHandler={eventHandler}
-            />
+            {renderConfig.metaInfo && 
+                <SelectMetaInfo 
+                    id={id}
+                    users={users} 
+                    created_at={created_at} 
+                    eventHandler={eventHandler}
+                />
+            }
             <div className="pentagram-card-component__main-container">
                 {renderConfig.mainPentagon && 
                     <SelectMainPentagon 
