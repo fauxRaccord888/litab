@@ -24,6 +24,7 @@ import {
 import toast from 'react-hot-toast';
 import { t as translate } from 'i18next';
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
+import { pentagramMutationErrorHandler } from '$feature/Pentagram/errorHandler';
 import { getPentagramUpdateInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 
@@ -116,8 +117,15 @@ function PentagramUpdate() {
     }
 
     const { handleUpdatePentagram } = useMutationHandler()
+    
+
     const handleClickSubmit = () => {
-        const response = handleUpdatePentagram(pentagramId)
+        const response = pentagramMutationErrorHandler(
+            async () => {
+                await handleUpdatePentagram(pentagramId)
+            }
+        )
+
         toast.promise(response, {
             loading: t("pentagram.toast.loading.updatePentagram"),
             success: t("pentagram.toast.success.updatePentagram"),

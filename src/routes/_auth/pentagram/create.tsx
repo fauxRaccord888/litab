@@ -21,6 +21,7 @@ import {
 
 import toast from 'react-hot-toast';
 import { t as translate } from 'i18next';
+import { pentagramMutationErrorHandler } from '$feature/Pentagram/errorHandler';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 
@@ -88,7 +89,12 @@ function PentagramInsert() {
 
     const { handleInsertPentagram } = useMutationHandler()
     const handleClickSubmit = () => {
-        const response = handleInsertPentagram()
+        const response = pentagramMutationErrorHandler(
+            async () => {
+                await handleInsertPentagram()
+            }
+        )
+
         toast.promise(response, {
             loading: t("pentagram.toast.loading.createPentagram"),
             success: t("pentagram.toast.success.createPentagram"),

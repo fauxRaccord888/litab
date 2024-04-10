@@ -16,8 +16,8 @@
         "error": {
             "invalidPosition": "선택한 위치는 선택할 수 없습니다.",
             "notUniqueOeuvre": "중복된 작품이 이 펜타그램에 이미 존재해요",
-            "insertTransactionFailed": "펜타그램 업데이트에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요.", 
-            "updateTransactionFailed": "펜타그램 등록에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요."
+            "emptyInput": "생성하려는 펜타그램이 비어있거나 기존 펜타그램과 변화가 없어요.",
+            "pentagramMutationFailed": "펜타그램 등록에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요."
         },
         "loading": {
             "updatePentagram": "펜타그램 업데이트를 기다리고 있어요.",
