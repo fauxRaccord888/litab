@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Toaster } from "react-hot-toast"
 import { ApolloProvider } from '@apollo/client'
-import { Analytics } from "@vercel/analytics/react"
 
 import { persistor, store } from "./lib/stores/store.ts"
 import { routeTree } from './routeTree.gen.ts'
@@ -41,6 +40,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 </PersistGate>
             </Provider>
         </ApolloProvider>
-        <Analytics />
     </React.StrictMode>
 )

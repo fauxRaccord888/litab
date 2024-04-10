@@ -23,7 +23,6 @@
     "@supabase/storage-js": "^2.5.5",
     "@supabase/supabase-js": "^2.39.3",
     "@tanstack/react-router": "^1.12.2",
-    "@vercel/analytics": "^1.2.2",
     "graphql": "^16.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
