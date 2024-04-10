@@ -8,7 +8,6 @@ import { supabaseClient } from "$lib/supabase";
 import { abortChanges } from "../../../store/pentagramUpsertSlice";
 import { filterChanges, formatChanges } from '../../../utils';
 import { evictCacheById } from "$lib/utils";
-import { InsertPentagramTransactionError, UpdatePentagramTransactionError } from "../../../error";
 import { PendingError } from "$lib/error";
 import { getOeuvreInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getUserById_QUERY } from "$feature/auth/graphql";
@@ -43,7 +42,7 @@ export function useMutationHandler() {
             setPending(false)
         }
     
-        if (error) throw new UpdatePentagramTransactionError()
+        if (error) throw error
 
         if (data) {
             evictCacheById({
@@ -84,7 +83,7 @@ export function useMutationHandler() {
             setPending(false)
         }
 
-        if (error) throw new InsertPentagramTransactionError()
+        if (error) throw error
 
         if (data) {
             evictCacheById({
