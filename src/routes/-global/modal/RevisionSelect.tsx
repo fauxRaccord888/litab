@@ -20,7 +20,7 @@ export default function RevisionSelect(props: {
     const changes = getUnionedChanges(revision);
 
     const { t } = useTranslation();
-    const title = t("modal.title.details");
+    const title = t("portal.modal.title.details");
 
     return (
         <ChangeLogModal

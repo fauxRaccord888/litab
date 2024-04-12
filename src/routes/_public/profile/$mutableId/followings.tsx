@@ -52,7 +52,7 @@ function FollowingsModalComponent(props: {
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.followings")
+    const title = t("portal.modal.title.followings")
     const handleClickClose = () => {
         navigate.profileSelect(params.mutableId)
     }

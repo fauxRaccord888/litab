@@ -2,7 +2,10 @@
     "menu": {
         "navigate": "이 펜타그램으로 이동",
         "update": "펜타그램 수정",
-        "remove": "펜타그램 삭제"
+        "delete": "펜타그램 삭제"
+    },
+    "button": {
+        "update": "업데이트"
     },
     "toast": {
         "success": {
@@ -10,6 +13,8 @@
             "removeNode": "선택한 작품은 변경 사항을 확정한 이후에 영구히 삭제될 예정입니다",
             "revertChange": "변경 사항이 취소되었어요",
             "addNode": "새로운 작품이 추가되었어요",
+
+            "deletePentagram": "펜타그램이 성공적으로 삭제되었어요.",
             "updatePentagram": "펜타그램이 성공적으로 업데이트 되었어요",
             "createPentagram": "펜타그램이 성공적으로 생성 되었어요"
         },
@@ -20,6 +25,7 @@
             "pentagramMutationFailed": "펜타그램 등록에 실패했어요. 같은 문제가 반복될 경우 문의를 남겨주세요."
         },
         "loading": {
+            "deletePentagram": "펜타그램 삭제를 기다리고 있어요.",
             "updatePentagram": "펜타그램 업데이트를 기다리고 있어요.",
             "createPentagram": "펜타그램 생성을 기다리고 있어요."
         }

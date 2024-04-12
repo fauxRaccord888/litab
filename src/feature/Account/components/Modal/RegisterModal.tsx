@@ -56,7 +56,7 @@ export default function RegisterModal(props: RegisterModalProps) {
                 />
 
                 <Button onClick={eventHandler.navigateToSignIn}>
-                    {t('modal.message.switchToSignIn')}
+                    {t('portal.modal.message.switchToSignIn')}
                 </Button>
             </div>
         </Modal>

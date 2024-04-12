@@ -58,7 +58,7 @@ function MutualFollowingModalComponent(props: {
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.mutualFollowers")
+    const title = t("portal.modal.title.mutualFollowers")
     const handleClickClose = () => {
         navigate.profileSelect(params.mutableId)
     }

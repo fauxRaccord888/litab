@@ -20,7 +20,7 @@ export default function NodeSelect(props: {
     const changes = getUnionedChanges(node);
 
     const { t } = useTranslation();
-    const title = t("modal.title.details");
+    const title = t("portal.modal.title.details");
 
     return (
         <ChangeLogModal

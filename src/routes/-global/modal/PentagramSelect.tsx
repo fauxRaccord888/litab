@@ -1,11 +1,15 @@
 import type { GetPentagramsSelectUserInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
+import type { CustomError } from '$lib/error';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useCurrentUser } from '$feature/auth/hooks';
 import { usePentagramNavigate } from "$feature/navigate/hooks"
+import { useDeletePentagram } from '$feature/Pentagram/hooks';
+import { pentagramDeleteErrorHandler } from '$feature/Pentagram/errorHandler';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getPentagramsSelectUserInfoById_QUERY } from '$feature/Pentagram/graphql';
 import PentagramMenuModal from '$feature/Pentagram/components/Modal/PentagramMenuModal';
+import toast from 'react-hot-toast';
 
 export default function PentagramSelect(props: {
     pentagramId: string;
@@ -18,13 +22,14 @@ export default function PentagramSelect(props: {
 
     const pentagram = getFirstNodeOfCollection(data?.pentagramsCollection);
     const { currentUser } = useCurrentUser()
+    const { deletePentagram } = useDeletePentagram()
 
     const isAuthor = (currentUser?.id === pentagram?.users.id && currentUser?.id !== undefined);
 
     const { t } = useTranslation();
     const pentagramNavigate = usePentagramNavigate();
 
-    const title = t("modal.title.pentagramSelectMenu");
+    const title = t("portal.modal.title.pentagramSelectMenu");
 
     const handleClickNavigate = () => {
         if (pentagramId) pentagramNavigate.select(pentagramId)
@@ -34,6 +39,21 @@ export default function PentagramSelect(props: {
         if (pentagramId) pentagramNavigate.update(pentagramId);
     };
 
+    const handleDeletePentagram = () => {
+        if (!pentagramId) return;
+        const response = pentagramDeleteErrorHandler(
+            async () => await deletePentagram({ id: pentagramId })
+        )
+
+        toast.promise(response, {
+            loading: t("pentagram.toast.loading.deletePentagram"),
+            success: t("pentagram.toast.success.deletePentagram"),
+            error: (err: CustomError) => t(err.i18nKey)
+        })
+
+        handleClickClose();
+    }
+
     return (
         <PentagramMenuModal
             title={title}
@@ -41,6 +61,7 @@ export default function PentagramSelect(props: {
             isAuthor={isAuthor}
             handleClickNavigate={handleClickNavigate}
             handleClickUpdate={handleClickUpdate} 
+            handleClickDelete={handleDeletePentagram}
         />
     );
 }

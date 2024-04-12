@@ -10,7 +10,7 @@ export default function NodeInsert(props: { handleClickClose: () => void; }) {
     const { t } = useTranslation();
     const { handleAddNode } = usePentagramAddModalEventHandler();
     const errorToast = useThrottledErrorToast();
-    const title = t("modal.title.addNode");
+    const title = t("portal.modal.title.addNode");
 
     const handleClickAddNode = (item: DBMiniOeuvre) => {
         errorToast(() => {

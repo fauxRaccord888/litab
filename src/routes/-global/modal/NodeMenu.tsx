@@ -15,7 +15,7 @@ export default function NodeMenu(props: { nodeId: string; handleClickClose: () =
     const { t } = useTranslation();
     const errorToast = useThrottledErrorToast();
 
-    const title = t("modal.title.nodeMenu");
+    const title = t("portal.modal.title.nodeMenu");
     const isDeleted = mergedNode?.deleted;
 
     const handleClickRecover = () => {

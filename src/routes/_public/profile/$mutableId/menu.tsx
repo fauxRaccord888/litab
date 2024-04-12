@@ -34,7 +34,7 @@ function ProfileSelectMenuModalComponent(props: PropsWithChildren) {
     const navigate = useProfileNavigate()
     const { t } = useTranslation()
 
-    const title = t("modal.title.profileSelectMenu")
+    const title = t("portal.modal.title.profileSelectMenu")
     const handleClickClose = () => {
         navigate.profileSelect(params.mutableId)
     }
