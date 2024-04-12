@@ -49,7 +49,7 @@ export default function SignIn(props: {
         })
     }
     
-    const title = t("modal.title.signIn");
+    const title = t("portal.modal.title.signIn");
     
     return (
         <SignInModal 

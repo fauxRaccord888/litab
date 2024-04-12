@@ -49,7 +49,7 @@ export default function Register(props: {
         })
     }
 
-    const title = t("modal.title.register");
+    const title = t("portal.modal.title.register");
     
     return (
         <RegisterModal 

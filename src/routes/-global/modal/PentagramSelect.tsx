@@ -24,7 +24,7 @@ export default function PentagramSelect(props: {
     const { t } = useTranslation();
     const pentagramNavigate = usePentagramNavigate();
 
-    const title = t("modal.title.pentagramSelectMenu");
+    const title = t("portal.modal.title.pentagramSelectMenu");
 
     const handleClickNavigate = () => {
         if (pentagramId) pentagramNavigate.select(pentagramId)

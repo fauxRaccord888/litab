@@ -28,7 +28,7 @@ export default function AccountMenu(props: {
         closeModal: handleClickClose
     }
 
-    const title = t("modal.title.accountMenu");
+    const title = t("portal.modal.title.accountMenu");
     
     return (
         <AccountMenuModal
