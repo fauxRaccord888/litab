@@ -1,7 +1,6 @@
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { MouseEvent, TouchEvent } from 'react';
-import { useCallback, useRef } from 'react'
-import { useNavigate } from '@tanstack/react-router';
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
@@ -22,12 +21,10 @@ import toast from 'react-hot-toast';
 import LoadStoredChangeDialog from '$feature/Pentagram/components/PentagramUpsertView/Modal/LoadStoredChangeDialog';
 import PentagramUpsertEditor from '$feature/Pentagram/components/PentagramUpsertView/PentagramUpsertEditor';
 
-export default function PentagramInsertEditor(props: { initiated: boolean | undefined }) {
-    const { initiated } = props
+export default function PentagramInsertEditor() {
     const { t } = useTranslation()
     const throttle = useThrottle();
     const errorToast = useThrottledErrorToast()
-    const navigate = useNavigate()
     const pentgramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate();
     const STYLE = useCSSVariables()
@@ -74,18 +71,9 @@ export default function PentagramInsertEditor(props: { initiated: boolean | unde
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
-    const setInitiated = useCallback((initiated: boolean | undefined) => {
-        navigate({
-            search: (prev) => ({
-                ...prev,
-                initiated
-            })
-        })
-    }, [navigate])
-
     return (
         <>
-            <LoadStoredChangeDialog initiated={initiated} setInitiated={setInitiated} pentagramId={null}/>
+            <LoadStoredChangeDialog pentagramId={null}/>
             <PentagramUpsertEditor
                 ref={parentRef}
 

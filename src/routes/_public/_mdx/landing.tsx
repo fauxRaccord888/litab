@@ -21,27 +21,30 @@ export const Route = createFileRoute('/_public/_mdx/landing')({
 
 function Landing() {
     const { i18n, t } = useTranslation()
-    const { initiated } = Route.useSearch()
     const navigate = useNavigate()
     const accountNavigate = useAccountNavigate()
 
     const handleClickSubmit = () => {
-        accountNavigate.accountMenuModal({
-            redirect: "/pentagram/create"
-        })
+        accountNavigate.accountMenuModal()
     }
 
     const page = Route.useSearch().page ?? 0
 
     const handleClickNext = () => {
         navigate({
-            search: () => ({ page: page + 1 }),
+            search: () => ({ 
+                redirect: "/pentagram/create",
+                page: page + 1 
+            }),
         })
     }
 
     const handleClickPrevious = () => {
         navigate({
-            search: () => ({ page: page - 1 }),
+            search: () => ({ 
+                redirect: "/pentagram/create",
+                page: page - 1 
+            }),
         })
     }
 
@@ -71,7 +74,6 @@ function Landing() {
                 <Carousel
                     {...props}
                     selected={page}
-                    initiated={initiated}
                     handleClickPrevious={handleClickPrevious}
                     handleClickNext={handleClickNext}
                 />
@@ -138,7 +140,7 @@ function Landing() {
             )
         },
         Editor() {
-            return <PentagramInsertEditor initiated={initiated} />
+            return <PentagramInsertEditor />
         }
     }
 

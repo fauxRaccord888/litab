@@ -5,16 +5,15 @@ import "./style/carousel.scss"
 
 type CaroueslProps = PropsWithChildren & {
     selected: number,
-    initiated?: boolean | undefined
     handleClickNext: (p: number) => void,
     handleClickPrevious: (p: number) => void
 }
 
 export default function Carousel(props: CaroueslProps) {
-    const { children, selected, initiated, handleClickNext, handleClickPrevious } = props
+    const { children, selected, handleClickNext, handleClickPrevious } = props
     const [guide, setGuide] = useState(false)
     const guideTimeoutRef = useRef<(() => void) | null>(null)
-    const resetScroll = useResetScroll(undefined, initiated)
+    const resetScroll = useResetScroll()
     const processedChildren = Children.toArray(children)
     
     useEffect(() => {
