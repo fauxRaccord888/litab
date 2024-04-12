@@ -1,4 +1,5 @@
 @import "src/lib/style/atomicMixin";
+@import "src/lib/style/animation/gradientBackground";
 
 .select-meta-info-component {
     @include flex;
@@ -18,11 +19,22 @@
 
     .select-meta-info-component__interaction-container {
         @include flex;
-        @include justify-center;
-        .more-icon-component {
-            @include fill-sm(rgb(var(--font-color)));
-            width: calc(var(--base-size) * 1.5);
-            height: calc(var(--base-size) * 1.5);
+        @include flex-center;
+        @include child-left-m(calc(var(--base-size) * 0.75));
+
+        .select-meta-info-component__update-button {
+            @include pointer;
+            @include gradient-background;
+        }
+        
+        .select-meta-info-component__more-icon-container {
+            @include flex;
+            @include justify-center;
+            .more-icon-component {
+                @include fill-sm(rgb(var(--font-color)));
+                width: calc(var(--base-size) * 1.5);
+                height: calc(var(--base-size) * 1.5);
+            }
         }
     }
 }

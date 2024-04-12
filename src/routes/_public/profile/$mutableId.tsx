@@ -87,6 +87,7 @@ function Profile() {
         pentagramMenuModal: (id: string) => pentagramNavigate.pentagramSelectModal(id),
         nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
+        navigateToUpdate:(id: string) => pentagramNavigate.update(id),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 

@@ -1,0 +1,18 @@
+@mixin gradient-background {
+    background: linear-gradient(-45deg, rgb(var(--primary)), rgb(var(--danger)), rgb(var(--info)), rgb(var(--secondary)));
+    animation: gradient 10s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
+    background-size: 400%, 400%;
+    transition: 0.8s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

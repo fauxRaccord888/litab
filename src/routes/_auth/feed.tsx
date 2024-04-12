@@ -20,11 +20,13 @@ function Feed() {
     const { feed, recommendedUsers, hasNextPage, fetchMoreFeed } = useFeed()
     const navigate = usePentagramNavigate();
     const oeuvreNavigate = useOeuvreNavigate()
+    const pentagramNavigate = usePentagramNavigate()
 
     const eventHandler: PentagramEventHandler & OeuvreEventHandler = {
         pentagramMenuModal: (pentagramId: string) => navigate.pentagramSelectModal(pentagramId),
         nodeSelectModal: (nodeId: string) => navigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => navigate.revisionSelectModal(revisionId),
+        navigateToUpdate:(id: string) => pentagramNavigate.update(id),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId)
     }
 

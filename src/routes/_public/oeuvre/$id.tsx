@@ -51,6 +51,7 @@ function Oeuvre() {
         pentagramMenuModal: (id: string) => pentagramNavigate.pentagramSelectModal(id),
         nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
+        navigateToUpdate:(id: string) => pentagramNavigate.update(id),
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
         selectGenreTag: (genreId: string) => genreNavigate.select(genreId)

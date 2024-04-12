@@ -18,6 +18,7 @@ export type PentagramEventHandler = {
     pentagramMenuModal?: (pentagramId: string) => void,
     nodeSelectModal?: (nodeId: string) => void,
     revisionSelectModal?: (revisionId: string) => void,
+    navigateToUpdate?: (pentagramId: string) => void
 }
 
 export type PentagramPlayerEventHandler = {
