@@ -47,7 +47,6 @@ export default forwardRef(function PentagramUpsertEditor(props: PentagramUpsertE
 
         eventHandler
     } = props
-
     
     return (
         <div className="pentagram-upsert-editor-component"> 

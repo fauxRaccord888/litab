@@ -1,5 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react"
 import './style/layout.scss'
+import { useRouter } from "@tanstack/react-router"
+import Button from "$lib/components/common/Button"
 
 interface LayoutProps extends PropsWithChildren{
     left?: ReactNode
@@ -7,6 +9,7 @@ interface LayoutProps extends PropsWithChildren{
 }
 
 export default function Layout(props: LayoutProps) {
+    const router = useRouter()
     return (
         <>
             <div id="portal-root" className="portal-root"></div>
@@ -18,7 +21,12 @@ export default function Layout(props: LayoutProps) {
                 </div>
 
                 <div className="main-section">
-                    {props.children}
+                    <div className="main-section__top-nav-bar">
+                        <Button onClick={() => router.history.back()}>←</Button>
+                    </div>
+                    <div className="main-section__inner-container">
+                        {props.children}
+                    </div>
                 </div>
 
                 <div className="right-sidebar-section">

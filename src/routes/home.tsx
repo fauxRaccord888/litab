@@ -7,6 +7,7 @@ export const Route = createFileRoute('/home')({
         if (currentUser) {
             throw redirect({
                 to: '/feed',
+                resetScroll: false
             })
         } else {
             throw redirect({
