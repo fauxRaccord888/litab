@@ -15,9 +15,10 @@ export function useMerge() {
     const nodes = useSelector((state: AppRootState) => nodeSelector.selectEntities(state))
     const changes = useSelector((state: AppRootState) => pendingChangeSelector.selectEntities(state))
     const mergedNodeIds = useSelector((state: AppRootState) => mergedNodeSelector.selectIds(state))
-
+    
     useEffect(() => {
         const ids = new Set([...Object.keys(nodes), ...Object.keys(changes), ...mergedNodeIds])
+        const mergedNodeIdsSet = new Set(mergedNodeIds)
         const prevChanges = prevChangesRef.current
         const prevSelectedId = prevSelectedIdRef.current
         
@@ -27,7 +28,9 @@ export function useMerge() {
                 Object.keys(prevChanges).length === 0 ||
                 id === selectedId ||
                 id === prevSelectedId ||
-                !deepCompare(prevChanges[id], changes[id])
+                !deepCompare(prevChanges[id], changes[id]) ||
+                !changes[id] ||
+                !mergedNodeIdsSet.has(id)
             )
             if (!needMerge) return
             dispatch(
