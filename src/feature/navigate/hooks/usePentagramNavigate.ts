@@ -1,8 +1,11 @@
+import { closeModal, setInsertNode, setNodeUpsertId, setNodeViewId, setPentagramMenuId, setRevisionViewId } from "$feature/portal/store/modalSlice"
 import { useNavigate } from "@tanstack/react-router"
 import { useCallback } from "react"
+import { useDispatch } from "react-redux"
 
 export function usePentagramNavigate() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const pentagramInsertNavigator = useCallback(() => {
         navigate({ 
@@ -17,30 +20,19 @@ export function usePentagramNavigate() {
                 pentagramId,
             },
         })
-    }, [navigate])
+        dispatch(closeModal())
+    }, [dispatch, navigate])
 
     const nodeUpsertModalNavigator = useCallback((
         nodeUpsertId: string,
     ) => {
-        navigate({
-            search: (prev) => ({
-                page: prev.page,
-                initiated: prev.initiated,
-                nodeUpsertId,
-            }),
-        })
-    }, [navigate])
+        dispatch(setNodeUpsertId(nodeUpsertId))
+    }, [dispatch])
 
     const nodeInsertNavigator =  useCallback((
     )=> {
-        navigate({
-            search: (prev) => ({
-                page: prev.page,
-                initiated: prev.initiated,
-                insertNode: true,
-            }),
-        })
-    }, [navigate])
+        dispatch(setInsertNode())
+    }, [dispatch])
 
     const pentagramSelectNavigator = useCallback((pentagramId: string) => {
         navigate({ 
@@ -49,37 +41,26 @@ export function usePentagramNavigate() {
                 pentagramId,
             },
         })
-    }, [navigate])
+        dispatch(closeModal())
+    }, [dispatch, navigate])
 
     const nodeSelectModalNavigator = useCallback((
         nodeViewId: string,
     ) => {
-        navigate({
-            search: {
-                nodeViewId,
-            },
-        })
-    }, [navigate])
+        dispatch(setNodeViewId(nodeViewId))
+    }, [dispatch])
 
     const revisionSelectModalNavigator = useCallback((
         revisionViewId: string,
     )=> {
-        navigate({
-            search: {
-                revisionViewId,
-            },
-        })
-    }, [navigate])
+        dispatch(setRevisionViewId(revisionViewId))
+    }, [dispatch])
 
     const pentagramSelectModalNavigator = useCallback((
         pentagramMenuId: string,
     ) => {
-        navigate({
-            search: {
-                pentagramMenuId,
-            },
-        })
-    }, [navigate])
+        dispatch(setPentagramMenuId(pentagramMenuId))
+    }, [dispatch])
 
     return {
         select: pentagramSelectNavigator,

@@ -1,34 +1,24 @@
+import { closeModal, setAccountMenu, setRegister, setSignIn } from "$feature/portal/store/modalSlice"
 import { useNavigate } from "@tanstack/react-router"
 import { useCallback } from "react"
+import { useDispatch } from "react-redux"
 
 export function useAccountNavigate() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const registerNavigator = useCallback(() => {
-        navigate({ 
-            search: (prev) => ({
-                page: prev.page,
-                initiated: prev.initiated,
-                redirect: prev.redirect,
-                register: true
-            }),
-        })
-    }, [navigate])
+        dispatch(setRegister())
+    }, [dispatch])
 
     const signInNavigator = useCallback(() => {
-        navigate({
-            search: (prev) => ({
-                page: prev.page,
-                initiated: prev.initiated,
-                redirect: prev.redirect,
-                signIn: true
-            }),
-        })
-    }, [navigate])
+        dispatch(setSignIn())
+    }, [dispatch])
 
     const updateNavigator = useCallback(() => {
         navigate({ to: '/account/update'})
-    }, [navigate])
+        dispatch(closeModal())
+    }, [dispatch, navigate])
 
     const signOutNavigator = useCallback(() => {
         navigate({ 
@@ -36,16 +26,9 @@ export function useAccountNavigate() {
         })
     }, [navigate])
 
-    const acocuntMenuModalNavigator = useCallback((payload?: {redirect?: string}) => {
-        navigate({ 
-            search: (prev) => ({
-                redirect: payload?.redirect,
-                page: prev.page,
-                initiated: prev.initiated,
-                accountMenu: true
-            }),
-        })
-    }, [navigate])
+    const acocuntMenuModalNavigator = useCallback(() => {
+        dispatch(setAccountMenu())
+    }, [dispatch])
 
     return {
         register: registerNavigator,
