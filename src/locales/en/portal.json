@@ -1,0 +1,32 @@
+{
+    "confirm": {
+        "button": {
+          "affirmative": "Confirm",
+          "negative": "Cancel"
+        },
+        "message": {
+          "deletePentagram": "The selected pentagram will be permanently deleted and cannot be recovered. Are you sure you want to delete it?"
+        }
+    },      
+
+    "modal": {
+        "title": {
+            "followers": "Followers",
+            "followings": "Followings",
+            "mutualFollowers": "Mutual followers",
+            "addNode": "New oeuvre",
+            "details": "Details",
+            "pentagramSelectMenu": "Pentagram Menu",
+            "nodeMenu": "Oeuvre Menu",
+            "profileSelectMenu": "Profile Menu",
+            "accountMenu": "Account Menu",
+            "register": "Register",
+            "signIn": "Sign In"
+        },
+    
+        "message": {
+            "switchToRegister": "Not a member yet?",
+            "switchToSignIn": "Are you already a member?"
+        }
+    }
+}

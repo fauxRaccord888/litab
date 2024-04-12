@@ -2,7 +2,10 @@
     "menu": {
         "navigate": "Move to this Pentagram",
         "update": "Edit Pentagram",
-        "remove": "Delete Pentagram"
+        "delete": "Delete Pentagram"
+    },
+    "button": {
+        "update": "Update"
     },
     "toast": {
         "success": {
@@ -10,6 +13,8 @@
             "removeNode": "Selected oeuvre will be permanently deleted after you finalize changes",
             "revertChange": "Your change has been reverted",
             "addNode": "New oeuvre has been added",
+            
+            "deletePentagram": "Pentagram has successfully deleted.",
             "updatePentagram": "Pentagram has successfully updated",
             "createPentagram": "Pentagram has been successfully added"
         },
@@ -20,6 +25,7 @@
             "pentagramMutationFailed": "Failed to register pentagram. If the same problem persists, please leave an inquiry."
         },
         "loading": {
+            "deletePentagram": "Waiting for Pentagram to be deleted.",
             "updatePentagram": "Waiting for Pentagram to be updated.",
             "createPentagram": "Waiting for Pentagram to be added."
         }
