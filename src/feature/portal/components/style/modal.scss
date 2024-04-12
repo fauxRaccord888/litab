@@ -10,6 +10,7 @@
     left: 0;
     top: 0;
     background-color: rgba(var(--modal-backdrop), 0.8);
+    z-index: 1;
 
     .modal-component__main-container {
         @include rounded-lg;

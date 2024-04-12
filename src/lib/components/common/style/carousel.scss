@@ -1,4 +1,5 @@
 @import "src/lib/style/atomicMixin";
+@import "src/lib/style/animation/gradientBackground";
 
 .carousel-component {
     .carousel-component__inner-container {
@@ -64,8 +65,7 @@
                 }
 
                 &.carousel-component__button--guide {
-                    background: linear-gradient(#FF8D28, #28FF7C, #B128FF);
-                    animation: rotate 3s linear infinite;
+                    @include gradient-background
                 }
             }
         }
