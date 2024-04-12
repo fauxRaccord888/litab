@@ -21,3 +21,19 @@ export async function pentagramMutationErrorHandler<T>(func: () => T) {
         throw new PentagramTransactionError()
     }
 }
+
+export async function pentagramDeleteErrorHandler<T>(func: () => T) {
+    try {
+        const result = await func()
+        return result
+    } catch(e) {
+        if (!isError(e)) {
+            throw new CustomUnknownError()
+        }
+
+        if (isCustomError(e)) {
+            throw e
+        }
+        throw new PentagramTransactionError()
+    }
+}
