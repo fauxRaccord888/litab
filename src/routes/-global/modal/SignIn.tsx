@@ -3,6 +3,7 @@ import type { CustomError } from '$lib/error';
 import type { SignInPayload } from '$feature/auth/types';
 import type { GuestMenuModalEventHandler } from '$feature/Account/types';
 /* hooks */
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from '@tanstack/react-router';
 import { useAccountNavigate } from '$feature/navigate/hooks';
@@ -11,6 +12,7 @@ import { useAuthMutationHandler } from '$feature/auth/hooks';
 import SignInModal from '$feature/Account/components/Modal/SignInModal';
 /* utils */
 import toast from 'react-hot-toast';
+import { setSession } from '$feature/auth/store/authSlice';
 import { signInErrorHandler } from '$feature/Account/errorHandler';
 
 export default function SignIn(props: { 
@@ -21,6 +23,8 @@ export default function SignIn(props: {
     const { redirect, handleClickClose } = props
     const navigate = useNavigate()
     const accountNavigate = useAccountNavigate()
+    const dispatch = useDispatch()
+
     const { signIn } = useAuthMutationHandler()
     const [signInHandler] = signIn
 
@@ -34,7 +38,10 @@ export default function SignIn(props: {
         const response = signInErrorHandler(
             () => {
                 const res = signInHandler(payload)
-                res.then(() => navigate({to: redirect}))
+                res.then(({data}) => {
+                    navigate({to: redirect})
+                    dispatch(setSession(data.user))
+                })
             }
         )
     
