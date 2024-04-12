@@ -7,7 +7,7 @@ export function useUtilNavigate() {
     const feedNavigator = useCallback(() => {
         navigate({ 
             to: "/feed",
-            search: {},
+            resetScroll: false
         })
     }, [navigate])
 
@@ -20,21 +20,18 @@ export function useUtilNavigate() {
     const errorNavigator = useCallback(() => {
         navigate({ 
             to: "/error",
-            search: {},
         })
     }, [navigate])
 
     const homeNavigator = useCallback(() => {
         navigate({ 
             to: "/home",
-            search: {},
-        })
+       })
     }, [navigate])
 
     const landingNavigator = useCallback(() => {
         navigate({ 
             to: "/landing",
-            search: {},
         })
     }, [navigate])
 

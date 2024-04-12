@@ -10,9 +10,5 @@ export function getScrollKey(location: ParsedLocation) {
         return splittedPath.slice(0, 3).join("/")
     }
 
-    if (splittedPath[1] === 'feed') {
-        return null
-    }
-
     return splittedPath.join("/")
 }
