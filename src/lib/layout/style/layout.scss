@@ -45,6 +45,23 @@
             display: inline;
             padding-bottom: 0;
         }
+        
+        .main-section__top-nav-bar {
+            position: fixed;
+            min-width: min(600px, 100vw);
+            max-width: 600px;
+            height: 48px;
+            background-color: rgb(var(--background-color));
+            z-index: 3;
+            border-bottom: rgb(var(--font-color), 0.5) 2px solid;
+            font-size: calc(var(--base-size) * 1.25);
+        }
+
+        .main-section__inner-container {
+            position: relative;
+            top: 48px;
+            margin-bottom: 90px;
+        }
     }
     
     .right-sidebar-section {
