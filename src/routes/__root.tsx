@@ -18,17 +18,7 @@ type RootContext = {
 }  
 
 export type RootSearch = {
-    nodeUpsertId?: string | undefined
-    insertNode?: boolean | undefined
-    pentagramMenuId?: string | undefined
-    nodeViewId?: string | undefined
-    revisionViewId?: string | undefined
-    accountMenu?: boolean | undefined
-    register?: boolean | undefined
-    signIn?: boolean | undefined
-
     page?: number | undefined
-    initiated?: boolean | undefined
     redirect?: string | undefined
 }
 
@@ -41,17 +31,7 @@ export const Route = createRootRouteWithContext<RootContext>()({
     },
     validateSearch: (search: Record<string, unknown>): RootSearch => {
         return {
-            nodeUpsertId: (search.nodeUpsertId as string) || undefined,
-            insertNode: (search.insertNode as boolean) || undefined,
-            pentagramMenuId: (search.pentagramMenuId as string) || undefined,
-            nodeViewId: (search.nodeViewId as string) || undefined,
-            revisionViewId: (search.revisionViewId as string) || undefined,
-            accountMenu: (search.accountMenu as boolean) || undefined,
-            register: (search.register as boolean) || undefined,
-            signIn: (search.signIn as boolean) || undefined,
-
             page: (search.page as number) || undefined,
-            initiated: (search.initiated as boolean) || undefined,
             redirect: (search.redirect as string) || undefined
         }
     },

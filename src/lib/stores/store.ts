@@ -13,10 +13,12 @@ import storage from 'redux-persist/lib/storage'
 
 import pentagramUpsertReducer from "$feature/Pentagram/store/pentagramUpsertSlice";
 import authReducer from "$feature/auth/store/authSlice";
+import modalReducer from "$feature/portal/store/modalSlice";
 
 const baseReducer = combineReducers({
     pentagramUpsert: pentagramUpsertReducer,
-    auth: authReducer
+    auth: authReducer,
+    modal: modalReducer
 })
 
 const persistConfig = {

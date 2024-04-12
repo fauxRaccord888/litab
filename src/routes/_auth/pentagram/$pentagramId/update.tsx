@@ -3,8 +3,7 @@ import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { GetPentagramUpdateInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
 import type { MouseEvent, TouchEvent } from 'react';
 
-import { useCallback, useRef } from 'react';
-import { useNavigate } from '@tanstack/react-router'
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate, useUtilNavigate } from "$feature/navigate/hooks"
@@ -65,7 +64,6 @@ export const Route = createFileRoute('/_auth/pentagram/$pentagramId/update')({
 
 function PentagramUpdate() {
     const { pentagramId }  = Route.useParams()
-    const { initiated } = Route.useSearch()
     const { pentagram } = Route.useLoaderData()
     
     const { t } = useTranslation()
@@ -73,7 +71,6 @@ function PentagramUpdate() {
     const errorToast = useThrottledErrorToast()
     const STYLE = useCSSVariables()
 
-    const navigate = useNavigate()
     const pentagramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
     const utilNavigate = useUtilNavigate()
@@ -138,18 +135,9 @@ function PentagramUpdate() {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
-    const setInitiated = useCallback(() => {
-        navigate({
-            search: (prev) => ({
-                ...prev,
-                initiated: true
-            })
-        })
-    }, [navigate])
-
     return (
         <>
-            <LoadStoredChangeDialog initiated={initiated} setInitiated={setInitiated} pentagramId={pentagramId}/>
+            <LoadStoredChangeDialog pentagramId={pentagramId}/>
             <PentagramUpdateView
                 ref={parentRef}
 

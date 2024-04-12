@@ -14,9 +14,6 @@ export function useUtilNavigate() {
     const searchNavigator = useCallback(() => {
         navigate({ 
             to: "/search",
-            search: {
-                initiated: undefined
-            },
         })
     }, [navigate])
 

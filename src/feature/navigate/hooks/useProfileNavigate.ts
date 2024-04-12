@@ -1,12 +1,16 @@
+import { closeModal } from "$feature/portal/store/modalSlice"
 import { useNavigate } from "@tanstack/react-router"
 import { useCallback } from "react"
+import { useDispatch } from "react-redux"
 
 export function useProfileNavigate() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const profileSelectNavigator = useCallback((mutableId: string) => {
         navigate({ to: '/profile/$mutableId', params: { mutableId } })
-    }, [navigate])
+        dispatch(closeModal())
+    }, [dispatch, navigate])
 
     const profileSelectMenuModalNavigator = useCallback((mutableId: string) => {
         navigate({ to: '/profile/$mutableId/menu', params: { mutableId } })

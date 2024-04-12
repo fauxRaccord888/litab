@@ -1,5 +1,7 @@
 import type { RootSearch } from 'routes/__root';
-import { useNavigate } from '@tanstack/react-router'
+import type { AppRootState } from '$lib/stores/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '$feature/portal/store/modalSlice';
 
 import PentagramSelect from './modal/PentagramSelect';
 import NodeMenu from './modal/NodeMenu';
@@ -14,6 +16,7 @@ export default function ModalController(props: {
     search: RootSearch
 }) {
     const { search } = props
+    const { redirect } = search
     const { 
         nodeUpsertId, 
         insertNode, 
@@ -23,29 +26,11 @@ export default function ModalController(props: {
         accountMenu, 
         register, 
         signIn,
-        redirect
-    } = search
-
-    const navigate = useNavigate()
+    } = useSelector((state: AppRootState) => state.modal)
+    const dispatch = useDispatch()
 
     const handleClickClose = () => {
-        navigate({
-            params: {},
-            search: (prev) => ({
-                nodeUpsertId: undefined,
-                insertNode: undefined,
-                pentagramMenuId: undefined,
-                nodeViewId: undefined,
-                revisionViewId: undefined,
-                accountMenu: undefined,
-                register: undefined,
-                signIn: undefined,
-                redirect: undefined,
-
-                page: prev.page,
-                initiated: prev.initiated
-            }),
-        })
+        dispatch(closeModal())
     }
 
     return (

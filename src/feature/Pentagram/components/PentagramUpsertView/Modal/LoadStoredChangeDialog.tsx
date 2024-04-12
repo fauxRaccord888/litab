@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react"
 import type { AppRootState } from "$lib/stores/store"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { usePentagramNavigate } from "$feature/navigate/hooks"
@@ -10,12 +10,11 @@ import Button from "$lib/components/common/Button"
 import "./style/loadStoredChangeDialog.scss"
 
 export default function LoadStoredChangeDialog(props: { 
-    initiated?: boolean | undefined,
-    setInitiated: (p: boolean | undefined) => void,
     pentagramId: string | null, 
 }) {
-    const { initiated, setInitiated, pentagramId } = props
+    const { pentagramId } = props
     const { t } = useTranslation()
+    const [initiated, setInitiated] = useState(false) 
     const dispatch = useDispatch()
 
     const storedPentagramId = useSelector((state: AppRootState) => state.pentagramUpsert.pentagramId)
@@ -39,8 +38,8 @@ export default function LoadStoredChangeDialog(props: {
     const onClickAbortChanges = (e: MouseEvent) => {
         e.stopPropagation()
         dispatch(abortChanges())
-        setInitiated(true)
         dispatch(setPentagramId(pentagramId))
+        setInitiated(true)
     }
     
     const onClickPreserveChanges = (e: MouseEvent) => {
@@ -56,7 +55,7 @@ export default function LoadStoredChangeDialog(props: {
 
     return (
         <>
-            {Boolean(!initiated) &&
+            {!initiated &&
             storedChangesExist &&
                 <Modal title={t('pentagram.dialog.title.temp')} >
                     <div className="load-stored-change-dialog__inner-container">

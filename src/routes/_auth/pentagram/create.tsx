@@ -1,9 +1,8 @@
 import type { CustomError } from '$lib/error';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { MouseEvent, TouchEvent } from 'react';
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from '@tanstack/react-router'
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate, useUtilNavigate } from "$feature/navigate/hooks"
 import { useCSSVariables } from '$lib/hooks/useCSSVariables';
@@ -39,12 +38,10 @@ export const Route = createFileRoute('/_auth/pentagram/create')({
 
 function PentagramInsert() {
     const { t } = useTranslation()
-    const { initiated } = Route.useSearch()
     const throttle = useThrottle();
     const errorToast = useThrottledErrorToast()
     const STYLE = useCSSVariables()
 
-    const navigate = useNavigate()
     const utilNavigate = useUtilNavigate()
     const pentgramNavigate = usePentagramNavigate()
     const oeuvreNavigate = useOeuvreNavigate();
@@ -107,18 +104,9 @@ function PentagramInsert() {
         selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
     }
 
-    const setInitiated = useCallback(() => {
-        navigate({
-            search: (prev) => ({
-                ...prev,
-                initiated: true
-            })
-        })
-    }, [navigate])
-
     return (
         <>
-            <LoadStoredChangeDialog initiated={initiated} setInitiated={setInitiated} pentagramId={null}/>
+            <LoadStoredChangeDialog pentagramId={null}/>
             <PentagramUpdateView
                 ref={parentRef}
 
