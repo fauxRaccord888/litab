@@ -7,4 +7,8 @@
     .pentagram-menu-modal-component__button--update {
         background-color: rgba(var(--info), 0.5);
     }
+
+    .pentagram-menu-modal-component__button--delete {
+        background-color: rgba(var(--danger), 0.5);
+    }
 }
