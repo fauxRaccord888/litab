@@ -18,7 +18,7 @@ export function useAuthMutationHandler() {
         if (response.error) {
             throw response.error
         }
-        return response        
+        return response
     }, [isPending, registerMutation])
 
     const signInHandler = useCallback(async (
@@ -30,7 +30,7 @@ export function useAuthMutationHandler() {
         if (response.error) {
             throw response.error
         }
-        return response        
+        return response
     }, [isPending, signInMutation])
 
     return { 

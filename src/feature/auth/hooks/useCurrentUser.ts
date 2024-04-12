@@ -1,7 +1,7 @@
 import type { GetUserByIdQuery } from "$lib/graphql/__generated__/graphql";
 import type { AppRootState } from "$lib/stores/store";
 import { useSelector, useStore } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { checkUserAndStore } from "../utils";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
@@ -21,7 +21,7 @@ export function useCurrentUser() {
         variables: { id: sessionUser?.id ?? "" }
     })
 
-    const currentUser = getFirstNodeOfCollection(data?.usersCollection)
+    const currentUser = useMemo(() => getFirstNodeOfCollection(data?.usersCollection), [data?.usersCollection])
 
     if (!sessionUser) return { loading, currentUser: null }
     return { loading, currentUser }
