@@ -5,6 +5,7 @@ import SearchIcon from '$lib/components/icons/SearchIcon'
 import UserIcon from '$lib/components/icons/UserIcon'
 import PentagonIcon from '$lib/components/icons/PentagonIcon'
 import PlusIcon from '$lib/components/icons/PlusIcon'
+import PenIcon from '$lib/components/icons/PenIcon'
 
 import "./style/navigationBar.scss"
 
@@ -43,6 +44,13 @@ export default function NavigationBar() {
                 </div>
                 <span className="navigation-bar-component__link-description">
                     {t("navigate.route.pentagram")}
+                </span>
+            </a>
+
+            <a onClick={utilNavigate.metaData} className="navigation-bar-component__link-container">
+                <PenIcon />
+                <span className="navigation-bar-component__link-description">
+                    {t("navigate.route.metaData")}
                 </span>
             </a>
         </div>
