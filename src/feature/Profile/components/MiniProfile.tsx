@@ -1,19 +1,18 @@
-import type { DBMiniProfile, ProfileInfoCardOptions } from "../types";
+import type { DBMiniProfile, ProfileEventHandler, ProfileInfoCardOptions } from "../types";
 
 import { useHandleFollow } from '../hooks';
-import { useProfileNavigate } from '$feature/navigate/hooks';
 import ProfileInfoCard from './UserInfoCard';
 
 import "./style/miniProfile.scss"
 
 type MiniProfileProps = {
     item: DBMiniProfile,
-    options: ProfileInfoCardOptions
+    options: ProfileInfoCardOptions,
+    eventHandler: ProfileEventHandler
 }
 
 export default function MiniProfile(props: MiniProfileProps) {
-    const { item, options } = props
-    const navigate = useProfileNavigate()
+    const { item, options, eventHandler } = props
     const handleFollow = useHandleFollow()
 
     const onFollow = () => {
@@ -38,7 +37,7 @@ export default function MiniProfile(props: MiniProfileProps) {
                 }}
                 eventHandler={{
                     follow: onFollow,
-                    selectProfile: navigate.profileSelect
+                    ...eventHandler
                 }}
             />
         </div>

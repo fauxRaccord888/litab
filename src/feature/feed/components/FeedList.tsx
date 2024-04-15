@@ -42,6 +42,7 @@ export default function FeedList(props: FeedListProps) {
             {items.length === 0 &&
                 <FollowRecommendation
                     recommendedUsers={recommendedUsers}
+                    eventHandler={eventHandler}
                 />
             }
         </div>

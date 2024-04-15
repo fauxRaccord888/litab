@@ -1,3 +1,4 @@
+import type { DBMiniProfile } from "$feature/Profile/types";
 import type { ISlotRenderConfig } from "$feature/template/type";
 import type { PentagramNodesInfoFragment, PentagramRevisionsMinimalInfoFragment, PentagramsSelectInfoFragment, PentagramsUpdateInfoFragment } from "$lib/graphql/__generated__/graphql";
 
