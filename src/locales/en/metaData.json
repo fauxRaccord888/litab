@@ -1,0 +1,88 @@
+{
+    "upsertForm": {
+        "message": {
+            "browseFile": "Find File",
+            "pitfall": "<0>Modifying works/artists/genres will also be applied to other people's pentagrams.</0> <0>Changing to a different work/artist/genre arbitrarily will restrict usage without warning.</0>"
+        },
+        "title": {
+            "cover": "Image Registration",
+            "oeuvreMetaData": "Artist/Genre Information"
+        }
+    },
+    "cover": {
+        "toast": {
+            "success": "The cover image has been successfully registered.",
+            "loading": "Waiting for cover image registration."
+        }
+    },
+    "oeuvres": {
+        "title": {
+            "insert": "Add Unregistered Oeuvres",
+            "update": "Edit Oeuvres",
+            "artistsAdded": "Artist Information",
+            "genresAdded": "Genre Information"
+        },
+        "button": {
+            "artistsModal": "Search Artist Information",
+            "genresModal": "Search Genre Information"
+        },
+        "placeholder": {
+            "title": "Title",
+            "description": "Description"
+        },
+        "toast": {
+            "loading": {
+                "insert": "Waiting to register Oeuvres.",
+                "update": "Waiting to update Oeuvres.",
+                "relationCreate": "Waiting to register Oeuvres-related information.",
+                "relationDelete": "Waiting to delete Oeuvres-related information."
+            },
+            "success": {
+                "insert": "Oeuvres registration completed successfully.",
+                "update": "Oeuvres update completed successfully.",
+                "relationCreate": "Oeuvres-related information has been successfully registered.",
+                "relationDelete": "Oeuvres-related information has been successfully deleted."
+            }
+        }
+    },
+    "artists": {
+        "title": {
+            "insert": "Add Unregistered Artist",
+            "update": "Edit Artist"
+        },
+        "placeholder": {
+            "title": "Name",
+            "description": "Bio"
+        },
+        "toast": {
+            "loading": {
+                "insert": "Waiting to register artist.",
+                "update": "Waiting to update artist."
+            },
+            "success": {
+                "insert": "Artist registration completed successfully.",
+                "update": "Artist update completed successfully."
+            }
+        }
+    },
+    "genres": {
+        "title": {
+            "insert": "Add Unregistered Genre",
+            "update": "Edit Genre"
+        },
+        "placeholder": {
+            "title": "Genre Name",
+            "description": "Description"
+        },
+        "toast": {
+            "loading": {
+                "insert": "Waiting to register genre.",
+                "update": "Waiting to update genre."
+            },
+            "success": {
+                "insert": "Genre registration completed successfully.",
+                "update": "Genre update completed successfully."
+            }
+        }
+    }
+}

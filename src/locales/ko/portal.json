@@ -21,12 +21,22 @@
             "profileSelectMenu": "프로필 메뉴",
             "accountMenu": "계정 메뉴",
             "register": "회원가입",
-            "signIn": "로그인"
+            "signIn": "로그인",
+            "metaData": "미등록 정보 추가",
+
+            "genresRelation": "장르 정보 검색",
+            "artistsRelation": "작가 정보 검색"
         },
     
         "message": {
             "switchToRegister": "아직 회원이 아니신가요?",
             "switchToSignIn": "혹시 이미 회원이신가요?"
-        }    
+        },
+
+        "button": {
+            "navigateToAddOeuvre": "DB 미등록 작품 추가하러 가기",
+            "navigateToAddArtist": "DB 미등록 작가 추가하러 가기",
+            "navigateToAddGenre": "DB 미등록 장르 추가하러 가기"
+        }
     }
 }

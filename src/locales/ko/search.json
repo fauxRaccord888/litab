@@ -2,6 +2,9 @@
     "title": {
         "index": "검색"
     },
+    "message": {
+        "navigateToRegister": "찾는 내용이 없다면 직접 등록해볼까요?"
+    },
     "result": {
         "empty": "요청하신 검색어에 대한 결과가 존재하지 않습니다."
     }
