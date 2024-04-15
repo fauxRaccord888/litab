@@ -12,7 +12,7 @@ type TabOptions = {
 }
 
 type TabProps = {
-    items: TabItem[]
+    items: (TabItem | false | undefined)[]
     options?: TabOptions
 }
 
@@ -32,23 +32,25 @@ export default function Tab(props: TabProps) {
         ].join(" ")}>
             <div className="tab-component__header">
                 {items.map((item, idx) => (
-                    <span 
-                        key={idx}
-                        className={[
-                            "tab-component__header-label",
-                            idx === selected ? "tab-component__header-label--selected" : ""
-                        ].join(" ")}
-                        onClick={(e) => handleClickItem(e, idx)}    
-                    >
-                        {item.label}
-                    </span>
+                    item && (
+                        <span 
+                            key={idx}
+                            className={[
+                                "tab-component__header-label",
+                                idx === selected ? "tab-component__header-label--selected" : ""
+                            ].join(" ")}
+                            onClick={(e) => handleClickItem(e, idx)}    
+                        >
+                            {item.label}
+                        </span>
+                    )
                 ))}
             </div>
 
             <div className="tab-component__body">
                 {items.map((item, idx) => {
                     if (idx !== selected) return null
-                    return (
+                    return item && (
                         item.items.map((it) => (
                             <div key={it.key} className="tab-component__item-container">
                                 <div className="tab-component__item-inner-container">
