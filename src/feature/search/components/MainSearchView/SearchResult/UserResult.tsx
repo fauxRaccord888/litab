@@ -10,6 +10,7 @@ type UserResultProps = {
 
 export default function UserResult(props: UserResultProps) {
     const { queryResults, eventHandler } = props
+    const { data } = queryResults
     const { t } = useTranslation()
     if (!(data && "usersCollection" in data)) return null
 

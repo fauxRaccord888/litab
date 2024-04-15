@@ -1,8 +1,13 @@
 import type { DBOeuvre } from "$feature/Oeuvre/types";
+import type { SearchDropdownKey } from "$feature/search/types";
 
-import OeuvreSearchView from "$feature/Oeuvre/components/OeuvreSearchView";
+import { useState } from "react";
+import { useSearchQuery } from "$feature/search/hooks";
+import { useOeuvreNavigate } from "$feature/navigate/hooks";
+import { SEARCH } from "$feature/search/constants";
+
 import Modal from "$feature/portal/components/Modal";
-
+import MainSearchView from "$feature/search/components/MainSearchView";
 import './style/addNodeModal.scss'
 
 type AddNodeModalProps = {
@@ -13,18 +18,37 @@ type AddNodeModalProps = {
 
 export default function AddNodeModal(props: AddNodeModalProps) {
     const { title, handleClickClose, handleAddNode } = props
+    const [keyword, setKeyword] = useState("")
+    const [searchOeuvres, result] = useSearchQuery(keyword).oeuvres
+    const oeuvreNavigate = useOeuvreNavigate()
+
+    const handleSearchOeuvres = async (
+        _key: SearchDropdownKey | null | undefined, 
+        keywordParam: string, 
+        includeCursor?: boolean
+    ) => {
+        setKeyword(keywordParam)
+        searchOeuvres(keywordParam, includeCursor)
+    }
+
+    const keys = ["oeuvres"] satisfies SearchDropdownKey[]
 
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
             <div className="add-node-modal-component__inner-cotainer">
-                <OeuvreSearchView
-                    oeuvreInfoCardRenderConfig={{
-                        coverImage: true,
-                        title: true,
-                        mainInfo: true,
-                        subInfo: false
+                <MainSearchView<typeof keys[number]>
+                    queryResults={{
+                        oeuvres: result
                     }}
-                    handleClickResult={handleAddNode}
+                    dropdownProps={{
+                        keys,
+                        name: SEARCH.dropdownName,
+                    }}
+                    eventHandler={{
+                        search: handleSearchOeuvres,
+                        selectOeuvre: handleAddNode,
+                        navigateToInsertMetaData: oeuvreNavigate.add
+                    }}
                 />
             </div>
         </Modal>
