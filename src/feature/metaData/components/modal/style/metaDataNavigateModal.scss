@@ -1,0 +1,11 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/modalMixin";
+
+.meta-data-navigate-modal-component__inner-cotainer{
+    @include menu-modal;
+    
+    .meta-data-navigate-modal-component__button {
+        background-color: rgba(var(--true-gray), 0.5);
+    }
+
+}
