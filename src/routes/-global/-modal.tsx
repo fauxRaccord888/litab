@@ -11,6 +11,7 @@ import NodeSelect from './modal/NodeSelect';
 import AccountMenu from './modal/AccountMenu';
 import Register from './modal/Register';
 import SignIn from './modal/SignIn';
+import MetaData from './modal/MetaData';
 
 export default function ModalController(props: {
     search: RootSearch
@@ -26,6 +27,7 @@ export default function ModalController(props: {
         accountMenu, 
         register, 
         signIn,
+        metaData
     } = useSelector((state: AppRootState) => state.modal)
     const dispatch = useDispatch()
 
@@ -78,6 +80,11 @@ export default function ModalController(props: {
             {signIn &&
                 <SignIn 
                     redirect={redirect}
+                    handleClickClose={handleClickClose}
+                />
+            }
+            {metaData &&
+                <MetaData
                     handleClickClose={handleClickClose}
                 />
             }
