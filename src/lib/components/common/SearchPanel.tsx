@@ -30,7 +30,7 @@ export default function SearchPanel(props: SearchPanelProps) {
         <div className="search-panel-component">
             <form onSubmit={onSubmit} className="search-panel-component__search-form">
                 <div className="search-panel-component__search_bar">
-                    {dropdownProps && <Dropdown {...dropdownProps} />}
+                    {dropdownProps && (dropdownProps.keys.length > 1) && <Dropdown {...dropdownProps} />}
                     <Input label={SEARCH.inputName} iconFunction={SearchIcon} value={keyword} onChange={setKeyword}/>
                 </div>
                 <Button primary>{t(`button.search`)}</Button>
