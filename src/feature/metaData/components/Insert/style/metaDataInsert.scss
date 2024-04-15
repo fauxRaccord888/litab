@@ -1,0 +1,7 @@
+@import "src/lib/style/atomicMixin";
+
+.meta-data-insert-component {
+    .meta-data-insert-component__inner-container {
+        @include margin-(calc(var(--base-size) * 1.5));
+    }
+}
