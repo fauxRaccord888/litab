@@ -70,10 +70,6 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
                     label: t("genre.tab.oeuvre"),
                     items: oeuvreComponents.concat(loader)
                 },
-                {
-                    label: t("genre.tab.user"),
-                    items: [<span>미구현</span>]
-                },
             ]}
         />
     )

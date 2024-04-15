@@ -5,4 +5,5 @@ export type DBMiniArtist = ArtistsMinimalInfoFragment
 
 export type ArtistEventHandler = {
     selectArtist?: (artist: DBMiniArtist) => void
+    updateArtist?: (artist: DBMiniArtist) => void
 }
