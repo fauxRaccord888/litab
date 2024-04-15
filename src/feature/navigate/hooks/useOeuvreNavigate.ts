@@ -8,7 +8,17 @@ export function useOeuvreNavigate() {
         navigate({ to: '/oeuvre/$id', params: { id } })
     }, [navigate])
 
+    const addNavigator = useCallback(() => {
+        navigate({ to: '/oeuvre/add' })
+    }, [navigate])
+
+    const updateNavigator = useCallback((id: string) => {
+        navigate({ to: '/oeuvre/$id/update', params: { id } })
+    }, [navigate])
+
     return {
         select: selectNavigator,
+        add: addNavigator,
+        update: updateNavigator
     }
 }
