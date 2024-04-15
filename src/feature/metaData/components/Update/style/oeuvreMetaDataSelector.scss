@@ -1,0 +1,16 @@
+@import "src/lib/style/atomicMixin";
+
+.oeuvre-metadata-selector-component {
+    @include child-top-m(calc(var(--base-size) * 1.5));
+    .oeuvre-metadata-selector-component__title {
+        @include margin-(0);
+        font-size: calc(var(--base-size) * 1.5);
+    }
+
+    .oeuvre-metadata-selector-component__unit-component {
+        @include w-full;
+        @include flex;
+        @include flex-col;
+        @include child-top-m(calc(var(--base-size) * 1.5));
+    }
+}

@@ -3,7 +3,8 @@
         "home": "Home",
         "search": "Search",
         "account": "Account",
-        "pentagram": "Pentagram"
+        "pentagram": "Pentagram",
+        "metaData": "MetaData"
     },
     "error": {
         "redirect": "Something went wrong. redirect..."

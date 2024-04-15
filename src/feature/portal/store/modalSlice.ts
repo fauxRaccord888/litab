@@ -11,6 +11,7 @@ type ModalSliceState = {
     accountMenu?: boolean | undefined
     register?: boolean | undefined
     signIn?: boolean | undefined
+    metaData?: boolean | undefined
 }
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
     accountMenu: undefined,
     register: undefined,
     signIn: undefined,
+    metaData: undefined
 } satisfies ModalSliceState
 
 const modalSlice = createSlice({
@@ -86,6 +88,13 @@ const modalSlice = createSlice({
                 ...initialState,
                 signIn: true
             }
+        },
+
+        setMetaData() {
+            return {
+                ...initialState,
+                metaData: true
+            }
         }
     },
 })
@@ -100,6 +109,7 @@ export const {
     setRevisionViewId, 
     setAccountMenu, 
     setRegister, 
-    setSignIn 
+    setSignIn,
+    setMetaData
 } = modalSlice.actions
 export default modalSlice.reducer

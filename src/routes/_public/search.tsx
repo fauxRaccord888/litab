@@ -43,9 +43,15 @@ function Search() {
         queryFunction(keywordParam, includeCursor)
     }
 
+    const handleNavigateToInsertMetaData = (category: SearchDropdownKey) => {
+        if (category === 'artists') artistNavigate.add()
+        if (category === 'oeuvres') oeuvreNavigate.add()
+        if (category === 'genres') genreNavigate.add()
+    }
 
     const eventHandler: MainSearchViewEventHandler = {
         search: handleSearch,
+        navigateToInsertMetaData: handleNavigateToInsertMetaData,
         selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id),
         selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
         selectArtist: (artist) => artistNavigate.select(artist.id),

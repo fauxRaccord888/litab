@@ -1,0 +1,35 @@
+@import "src/lib/style/atomicMixin";
+
+.upsert-form-component {
+    @include flex;
+    @include flex-col;
+    @include w-full;
+    @include align-center;
+    @include child-top-m(calc(var(--base-size) * 1.5));
+
+    .upsert-form-component__field-input-container {
+        @include flex;
+        @include flex-col;
+        @include w-full;
+        @include child-top-m(calc(var(--base-size) * 1.5));        
+
+        .upsert-form-component__field-input {
+            @include rounded-lg;
+            @include padding-(calc(var(--base-size) * 0.5));
+            background-color: rgb(var(--background-color));
+            color: rgb(var(--font-color));
+            height: calc(var(--base-size) * 2);
+            border: 2px solid rgb(var(--font-color));
+            font-size: calc(var(--base-size) * 1.25);
+            
+            &.upsert-form-component__field-input--large {
+                height: calc(var(--base-size) * 15);
+            }
+        }
+    }
+
+    .upsert-form-component__upload-button {
+        @include w-full;
+        background-color: rgba(var(--primary), 1);
+    }
+}

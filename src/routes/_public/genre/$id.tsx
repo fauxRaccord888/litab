@@ -3,7 +3,7 @@ import type { GenreEventHandler } from "$feature/Genre/types";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import type { BaseEventHandler } from "$lib/types/components";
 import { useQuery } from "@apollo/client";
-import { useOeuvreNavigate, useRedirectOnError } from "$feature/navigate/hooks";
+import { useGenreNavigate, useOeuvreNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { t as translate } from 'i18next'
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -32,6 +32,7 @@ function Genre() {
     const item = getFirstNodeOfCollection(data?.genresCollection)
 
     const oeuvreNavigate = useOeuvreNavigate()
+    const genreNavigate = useGenreNavigate()
     useRedirectOnError(Boolean(
         (data && !item) 
         || error
@@ -46,6 +47,7 @@ function Genre() {
             }
         }),
         selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
+        updateGenre: (genre) => genreNavigate.update(genre.id)
     }
 
     if (!item)  return null
@@ -55,6 +57,9 @@ function Genre() {
             <GenreSelectView
                 item={item}
                 eventHandler={eventHandler}
+                options={{
+                    enableUpdate: true
+                }}
             />
             <Outlet />
         </div>

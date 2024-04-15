@@ -1,5 +1,6 @@
 {
     "search": "search",
     "delete": "delete",
-    "submit": "submit"
+    "submit": "submit",
+    "update": "update"
 }

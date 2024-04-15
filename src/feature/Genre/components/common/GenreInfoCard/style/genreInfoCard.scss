@@ -1,0 +1,18 @@
+@import "src/lib/style/atomicMixin";
+@import "src/lib/style/animation/gradientBackground";
+
+.genre-info-card-component {
+    .genre-info-card-component__title {
+        @include w-full;
+        @include flex;
+        @include flex-col;
+        @include child-top-m(calc(var(--base-size) * 0.5));
+
+        .genre-info-card-component__button--update {
+            @include pointer;
+            @include gradient-background;
+            @include padding-(calc(var(--base-size) * 0.3));
+            font-size: calc(var(--base-size) * 0.8);
+        }
+    }
+}

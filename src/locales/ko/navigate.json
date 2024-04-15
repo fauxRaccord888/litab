@@ -3,7 +3,8 @@
         "home": "홈",
         "search": "검색",
         "account": "계정",
-        "pentagram": "펜타그램"
+        "pentagram": "펜타그램",
+        "metaData": "정보 작성"
     },
     "error": {
         "redirect": "무언가 잘못되었어요. 홈으로 이동합니다."

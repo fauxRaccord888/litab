@@ -1,6 +1,7 @@
 import type { DBOeuvre, OeuvreEventHandler } from '../types';
 import type { BaseEventHandler } from '$lib/types/components';
 import type { PentagramEventHandler } from '$feature/Pentagram/types';
+import type { InfoCardOptions } from '$feature/template/components/InfoCardTemplate';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,17 +13,19 @@ import InfiniteScrollTrigger from '$lib/components/common/InfiniteScrollTrigger'
 
 type OeuvreSelectViewProps = {
     item: DBOeuvre
+    options: InfoCardOptions
     eventHandler: BaseEventHandler & OeuvreEventHandler & PentagramEventHandler
 }
 
 export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
-    const { item, eventHandler } = props
+    const { item, options, eventHandler } = props
     const { t } = useTranslation()
     
     const infoCardComponent = (
         <OeuvreInfoCard
             key={item.id}
             item={item}
+            options={options}
             renderConfig={{
                 coverImage: true,
                 title: true,
@@ -64,10 +67,6 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                     label: t("oeuvre.tab.pentagram"),
                     items: pentagramComponents.concat(loader)
                 },
-                {
-                    label: t("oeuvre.tab.user"),
-                    items: [<span>미구현</span>]
-                },        
             ]}
         />
     )

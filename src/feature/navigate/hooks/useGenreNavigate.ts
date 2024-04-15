@@ -8,7 +8,17 @@ export function useGenreNavigate() {
         navigate({ to: '/genre/$id', params: { id } })
     }, [navigate])
 
+    const addNavigator = useCallback(() => {
+        navigate({ to: '/genre/add' })
+    }, [navigate])
+
+    const updateNavigator = useCallback((id: string) => {
+        navigate({ to: '/genre/$id/update', params: { id } })
+    }, [navigate])
+
     return {
         select: selectNavigator,
+        add: addNavigator,
+        update: updateNavigator
     }
 }

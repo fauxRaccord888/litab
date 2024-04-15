@@ -11,6 +11,7 @@ export type InfoCardOptions = {
     // COMMENT Oeuvre 컴포넌트의 경우, Oeuvre 엔티티가 2번 사용됨(작품 자체, 작품 관련 펜타그램의 호버카드)
     // 이 경우, 동일한 이벤트 핸들러를 사용하므로 아이템 클릭 가능 여부를 이벤트 핸들러만으로 판단할 수 없음
     enableSelect?: boolean 
+    enableUpdate?: boolean
 }
 
 type InfoCardProps = {

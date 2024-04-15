@@ -1,0 +1,44 @@
+@import "src/lib/style/atomicMixin";
+
+.oeuvre-meta-data-selector-unit-component {
+    @include box-shadow-2(rgb(var(--font-color)));
+    @include rounded-lg;
+    flex-grow: 1;
+    .oeuvre-meta-data-selector-unit-component__inner-container {
+        @include flex;
+        @include flex-col;
+        @include child-top-m(calc(var(--base-size) * 1));
+        @include margin-(calc(var(--base-size) * 1.5));
+
+        .oeuvre-meta-data-selector-unit-component__title {
+            font-size: calc(var(--base-size) * 1.2);
+            margin: 0;
+        }
+    
+        .oeuvre-meta-data-selector-unit-component__meta-tag-container {
+            @include w-full;
+            @include flex;
+            @include flex-center;
+            justify-content: space-between;
+
+            .oeuvre-meta-data-selector-unit-component__divider {
+                @include rounded-lg;
+                flex-grow: 1;
+                height: 2px;
+                background-color: rgb(var(--font-color));
+                margin-left: calc(var(--base-size) * 2);
+                margin-right: calc(var(--base-size) * 2);
+            }
+    
+            .oeuvre-meta-data-selector-unit-component__meta-tag-button--delete {
+                background-color: rgba(var(--danger), 0.8);
+            }
+        }
+    
+    
+        .oeuvre-meta-data-selector-unit-component__modal-button {
+            @include w-full;
+            background-color: rgba(var(--primary), 0.8);
+        }
+    }
+}

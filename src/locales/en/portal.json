@@ -21,12 +21,22 @@
             "profileSelectMenu": "Profile Menu",
             "accountMenu": "Account Menu",
             "register": "Register",
-            "signIn": "Sign In"
+            "signIn": "Sign In",
+            "metaData": "Unregistered Meta Data",
+
+            "genresRelation": "Search Genre Info",
+            "artistsRelation": "Search Artist Info"
         },
     
         "message": {
             "switchToRegister": "Not a member yet?",
             "switchToSignIn": "Are you already a member?"
+        },
+
+        "button": {
+            "navigateToAddOeuvre": "Navigate To Register Unregistered Oeuvre",
+            "navigateToAddArtist": "Navigate To Register Unregistered Artist",
+            "navigateToAddGenre": "Navigate To Register Unregistered Genre"
         }
     }
 }

@@ -8,7 +8,17 @@ export function useArtistNavigate() {
         navigate({ to: '/artist/$id', params: { id } })
     }, [navigate])
 
+    const addNavigator = useCallback(() => {
+        navigate({ to: '/artist/add' })
+    }, [navigate])
+
+    const updateNavigator = useCallback((id: string) => {
+        navigate({ to: '/artist/$id/update', params: { id } })
+    }, [navigate])
+
     return {
         select: selectNavigator,
+        add: addNavigator,
+        update: updateNavigator
     }
 }

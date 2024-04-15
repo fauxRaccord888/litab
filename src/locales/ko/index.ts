@@ -5,6 +5,7 @@ import button from './button.json'
 import feed from './feed.json'
 import form from './form.json'
 import genre from './genre.json'
+import metaData from './metaData.json'
 import navigate from './navigate.json'
 import network from './network.json'
 import node from './node.json'
@@ -23,6 +24,7 @@ export default {
     feed,
     form,
     genre,
+    metaData,
     navigate,
     network,
     node,

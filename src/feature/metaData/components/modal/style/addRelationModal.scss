@@ -1,0 +1,11 @@
+@import "src/lib/style/atomicMixin";
+
+.add-relation-modal-component__inner-cotainer {
+    @include w-full;
+    
+    .main-search-view-component {
+        .main-search-view-component__inner-container {
+            @include margin-(0);
+        }
+    }
+}

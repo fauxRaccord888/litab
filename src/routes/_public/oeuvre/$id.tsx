@@ -55,6 +55,7 @@ function Oeuvre() {
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
         navigateToUpdate:(id: string) => pentagramNavigate.update(id),
         selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
+        updateOeuvre: (oeuvre) => oeuvreNavigate.update(oeuvre.id),
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
         selectGenreTag: (genreId: string) => genreNavigate.select(genreId),
         selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id)
@@ -67,6 +68,9 @@ function Oeuvre() {
             <OeuvreSelectView
                 item={item}
                 eventHandler={eventHandler}
+                options={{
+                    enableUpdate: true
+                }}
             />
             <Outlet />
         </div>

@@ -3,7 +3,7 @@ import type { ArtistEventHandler } from "$feature/Artist/types";
 import type { BaseEventHandler } from "$lib/types/components";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import { useQuery } from "@apollo/client";
-import { useOeuvreNavigate, useRedirectOnError } from "$feature/navigate/hooks";
+import { useArtistNavigate, useOeuvreNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { t as translate } from 'i18next'
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -32,6 +32,7 @@ function Artist() {
     const item = getFirstNodeOfCollection(data?.artistsCollection)
 
     const oeuvreNavigate = useOeuvreNavigate()
+    const artistNavigate = useArtistNavigate()
     useRedirectOnError(Boolean(
         (data && !item) 
         || error
@@ -46,6 +47,7 @@ function Artist() {
             }
         }),
         selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
+        updateArtist: (artist) => artistNavigate.update(artist.id)
     }
 
     if (!item) return null
@@ -55,6 +57,9 @@ function Artist() {
             <ArtistSelectView
                 item={item}
                 eventHandler={eventHandler}
+                options={{
+                    enableUpdate: true
+                }}
             />
             <Outlet />
         </div>
