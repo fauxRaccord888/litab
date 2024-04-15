@@ -36,13 +36,7 @@ export default function SignIn(props: {
 
     const handleSignIn = async (payload: SignInPayload) => {
         const response = signInErrorHandler(
-            () => {
-                const res = signInHandler(payload)
-                res.then(({data}) => {
-                    navigate({to: redirect})
-                    dispatch(setSession(data.user))
-                })
-            }
+            () => signInHandler(payload)
         )
     
         toast.promise(response, {
@@ -51,7 +45,9 @@ export default function SignIn(props: {
             error: (error: CustomError) => t(error.i18nKey),
         })
     
-        response.then(() => {
+        response.then((response) => {
+            dispatch(setSession(response.data.user))
+            navigate({to: redirect})
             handleClickClose()
         })
     }
