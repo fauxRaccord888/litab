@@ -17,6 +17,11 @@ export default function ArtistInfoCard(props: ArtistInfoCardProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { id, name, abstract, bio, updated_at } = item
 
+    const handleSelect = () => {
+        if (eventHandler.selectArtist) eventHandler.selectArtist(item)
+    }
+
+
     const coverImage = useMemo(() => (
         <BucketImage bucket="artists" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
     ), [id, updated_at])
@@ -25,7 +30,7 @@ export default function ArtistInfoCard(props: ArtistInfoCardProps) {
         <div className="artist-info-card-component">
             <InfoCardTemplate
                 id={id}
-                onClick={eventHandler?.selectArtist}
+                onClick={handleSelect}
                 renderConfig={renderConfig}
                 components={{
                     title: name,

@@ -3,7 +3,7 @@ import type { BaseEventHandler } from "$lib/types/components";
 import type { OeuvreEventHandler } from "$feature/Oeuvre/types";
 import type { PentagramEventHandler } from "$feature/Pentagram/types";
 import { useQuery } from "@apollo/client";
-import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, usePentagramNavigate, useRedirectOnError } from "$feature/navigate/hooks";
+import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, usePentagramNavigate, useProfileNavigate, useRedirectOnError } from "$feature/navigate/hooks";
 import { t as translate } from 'i18next'
 import { getOeuvreInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getFirstNodeOfCollection } from "$lib/utils/graphql";
@@ -35,6 +35,8 @@ function Oeuvre() {
     const oeuvreNavigate = useOeuvreNavigate()
     const artistNavigate = useArtistNavigate()
     const genreNavigate = useGenreNavigate()
+    const profileNavigate = useProfileNavigate()
+
     useRedirectOnError(Boolean(
         (data && !item) 
         || error
@@ -52,9 +54,10 @@ function Oeuvre() {
         nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
         navigateToUpdate:(id: string) => pentagramNavigate.update(id),
-        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
-        selectGenreTag: (genreId: string) => genreNavigate.select(genreId)
+        selectGenreTag: (genreId: string) => genreNavigate.select(genreId),
+        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id)
     }
 
     if (!item) return null

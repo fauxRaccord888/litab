@@ -15,6 +15,7 @@ export type PentagramSelectOptions = {
 }
 
 export type PentagramEventHandler = {
+    selectProfile?: (profile: DBMiniProfile) => void, 
     pentagramMenuModal?: (pentagramId: string) => void,
     nodeSelectModal?: (nodeId: string) => void,
     revisionSelectModal?: (revisionId: string) => void,

@@ -68,7 +68,7 @@ export default function PentagramInsertEditor() {
     }
 
     const oeuvreEventHandler: OeuvreEventHandler = {
-        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
     }
 
     return (

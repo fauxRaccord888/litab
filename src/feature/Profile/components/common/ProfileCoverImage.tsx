@@ -6,19 +6,19 @@ import UserIcon from "$lib/components/icons/UserIcon"
 import BucketImage from "$lib/components/common/BucketImage"
 
 type ProfileCoverImageProps = {
+    item: DBProfiles,
     id: DBProfiles["id"]
-    mutable_id: DBProfiles["mutable_id"],
     updated_at: DBProfiles["updated_at"],
     eventHandler: ProfileEventHandler
     className?: string,
 }
 
 export default function ProfileCoverImage(props: ProfileCoverImageProps) {
-    const { id, mutable_id, updated_at, eventHandler, className } = props
+    const { item, id, updated_at, eventHandler, className } = props
     
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.selectProfile) eventHandler.selectProfile(mutable_id)
+        if (eventHandler.selectProfile) eventHandler.selectProfile(item)
     }
 
     return (

@@ -1,7 +1,7 @@
-import type { SearchDropdownKey } from '$feature/search/types'
+import type { MainSearchViewEventHandler, SearchDropdownKey } from '$feature/search/types'
 import { useState } from 'react'
 import { useSearchQuery } from '$feature/search/hooks'
-import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate } from '$feature/navigate/hooks'
+import { useArtistNavigate, useGenreNavigate, useOeuvreNavigate, useProfileNavigate } from '$feature/navigate/hooks'
 import { t as translate} from "i18next"
 import { createFileRoute } from '@tanstack/react-router'
 import { SEARCH } from '$feature/search/constants'
@@ -20,6 +20,7 @@ function Search() {
     const [keyword, setKeyword] = useState('')
 
     const searchQuery = useSearchQuery(keyword)
+    const profileNavigate = useProfileNavigate()
     const oeuvreNavigate = useOeuvreNavigate()
     const genreNavigate = useGenreNavigate()
     const artistNavigate = useArtistNavigate()
@@ -31,17 +32,24 @@ function Search() {
         genres: searchQuery.genres[1]
     }
 
-    const handleSearch = async (key: SearchDropdownKey, keywordParam: string, includeCursor?: boolean) => {
+    const handleSearch = async (
+        key: SearchDropdownKey | null | undefined, 
+        keywordParam: string, 
+        includeCursor?: boolean
+    ) => {
+        if (!key) return
         const [queryFunction] = searchQuery[key]
         setKeyword(keywordParam)
         queryFunction(keywordParam, includeCursor)
     }
 
-    const eventHandler = {
+
+    const eventHandler: MainSearchViewEventHandler = {
         search: handleSearch,
-        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
-        selectArtist: (artistId: string) => artistNavigate.select(artistId),
-        selectGenre: (genreId: string) => genreNavigate.select(genreId)
+        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id),
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
+        selectArtist: (artist) => artistNavigate.select(artist.id),
+        selectGenre: (genre) => genreNavigate.select(genre.id)
     }
 
     return (

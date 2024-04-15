@@ -30,13 +30,13 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
 
     const handleClickProfile = () => {
         if (!eventHandler.selectProfile) return
-        eventHandler?.selectProfile(mutable_id)
+        eventHandler?.selectProfile(item)
     }
 
     const coverImage = (
         <ProfileCoverImage 
             id={id} 
-            mutable_id={mutable_id}
+            item={item}
             updated_at={updated_at}
             eventHandler={eventHandler}
         />
@@ -45,6 +45,7 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const title = (
         <div className="user-info-card-component__title-container">
             <ProfileUserInfo
+                item={item}
                 mutable_id={mutable_id}
                 nickname={nickname}
                 eventHandler={eventHandler}

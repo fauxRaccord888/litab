@@ -18,6 +18,10 @@ export default function OeuvreInfoCard(props: OeuvreInfoProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { id, title, description, updated_at } = item
 
+    const handleSelect = () => {
+        if (eventHandler.selectOeuvre) eventHandler.selectOeuvre(item)
+    }
+
     const coverImage = useMemo(() => (
         <BucketImage bucket="oeuvres" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
     ), [id, updated_at])
@@ -33,7 +37,7 @@ export default function OeuvreInfoCard(props: OeuvreInfoProps) {
         <div className="oeuvre-info-card-component">
             <InfoCardTemplate
                 id={id}
-                onClick={eventHandler.selectOeuvre}
+                onClick={handleSelect}
                 renderConfig={renderConfig}
                 components={{
                     title,

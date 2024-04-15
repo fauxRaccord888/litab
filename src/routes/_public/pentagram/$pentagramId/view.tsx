@@ -37,7 +37,7 @@ function PentagramSelect() {
         nodeSelectModal: (nodeId: string) => pentagramNavigate.nodeSelectModal(nodeId),
         revisionSelectModal: (revisionId: string) => pentagramNavigate.revisionSelectModal(revisionId),
         navigateToUpdate:(id: string) => pentagramNavigate.update(id),
-        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
     }
 
     if (!item) return null
