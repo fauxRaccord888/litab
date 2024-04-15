@@ -1,5 +1,5 @@
 /* types */
-import type { CustomError } from '$lib/error';
+import type { CustomError } from '$lib/error/customError';
 import type { RegisterPayload } from '$feature/auth/types';
 import type { GuestMenuModalEventHandler } from '$feature/Account/types';
 /* hooks */
@@ -13,7 +13,7 @@ import RegisterModal from '$feature/Account/components/Modal/RegisterModal';
 /* utils */
 import toast from 'react-hot-toast';
 import { setSession } from '$feature/auth/store/authSlice';
-import { registerErrorHandler } from '$feature/Account/errorHandler/registerErrorHandler'
+import { registerErrorHandler } from '$lib/error/handler/registerErrorHandler'
 
 export default function Register(props: { 
     redirect?: string | undefined,

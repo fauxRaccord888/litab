@@ -1,4 +1,4 @@
-import type { CustomError } from '$lib/error';
+import type { CustomError } from '$lib/error/customError';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { GetPentagramUpdateInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
 import type { MouseEvent, TouchEvent } from 'react';
@@ -23,7 +23,7 @@ import {
 import toast from 'react-hot-toast';
 import { t as translate } from 'i18next';
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
-import { pentagramMutationErrorHandler } from '$feature/Pentagram/errorHandler';
+import { pentagramMutationErrorHandler } from '$lib/error/handler/pentagramErrorHandler';
 import { getPentagramUpdateInfoById_QUERY } from '$feature/Pentagram/graphql';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 
@@ -132,7 +132,7 @@ function PentagramUpdate() {
     }
 
     const oeuvreEventHandler: OeuvreEventHandler = {
-        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
     }
 
     return (

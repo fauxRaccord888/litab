@@ -1,7 +1,7 @@
 import type { UploadCoverPayload } from "../../types"
 import type { PostgrestError } from "@supabase/supabase-js"
 import type { StorageError } from "@supabase/storage-js"
-import type { AccessNotGrantedError } from "$feature/auth/error"
+import type { AccessNotGrantedError } from "$lib/error/customError"
 import { useCallback, useState } from "react"
 import { uploadCover_SUPABASE } from "../../supabase"
 

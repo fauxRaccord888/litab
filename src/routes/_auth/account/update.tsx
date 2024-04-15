@@ -1,8 +1,8 @@
 import type { UpdateAuthPayload, UpdateProfilePayload, UploadCoverPayload } from '$feature/Account/types'
-import type { CustomError } from '$lib/error'
+import type { CustomError } from '$lib/error/customError';
 import { useTranslation } from 'react-i18next'
 import { useUpdateProfileHandler } from '$feature/Account/hooks'
-import { updateAccountErrorHandler } from '$feature/Account/errorHandler'
+import { updateAccountErrorHandler } from '$lib/error/handler';
 import toast from 'react-hot-toast'
 import { t as translate} from 'i18next'
 import { createFileRoute } from '@tanstack/react-router'

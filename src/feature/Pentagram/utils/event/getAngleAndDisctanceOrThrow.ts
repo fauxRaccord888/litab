@@ -1,5 +1,5 @@
 import type { useCSSVariables } from "$lib/hooks/useCSSVariables"
-import { PositionError } from "../../error"
+import { PositionError } from "$lib/error/customError"
 import { PENTAGRAM } from "../../constants"
 
 export function getAngleAndDisctanceOrThrow(

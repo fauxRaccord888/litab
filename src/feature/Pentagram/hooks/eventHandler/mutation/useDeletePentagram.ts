@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useMutation } from "@apollo/client";
 
 import { evictCacheById } from "$lib/utils";
-import { PendingError } from "$lib/error";
+import { PendingError } from "$lib/error/customError";
 import { deletePentagram_MUTATION } from "$feature/Pentagram/graphql";
 
 type DeletePentagramPayload = {

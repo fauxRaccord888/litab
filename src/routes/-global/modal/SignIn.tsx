@@ -1,5 +1,5 @@
 /* types */
-import type { CustomError } from '$lib/error';
+import type { CustomError } from '$lib/error/customError';
 import type { SignInPayload } from '$feature/auth/types';
 import type { GuestMenuModalEventHandler } from '$feature/Account/types';
 /* hooks */
@@ -13,7 +13,7 @@ import SignInModal from '$feature/Account/components/Modal/SignInModal';
 /* utils */
 import toast from 'react-hot-toast';
 import { setSession } from '$feature/auth/store/authSlice';
-import { signInErrorHandler } from '$feature/Account/errorHandler';
+import { signInErrorHandler } from '$lib/error/handler';
 
 export default function SignIn(props: { 
     redirect?: string | undefined,

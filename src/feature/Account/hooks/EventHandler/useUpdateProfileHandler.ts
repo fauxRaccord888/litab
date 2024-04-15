@@ -6,7 +6,7 @@ import { useApolloClient, useMutation } from "@apollo/client";
 import { useUpdateAuthMutation, useUploadCoverMutation } from "..";
 import { updateProfile_MUTATION } from "../../graphql";
 import { evictCacheById } from "$lib/utils";
-import { PendingError } from "$lib/error";
+import { PendingError } from "$lib/error/customError";
 
 export function useUpdateProfileHandler() {
     const apolloClient = useApolloClient()
