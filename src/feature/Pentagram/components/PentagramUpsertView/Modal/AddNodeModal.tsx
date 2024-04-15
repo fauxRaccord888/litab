@@ -3,7 +3,6 @@ import type { SearchDropdownKey } from "$feature/search/types";
 
 import { useState } from "react";
 import { useSearchQuery } from "$feature/search/hooks";
-import { useOeuvreNavigate } from "$feature/navigate/hooks";
 import { SEARCH } from "$feature/search/constants";
 
 import Modal from "$feature/portal/components/Modal";
@@ -20,7 +19,6 @@ export default function AddNodeModal(props: AddNodeModalProps) {
     const { title, handleClickClose, handleAddNode } = props
     const [keyword, setKeyword] = useState("")
     const [searchOeuvres, result] = useSearchQuery(keyword).oeuvres
-    const oeuvreNavigate = useOeuvreNavigate()
 
     const handleSearchOeuvres = async (
         _key: SearchDropdownKey | null | undefined, 
@@ -47,7 +45,6 @@ export default function AddNodeModal(props: AddNodeModalProps) {
                     eventHandler={{
                         search: handleSearchOeuvres,
                         selectOeuvre: handleAddNode,
-                        navigateToInsertMetaData: oeuvreNavigate.add
                     }}
                 />
             </div>
