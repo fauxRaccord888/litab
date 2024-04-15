@@ -45,7 +45,7 @@ function Genre() {
                 id: params.id
             }
         }),
-        selectOeuvre: (id: string) => oeuvreNavigate.select(id)
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
     }
 
     if (!item)  return null

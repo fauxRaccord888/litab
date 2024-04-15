@@ -1,4 +1,4 @@
-import { CustomError } from ".";
+import { CustomError } from "./base"
 
 export class PendingError extends CustomError {
     constructor() {

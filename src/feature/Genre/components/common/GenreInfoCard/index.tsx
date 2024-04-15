@@ -17,6 +17,10 @@ export default function GenreInfoCard(props: GenreInfoCardProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { id, name, abstract, updated_at, description } = item
 
+    const handleSelect = () => {
+        if (eventHandler.selectGenre) eventHandler.selectGenre(item)
+    }
+
     const coverImage = useMemo(() => (
         <BucketImage bucket="genres" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
     ), [id, updated_at])
@@ -26,7 +30,7 @@ export default function GenreInfoCard(props: GenreInfoCardProps) {
         <div className="genre-info-card-component">
             <InfoCardTemplate
                 id={id}
-                onClick={eventHandler.selectGenre}
+                onClick={handleSelect}
                 renderConfig={renderConfig}
                 components={{
                     title: name,

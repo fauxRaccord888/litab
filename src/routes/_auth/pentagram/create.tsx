@@ -1,4 +1,4 @@
-import type { CustomError } from '$lib/error';
+import type { CustomError } from '$lib/error/customError';
 import type { OeuvreEventHandler } from '$feature/Oeuvre/types';
 import type { MouseEvent, TouchEvent } from 'react';
 import { useRef } from 'react'
@@ -20,7 +20,7 @@ import {
 
 import toast from 'react-hot-toast';
 import { t as translate } from 'i18next';
-import { pentagramMutationErrorHandler } from '$feature/Pentagram/errorHandler';
+import { pentagramMutationErrorHandler } from '$lib/error/handler/pentagramErrorHandler';
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 
@@ -101,7 +101,7 @@ function PentagramInsert() {
     }
 
     const oeuvreEventHandler: OeuvreEventHandler = {
-        selectOeuvre: (oeuvreId: string) => oeuvreNavigate.select(oeuvreId),
+        selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
     }
 
     return (

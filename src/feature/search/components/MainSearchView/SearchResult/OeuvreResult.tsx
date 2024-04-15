@@ -10,7 +10,7 @@ type OeuvreResultProps = {
 
 export default function OeuvreResult(props: OeuvreResultProps) {
     const { queryResults, eventHandler } = props
-    const { data } = queryResults.oeuvres
+    const { data } = queryResults
     const { t } = useTranslation()
     if (!(data && "oeuvresCollection" in data))  return null
 

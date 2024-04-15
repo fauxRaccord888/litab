@@ -60,8 +60,11 @@ function FollowersModalComponent(props: {
     return (
         <MiniProfileModal
             title={title} 
-            handleClickClose={handleClickClose}
             items={props.items}
+            eventHandler={{
+                selectProfile: (profile) => navigate.profileSelect(profile.mutable_id)
+            }}
+            handleClickClose={handleClickClose}
         />
     )
 }

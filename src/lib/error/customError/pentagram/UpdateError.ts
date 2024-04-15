@@ -1,4 +1,4 @@
-import { CustomError } from "$lib/error"
+import { CustomError } from '../base'
 
 export class PositionError extends CustomError {
     constructor() {

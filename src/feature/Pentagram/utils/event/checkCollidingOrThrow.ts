@@ -1,7 +1,6 @@
 import type { QuadtreeNode } from ".."
 import { Quadtree } from ".."
-import { PositionError } from "../../error"
-
+import { PositionError } from "$lib/error/customError"
 
 export function checkCollidingOrThrow (
     node: { angle: number, distance: number, id?: string},

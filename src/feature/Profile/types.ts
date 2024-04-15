@@ -14,7 +14,7 @@ export type ProfileInfoCardOptions = InfoCardOptions & {
 }
 export type ProfileEventHandler = {
     follow?: (id: string) => void
-    selectProfile?: (mutableId: string) => void
+    selectProfile?: (profile: DBMiniProfile) => void
     mutualFollowersModal?: (mutableId: string) => void
     followingsModal?: (mutableId: string) => void
     followersModal?: (mutableId: string) => void

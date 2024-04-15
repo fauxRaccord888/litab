@@ -1,14 +1,15 @@
-import type { DBProfiles } from "$feature/Profile/types";
+import type { DBProfiles, ProfileEventHandler } from "$feature/Profile/types";
 import { useTranslation } from "react-i18next";
 import MiniProfile from "$feature/Profile/components/MiniProfile";
 import './style/followRecommendation.scss'
 
 type FeedListProps = {
     recommendedUsers: DBProfiles[] | null | undefined,
+    eventHandler: ProfileEventHandler
 }
 
 export default function FollowRecommendation(props: FeedListProps) {
-    const { recommendedUsers } = props
+    const { recommendedUsers, eventHandler } = props
     const { t } = useTranslation()
 
     return (
@@ -25,6 +26,7 @@ export default function FollowRecommendation(props: FeedListProps) {
                                     <div className="follow-recommendation-component__user-inner-container">
                                         <MiniProfile
                                             item={user}
+                                            eventHandler={eventHandler}
                                             options={{
                                                 displayFollow: true
                                             }}

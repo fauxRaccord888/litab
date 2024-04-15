@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Tab from '$lib/components/common/Tab'
 import AuthUpdate from './components/AuthUpdate'
 import ProfileUpdate from './components/ProfileUpdate'
-import CoverUpload from './components/CoverUpload'
+import CoverUpload from '$lib/components/common/CoverUpload'
 
 type AccountUpdateProps = {
     handleUpdateAuth: (payload: UpdateAuthPayload) => void,
@@ -25,7 +25,7 @@ export default function AcocuntUpdate(props: AccountUpdateProps) {
                     },
                     {
                         label: t("account.title.update.cover"),
-                        items: [<CoverUpload key={"cover"} handleUpload={handleUploadCover} />]
+                        items: [<CoverUpload key={"cover"} title={t('account.title.update.cover')} handleUpload={handleUploadCover} />]
                     },
                     {
                         label: t("account.title.update.auth"),

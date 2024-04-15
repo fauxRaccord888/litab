@@ -8,7 +8,7 @@ import { supabaseClient } from "$lib/supabase";
 import { abortChanges } from "../../../store/pentagramUpsertSlice";
 import { filterChanges, formatChanges } from '../../../utils';
 import { evictCacheById } from "$lib/utils";
-import { PendingError } from "$lib/error";
+import { PendingError } from "$lib/error/customError";
 import { getOeuvreInfoById_QUERY } from "$feature/Oeuvre/graphql";
 import { getUserById_QUERY } from "$feature/auth/graphql";
 

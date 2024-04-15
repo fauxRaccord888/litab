@@ -1,6 +1,14 @@
-import { CustomError } from "$lib/error"
+import { CustomError } from "./base"
 
-// Profile
+export class InvalidCredentialError extends CustomError {
+    constructor() {
+        super(
+            '아이디와 비밀번호를 다시 확인해주세요.',
+            'account.toast.error.invalidCredential'
+        )
+    }
+}
+
 export class DuplicateMutableIdError extends CustomError {
     constructor() {
         super(
@@ -43,16 +51,6 @@ export class DuplicateEmailError extends CustomError {
         super(
             '중복된 이메일입니다.',
             'account.toast.error.notUniqueEmail'
-        )
-    }
-}
-
-// Cover
-export class ExceedMaximumSizeError extends CustomError {
-    constructor() {
-        super(
-            '업로드 가능한 최대 용량을 초과하였습니다.',
-            'account.toast.error.exceedMaximumSize'
         )
     }
 }

@@ -10,7 +10,7 @@ type ArtistResultProps = {
 
 export default function ArtistResult(props: ArtistResultProps) {
     const { queryResults, eventHandler } = props
-    const { data } = queryResults.artists
+    const { data } = queryResults
     const { t } = useTranslation()
     if (!(data && "artistsCollection" in data))  return null
 

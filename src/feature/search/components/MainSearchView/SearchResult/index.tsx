@@ -7,59 +7,51 @@ import GenreResult from "./GenreResult"
 import InfiniteScrollTrigger from "$lib/components/common/InfiniteScrollTrigger"
 import "./style/searchResult.scss"
 
-type SearchResultProps = {
-    category: SearchDropdownKey | null | undefined
-    queryResults: QueryResults
-    eventHandler: MainSearchViewEventHandler
+type SearchResultProps<T extends string = SearchDropdownKey> = {
+    category: T | null | undefined
+    queryResults: Record<T, QueryResults>
+    eventHandler: MainSearchViewEventHandler<T>
     loadMoreFunction: () => void
 }
 
-export default function SearchResult(props: SearchResultProps) {
+export default function SearchResult<T extends SearchDropdownKey>(props: SearchResultProps<T>) {
     const { category, queryResults, eventHandler, loadMoreFunction } = props
+    
+    const hasNextPage = useMemo(() => {
+        if (!category) return false
+        const data = queryResults[category].data
+        if (!data) return false
 
-    const hasNextPage = useMemo(() => {        
-        if (category === "users") {
-            const userData = queryResults.users.data
-            if (userData && "usersCollection" in userData) {
-                return userData.usersCollection?.pageInfo.hasNextPage
-            }
+        if (category === "users" && "usersCollection" in data) {
+            return data.usersCollection?.pageInfo.hasNextPage
         }
 
-        if (category === "oeuvres") {
-            const oeuvreData = queryResults.oeuvres.data
-            if (oeuvreData && "oeuvresCollection" in oeuvreData) {
-                return oeuvreData.oeuvresCollection?.pageInfo.hasNextPage
-            }
+        if (category === "oeuvres" && "oeuvresCollection" in data) {
+            return data.oeuvresCollection?.pageInfo.hasNextPage
         }
 
-        if (category === "artists") {
-            const artistData = queryResults.artists.data
-            if (artistData && "artistsCollection" in artistData) {
-                return artistData.artistsCollection?.pageInfo.hasNextPage
-            }
+        if (category === "artists" && "artistsCollection" in data) {
+            return data.artistsCollection?.pageInfo.hasNextPage
         }
 
-        if (category === "genres") {
-            const genreData = queryResults.genres.data
-            if (genreData && "genresCollection" in genreData) {
-                return genreData.genresCollection?.pageInfo.hasNextPage
-            }
+        if (category === "genres" && "genresCollection" in data) {
+            return data.genresCollection?.pageInfo.hasNextPage
         }
-    }, [category, queryResults.artists.data, queryResults.genres.data, queryResults.oeuvres.data, queryResults.users.data])
+    }, [category, queryResults])
 
     return (
         <div className="search-result-component">
             {category === "users" &&
-                <UserResult queryResults={queryResults} />
+                <UserResult queryResults={queryResults[category]} eventHandler={eventHandler}/>
             }
             {category === "oeuvres" &&
-                <OeuvreResult queryResults={queryResults} eventHandler={eventHandler}/>
+                <OeuvreResult queryResults={queryResults[category]} eventHandler={eventHandler}/>
             }
             {category === "artists" &&
-                <ArtistResult queryResults={queryResults} eventHandler={eventHandler}/>
+                <ArtistResult queryResults={queryResults[category]} eventHandler={eventHandler}/>
             }
             {category === "genres" &&
-                <GenreResult queryResults={queryResults} eventHandler={eventHandler}/>
+                <GenreResult queryResults={queryResults[category]} eventHandler={eventHandler}/>
             }
             {category &&
                 <InfiniteScrollTrigger 

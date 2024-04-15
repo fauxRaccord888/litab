@@ -1,16 +1,13 @@
-import type { CustomError } from "$lib/error";
-
 import { useFollowMutation } from ".."
 import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "$feature/auth/hooks";
 
 import toast from "react-hot-toast";
-import { AccessNotGrantedError } from "$feature/auth/error";
-import { CustomUnknownError } from "$lib/error";
+import { AccessNotGrantedError, CustomError, CustomUnknownError } from "$lib/error/customError";
 import { calcFollowings } from "../../util"
 import { isCustomError } from "$lib/utils";
 
-
+// TODO 바깥 스코프 에러(gql 에러 등)에 대한 핸들러가 존재하지 않음.
 export function useHandleFollow() {
     const {
         follow: followMutation,

@@ -7,11 +7,12 @@ import SearchIcon from "$lib/components/icons/SearchIcon"
 import "./style/coverUpload.scss"
 
 type CoverUploadProps = {
+    title?: string,
     handleUpload: (payload: UploadCoverPayload) => void
 }
 
 export default function CoverUpload(props: CoverUploadProps) {
-    const { handleUpload } = props
+    const { title, handleUpload } = props
     const { t } = useTranslation()
     const [file, setFile] = useState<File | null>(null)
 
@@ -28,16 +29,18 @@ export default function CoverUpload(props: CoverUploadProps) {
     }
 
     return (
-        <div className="account-cover-upload-component">
-            <h2 className="account-cover-upload-component__title">{t('account.title.update.cover')}</h2>
-            {file &&
-                <img className="account-cover-upload-component__upload-preview" src={URL.createObjectURL(file)}/>
+        <div className="cover-upload-component">
+            {title &&
+                <h2 className="cover-upload-component__title">{title}</h2>
             }
-            <label className="account-cover-upload-component__upload-input-label" htmlFor="cover-input">
-                <div className="account-cover-upload-component__upload-input-label-inner-container">
-                    <SearchIcon className="account-cover-upload-component__search-icon-component"/>
+            {file &&
+                <img className="cover-upload-component__upload-preview" src={URL.createObjectURL(file)}/>
+            }
+            <label className="cover-upload-component__upload-input-label" htmlFor="cover-input">
+                <div className="cover-upload-component__upload-input-label-inner-container">
+                    <SearchIcon className="cover-upload-component__search-icon-component"/>
                     <span>
-                        {file ? file.name.slice(0, 39) : t('account.message.browseFile')}
+                        {file ? file.name.slice(0, 39) : t('metaData.upsertForm.message.browseFile')}
                     </span>
                 </div>
             </label>
@@ -46,10 +49,10 @@ export default function CoverUpload(props: CoverUploadProps) {
                 type="file" 
                 accept="image/*"
                 onChange={handlePendingImage}     
-                className="account-cover-upload-component__upload-input" 
+                className="cover-upload-component__upload-input" 
             />
 
-            <Button className="account-cover-upload-component__upload-button" onClick={handleSubmit}>
+            <Button className="cover-upload-component__upload-button" onClick={handleSubmit}>
                 {t("button.submit")}
             </Button>
         </div>

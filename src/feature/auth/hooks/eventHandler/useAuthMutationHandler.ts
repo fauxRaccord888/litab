@@ -1,7 +1,7 @@
 import type { RegisterPayload, SignInPayload } from "../../types";
 import { useCallback } from "react";
 import { useRegisterOnAuthMutation, useSignInOnAuthMutation } from "..";
-import { PendingError } from "$lib/error";
+import { PendingError } from "$lib/error/customError";
 
 export function useAuthMutationHandler() {
     const [registerMutation, registerResponse] = useRegisterOnAuthMutation() 

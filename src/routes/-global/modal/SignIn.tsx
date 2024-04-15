@@ -1,5 +1,5 @@
 /* types */
-import type { CustomError } from '$lib/error';
+import type { CustomError } from '$lib/error/customError';
 import type { SignInPayload } from '$feature/auth/types';
 import type { GuestMenuModalEventHandler } from '$feature/Account/types';
 /* hooks */
@@ -13,7 +13,7 @@ import SignInModal from '$feature/Account/components/Modal/SignInModal';
 /* utils */
 import toast from 'react-hot-toast';
 import { setSession } from '$feature/auth/store/authSlice';
-import { signInErrorHandler } from '$feature/Account/errorHandler';
+import { signInErrorHandler } from '$lib/error/handler';
 
 export default function SignIn(props: { 
     redirect?: string | undefined,
@@ -36,13 +36,7 @@ export default function SignIn(props: {
 
     const handleSignIn = async (payload: SignInPayload) => {
         const response = signInErrorHandler(
-            () => {
-                const res = signInHandler(payload)
-                res.then(({data}) => {
-                    navigate({to: redirect})
-                    dispatch(setSession(data.user))
-                })
-            }
+            () => signInHandler(payload)
         )
     
         toast.promise(response, {
@@ -51,7 +45,9 @@ export default function SignIn(props: {
             error: (error: CustomError) => t(error.i18nKey),
         })
     
-        response.then(() => {
+        response.then((response) => {
+            dispatch(setSession(response.data.user))
+            navigate({to: redirect})
             handleClickClose()
         })
     }

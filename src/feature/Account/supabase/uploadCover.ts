@@ -1,6 +1,6 @@
 import type { UploadCoverPayload } from "../types"
 import { supabaseClient, upload_SUPABASE } from "$lib/supabase"
-import { AccessNotGrantedError } from "$feature/auth/error"
+import { AccessNotGrantedError } from "$lib/error/customError"
 
 export const uploadCover_SUPABASE = async (
     payload: UploadCoverPayload,

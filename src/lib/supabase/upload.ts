@@ -1,6 +1,6 @@
 import type { BucketKeys } from "./types"
 import { supabaseClient } from "./client"
-import { CustomUnknownError } from '$lib/error';
+import { CustomUnknownError } from "$lib/error/customError"
 
 // COMMENT 
 // DB에 트리거를 두어 update 시에 table을 업데이트하는 것이 기술적으로는 가능함
@@ -40,7 +40,6 @@ export const upload_SUPABASE = async (
             .eq('id', id)
         if (tableError) return { data: null, error: tableError}
     }
-
 
     return {
         data: storageData, error: null

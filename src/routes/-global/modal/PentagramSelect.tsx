@@ -1,11 +1,11 @@
 import type { GetPentagramsSelectUserInfoByIdQuery } from '$lib/graphql/__generated__/graphql';
-import type { CustomError } from '$lib/error';
+import type { CustomError } from '$lib/error/customError';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useCurrentUser } from '$feature/auth/hooks';
 import { usePentagramNavigate } from "$feature/navigate/hooks"
 import { useDeletePentagram } from '$feature/Pentagram/hooks';
-import { pentagramDeleteErrorHandler } from '$feature/Pentagram/errorHandler';
+import { pentagramDeleteErrorHandler } from '$lib/error/handler/pentagramErrorHandler';
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
 import { getPentagramsSelectUserInfoById_QUERY } from '$feature/Pentagram/graphql';
 import PentagramMenuModal from '$feature/Pentagram/components/Modal/PentagramMenuModal';

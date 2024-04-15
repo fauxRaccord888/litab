@@ -5,6 +5,7 @@ import type { DBProfiles, ProfileEventHandler, ProfileInfoCardOptions } from "..
 import "./style/profileUserInfo.scss"
 
 type ProfileUserInfoProps = {
+    item: DBProfiles,
     mutable_id: DBProfiles["mutable_id"]
     nickname: DBProfiles["nickname"]
     eventHandler: ProfileEventHandler
@@ -12,11 +13,11 @@ type ProfileUserInfoProps = {
 }
 
 export default function ProfileUserInfo(props: ProfileUserInfoProps) {
-    const { mutable_id, nickname, eventHandler, options } = props
+    const { item, mutable_id, nickname, eventHandler, options } = props
 
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.selectProfile) eventHandler.selectProfile(mutable_id)
+        if (eventHandler.selectProfile) eventHandler.selectProfile(item)
     }
 
     return (

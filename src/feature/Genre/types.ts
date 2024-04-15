@@ -4,5 +4,5 @@ export type DBGenre = GenresInfoFragment
 export type DBMiniGenre = GenresMinimalInfoFragment
 
 export type GenreEventHandler = {
-    selectGenre?: (genreId: string) => void
+    selectGenre?: (genre: DBMiniGenre) => void
 }

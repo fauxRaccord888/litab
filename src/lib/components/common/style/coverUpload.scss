@@ -1,34 +1,34 @@
 @import "src/lib/style/atomicMixin";
 
-.account-cover-upload-component {
+.cover-upload-component {
     @include flex;
     @include flex-col;
     @include w-full;
     @include align-center;
     @include child-top-m(calc(var(--base-size) * 1.5));
 
-    .account-cover-upload-component__title {
+    .cover-upload-component__title {
         @include w-full;
         @include margin-(0);
     }
 
-    .account-cover-upload-component__upload-input {
+    .cover-upload-component__upload-input {
         display: none;
     }
 
-    .account-cover-upload-component__upload-input-label {
+    .cover-upload-component__upload-input-label {
         @include flex;
         @include w-full;
         @include rounded-lg;
         @include box-shadow-2(rgb(var(--font-color)));
-        .account-cover-upload-component__upload-input-label-inner-container {
+        .cover-upload-component__upload-input-label-inner-container {
             @include flex;
             @include w-full;
             @include align-center;
             @include margin-(calc(var(--base-size) * 0.5));
             @include child-left-m(calc(var(--base-size) * 0.5));
     
-            .account-cover-upload-component__search-icon-component {
+            .cover-upload-component__search-icon-component {
                 width: calc(var(--base-size) * 1.5);
                 height: calc(var(--base-size) * 1.5);
                 @include stroke-lg(rgb(var(--font-color)));
@@ -36,7 +36,7 @@
         }
     }
 
-    .account-cover-upload-component__upload-preview {
+    .cover-upload-component__upload-preview {
         @include flex;
         @include rounded-full;
         width: 50%;
@@ -44,7 +44,7 @@
         object-fit: cover;
     }
 
-    .account-cover-upload-component__upload-button {
+    .cover-upload-component__upload-button {
         @include w-full;
         background-color: rgba(var(--primary), 1);
     }

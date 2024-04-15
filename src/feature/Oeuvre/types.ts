@@ -4,7 +4,7 @@ export type DBOeuvre = OeuvresInfoFragment
 export type DBMiniOeuvre = OeuvresMinimalInfoFragment
 
 export type OeuvreEventHandler = {
-    selectOeuvre?: (oeuvreId: string) => void,
+    selectOeuvre?: (oeuvre: DBMiniOeuvre) => void,
     selectArtistTag?: (artistId: string) => void,
     selectGenreTag?: (genreId: string) => void 
 }

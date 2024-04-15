@@ -1,5 +1,5 @@
 import type { ApolloError } from "@apollo/client"
-import { CustomError } from "$lib/error";
+import type { CustomError } from "$lib/error/customError";
 
 export function isError(error: unknown): error is Error {
     return typeof error === 'object' && error !== null && 'message' in error

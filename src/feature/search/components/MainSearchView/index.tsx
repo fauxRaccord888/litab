@@ -1,4 +1,4 @@
-import type { MainSearchViewEventHandler, QueryResults, SearchDropdownKey, SearchDropdownProps } from "../../types"
+import type { MainSearchViewEventHandler, QueryResultsObj, SearchDropdownKey, DropdownProps } from "../../types"
 import { useState } from "react"
 import { isSearchDropDownKey } from "../../types"
 import { SEARCH } from "$feature/search/constants"
@@ -6,16 +6,19 @@ import SearchPanel from "$lib/components/common/SearchPanel"
 import SearchResult from "./SearchResult"
 import "./style/mainSearchView.scss"
 
-type MainSearchViewProps = {
-    queryResults: QueryResults
-    dropdownProps: SearchDropdownProps
-    eventHandler: MainSearchViewEventHandler
+type MainSearchViewProps<T extends SearchDropdownKey>= {
+    queryResults: QueryResultsObj<T>
+    dropdownProps: DropdownProps<T>
+    eventHandler: MainSearchViewEventHandler<T>
 }
 
-export default function MainSearchView(props: MainSearchViewProps) {
+export default function MainSearchView<T extends SearchDropdownKey>(props: MainSearchViewProps<T>) {
     const { queryResults, dropdownProps, eventHandler } = props
+
     const [keyword, setKeyword] = useState('')
-    const [category, setCategory] = useState<SearchDropdownKey | null>(null)
+    const [category, setCategory] = useState<T | null>(null)
+    const isSoleCategory = dropdownProps.keys.length === 1
+    const firstCategory = dropdownProps.keys[0]
 
     const handleSearch = (formData: FormData) => {
         setCategory(null)
@@ -24,16 +27,25 @@ export default function MainSearchView(props: MainSearchViewProps) {
         const formCategory = formData.get(SEARCH.dropdownName)?.toString()
 
         if (!formKeyword) return
-        if (!formCategory) return
-        if (!isSearchDropDownKey(formCategory)) return
-        setCategory(formCategory)
+        if (!isSoleCategory && !formCategory) return
+        
+        if (
+            typeof formCategory !== 'undefined' && 
+            !isSearchDropDownKey(formCategory)
+        ) return
+
+        setCategory(isSoleCategory ? firstCategory : formCategory as T)
         setKeyword(formKeyword)
         eventHandler.search(formCategory, formKeyword)
     }
 
     const handleLoadMore = () => {
-        if (!category) return
-        if (!isSearchDropDownKey(category)) return
+        if (!isSoleCategory && !category) return
+        if (
+            category && 
+            !isSearchDropDownKey(category)
+        ) return
+
         eventHandler.search(category, keyword, true)
     }
 
@@ -41,7 +53,7 @@ export default function MainSearchView(props: MainSearchViewProps) {
         <div className="main-search-view-component">
             <div className="main-search-view-component__inner-container">
                 <SearchPanel dropdownProps={dropdownProps} submitFunction={handleSearch} />
-                <SearchResult 
+                <SearchResult
                     category={category} 
                     queryResults={queryResults} 
                     loadMoreFunction={handleLoadMore} 

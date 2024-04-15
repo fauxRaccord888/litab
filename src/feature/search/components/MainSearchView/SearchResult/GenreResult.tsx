@@ -10,7 +10,7 @@ type GenreResultProps = {
 
 export default function GenreResult(props: GenreResultProps) {
     const { queryResults, eventHandler } = props
-    const { data } = queryResults.genres
+    const { data } = queryResults
     const { t } = useTranslation()
     if (!(data && "genresCollection" in data))  return null
 

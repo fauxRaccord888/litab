@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import type { DBMiniProfile } from "$feature/Profile/types";
+import type { DBMiniProfile, ProfileEventHandler } from "$feature/Profile/types";
 import type { PentagramEventHandler } from "../../../types";
 import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "$feature/auth/hooks";
@@ -14,7 +14,7 @@ type SelectMetaInfoProps = {
     id: string,
     created_at: string
     users: DBMiniProfile
-    eventHandler: PentagramEventHandler
+    eventHandler: PentagramEventHandler & ProfileEventHandler
 }
 
 export default function SelectMetaInfo(props: SelectMetaInfoProps) {    
@@ -41,6 +41,7 @@ export default function SelectMetaInfo(props: SelectMetaInfoProps) {
                 <div className="select-meta-info-component__profile-container">
                     <MiniProfile 
                         item={users} 
+                        eventHandler={eventHandler}
                         options={{
                             displayFollow: false
                         }}
