@@ -24,11 +24,11 @@ export function getAngleAndDisctanceOrThrow(
     return positionWithAdjustment({ angle, distance })
 }
 
-function isInside(y: number, x: number, radius: number, sides: number) {
+export function isInside(y: number, x: number, radius: number, sides: number) {
     let inside = false
     const radianPerSide = 2 * Math.PI / sides
     const offset = PENTAGRAM.ANGLE_OFFSET / PENTAGRAM.HALF_CIRCLE * Math.PI
-    
+
     for (let i = 0; i < sides; i++) {
         const x1 = Math.cos(radianPerSide * i + offset) * radius
         const y1 = Math.sin(radianPerSide * i + offset) * radius
