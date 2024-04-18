@@ -226,27 +226,27 @@ export type Database = {
           current_angle: number
           current_distance: number
           id: string
-          node_id: string
+          pentagram_node_id: string
           revision_id: string
         }
         Insert: {
           current_angle?: number
           current_distance?: number
           id?: string
-          node_id: string
+          pentagram_node_id: string
           revision_id: string
         }
         Update: {
           current_angle?: number
           current_distance?: number
           id?: string
-          node_id?: string
+          pentagram_node_id?: string
           revision_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "public_pentagram_revision_upsert_records_node_id_fkey"
-            columns: ["node_id"]
+            columns: ["pentagram_node_id"]
             isOneToOne: false
             referencedRelation: "pentagram_nodes"
             referencedColumns: ["id"]
@@ -263,21 +263,21 @@ export type Database = {
       pentagram_revision_remove_records: {
         Row: {
           id: string
-          node_id: string
+          pentagram_node_id: string
           previous_angle: number
           previous_distance: number
           revision_id: string
         }
         Insert: {
           id?: string
-          node_id: string
+          pentagram_node_id: string
           previous_angle?: number
           previous_distance?: number
           revision_id: string
         }
         Update: {
           id?: string
-          node_id?: string
+          pentagram_node_id?: string
           previous_angle?: number
           previous_distance?: number
           revision_id?: string
@@ -285,7 +285,7 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "public_pentagram_revision_upsert_records_node_id_fkey"
-            columns: ["node_id"]
+            columns: ["pentagram_node_id"]
             isOneToOne: false
             referencedRelation: "pentagram_nodes"
             referencedColumns: ["id"]
@@ -304,7 +304,7 @@ export type Database = {
           current_angle: number
           current_distance: number
           id: string
-          node_id: string
+          pentagram_node_id: string
           previous_angle: number
           previous_distance: number
           revision_id: string
@@ -313,7 +313,7 @@ export type Database = {
           current_angle?: number
           current_distance?: number
           id?: string
-          node_id: string
+          pentagram_node_id: string
           previous_angle?: number
           previous_distance?: number
           revision_id: string
@@ -322,7 +322,7 @@ export type Database = {
           current_angle?: number
           current_distance?: number
           id?: string
-          node_id?: string
+          pentagram_node_id?: string
           previous_angle?: number
           previous_distance?: number
           revision_id?: string
@@ -330,7 +330,7 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "public_pentagram_revision_upsert_records_node_id_fkey"
-            columns: ["node_id"]
+            columns: ["pentagram_node_id"]
             isOneToOne: false
             referencedRelation: "pentagram_nodes"
             referencedColumns: ["id"]
@@ -349,27 +349,27 @@ export type Database = {
           current_angle: number
           current_distance: number
           id: string
-          node_id: string
+          pentagram_node_id: string
           revision_id: string
         }
         Insert: {
           current_angle?: number
           current_distance?: number
           id?: string
-          node_id: string
+          pentagram_node_id: string
           revision_id: string
         }
         Update: {
           current_angle?: number
           current_distance?: number
           id?: string
-          node_id?: string
+          pentagram_node_id?: string
           revision_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "public_pentagram_revision_upsert_records_node_id_fkey"
-            columns: ["node_id"]
+            columns: ["pentagram_node_id"]
             isOneToOne: false
             referencedRelation: "pentagram_nodes"
             referencedColumns: ["id"]
@@ -455,6 +455,69 @@ export type Database = {
           },
           {
             foreignKeyName: "public_pentagrams_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shadows: {
+        Row: {
+          avoid_factor: number
+          body_length: number
+          centering_factor: number
+          color: number[]
+          created_at: string
+          id: string
+          matching_factor: number
+          min_distance: number
+          name: string
+          speed_limit: number
+          turn_factor: number
+          user_id: string
+          visual_range: number
+        }
+        Insert: {
+          avoid_factor: number
+          body_length: number
+          centering_factor: number
+          color: number[]
+          created_at?: string
+          id?: string
+          matching_factor: number
+          min_distance: number
+          name: string
+          speed_limit: number
+          turn_factor: number
+          user_id: string
+          visual_range: number
+        }
+        Update: {
+          avoid_factor?: number
+          body_length?: number
+          centering_factor?: number
+          color?: number[]
+          created_at?: string
+          id?: string
+          matching_factor?: number
+          min_distance?: number
+          name?: string
+          speed_limit?: number
+          turn_factor?: number
+          user_id?: string
+          visual_range?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_shadow_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_shadow_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
