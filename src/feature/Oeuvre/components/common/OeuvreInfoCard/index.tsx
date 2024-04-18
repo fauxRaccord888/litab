@@ -19,7 +19,7 @@ type OeuvreInfoProps = {
 
 export default function OeuvreInfoCard(props: OeuvreInfoProps) {
     const { item, renderConfig, options, eventHandler } = props
-    const { id, title, description, updated_at } = item
+    const { id, title, description, updatedAt } = item
     const { t } = useTranslation()
 
     const handleSelect = () => {
@@ -45,8 +45,8 @@ export default function OeuvreInfoCard(props: OeuvreInfoProps) {
     )
 
     const coverImage = useMemo(() => (
-        <BucketImage bucket="oeuvres" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
-    ), [id, updated_at])
+        <BucketImage bucket="oeuvres" timeStamp={updatedAt} id={id} fallback={<FallbackIcon />} />
+    ), [id, updatedAt])
 
     const mainInfo = useMemo(() => (
         <OeuvreMainInfo 

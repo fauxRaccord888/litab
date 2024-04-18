@@ -76,7 +76,7 @@ export default function ProfileSelectView(props: {
     ), [eventHandler, item.pentagramsCollection?.pageInfo.hasNextPage])
 
     const revisionComponents = useMemo(() => (
-        item?.pentagram_revisionsCollection?.edges.map((edge) => (
+        item?.pentagramRevisionsCollection?.edges.map((edge) => (
             <FeedItem
                 key={edge.node.id}
                 item={edge.node}
@@ -90,17 +90,17 @@ export default function ProfileSelectView(props: {
                 eventHandler={eventHandler}
             />
         )) || []
-    ), [eventHandler, item?.pentagram_revisionsCollection?.edges])
+    ), [eventHandler, item?.pentagramRevisionsCollection?.edges])
 
     const revisionLoader = useMemo(() => (
         <InfiniteScrollTrigger
-            hasNextPage={item.pentagram_revisionsCollection?.pageInfo.hasNextPage}
+            hasNextPage={item.pentagramRevisionsCollection?.pageInfo.hasNextPage}
             handleLoadMore={() => eventHandler.handleLoadMore({
                 revisionLimit: NETWORK.readLimit, 
                 pentagramLimit: 0
             })}
         />
-    ), [eventHandler, item.pentagram_revisionsCollection?.pageInfo.hasNextPage])
+    ), [eventHandler, item.pentagramRevisionsCollection?.pageInfo.hasNextPage])
 
     const tabComponent = (
         <Tab items={[

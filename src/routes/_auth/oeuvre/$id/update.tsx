@@ -44,7 +44,7 @@ function UpdateOeuvre() {
         evictCacheById({
             cache: apolloClient.cache,
             id: params.id,
-            entity: category
+            entity: "Oeuvres"
         })
     }
 

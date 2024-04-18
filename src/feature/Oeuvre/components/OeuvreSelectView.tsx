@@ -37,10 +37,10 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
     )
 
     const pentagramComponents = useMemo(() => (
-        item?.pentagram_nodesCollection?.edges.map((edge) => (
+        item?.pentagramNodesCollection?.edges.map((edge) => (
             <PentagramCard
-                key={edge.node.pentagrams.id}
-                item={edge.node.pentagrams}
+                key={edge.node.pentagram.id}
+                item={edge.node.pentagram}
                 renderConfig={{
                     metaInfo: true,
                     mainPentagon: true,
@@ -51,14 +51,14 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
                 options={{}}
             />
         )) || []
-    ), [eventHandler, item?.pentagram_nodesCollection?.edges])
+    ), [eventHandler, item?.pentagramNodesCollection?.edges])
 
     const loader = useMemo(() => (
         <InfiniteScrollTrigger
-            hasNextPage={item.pentagram_nodesCollection?.pageInfo.hasNextPage}
+            hasNextPage={item.pentagramNodesCollection?.pageInfo.hasNextPage}
             handleLoadMore={eventHandler.handleLoadMore}
         />
-    ), [eventHandler.handleLoadMore, item.pentagram_nodesCollection?.pageInfo.hasNextPage])
+    ), [eventHandler.handleLoadMore, item.pentagramNodesCollection?.pageInfo.hasNextPage])
 
     const tabComponent = (
         <Tab

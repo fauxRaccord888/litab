@@ -52,7 +52,7 @@ function Search() {
     const eventHandler: MainSearchViewEventHandler = {
         search: handleSearch,
         navigateToInsertMetaData: handleNavigateToInsertMetaData,
-        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id),
+        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutableId),
         selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
         selectArtist: (artist) => artistNavigate.select(artist.id),
         selectGenre: (genre) => genreNavigate.select(genre.id)

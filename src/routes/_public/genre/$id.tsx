@@ -41,7 +41,7 @@ function Genre() {
     const eventHandler: BaseEventHandler & GenreEventHandler & OeuvreEventHandler = {
         handleLoadMore: () => fetchMore({
             variables: {
-                cursor: item?.oeuvres_genresCollection?.pageInfo?.endCursor,
+                cursor: item?.oeuvresGenresCollection?.pageInfo?.endCursor,
                 limit: NETWORK.readLimit,
                 id: params.id
             }

@@ -18,7 +18,7 @@ type MergedNodeProps = {
 
 export default function MergedNode(props: MergedNodeProps) {
     const { item, handleClickNode, handleClickSelectedNode, handleDragAndTouchMove, eventHandler } = props
-    const { id, angle, distance, oeuvres, selected, deleted } = item
+    const { id, angle, distance, oeuvre, selected, deleted } = item
     const hoverHook = useHover()
 
     const onClickNode = (e: MouseEvent<HTMLDivElement>) => {
@@ -58,8 +58,8 @@ export default function MergedNode(props: MergedNodeProps) {
                         onDragStart={onDragStart}
                         onDragOver={(e) => e.preventDefault()}
                     >
-                        <OeuvreNode item={oeuvres} hoverHook={hoverHook} />
-                        {!selected && <OeuvreNodeHoverCard item={oeuvres} hoverHook={hoverHook} eventHandler={eventHandler} />}
+                        <OeuvreNode item={oeuvre} hoverHook={hoverHook} />
+                        {!selected && <OeuvreNodeHoverCard item={oeuvre} hoverHook={hoverHook} eventHandler={eventHandler} />}
                     </div>
                 </PositionAdjuster>
             }

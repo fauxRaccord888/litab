@@ -6,14 +6,14 @@ import "./style/profileUserInfo.scss"
 
 type ProfileUserInfoProps = {
     item: DBProfiles,
-    mutable_id: DBProfiles["mutable_id"]
+    mutableId: DBProfiles["mutableId"]
     nickname: DBProfiles["nickname"]
     eventHandler: ProfileEventHandler
     options: ProfileInfoCardOptions
 }
 
 export default function ProfileUserInfo(props: ProfileUserInfoProps) {
-    const { item, mutable_id, nickname, eventHandler, options } = props
+    const { item, mutableId, nickname, eventHandler, options } = props
 
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
@@ -29,7 +29,7 @@ export default function ProfileUserInfo(props: ProfileUserInfoProps) {
             onClick={onClickProfile}
         >
             <span className="profile-user-info-component__mutable-id">
-                {mutable_id}
+                {mutableId}
             </span>
             {options.miniView &&
                 <span className="profile-user-info-component__nickname">

@@ -1,18 +1,18 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment ArtistsMinimalInfo on artists {
+    fragment ArtistsMinimalInfo on Artists {
         id
         name
-        updated_at
+        updatedAt
     }
 `)
 
 graphql(/* GraphQL */ `
-    fragment ArtistOeuvresInfo on artists {
-        oeuvres_artistsCollection(
+    fragment ArtistOeuvresInfo on Artists {
+        oeuvresArtistsCollection(
             orderBy: {
-                oeuvre_id: DescNullsLast
+                oeuvreId: DescNullsLast
             }
             first: $limit
             after: $cursor
@@ -24,7 +24,7 @@ graphql(/* GraphQL */ `
             edges {
                 cursor
                 node {
-                    oeuvres {
+                    oeuvre {
                         ...OeuvresMinimalInfo
                     }
                 }
@@ -34,7 +34,7 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment ArtistsInfo on artists {
+    fragment ArtistsInfo on Artists {
         ...ArtistsMinimalInfo
         ...ArtistOeuvresInfo
         abstract

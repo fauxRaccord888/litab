@@ -18,7 +18,7 @@ export default function ProfileUpdate(props: ProfileUpdateProps) {
     const { currentUser } = useCurrentUser()
 
     const [formData, setFormData] = useState<Record<AcocuntProfileUpdateKey, string>>({
-        mutableId: currentUser?.mutable_id || '',
+        mutableId: currentUser?.mutableId || '',
         nickname: currentUser?.nickname || "",
         description: currentUser?.description || ""
     })

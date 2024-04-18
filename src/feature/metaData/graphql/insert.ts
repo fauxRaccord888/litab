@@ -5,7 +5,7 @@ export const insertArtist_MUTATION = graphql(/* GraphQL */ `
         $title: String,
         $description: String,
     ) {
-        insertIntoartistsCollection(
+        insertIntoArtistsCollection(
             objects: {
                 name: $title,
                 bio: $description,
@@ -23,7 +23,7 @@ export const insertOeuvres_MUTATION = graphql(/* GraphQL */ `
         $title: String,
         $description: String,
     ) {
-        insertIntooeuvresCollection(
+        insertIntoOeuvresCollection(
             objects: {
                 title: $title,
                 description: $description,
@@ -41,7 +41,7 @@ export const insertGenres_MUTATION = graphql(/* GraphQL */ `
         $title: String,
         $description: String,
     ) {
-        insertIntogenresCollection(
+        insertIntoGenresCollection(
             objects: {
                 name: $title,
                 description: $description

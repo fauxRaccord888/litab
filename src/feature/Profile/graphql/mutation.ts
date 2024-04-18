@@ -2,15 +2,15 @@ import { graphql } from "$lib/graphql/__generated__"
 
 export const insertFollowings_MUTATION = graphql(/* GraphQL */ `
     mutation insertFollowings($followerId:UUID!, $followingId:UUID!) {
-        insertIntofollowingsCollection(
+        insertIntoFollowingsCollection(
             objects: {
-                follower_id: $followerId,
-                following_id: $followingId
+                followerId: $followerId,
+                followingId: $followingId
             }
         ) {
             records{
-                follower_id { id },
-                follower_id { id }
+                followerId,
+                followingId
             }
         }
     }
@@ -18,15 +18,15 @@ export const insertFollowings_MUTATION = graphql(/* GraphQL */ `
 
 export const deleteFollowings_MUTATION = graphql(/* GraphQL */ `
     mutation deleteFollowings($followerId:UUID!, $followingId:UUID!) {
-        deleteFromfollowingsCollection(
+        deleteFromFollowingsCollection(
             filter : {
-                following_id: {eq: $followingId },
-                follower_id: {eq: $followerId}
+                followingId: {eq: $followingId },
+                followerId: {eq: $followerId}
             }
         ) {
             records {
-                follower_id { id },
-                follower_id { id }
+                followerId,
+                followingId
             }
         }
     }

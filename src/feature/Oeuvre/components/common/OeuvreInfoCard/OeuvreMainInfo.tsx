@@ -12,7 +12,7 @@ type OeuvreMainInfoProps = {
 
 export default function OeuvreMainInfo(props: OeuvreMainInfoProps) {
     const { item, eventHandler } = props
-    const { oeuvres_artistsCollection, oeuvres_genresCollection } = item
+    const { oeuvresArtistsCollection, oeuvresGenresCollection } = item
 
     const onClickGenre = (e: MouseEvent, genreId: string) => {
         e.preventDefault()
@@ -24,29 +24,29 @@ export default function OeuvreMainInfo(props: OeuvreMainInfoProps) {
         if (eventHandler.selectArtistTag) eventHandler.selectArtistTag(artistId)
     }
 
-    const artistsInfo = oeuvres_artistsCollection?.edges.map((edge) => (
+    const artistsInfo = oeuvresArtistsCollection?.edges.map((edge) => (
         <span 
             className={[
                 "oeuvre-main-info-component__artist",
                 "light-font-color",
                 eventHandler.selectArtistTag ? "oeuvre-main-info-component__artist--pointer" : ""
             ].join(" ")}
-            key={edge.node.artists.id}
-            onClickCapture={(e) => onClickArtist(e, edge.node.artists.id)}
+            key={edge.node.artist.id}
+            onClickCapture={(e) => onClickArtist(e, edge.node.artist.id)}
         >
-            {edge.node.artists.name}
+            {edge.node.artist.name}
         </span>
     ))
     
-    const genresInfo = oeuvres_genresCollection?.edges.map((edge) => {
-        const bgColor = fromHex(edge.node.genres.id.slice(0, 6))
+    const genresInfo = oeuvresGenresCollection?.edges.map((edge) => {
+        const bgColor = fromHex(edge.node.genre.id.slice(0, 6))
         const isLightFont = calcFontColorByBG(bgColor)
         const style: CustomBackgroundCSSProp = {"--custom-bg" : bgColor}
 
         return (
             <span 
-                key={edge.node.genres.id}
-                onClickCapture={(e) => onClickGenre(e, edge.node.genres.id)}
+                key={edge.node.genre.id}
+                onClickCapture={(e) => onClickGenre(e, edge.node.genre.id)}
                 className={[
                     "oeuvre-main-info-component__artist",
                     isLightFont ? "light-font-color" : "",
@@ -54,7 +54,7 @@ export default function OeuvreMainInfo(props: OeuvreMainInfoProps) {
                 ].join(" ")}
                 style={style} 
             >
-                {edge.node.genres.name}
+                {edge.node.genre.name}
             </span>
         )
     })

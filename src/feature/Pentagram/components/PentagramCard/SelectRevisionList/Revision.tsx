@@ -12,14 +12,14 @@ type RevisionProps = {
 export default function Revision(props: RevisionProps) {
     const { item, eventHandler } = props
     const {
-        created_at,
-        pentagram_revision_upsert_recordsCollection: upsert, 
-        pentagram_revision_update_recordsCollection: update, 
-        pentagram_revision_remove_recordsCollection: remove, 
-        pentagram_revision_recover_recordsCollection: recover 
+        createdAt,
+        pentagramRevisionUpsertRecordsCollection: upsert, 
+        pentagramRevisionUpdateRecordsCollection: update, 
+        pentagramRevisionRemoveRecordsCollection: remove, 
+        pentagramRevisionRecoverRecordsCollection: recover 
     } = item
     
-    const relativeTime = useTranslatedRelativeTime(new Date(created_at))
+    const relativeTime = useTranslatedRelativeTime(new Date(createdAt))
     const changes = { upsert, update, remove, recover }
 
     const onClickRevision = (e: MouseEvent) => {
@@ -47,7 +47,7 @@ export default function Revision(props: RevisionProps) {
                 })}
             </div>
             <span 
-                title={String(new Date(created_at))} 
+                title={String(new Date(createdAt))} 
                 className="revision-component__revision-date"
             >
                 {relativeTime}

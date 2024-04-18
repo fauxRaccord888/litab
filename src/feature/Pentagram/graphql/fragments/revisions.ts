@@ -1,13 +1,13 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment PentagramRevisionsInfo on pentagram_revisions {
+    fragment PentagramRevisionsInfo on PentagramRevisions {
         id
-        created_at
-        pentagrams {
+        createdAt
+        pentagram {
             id
         }
-        pentagram_revision_update_recordsCollection {
+        pentagramRevisionUpdateRecordsCollection {
             totalCount
             edges {
                 node {
@@ -15,7 +15,7 @@ graphql(/* GraphQL */ `
                 }
             }
         }
-        pentagram_revision_upsert_recordsCollection {
+        pentagramRevisionUpsertRecordsCollection {
             totalCount
             edges {
                 node {
@@ -23,7 +23,7 @@ graphql(/* GraphQL */ `
                 }
             }
         }
-        pentagram_revision_remove_recordsCollection {
+        pentagramRevisionRemoveRecordsCollection {
             totalCount
             edges {
                 node {
@@ -31,7 +31,7 @@ graphql(/* GraphQL */ `
                 }
             }
         }
-        pentagram_revision_recover_recordsCollection {
+        pentagramRevisionRecoverRecordsCollection {
             totalCount
             edges {
                 node {
@@ -43,35 +43,35 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment PentagramRevisionsMinimalInfo on pentagram_revisions {
+    fragment PentagramRevisionsMinimalInfo on PentagramRevisions {
         id
-        created_at
-        pentagrams {
+        createdAt
+        pentagram {
             id
         }
-        pentagram_revision_update_recordsCollection {
+        pentagramRevisionUpdateRecordsCollection {
             totalCount
         }
-        pentagram_revision_upsert_recordsCollection {
+        pentagramRevisionUpsertRecordsCollection {
             totalCount
         }
-        pentagram_revision_remove_recordsCollection {
+        pentagramRevisionRemoveRecordsCollection {
             totalCount
         }
-        pentagram_revision_recover_recordsCollection {
+        pentagramRevisionRecoverRecordsCollection {
             totalCount
         }
     }
 `)
 
 graphql(/* GraphQL */ `
-    fragment PentagramRevisionFeedInfo on pentagram_revisions {
+    fragment PentagramRevisionFeedInfo on PentagramRevisions {
         id
-        created_at
-        users {
+        createdAt
+        user {
             ...MiniProfileInfo
         }
-        pentagrams {
+        pentagram {
             ...PentagramsSelectInfo
         }
     }

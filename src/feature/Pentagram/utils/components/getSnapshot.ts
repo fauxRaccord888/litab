@@ -8,28 +8,28 @@ export function getSnapshot(
 ) {
     const position = unionedChanges.find((change) => {
         if (!change) return false
-        if (!change?.created_at) return false
-        const date = new Date(change?.created_at)
+        if (!change?.createdAt) return false
+        const date = new Date(change?.createdAt)
         if (date > timestamp) return false
         if (calcBeforePosition && date >= timestamp) return false
-        if (typeof change?.current_angle !== 'number') return false
-        if (typeof change?.current_distance !== 'number') return false
+        if (typeof change?.currentAngle !== 'number') return false
+        if (typeof change?.currentDistance !== 'number') return false
         return true
     })
 
     const deleted = unionedChanges
         .find((change) => {
             if (!change) return false
-            if (!change?.created_at) return false
-            const date = new Date(change?.created_at)
+            if (!change?.createdAt) return false
+            const date = new Date(change?.createdAt)
             if (date > timestamp) return false
             if (calcBeforePosition && date >= timestamp) return false
             return true
         })
         ?.changeType === 'remove'
 
-    const angle = position ? position.current_angle : null;
-    const distance = position ? position.current_distance : null;
+    const angle = position ? position.currentAngle : null;
+    const distance = position ? position.currentDistance : null;
 
     return { angle, distance, deleted }
 }

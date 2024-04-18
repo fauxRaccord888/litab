@@ -1,14 +1,14 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment PentagramsUpdateInfo on pentagrams {
+    fragment PentagramsUpdateInfo on Pentagrams {
         id
         description
-        created_at
-        users {
+        createdAt
+        user {
             ...MiniProfileInfo
         }
-        pentagram_nodesCollection {
+        pentagramNodesCollection {
             edges {
                 node {
                     ...PentagramNodesInfo
@@ -19,22 +19,22 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment PentagramsSelectInfo on pentagrams {
+    fragment PentagramsSelectInfo on Pentagrams {
         id
         description
-        created_at
-        users {
+        createdAt
+        user {
             ...MiniProfileInfo
         }
-        pentagram_nodesCollection {
+        pentagramNodesCollection {
             edges {
                 node {
                     ...PentagramNodesInfo
                 }
             }
         }
-        pentagram_revisionsCollection(
-            orderBy: { created_at: DescNullsLast }
+        pentagramRevisionsCollection(
+            orderBy: { createdAt: DescNullsLast }
         ) {
             edges {
                 node {
@@ -46,9 +46,9 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment PentagramsSelectUserInfo on pentagrams {
+    fragment PentagramsSelectUserInfo on Pentagrams {
         id
-        users {
+        user {
             ...MiniProfileInfo
         }
     }

@@ -2,7 +2,7 @@ import type { ApolloCache } from "@apollo/client"
 
 export function evictCacheById<T> (payload: {
     cache: ApolloCache<T>, 
-    entity: 'users' | 'pentagrams' | 'oeuvres' | 'artists' |'genres' | 'feed',
+    entity: 'Users' | 'Pentagrams' | 'Oeuvres' | 'Artists' |'Genres' | 'Feed',
     id: string | null | undefined
 }) {
     const { cache, entity, id } = payload

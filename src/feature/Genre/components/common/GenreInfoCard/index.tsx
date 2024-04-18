@@ -19,7 +19,7 @@ type GenreInfoCardProps = {
 
 export default function GenreInfoCard(props: GenreInfoCardProps) {
     const { item, renderConfig, options, eventHandler } = props
-    const { id, name, abstract, updated_at, description } = item
+    const { id, name, abstract, updatedAt, description } = item
     const { t } = useTranslation()
 
     const handleSelect = () => {
@@ -45,8 +45,8 @@ export default function GenreInfoCard(props: GenreInfoCardProps) {
     )
 
     const coverImage = useMemo(() => (
-        <BucketImage bucket="genres" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
-    ), [id, updated_at])
+        <BucketImage bucket="genres" timeStamp={updatedAt} id={id} fallback={<FallbackIcon />} />
+    ), [id, updatedAt])
 
 
     return (

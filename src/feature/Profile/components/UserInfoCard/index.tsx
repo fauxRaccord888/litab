@@ -20,7 +20,7 @@ type ProfileInfoCardProps = {
 
 export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const { item, renderConfig, options, eventHandler } = props
-    const { id, mutable_id, nickname, description, updated_at, followersCollection, followingsCollection } = item
+    const { id, mutableId, nickname, description, updatedAt, followersCollection, followingsCollection } = item
     const { currentUser } = useCurrentUser()
 
     const followings = calcFollowings(currentUser)
@@ -37,7 +37,7 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
         <ProfileCoverImage 
             id={id} 
             item={item}
-            updated_at={updated_at}
+            updatedAt={updatedAt}
             eventHandler={eventHandler}
         />
     )
@@ -46,14 +46,14 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
         <div className="user-info-card-component__title-container">
             <ProfileUserInfo
                 item={item}
-                mutable_id={mutable_id}
+                mutableId={mutableId}
                 nickname={nickname}
                 eventHandler={eventHandler}
                 options={options}
             />
             <ProfileInteraction 
                 id={id}
-                mutable_id={mutable_id}
+                mutableId={mutableId}
                 isMe={isMe}
                 followed={followed}
                 eventHandler={eventHandler}
@@ -67,13 +67,13 @@ export default function ProfileInfoCard(props: ProfileInfoCardProps) {
     const subInfo = (
         <>
             <ProfileFollowingInfo
-                mutable_id={mutable_id}
+                mutableId={mutableId}
                 followersCollection={followersCollection}
                 followingsCollection={followingsCollection}
                 eventHandler={eventHandler}
             />
             <ProfileDescriptionInfo
-                mutable_id={mutable_id}
+                mutableId={mutableId}
                 nickname={nickname}
                 description={description}
                 mutualFollowers={mutualFollowers}

@@ -46,23 +46,23 @@ function getId(response: FetchResult<MetaDataMutations>) {
     let id = undefined
     if (
         response.data && 
-        "insertIntoartistsCollection" in response.data
+        "insertIntoArtistsCollection" in response.data
     ) {
-        id = getFirstRecordOfResponse(response.data.insertIntoartistsCollection)?.id
+        id = getFirstRecordOfResponse(response.data.insertIntoArtistsCollection)?.id
     }
 
     if (
         response.data && 
-        "insertIntogenresCollection" in response.data
+        "insertIntoGenresCollection" in response.data
     ) {
-        id = getFirstRecordOfResponse(response.data.insertIntogenresCollection)?.id
+        id = getFirstRecordOfResponse(response.data.insertIntoGenresCollection)?.id
     }
 
     if (
         response.data && 
-        "insertIntooeuvresCollection" in response.data
+        "insertIntoOeuvresCollection" in response.data
     ) {
-        id = getFirstRecordOfResponse(response.data.insertIntooeuvresCollection)?.id
+        id = getFirstRecordOfResponse(response.data.insertIntoOeuvresCollection)?.id
     }
 
     return id

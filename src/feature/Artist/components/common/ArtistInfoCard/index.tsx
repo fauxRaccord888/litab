@@ -19,7 +19,7 @@ type ArtistInfoCardProps = {
 
 export default function ArtistInfoCard(props: ArtistInfoCardProps) {
     const { item, renderConfig, options, eventHandler } = props
-    const { id, name, abstract, bio, updated_at } = item
+    const { id, name, abstract, bio, updatedAt } = item
     const { t } = useTranslation()
 
     const handleSelect = () => {
@@ -45,8 +45,8 @@ export default function ArtistInfoCard(props: ArtistInfoCardProps) {
     )
 
     const coverImage = useMemo(() => (
-        <BucketImage bucket="artists" timeStamp={updated_at} id={id} fallback={<FallbackIcon />} />
-    ), [id, updated_at])
+        <BucketImage bucket="artists" timeStamp={updatedAt} id={id} fallback={<FallbackIcon />} />
+    ), [id, updatedAt])
 
     return (
         <div className="artist-info-card-component">

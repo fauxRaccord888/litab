@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useThrottle, useThrottledErrorToast } from '$lib/hooks';
 import { useOeuvreNavigate, usePentagramNavigate } from "$feature/navigate/hooks"
-import { useCSSVariables } from '$lib/hooks/useCSSVariables';
+import { useCSSVariables } from '$lib/hooks';
 import { 
     useMainPentagonEventHandler, 
     useMerge, 

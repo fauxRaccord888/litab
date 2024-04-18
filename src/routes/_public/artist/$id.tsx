@@ -41,7 +41,7 @@ function Artist() {
     const eventHandler: BaseEventHandler & ArtistEventHandler & OeuvreEventHandler = {
         handleLoadMore: () => fetchMore({
             variables: {
-                cursor: item?.oeuvres_artistsCollection?.pageInfo?.endCursor,
+                cursor: item?.oeuvresArtistsCollection?.pageInfo?.endCursor,
                 limit: NETWORK.readLimit,
                 id: params.id
             }

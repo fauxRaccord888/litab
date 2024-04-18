@@ -5,14 +5,14 @@ export const insertOeuvresArtistsRelation_MUTATION = graphql(/* GraphQL */ `
         $metaId: UUID,
         $oeuvreId: UUID,
     ) {
-        insertIntooeuvres_artistsCollection(
+        insertIntoOeuvresArtistsCollection(
             objects: {
-                oeuvre_id: $oeuvreId,
-                artist_id: $metaId,
+                oeuvreId: $oeuvreId,
+                artistId: $metaId,
             }
         ) {
             records {
-                oeuvre_id
+                oeuvreId
             }
         }
     }
@@ -23,14 +23,14 @@ export const insertOeuvresGenresRelation_MUTATION = graphql(/* GraphQL */ `
         $metaId: UUID,
         $oeuvreId: UUID,
     ) {
-        insertIntooeuvres_genresCollection(
+        insertIntoOeuvresGenresCollection(
             objects: {
-                oeuvre_id: $oeuvreId,
-                genre_id: $metaId,
+                oeuvreId: $oeuvreId,
+                genreId: $metaId,
             }
         ) {
             records {
-                oeuvre_id
+                oeuvreId
             }
         }
     }
@@ -41,14 +41,14 @@ export const deleteOeuvresArtistsRelation_MUTATION = graphql(/* GraphQL */ `
         $metaId: UUID,
         $oeuvreId: UUID,
     ) {
-        deleteFromoeuvres_artistsCollection(
+        deleteFromOeuvresArtistsCollection(
             filter: {
-                oeuvre_id: { eq: $oeuvreId },
-                artist_id: { eq: $metaId },
+                oeuvreId: { eq: $oeuvreId },
+                artistId: { eq: $metaId },
             }
         ) {
             records {
-                oeuvre_id
+                oeuvreId
             }
         }
     }
@@ -60,14 +60,14 @@ export const deleteOeuvresGenresRelation_MUTATION = graphql(/* GraphQL */ `
         $metaId: UUID,
         $oeuvreId: UUID,
     ) {
-        deleteFromoeuvres_genresCollection(
+        deleteFromOeuvresGenresCollection(
             filter: {
-                oeuvre_id: { eq: $oeuvreId },
-                genre_id: { eq: $metaId },
+                oeuvreId: { eq: $oeuvreId },
+                genreId: { eq: $metaId },
             }
         ) {
             records {
-                oeuvre_id
+                oeuvreId
             }
         }
     }

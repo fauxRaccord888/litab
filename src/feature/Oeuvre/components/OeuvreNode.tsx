@@ -24,7 +24,7 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
                 <BucketImage 
                     bucket="oeuvres"
                     id={item.id}
-                    timeStamp={item.updated_at}
+                    timeStamp={item.updatedAt}
                     fallback={<FallbackIcon />}
                 />
             </div>

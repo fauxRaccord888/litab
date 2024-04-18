@@ -1,67 +1,67 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment UpdateRecordInfo on pentagram_revision_update_records {
+    fragment UpdateRecordInfo on PentagramRevisionUpdateRecords {
         id
-        pentagram_nodes {
-            oeuvres {
+        pentagramNode {
+            oeuvre {
                 ...OeuvresMinimalInfo
             }
         }
-        pentagram_revisions {
-            created_at
+        revision {
+            createdAt
         }
-        current_angle
-        current_distance
-        previous_angle
-        previous_distance
+        currentAngle
+        currentDistance
+        previousAngle
+        previousDistance
     }
 `)
 
 graphql(/* GraphQL */ `
-    fragment UpsertRecordInfo on pentagram_revision_upsert_records {
+    fragment UpsertRecordInfo on PentagramRevisionUpsertRecords {
         id
-        pentagram_nodes {
-            oeuvres {
+        pentagramNode {
+            oeuvre {
                 ...OeuvresMinimalInfo
             }
         }
-        pentagram_revisions {
-            created_at
+        revision {
+            createdAt
         }
-        current_angle
-        current_distance
+        currentAngle
+        currentDistance
     }
 `)
 
 graphql(/* GraphQL */ `  
-    fragment RemoveRecordInfo on pentagram_revision_remove_records {
+    fragment RemoveRecordInfo on PentagramRevisionRemoveRecords {
         id
-        pentagram_nodes {
-            oeuvres {
+        pentagramNode {
+            oeuvre {
                 ...OeuvresMinimalInfo
             }
         }
-        pentagram_revisions {
-            created_at
+        revision {
+            createdAt
         }
-        previous_angle
-        previous_distance
+        previousAngle
+        previousDistance
     }
 `)
 
 graphql(/* GraphQL */ `
-    fragment RecoverRecordInfo on pentagram_revision_recover_records {
+    fragment RecoverRecordInfo on PentagramRevisionRecoverRecords {
         id
-        pentagram_nodes {
-            oeuvres {
+        pentagramNode {
+            oeuvre {
                 ...OeuvresMinimalInfo
             }
         }
-        pentagram_revisions {
-            created_at
+        revision {
+            createdAt
         }
-        current_angle
-        current_distance
+        currentAngle
+        currentDistance
     }
 `)

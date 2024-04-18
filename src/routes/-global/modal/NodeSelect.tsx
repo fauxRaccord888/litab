@@ -15,7 +15,7 @@ export default function NodeSelect(props: {
         variables: { id: nodeId }
     });
 
-    const node = getFirstNodeOfCollection(data?.pentagram_nodesCollection);
+    const node = getFirstNodeOfCollection(data?.pentagramNodesCollection);
 
     const changes = getUnionedChanges(node);
 

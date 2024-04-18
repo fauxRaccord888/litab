@@ -10,7 +10,7 @@ export function formatChanges(
         removeChanges
     } = filteredChanges   
     const processedUpsertChanges = upsertChanges.map(({change}) =>({
-        oeuvre_id: change?.oeuvres?.id,
+        oeuvre_id: change?.oeuvre?.id,
         current_angle: change?.angle,
         current_distance: change?.distance,
     }))

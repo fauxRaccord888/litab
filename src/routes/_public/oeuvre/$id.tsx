@@ -45,7 +45,7 @@ function Oeuvre() {
     const eventHandler: BaseEventHandler & OeuvreEventHandler & PentagramEventHandler = {
         handleLoadMore: () => fetchMore({
             variables: {
-                cursor: item?.pentagram_nodesCollection?.pageInfo?.endCursor,
+                cursor: item?.pentagramNodesCollection?.pageInfo?.endCursor,
                 limit: NETWORK.readLimit,
                 id: params.id
             }
@@ -58,7 +58,7 @@ function Oeuvre() {
         updateOeuvre: (oeuvre) => oeuvreNavigate.update(oeuvre.id),
         selectArtistTag: (artistId: string) => artistNavigate.select(artistId),
         selectGenreTag: (genreId: string) => genreNavigate.select(genreId),
-        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id)
+        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutableId)
     }
 
     if (!item) return null

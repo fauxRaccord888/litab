@@ -11,7 +11,7 @@ import "./style/profileInteraction.scss"
 
 type ProfileInteractionsProps = {
     id: DBProfiles["id"]
-    mutable_id: DBProfiles["mutable_id"]
+    mutableId: DBProfiles["mutableId"]
     isMe?: boolean | undefined,
     followed?: boolean | undefined,
     eventHandler: ProfileEventHandler
@@ -19,7 +19,7 @@ type ProfileInteractionsProps = {
 }
 
 export default function ProfileInteraction(props: ProfileInteractionsProps ) {
-    const { id, mutable_id, isMe, followed, eventHandler, options } = props
+    const { id, mutableId, isMe, followed, eventHandler, options } = props
     const { t } = useTranslation()
 
     const onClickFollow = (e:MouseEvent) => {
@@ -29,7 +29,7 @@ export default function ProfileInteraction(props: ProfileInteractionsProps ) {
 
     const onClickInteraction = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.profileSelectMenuModal) eventHandler.profileSelectMenuModal(mutable_id)
+        if (eventHandler.profileSelectMenuModal) eventHandler.profileSelectMenuModal(mutableId)
     }
 
     return (

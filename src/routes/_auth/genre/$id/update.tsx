@@ -39,7 +39,7 @@ function UpdateGenre() {
         evictCacheById({
             cache: apolloClient.cache,
             id: params.id,
-            entity: category
+            entity: "Genres"
         })
     }
 
