@@ -1,18 +1,18 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment OeuvresMinimalInfo on oeuvres {
+    fragment OeuvresMinimalInfo on Oeuvres {
         id
         title
-        updated_at
+        updatedAt
     }
 `)
 
 graphql(/* GraphQL */ `
-      fragment OeuvrePentagramsInfo on oeuvres {
-        pentagram_nodesCollection(
+      fragment OeuvrePentagramsInfo on Oeuvres {
+        pentagramNodesCollection(
             orderBy: {
-                created_at: DescNullsLast
+                createdAt: DescNullsLast
             }
             first: $limit
             after: $cursor
@@ -24,7 +24,7 @@ graphql(/* GraphQL */ `
             edges {
               	cursor
                 node {
-                    pentagrams {
+                    pentagram {
                         ...PentagramsSelectInfo
                     }
                 }
@@ -34,23 +34,23 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment OeuvresInfo on oeuvres {
+    fragment OeuvresInfo on Oeuvres {
         ...OeuvresMinimalInfo
         ...OeuvrePentagramsInfo
         description
-        oeuvres_artistsCollection {
+        oeuvresArtistsCollection {
             edges {
                 node {
-                    artists {
+                    artist {
                         ...ArtistsMinimalInfo
                     }
                 }
             }
         },
-        oeuvres_genresCollection {
+        oeuvresGenresCollection {
             edges {
                 node {
-                    genres {
+                    genre {
                         ...GenresMinimalInfo
                     }
                 }

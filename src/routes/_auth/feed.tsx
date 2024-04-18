@@ -29,7 +29,7 @@ function Feed() {
         revisionSelectModal: (revisionId: string) => navigate.revisionSelectModal(revisionId),
         navigateToUpdate:(id: string) => pentagramNavigate.update(id),
         selectOeuvre: (oeuvre) => oeuvreNavigate.select(oeuvre.id),
-        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutable_id)
+        selectProfile: (profile) => profileNavigate.profileSelect(profile.mutableId)
     }
 
     const items = feed?.items ? feed.items.edges.map((edge) => edge.node) : []

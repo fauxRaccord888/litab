@@ -14,7 +14,7 @@ type PendingChangesProps = {
 export default function PendingChanges(props: PendingChangesProps) {
     const { item, handleClickRevert } = props 
     const { id, node, change } = item
-    const { oeuvres, changeType } = change
+    const { oeuvre, changeType } = change
 
     const onClickDelete = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
@@ -27,10 +27,10 @@ export default function PendingChanges(props: PendingChangesProps) {
                 <PentagramChange 
                     item={{
                         id,
-                        oeuvres,
+                        oeuvre,
                         changeType,
-                        previous_angle: node?.angle,
-                        previous_distance: node?.distance,
+                        previousAngle: node?.angle,
+                        previousDistance: node?.distance,
                     }}
                 />
             }
@@ -42,12 +42,12 @@ export default function PendingChanges(props: PendingChangesProps) {
                 <PentagramChange 
                     item={{
                         id,
-                        oeuvres,
+                        oeuvre,
                         changeType,
-                        previous_angle: node?.angle,
-                        previous_distance: node?.distance,
-                        current_angle: change?.angle,
-                        current_distance: change?.distance
+                        previousAngle: node?.angle,
+                        previousDistance: node?.distance,
+                        currentAngle: change?.angle,
+                        currentDistance: change?.distance
                     }}
                 />
             }

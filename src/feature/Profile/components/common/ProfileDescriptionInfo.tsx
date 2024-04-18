@@ -9,7 +9,7 @@ import { PROFILE } from "$feature/Profile/constants"
 import "./style/profileDescriptionInfo.scss"
 
 type ProfileDescriptionInfoProps = {
-    mutable_id: DBProfiles["mutable_id"]
+    mutableId: DBProfiles["mutableId"]
     nickname: DBProfiles["nickname"], 
     description: DBProfiles["description"]
     mutualFollowers: ReturnType<typeof calcMutualFollowers>
@@ -18,17 +18,17 @@ type ProfileDescriptionInfoProps = {
 }
 
 export default function ProfileDescriptionInfo(props: ProfileDescriptionInfoProps) {
-    const { mutable_id, nickname, mutualFollowers, description, eventHandler } = props
+    const { mutableId, nickname, mutualFollowers, description, eventHandler } = props
     const mutualFollowerDisplayCount = PROFILE.MUTUAL_FOLLOWER_DISPLAY_COUNT
     const totalMutualFollowerCount = mutualFollowers.length
     const displayedMutualFollowers = mutualFollowers
         .slice(0, mutualFollowerDisplayCount)
-        .map((node) => node.follower_id.mutable_id)
+        .map((node) => node.follower_id.mutableId)
     const additionalCount = Math.max(totalMutualFollowerCount - mutualFollowerDisplayCount, 0)
 
     const onClickMutualFollowing = (e: MouseEvent) => {
         e.stopPropagation()
-        if (eventHandler.mutualFollowersModal) eventHandler.mutualFollowersModal(mutable_id)
+        if (eventHandler.mutualFollowersModal) eventHandler.mutualFollowersModal(mutableId)
     }
 
     return (

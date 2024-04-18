@@ -22,7 +22,7 @@ export default function PentagramNode(props: PentagramNodeProps) {
     const hoverHook = useHover()
 
     const unionedChanges = getUnionedChanges(item)
-    const { id, oeuvres } = item
+    const { id, oeuvre } = item
     const position= getSnapshot(unionedChanges, timestamp)
     const prevPosition = getSnapshot(unionedChanges, timestamp, true)
 
@@ -46,8 +46,8 @@ export default function PentagramNode(props: PentagramNodeProps) {
                         className="pentagram-node-component"
                         onClick={onClickNode}
                     >
-                        <OeuvreNode item={oeuvres} hoverHook={hoverHook} />
-                        <OeuvreNodeHoverCard item={oeuvres} hoverHook={hoverHook} eventHandler={eventHandler} />
+                        <OeuvreNode item={oeuvre} hoverHook={hoverHook} />
+                        <OeuvreNodeHoverCard item={oeuvre} hoverHook={hoverHook} eventHandler={eventHandler} />
                     </div>
                 </PositionAdjuster>
             }

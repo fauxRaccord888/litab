@@ -12,19 +12,19 @@ type FeedMessageProps = {
 export default function FeedMessage(props: FeedMessageProps) {
     const { t } = useTranslation()
     const { item } = props
-    const { __typename, id, users } = item
+    const { __typename, id, user } = item
     let icon = null
     let message = null
         
-    if (__typename === "pentagram_revisions") {
-        const revisionEdge = item?.pentagrams.pentagram_revisionsCollection?.edges.at(-1)
+    if (__typename === "PentagramRevisions") {
+        const revisionEdge = item?.pentagram.pentagramRevisionsCollection?.edges.at(-1)
         const revisionId = revisionEdge?.node.id
         const isFirstRevision = revisionId === id
         if (isFirstRevision) {
-            message = t('feed.message.create', { user: users.mutable_id })
+            message = t('feed.message.create', { user: user.mutableId })
             icon = <PenIcon className="feed-message-component__pen-icon"/>
         } else {
-            message = t('feed.message.edit', { user: users.mutable_id })
+            message = t('feed.message.edit', { user: user.mutableId })
             icon = <PentagonIcon className="feed-message-component__pentagram-icon"/>
         }
     }

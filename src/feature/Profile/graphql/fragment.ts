@@ -1,16 +1,16 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment MiniProfileInfo on users {
-        mutable_id,
+    fragment MiniProfileInfo on Users {
+        mutableId,
         nickname,
         id,
-        updated_at
+        updatedAt
     }
 `)
 
 graphql(/* GraphQL */ `
-    fragment ProfilesInfo on users {
+    fragment ProfilesInfo on Users {
         ...MiniProfileInfo,
         description,
         nickname,
@@ -21,7 +21,7 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment ProfileFollowInfo on users {
+    fragment ProfileFollowInfo on Users {
         followingsCollection {
             edges {
                 node {
@@ -44,10 +44,10 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment ProfilePentagramInfo on users {
+    fragment ProfilePentagramInfo on Users {
         pentagramsCollection(
             orderBy: {
-                created_at: DescNullsLast
+                createdAt: DescNullsLast
             }
             first: $pentagramLimit
             after: $pentagramCursor
@@ -67,10 +67,10 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment ProfileRevisionInfo on users {
-        pentagram_revisionsCollection(
+    fragment ProfileRevisionInfo on Users {
+        pentagramRevisionsCollection(
             orderBy: {
-                created_at: DescNullsLast
+                createdAt: DescNullsLast
             }
             first: $revisionLimit
             after: $revisionCursor

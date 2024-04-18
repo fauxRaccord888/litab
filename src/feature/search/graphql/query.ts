@@ -36,11 +36,11 @@ export const searchUsers_QUERY = graphql(/* GraphQL */ `
     ) {
         usersCollection(
             orderBy: {
-                mutable_id: DescNullsLast
+                mutableId: DescNullsLast
             }
             first: $limit
             after: $cursor
-            filter: { mutable_id: { ilike: $keyword } }
+            filter: { mutableId: { ilike: $keyword } }
         ) {
             pageInfo {
                 hasNextPage

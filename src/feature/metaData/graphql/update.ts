@@ -6,7 +6,7 @@ export const updateArtist_MUTATION = graphql(/* GraphQL */ `
         $title: String,
         $description: String,
     ) {
-        updateartistsCollection(
+        updateArtistsCollection(
           	filter: {
               id: { eq: $id }
             }
@@ -28,7 +28,7 @@ export const updateOeuvres_MUTATION = graphql(/* GraphQL */ `
         $title: String,
         $description: String,
     ) {
-        updateoeuvresCollection(
+        updateOeuvresCollection(
           	filter: {
               id: { eq: $id }
             }
@@ -50,7 +50,7 @@ export const updateGenres_MUTATION = graphql(/* GraphQL */ `
         $title: String,
         $description: String,
     ) {
-        updategenresCollection(
+        updateGenresCollection(
           	filter: {
               id: { eq: $id }
             }

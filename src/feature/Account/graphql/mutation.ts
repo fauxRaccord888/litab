@@ -6,17 +6,17 @@ export const updateProfile_MUTATION = graphql(/* GraphQL */ `
         $mutableId: String,
         $description: String,
     ) {
-        updateusersCollection(
+        updateUsersCollection(
             set: {
                 nickname: $nickname,
-                mutable_id: $mutableId,
+                mutableId: $mutableId,
                 description: $description,
             }
         ) {
             records {
                 id,
                 nickname,
-                mutable_id,
+                mutableId,
                 description,
             }
         }

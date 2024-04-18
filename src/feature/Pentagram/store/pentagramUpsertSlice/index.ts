@@ -41,7 +41,7 @@ const pentagramUpsertSlice = createSlice({
     },
     reducers: {
         initialize(state, action: PayloadAction<{
-            nodes: DBPentagram_UPDATE["pentagram_nodesCollection"] | null
+            nodes: DBPentagram_UPDATE["pentagramNodesCollection"] | null
         }>) {
             initializeNode(state, action)
         },
@@ -68,7 +68,7 @@ const pentagramUpsertSlice = createSlice({
                         id,
                         angle,
                         distance,
-                        oeuvres: node.oeuvres,
+                        oeuvre: node.oeuvre,
                         changeType: 'update'
                     }
                 })
@@ -86,14 +86,14 @@ const pentagramUpsertSlice = createSlice({
             }
         },
 
-        upsertNode(state, action: PayloadAction<{ oeuvres: DBOeuvre }>) {
+        upsertNode(state, action: PayloadAction<{ oeuvre: DBOeuvre }>) {
             const selected = state.selected
             const { angle, distance } = state.selectedPosition
-            const { oeuvres } = action.payload
+            const { oeuvre } = action.payload
 
             if (
                 !selected && 
-                oeuvres &&
+                oeuvre &&
                 typeof angle === 'number' &&
                 typeof distance === 'number' 
             ) {
@@ -102,7 +102,7 @@ const pentagramUpsertSlice = createSlice({
                     payload: {
                         angle,
                         distance,
-                        oeuvres,
+                        oeuvre,
                         changeType: "upsert" 
                     }
                 })
@@ -121,7 +121,7 @@ const pentagramUpsertSlice = createSlice({
                         id,
                         angle: node.angle,
                         distance: node.distance,
-                        oeuvres: node.oeuvres,
+                        oeuvre: node.oeuvre,
                         deleted: false,
                         changeType: 'recover'
                     }
@@ -144,7 +144,7 @@ const pentagramUpsertSlice = createSlice({
                     payload: {
                         id,
                         deleted: true,
-                        oeuvres: node.oeuvres,
+                        oeuvre: node.oeuvre,
                         changeType: 'remove'
                     }
                 })

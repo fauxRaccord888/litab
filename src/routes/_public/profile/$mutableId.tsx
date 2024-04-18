@@ -63,12 +63,12 @@ function Profile() {
         fetchMore({
             variables: {
                 ...payload,
-                mutableId: item?.mutable_id,
-                revisionCursor: item?.pentagram_revisionsCollection?.pageInfo?.endCursor,
+                mutableId: item?.mutableId,
+                revisionCursor: item?.pentagramRevisionsCollection?.pageInfo?.endCursor,
                 pentagramCursor: item?.pentagramsCollection?.pageInfo?.endCursor
             }
         })
-    }, [fetchMore, item?.mutable_id, item?.pentagram_revisionsCollection?.pageInfo?.endCursor, item?.pentagramsCollection?.pageInfo?.endCursor])
+    }, [fetchMore, item?.mutableId, item?.pentagramRevisionsCollection?.pageInfo?.endCursor, item?.pentagramsCollection?.pageInfo?.endCursor])
 
     const onFollow = (id: string) => {
         handleFollow(

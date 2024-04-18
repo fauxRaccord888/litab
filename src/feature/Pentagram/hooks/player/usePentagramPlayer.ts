@@ -14,8 +14,8 @@ import { TIME } from "../../constants";
 export function usePentagramPlayer(pentagram: DBPentagram_SELECT | undefined | null) {
     const timestamps = useMemo(() => arrayToDoubleLinkedList(
         pentagram
-            ?.pentagram_revisionsCollection?.edges
-            .map((edge) => new Date(edge.node.created_at))
+            ?.pentagramRevisionsCollection?.edges
+            .map((edge) => new Date(edge.node.createdAt))
             .sort((a, b) => a.getTime() - b.getTime()) 
     ), [pentagram])
     const initialTimestamp = useMemo(() => 

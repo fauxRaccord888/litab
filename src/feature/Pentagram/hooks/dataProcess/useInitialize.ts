@@ -8,7 +8,7 @@ export function useInitialize(pentagram: DBPentagram_UPDATE | null) {
     
     useEffect(() => {
         dispatch(
-            initialize( { nodes: pentagram?.pentagram_nodesCollection } )
+            initialize( { nodes: pentagram?.pentagramNodesCollection } )
         )
         dispatch(unselectSelected())
     }, [pentagram, dispatch])

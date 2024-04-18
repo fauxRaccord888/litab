@@ -30,7 +30,7 @@ export function useUpdateProfileHandler() {
             update(cache) {
                 evictCacheById({
                     cache, 
-                    entity: 'users', 
+                    entity: 'Users', 
                     id: currentUser?.id
                 })
             },
@@ -64,7 +64,7 @@ export function useUpdateProfileHandler() {
                 updateCache(cache) {
                     evictCacheById({
                         cache, 
-                        entity: 'users', 
+                        entity: 'Users', 
                         id: currentUser?.id
                     })
                 },

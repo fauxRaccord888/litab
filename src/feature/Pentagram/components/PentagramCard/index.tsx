@@ -18,7 +18,7 @@ export type PentagramCardProps = {
 export default function PentagramCard(props: PentagramCardProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { timestamp, isPlaying, handlePlayPentagram, handleSetTimestamp } = usePentagramPlayer(item)
-    const { id, users, created_at, pentagram_nodesCollection, pentagram_revisionsCollection } = item
+    const { id, user, createdAt, pentagramNodesCollection, pentagramRevisionsCollection } = item
 
     const playerEventHandler: PentagramPlayerEventHandler = {
         playPentagram: handlePlayPentagram,
@@ -30,8 +30,8 @@ export default function PentagramCard(props: PentagramCardProps) {
             {renderConfig.metaInfo && 
                 <SelectMetaInfo 
                     id={id}
-                    users={users} 
-                    created_at={created_at} 
+                    users={user} 
+                    createdAt={createdAt} 
                     eventHandler={eventHandler}
                 />
             }
@@ -41,7 +41,7 @@ export default function PentagramCard(props: PentagramCardProps) {
                         timestamp={options.forcedTimestamp ?? timestamp}
                         options={options}
                         eventHandler={eventHandler}
-                        pentagram_nodesCollection={pentagram_nodesCollection}
+                        pentagramNodesCollection={pentagramNodesCollection}
                     />
                 }
             </div>
@@ -50,14 +50,14 @@ export default function PentagramCard(props: PentagramCardProps) {
                     <SelectPlayer 
                         timestamp={timestamp}
                         isPlaying={isPlaying}
-                        pentagram_revisionsCollection={pentagram_revisionsCollection} 
+                        pentagramRevisionsCollection={pentagramRevisionsCollection} 
                         eventHandler={playerEventHandler} 
                     />
                 </div>
             }
             {renderConfig.revision &&
                 <SelectRevisionList 
-                    pentagram_revisionsCollection={pentagram_revisionsCollection}
+                    pentagramRevisionsCollection={pentagramRevisionsCollection}
                     eventHandler={eventHandler}
                     options={options}
                 />

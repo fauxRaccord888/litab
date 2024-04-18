@@ -24,7 +24,7 @@ export function useFollowMutation() {
             update: (cache) => {
                 evictCacheById({
                     cache,
-                    entity: 'users', 
+                    entity: 'Users', 
                     id: currentUser?.id
                 })
             }
@@ -39,7 +39,7 @@ export function useFollowMutation() {
             update: (cache) => {
                 evictCacheById({
                     cache, 
-                    entity: 'users', 
+                    entity: 'Users', 
                     id: currentUser?.id
                 })
             }

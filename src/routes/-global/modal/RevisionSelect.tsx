@@ -15,7 +15,7 @@ export default function RevisionSelect(props: {
         variables: { id: revisionId }
     });
 
-    const revision = getFirstNodeOfCollection(data?.pentagram_revisionsCollection);
+    const revision = getFirstNodeOfCollection(data?.pentagramRevisionsCollection);
 
     const changes = getUnionedChanges(revision);
 

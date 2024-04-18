@@ -1,5 +1,5 @@
 import type { PentagramNodePosition } from "../../../types"
-import type { useCSSVariables } from "$lib/hooks/useCSSVariables"
+import type { useCSSVariables } from "$lib/hooks"
 import { calcTransformValueFromPosition } from "../../../utils"
 
 // COMMENT

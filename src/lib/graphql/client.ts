@@ -65,9 +65,9 @@ const cache = new InMemoryCache({
                 },
             },
         },
-        oeuvres: {
+        Oeuvres: {
             fields: {
-                pentagram_nodesCollection: {
+                pentagramNodesCollection: {
                     keyArgs: false,
                     merge(existing: IConnection, incoming: IConnection){
                         return mergeCacheUtil(existing, incoming)
@@ -75,9 +75,9 @@ const cache = new InMemoryCache({
                 }
             }
         },
-        genres: {
+        Genres: {
             fields: {
-                oeuvres_genresCollection: {
+                oeuvresGenresCollection: {
                     keyArgs: false,
                     merge(existing: IConnection, incoming: IConnection){
                         return mergeCacheUtil(existing, incoming)
@@ -85,9 +85,9 @@ const cache = new InMemoryCache({
                 }
             }
         },
-        artists: {
+        Artists: {
             fields: {
-                oeuvres_artistsCollection:{
+                oeuvresArtistsCollection:{
                     keyArgs: false,
                     merge(existing: IConnection, incoming: IConnection){
                         return mergeCacheUtil(existing, incoming)
@@ -95,7 +95,7 @@ const cache = new InMemoryCache({
                 }
             }
         },
-        users: {
+        Users: {
             fields: {
                 followingsCollection: {
                     merge(_existing, incoming) {
@@ -108,15 +108,15 @@ const cache = new InMemoryCache({
                         return mergeCacheUtil(existing, incoming)
                     }
                 },
-                pentagram_revisionsCollection: {
+                pentagramRevisionsCollection: {
                     keyArgs: false,
                     merge(existing: IConnection, incoming: IConnection){
                         return mergeCacheUtil(existing, incoming)
                     }
-                }
+                },
             }
         },
-        feed: {
+        Feed: {
             fields: {
                 items: {
                     keyArgs: false,

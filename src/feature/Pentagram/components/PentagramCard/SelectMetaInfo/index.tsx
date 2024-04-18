@@ -12,17 +12,17 @@ import './style/selectMetaInfo.scss'
 
 type SelectMetaInfoProps = {
     id: string,
-    created_at: string
+    createdAt: string
     users: DBMiniProfile
     eventHandler: PentagramEventHandler & ProfileEventHandler
 }
 
 export default function SelectMetaInfo(props: SelectMetaInfoProps) {    
-    const { id, created_at, users, eventHandler } = props
+    const { id, createdAt, users, eventHandler } = props
     const { t } = useTranslation()
     const { currentUser } = useCurrentUser()
     const isAuthor = currentUser?.id === users.id
-    const relativeTime = useTranslatedRelativeTime(new Date(created_at))
+    const relativeTime = useTranslatedRelativeTime(new Date(createdAt))
 
     const onClickIcon = (e: MouseEvent) => {
         e.stopPropagation()
@@ -49,7 +49,7 @@ export default function SelectMetaInfo(props: SelectMetaInfoProps) {
                 </div>
                 <span 
                     className="select-meta-info-component__date"
-                    title={String(new Date(created_at))}
+                    title={String(new Date(createdAt))}
                 >
                     {relativeTime}
                 </span>

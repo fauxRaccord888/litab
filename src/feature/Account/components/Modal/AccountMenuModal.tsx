@@ -56,7 +56,7 @@ export default function AccountMenuModal(props: AccountMenuModalProps) {
                                 "account-menu-modal-component__button--profile",
                             ].join(' ')}
                             onClick={(e) => {
-                                onClickHandler(e, () => eventHandler.navigateToProfile(currentUser?.mutable_id))
+                                onClickHandler(e, () => eventHandler.navigateToProfile(currentUser?.mutableId))
                             }}
                         >
                             {t("account.modal.menu.profile")}

@@ -3,20 +3,20 @@ import type { ChangeTypeKey, TPentagramChange } from "../../components/common/Pe
 import type { Collections } from "$lib/types/graphql";
 
 type EntityWithUnunionedChanges= {
-    pentagram_revision_upsert_recordsCollection?: Collections<UpsertRecordInfoFragment> | null | undefined,
-    pentagram_revision_update_recordsCollection?: Collections<UpdateRecordInfoFragment> | null | undefined,
-    pentagram_revision_remove_recordsCollection?: Collections<RemoveRecordInfoFragment> | null | undefined,
-    pentagram_revision_recover_recordsCollection?: Collections<RecoverRecordInfoFragment> | null | undefined
+    pentagramRevisionUpsertRecordsCollection?: Collections<UpsertRecordInfoFragment> | null | undefined,
+    pentagramRevisionUpdateRecordsCollection?: Collections<UpdateRecordInfoFragment> | null | undefined,
+    pentagramRevisionRemoveRecordsCollection?: Collections<RemoveRecordInfoFragment> | null | undefined,
+    pentagramRevisionRecoverRecordsCollection?: Collections<RecoverRecordInfoFragment> | null | undefined
 } | null | undefined
 
 export function getUnionedChanges(node: EntityWithUnunionedChanges):TPentagramChange[] {
     if (!node) return []
 
     const { 
-        pentagram_revision_upsert_recordsCollection: upsert,
-        pentagram_revision_update_recordsCollection: update,
-        pentagram_revision_remove_recordsCollection: remove,
-        pentagram_revision_recover_recordsCollection: recover
+        pentagramRevisionUpsertRecordsCollection: upsert,
+        pentagramRevisionUpdateRecordsCollection: update,
+        pentagramRevisionRemoveRecordsCollection: remove,
+        pentagramRevisionRecoverRecordsCollection: recover
     } = node
 
     const unprocessedChanges = {
@@ -31,8 +31,8 @@ export function getUnionedChanges(node: EntityWithUnunionedChanges):TPentagramCh
         .map((key) => (
             unprocessedChanges[key]?.edges?.map((edge) => ({
                 ...edge.node,
-                created_at: edge.node.pentagram_revisions.created_at,
-                oeuvres: edge.node.pentagram_nodes.oeuvres,
+                createdAt: edge.node.revision.createdAt,
+                oeuvre: edge.node.pentagramNode.oeuvre,
                 changeType: key
             }))
         ))
@@ -41,8 +41,8 @@ export function getUnionedChanges(node: EntityWithUnunionedChanges):TPentagramCh
             return acc?.concat(cur)
         }, [])
         .sort((a, b) => {
-            if (!a?.created_at || !b?.created_at) return 0
-            return new Date(b?.created_at).getTime() - new Date(a?.created_at).getTime()
+            if (!a?.createdAt || !b?.createdAt) return 0
+            return new Date(b?.createdAt).getTime() - new Date(a?.createdAt).getTime()
         })
 
     return result

@@ -8,9 +8,9 @@ export function usePentagramAddModalEventHandler() {
     const dispatch = useDispatch()
     const mergedNodes = useSelector((state: AppRootState) => mergedNodeSelector.selectEntities(state))
 
-    const handleAddNode = (oeuvres: DBOeuvre) => {
-        checkOeuvreUniqueOrThrow(mergedNodes, oeuvres)
-        dispatch(upsertNode({ oeuvres }))
+    const handleAddNode = (oeuvre: DBOeuvre) => {
+        checkOeuvreUniqueOrThrow(mergedNodes, oeuvre)
+        dispatch(upsertNode({ oeuvre }))
     }
 
     return { handleAddNode, }

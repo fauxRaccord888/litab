@@ -24,7 +24,7 @@ export default function PentagramSelect(props: {
     const { currentUser } = useCurrentUser()
     const { deletePentagram } = useDeletePentagram()
 
-    const isAuthor = (currentUser?.id === pentagram?.users.id && currentUser?.id !== undefined);
+    const isAuthor = (currentUser?.id === pentagram?.user.id && currentUser?.id !== undefined);
 
     const { t } = useTranslation();
     const pentagramNavigate = usePentagramNavigate();

@@ -22,12 +22,12 @@ export default function FeedItem(props: FeedItemProps) {
     const { item, eventHandler, options } = props
     let feedItem = null
 
-    if (item.__typename === 'pentagram_revisions') {
-        const { pentagrams, id } = item
+    if (item.__typename === "PentagramRevisions") {
+        const { pentagram, id } = item
     
         feedItem = (
             <PentagramCard 
-                item={pentagrams}
+                item={pentagram}
                 renderConfig={{
                     metaInfo: true,
                     mainPentagon: true,
@@ -36,7 +36,7 @@ export default function FeedItem(props: FeedItemProps) {
                 }}
                 options={{
                     displayRevisionIds: [id],
-                    forcedTimestamp: new Date(item.created_at),
+                    forcedTimestamp: new Date(item.createdAt),
                     enableAnimation: true
                 }}
                 eventHandler={eventHandler}

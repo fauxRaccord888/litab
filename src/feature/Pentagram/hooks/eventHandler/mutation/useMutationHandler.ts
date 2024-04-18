@@ -47,12 +47,12 @@ export function useMutationHandler() {
         if (data) {
             evictCacheById({
                 cache: apolloClient.cache, 
-                entity: 'users', 
+                entity: 'Users', 
                 id: currentUser?.id
             })
             evictCacheById({
                 cache: apolloClient.cache, 
-                entity: 'feed', 
+                entity: 'Feed', 
                 id: currentUser?.id
             })
             apolloClient.refetchQueries({
@@ -88,12 +88,12 @@ export function useMutationHandler() {
         if (data) {
             evictCacheById({
                 cache: apolloClient.cache, 
-                entity: 'users', 
+                entity: 'Users', 
                 id: currentUser?.id
             })
             evictCacheById({
                 cache: apolloClient.cache, 
-                entity: 'feed', 
+                entity: 'Feed', 
                 id: currentUser?.id
             })
             apolloClient.refetchQueries({

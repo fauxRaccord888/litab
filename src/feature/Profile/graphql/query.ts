@@ -10,7 +10,7 @@ export const getUserByMutableId_QUERY = graphql(/* GraphQL */ `
     ) {
         usersCollection  (
             first: 1
-            filter: { mutable_id: { eq: $mutableId } }
+            filter: { mutableId: { eq: $mutableId } }
         ) {
             edges {
                 node {
@@ -20,5 +20,3 @@ export const getUserByMutableId_QUERY = graphql(/* GraphQL */ `
         }
     }
 `)
-
-

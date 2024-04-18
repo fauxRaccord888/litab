@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import type { PentagramNodePosition } from '../../types';
 import { useSpring } from '@react-spring/web';
-import { useCSSVariables } from '$lib/hooks/useCSSVariables';
+import { useCSSVariables } from '$lib/hooks';
 import { animated } from '@react-spring/web';
 import { calcPositionAdjusterAnimation } from './animation';
 import './style/positionAdjuster.scss'

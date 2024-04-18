@@ -22,7 +22,7 @@ export function useDeletePentagram() {
                 evictCacheById({
                     cache, 
                     id: payload.id,
-                    entity: 'pentagrams', 
+                    entity: 'Pentagrams', 
                 })
             },
         })

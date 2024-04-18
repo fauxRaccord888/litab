@@ -37,10 +37,10 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
     )
 
     const oeuvreComponents = useMemo(() => (
-        item?.oeuvres_genresCollection?.edges.map((edge) => (
+        item?.oeuvresGenresCollection?.edges.map((edge) => (
             <OeuvreInfoCard
-                key={edge.node.oeuvres.id}
-                item={edge.node.oeuvres}
+                key={edge.node.oeuvre.id}
+                item={edge.node.oeuvre}
                 eventHandler={eventHandler}
                 renderConfig={{
                     coverImage: true,
@@ -54,14 +54,14 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
                 }}
             />
         )) || []
-    ), [eventHandler, item?.oeuvres_genresCollection?.edges])
+    ), [eventHandler, item?.oeuvresGenresCollection?.edges])
 
     const loader = useMemo(() => (
         <InfiniteScrollTrigger
-            hasNextPage={item.oeuvres_genresCollection?.pageInfo.hasNextPage}
+            hasNextPage={item.oeuvresGenresCollection?.pageInfo.hasNextPage}
             handleLoadMore={eventHandler.handleLoadMore}
         />
-    ), [eventHandler.handleLoadMore, item.oeuvres_genresCollection?.pageInfo.hasNextPage])
+    ), [eventHandler.handleLoadMore, item.oeuvresGenresCollection?.pageInfo.hasNextPage])
 
     const tabComponent = (
         <Tab

@@ -14,9 +14,9 @@ export function usePentagramModalEventHandler(quadtreeRef: MutableRefObject<Quad
     const mergedNodes = useSelector((state: AppRootState) => mergedNodeSelector.selectEntities(state))
     const nodes = useSelector((state: AppRootState) => nodeSelector.selectEntities(state))
 
-    const handleAddNode = (oeuvres: DBOeuvre) => {
-        checkOeuvreUniqueOrThrow(mergedNodes, oeuvres)
-        dispatch(upsertNode({ oeuvres }))
+    const handleAddNode = (oeuvre: DBOeuvre) => {
+        checkOeuvreUniqueOrThrow(mergedNodes, oeuvre)
+        dispatch(upsertNode({ oeuvre }))
     }
 
     const handleRemoveNode = (id: string) => {

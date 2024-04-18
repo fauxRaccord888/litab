@@ -1,6 +1,6 @@
 import type { MouseEvent, MutableRefObject, TouchEvent } from "react"
 import type { QuadtreeNode } from "../../../utils"
-import type { useCSSVariables } from "$lib/hooks/useCSSVariables";
+import type { useCSSVariables } from "$lib/hooks";
 
 import { useDispatch } from "react-redux"
 import { useInsertSelectedInQuadtree } from '../..';

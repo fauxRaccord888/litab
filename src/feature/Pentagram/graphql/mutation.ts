@@ -4,7 +4,7 @@ export const deletePentagram_MUTATION = graphql(/* GraphQL */ `
     mutation deletePentagram(
         $id: UUID,
     ) {
-        deleteFrompentagramsCollection(
+        deleteFromPentagramsCollection(
             filter: {
                 id: { eq: $id }
             }

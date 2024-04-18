@@ -1,10 +1,10 @@
 import { graphql } from "$lib/graphql/__generated__"
 
 graphql(/* GraphQL */ `
-    fragment FeedInfo on feed {
+    fragment FeedInfo on Feed {
         items (
             orderBy: {
-                created_at: DescNullsLast
+                createdAt: DescNullsLast
             }
             first: $limit
             after: $cursor
@@ -24,7 +24,7 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment FollowRecommendationInfo on feed {
+    fragment FollowRecommendationInfo on Feed {
         recommendation {
             edges {
                 node {

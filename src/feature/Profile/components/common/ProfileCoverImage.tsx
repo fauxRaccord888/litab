@@ -8,13 +8,13 @@ import BucketImage from "$lib/components/common/BucketImage"
 type ProfileCoverImageProps = {
     item: DBProfiles,
     id: DBProfiles["id"]
-    updated_at: DBProfiles["updated_at"],
+    updatedAt: DBProfiles["updatedAt"],
     eventHandler: ProfileEventHandler
     className?: string,
 }
 
 export default function ProfileCoverImage(props: ProfileCoverImageProps) {
-    const { item, id, updated_at, eventHandler, className } = props
+    const { item, id, updatedAt, eventHandler, className } = props
     
     const onClickProfile = (e: MouseEvent) => {
         e.stopPropagation()
@@ -26,7 +26,7 @@ export default function ProfileCoverImage(props: ProfileCoverImageProps) {
             id={id}
             onClick={onClickProfile}
             bucket="users"
-            timeStamp={updated_at}
+            timeStamp={updatedAt}
             className={className}
             fallback={<UserIcon className="profile-cover-image-component__fallback-image"/>}
         />

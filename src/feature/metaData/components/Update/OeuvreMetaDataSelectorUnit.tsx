@@ -17,8 +17,8 @@ export default function OeuvreMetaDataSelectorUnit(props: OeuvreMetadataSelector
     const { t } = useTranslation()
 
     const collections = (
-        entity === "artists" ? record?.oeuvres_artistsCollection
-        : entity === "genres" ? record?.oeuvres_genresCollection
+        entity === "artists" ? record?.oeuvresArtistsCollection
+        : entity === "genres" ? record?.oeuvresGenresCollection
         : null
     )
 
@@ -54,7 +54,7 @@ export default function OeuvreMetaDataSelectorUnit(props: OeuvreMetadataSelector
                     {t(`metaData.oeuvres.title.${entity}Added`)}
                 </h3>
                 {collections?.edges.map((edge) => {
-                    const item = edge?.__typename === "oeuvres_artistsEdge" ? edge.node.artists : edge.node.genres
+                    const item = edge?.__typename === "OeuvresArtistsEdge" ? edge.node.artist : edge.node.genre
 
                     return (
                         <div key={item.id} className="oeuvre-meta-data-selector-unit-component__meta-tag-container">

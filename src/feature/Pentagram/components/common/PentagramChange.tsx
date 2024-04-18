@@ -7,13 +7,13 @@ export type ChangeTypeKey = "upsert" | "update" | "remove" | "recover"
 export type TPentagramChange = {
     id: string,
     changeType: ChangeTypeKey,
-    oeuvres: DBMiniOeuvre,
-    previous_angle?: number | undefined | null
-    previous_distance?: number | undefined | null
-    current_angle?: number | undefined | null
-    current_distance?: number | undefined | null
+    oeuvre: DBMiniOeuvre,
+    previousAngle?: number | undefined | null
+    previousDistance?: number | undefined | null
+    currentAngle?: number | undefined | null
+    currentDistance?: number | undefined | null
 
-    created_at?: string
+    createdAt?: string
 }
 
 type PentagramChangeProps = {
@@ -21,7 +21,7 @@ type PentagramChangeProps = {
 }
 
 export default function PentagramChange(props: PentagramChangeProps) {
-    const { changeType, oeuvres, previous_angle, previous_distance, current_angle, current_distance } = props.item
+    const { changeType, oeuvre, previousAngle, previousDistance, currentAngle, currentDistance } = props.item
 
     return (
         <div className="pentagram-change-component">
@@ -29,14 +29,14 @@ export default function PentagramChange(props: PentagramChangeProps) {
                 <span className="pentagram-change-component__change-type">
                     <Trans i18nKey={`node.change.${changeType}`}/>
                 </span>
-                <span className="pentagram-change-component__title">{oeuvres?.title}</span>
+                <span className="pentagram-change-component__title">{oeuvre?.title}</span>
             </div>
             
             <div className="pentagram-change-component__position-info-container">
                 {
                     (
-                        typeof previous_angle === 'number' &&
-                        typeof previous_distance === 'number'
+                        typeof previousAngle === 'number' &&
+                        typeof previousDistance === 'number'
                     ) &&
                     <div className="pentagram-change-component__position-container">
                         <PositionIcon 
@@ -45,13 +45,13 @@ export default function PentagramChange(props: PentagramChangeProps) {
                                 "pentagram-change-component__position-icon-component--previous"
                             ].join(" ")} 
                         />
-                        {`${previous_angle}° ${previous_distance}%`}
+                        {`${previousAngle}° ${previousDistance}%`}
                     </div>
                 }
                 {
                     (
-                        typeof current_angle === 'number' &&
-                        typeof current_distance === 'number'
+                        typeof currentAngle === 'number' &&
+                        typeof currentDistance === 'number'
                     ) &&
                     <div className="pentagram-change-component__position-container">
                         <PositionIcon 
@@ -60,7 +60,7 @@ export default function PentagramChange(props: PentagramChangeProps) {
                                 "pentagram-change-component__position-icon-component--current"
                             ].join(" ")} 
                         />
-                        {`${current_angle}° ${current_distance}%`}
+                        {`${currentAngle}° ${currentDistance}%`}
                     </div>
                 }
             </div>

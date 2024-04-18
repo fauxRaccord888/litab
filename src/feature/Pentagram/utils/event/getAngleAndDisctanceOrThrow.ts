@@ -1,4 +1,4 @@
-import type { useCSSVariables } from "$lib/hooks/useCSSVariables"
+import type { useCSSVariables } from "$lib/hooks"
 import { PositionError } from "$lib/error/customError"
 import { PENTAGRAM } from "../../constants"
 

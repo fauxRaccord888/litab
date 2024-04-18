@@ -68,7 +68,7 @@ function MutualFollowingModalComponent(props: {
             title={title} 
             items={props.items}
             eventHandler={{
-                selectProfile: (profile) => navigate.profileSelect(profile.mutable_id)
+                selectProfile: (profile) => navigate.profileSelect(profile.mutableId)
             }}
             handleClickClose={handleClickClose}
         />

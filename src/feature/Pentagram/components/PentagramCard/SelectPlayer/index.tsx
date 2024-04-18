@@ -6,18 +6,18 @@ import "./style/selectPlayer.scss"
 type SelectPlayerProps = {
     timestamp: Date
     isPlaying: boolean
-    pentagram_revisionsCollection: DBPentagram_SELECT["pentagram_revisionsCollection"],
+    pentagramRevisionsCollection: DBPentagram_SELECT["pentagramRevisionsCollection"],
     eventHandler: PentagramPlayerEventHandler
 }
 
 export default function SelectPlayer(props: SelectPlayerProps) {    
-    const { timestamp, isPlaying, pentagram_revisionsCollection, eventHandler } = props
+    const { timestamp, isPlaying, pentagramRevisionsCollection, eventHandler } = props
 
     const timestamps = useMemo(() => (
-        pentagram_revisionsCollection?.edges
-            .map((edge) => new Date(edge.node.created_at))
+        pentagramRevisionsCollection?.edges
+            .map((edge) => new Date(edge.node.createdAt))
             .sort((a, b) => a.getTime() - b.getTime()) 
-    ), [pentagram_revisionsCollection])
+    ), [pentagramRevisionsCollection])
 
     const onClickPlay = () => {
         if (eventHandler.playPentagram) {

@@ -27,7 +27,7 @@ export function useRelationMutation() {
     const evictCache = (payload: OeuvreRelationPayload) => {
         evictCacheById({
             cache: apolloClient.cache,
-            entity: "oeuvres",
+            entity: "Oeuvres",
             id: payload.oeuvreId
         })
     }
