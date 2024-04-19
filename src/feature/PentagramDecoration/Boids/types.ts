@@ -1,19 +1,13 @@
-export type DBBoids = {
-    color: [number, number, number],
-    bodyLength: number,
-    centeringFactor: number,
-    matchingFactor: number,
-    minDistance: number,
-    avoidFactor: number,
-    turnFactor: number,
-    visualRange: number,
-    speedLimit: number
-} 
+import type { ShadowsMinimalInfoFragment } from "$lib/graphql/__generated__/graphql"
 
-export type Boids = DBBoids & {
+export type DBBoids = ShadowsMinimalInfoFragment
+
+export type BoidsKey = keyof DBBoids
+
+export type Boids = {
     x: number,
     y: number,
     dx: number,
     dy: number,
     body: [number, number][]
-}
+} & DBBoids
