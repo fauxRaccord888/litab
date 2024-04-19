@@ -7,3 +7,5 @@ export * from "./error"
 export * from './isMobile'
 export * from './mergeCacheUtil'
 export * from './dataStructure'
+export * from './createRandomizedObject'
+export * from './pickPointInside'
