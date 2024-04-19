@@ -114,6 +114,12 @@ const cache = new InMemoryCache({
                         return mergeCacheUtil(existing, incoming)
                     }
                 },
+                shadowsCollection: {
+                    keyArgs: false,
+                    merge(existing: IConnection, incoming: IConnection){
+                        return mergeCacheUtil(existing, incoming)
+                    }
+                }
             }
         },
         Feed: {
