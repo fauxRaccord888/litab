@@ -1,12 +1,16 @@
-import type { IDynamicObject, IDynamicObjectSeed } from '../types'
+import type { IDynamicObject } from '../../types'
+import type { InventoryEntities } from '$feature/Inventory/types'
 import type { RefObject } from 'react'
 import { useEffect, useRef } from 'react'
-import { animationLoop, hydrateSeed } from '../function'
+import { animationLoop } from '../function'
+import { SeedFactory } from '$feature/Inventory/function/factory'
+
 
 export function usePentagramDecorativeAnimation(
-    seeds: IDynamicObjectSeed[],
     sides: number,
     canvasRef: RefObject<HTMLCanvasElement>,
+    seeds?: InventoryEntities[],
+    ms = 50
 ) {
     const animationIntervalRef = useRef<(() => void) | null>(null)
     const dynamicObjRef = useRef<IDynamicObject[] | null>(null)
@@ -20,22 +24,28 @@ export function usePentagramDecorativeAnimation(
         if (!canvas || !ctx || !seeds) return
 
         if (!obj?.length) {
-            dynamicObjRef.current = hydrateSeed(seeds, sides, canvas, ctx)
+            const bucket: IDynamicObject[] = []
+            dynamicObjRef.current = bucket
+            seeds.forEach((seed) => {
+                const animationInstance = SeedFactory.createAnimationInstance(seed, canvas, bucket, sides)
+                if (animationInstance) bucket.push(animationInstance)
+            })
         }
 
-        const interval = setInterval(() => {
-            animationLoop(
-                dynamicObjRef.current,
+        const intervalId = setInterval(() => {
+            animationLoop({
                 ctx,
                 canvas,
-            )
-        }, 50)
+                dynamics: dynamicObjRef.current,
+                onComplete: animationIntervalRef.current
+            })
+        }, ms)
 
-        animationIntervalRef.current = () => clearInterval(interval)
+        animationIntervalRef.current = () => clearInterval(intervalId)
 
         return () => {
             if (animationIntervalRef.current) animationIntervalRef.current()
-                animationIntervalRef.current = null
+            animationIntervalRef.current = null
         }
-    }, [canvasRef, dynamicObjRef, seeds, sides])
+    }, [canvasRef, ms, seeds, sides])
 }
