@@ -1,26 +1,37 @@
-import type { IDynamicObjectSeed } from "../types";
+import type { InventoryEntities } from "$feature/Inventory/types";
 import { useRef } from "react";
 import { usePentagramDecorativeAnimation } from "..//hooks";
 import "./style/decorationCanvas.scss"
 
 type DecorationCanvasProps = {
-    seeds: IDynamicObjectSeed[],
+    backgroundSeeds?: InventoryEntities[]
+    foregroundSeeds?: InventoryEntities[],
     canvasSize: number
     sides: number
 }
 
 export default function DecorationCanvas(props: DecorationCanvasProps) {
-    const { seeds, sides, canvasSize } = props
-    const canvasRef = useRef<HTMLCanvasElement | null>(null)
+    const { backgroundSeeds, foregroundSeeds, sides, canvasSize } = props
+    const bgCanvasRef = useRef<HTMLCanvasElement | null>(null)
+    const foregroundCanvasRef = useRef<HTMLCanvasElement | null>(null)
 
-    usePentagramDecorativeAnimation(seeds, sides, canvasRef)
+    usePentagramDecorativeAnimation(sides, bgCanvasRef, backgroundSeeds, 50)
+    usePentagramDecorativeAnimation(sides, foregroundCanvasRef, foregroundSeeds)
 
     return (
-        <canvas 
-            className="decoration-canvas-component" 
-            width={canvasSize}
-            height={canvasSize}
-            ref={canvasRef} 
-        />
+        <>
+            <canvas 
+                className="decoration-canvas-component" 
+                width={canvasSize}
+                height={canvasSize}
+                ref={bgCanvasRef} 
+            />
+            <canvas 
+                className="decoration-canvas-component" 
+                width={canvasSize}
+                height={canvasSize}
+                ref={foregroundCanvasRef} 
+            />
+        </>
     )
 }
