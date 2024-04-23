@@ -33,6 +33,57 @@ export type Database = {
         }
         Relationships: []
       }
+      cosmos: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          shooting_star_colors: string[]
+          shooting_star_count: number
+          size_param: number
+          speed_param: number
+          star_count: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          shooting_star_colors: string[]
+          shooting_star_count: number
+          size_param: number
+          speed_param: number
+          star_count: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          shooting_star_colors?: string[]
+          shooting_star_count?: number
+          size_param?: number
+          speed_param?: number
+          star_count?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_Cosmos_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_Cosmos_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       followings: {
         Row: {
           follower_id: string
@@ -467,7 +518,7 @@ export type Database = {
           avoid_factor: number
           body_length: number
           centering_factor: number
-          color: number[]
+          color: string
           created_at: string
           id: string
           matching_factor: number
@@ -482,7 +533,7 @@ export type Database = {
           avoid_factor: number
           body_length: number
           centering_factor: number
-          color: number[]
+          color: string
           created_at?: string
           id?: string
           matching_factor: number
@@ -497,7 +548,7 @@ export type Database = {
           avoid_factor?: number
           body_length?: number
           centering_factor?: number
-          color?: number[]
+          color?: string
           created_at?: string
           id?: string
           matching_factor?: number
@@ -552,6 +603,54 @@ export type Database = {
             foreignKeyName: "users_id_fkey"
             columns: ["id"]
             isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      worley: {
+        Row: {
+          color: string
+          created_at: string
+          grid_count: number
+          id: string
+          limit: number
+          movement_param: number
+          name: string
+          user_id: string
+        }
+        Insert: {
+          color: string
+          created_at?: string
+          grid_count: number
+          id?: string
+          limit: number
+          movement_param: number
+          name: string
+          user_id: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          grid_count?: number
+          id?: string
+          limit?: number
+          movement_param?: number
+          name?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_worley_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_worley_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
