@@ -1,0 +1,42 @@
+{
+    "shadows": {
+        "label": {
+            "color": "색상",
+            "bodyLength": "크기",
+            "centeringFactor": "호기심",
+            "matchingFactor": "집단 성향",
+            "minDistance": "최소 거리",
+            "avoidFactor": "충돌 회피 성향",
+            "turnFactor": "충돌 시 반발",
+            "visualRange": "시야 거리",
+            "speedLimit": "최고 속도" 
+        },
+        "value": {
+            "newRecord": "새 그림자"
+        }
+    },
+    "cosmos": {
+        "label": {
+            "shootingStarColors": "별똥별 색상",
+            "shootingStarCount": "별똥별 수량", 
+            "starCount": "별 수량",
+            "sizeParam": "별 크기",
+            "speedParam": "별 속도"
+        },
+        "value": {
+            "newRecord": "새 단순한 우주"
+        }
+    },
+
+    "worley": {
+        "label": {
+            "color": "배경 색상",
+            "gridCount": "물방울 수량", 
+            "limit": "선명도",
+            "movementParam": "움직임"
+        },
+        "value": {
+            "newRecord": "새 월리의 연못"
+        }
+    }
+}

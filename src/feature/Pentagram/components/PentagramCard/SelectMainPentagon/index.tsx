@@ -42,11 +42,12 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
                         timestamp={timestamp}
                     />
                 ))}
-                <DecorationCanvas 
-                    seeds={[]} 
-                    canvasSize={canvasSize} 
-                    sides={PENTAGRAM.SIDES}
-                />
+                {inView && 
+                    <DecorationCanvas 
+                        canvasSize={canvasSize} 
+                        sides={PENTAGRAM.SIDES}
+                    />
+                }
             </OeuvrePentagonWrapper>
             {!inView && <div ref={sentinelRef} className="select-main-pentagon-component__sentinel" />}
         </div>
