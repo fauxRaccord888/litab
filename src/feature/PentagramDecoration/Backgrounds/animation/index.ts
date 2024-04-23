@@ -1,2 +1,2 @@
-export * from './ShootingStar'
-export * from './Star'
+export * from './Cosmos'
+export * from './Worley'
