@@ -37,6 +37,4 @@ export default {
     profile,
     search,
     error,
-
-    inventory
 }
