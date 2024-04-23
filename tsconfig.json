@@ -19,6 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "strictPropertyInitialization": false,
 
     /* alias */
     /* resolve는 vite에서 처리, 아래 내용은 ESlint에만 적용됨 */
