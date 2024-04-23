@@ -1,3 +1,4 @@
 {
-    "unknownError" : "An unknown error has occurred"
+    "unknownError" : "An unknown error has occurred",
+    "typeError": "Incorrect type was entered"
 }

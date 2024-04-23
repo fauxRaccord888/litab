@@ -16,6 +16,8 @@ import profile from './profile.json'
 import search from './search.json'
 import error from './error.json'
 
+import pentagramDecoration from '$feature/PentagramDecoration/locales/kr.json'
+
 export default {
     account,
     artist,
@@ -30,8 +32,11 @@ export default {
     node,
     oeuvre,
     pentagram,
+    pentagramDecoration,
     portal,
     profile,
     search,
-    error
+    error,
+
+    inventory
 }
