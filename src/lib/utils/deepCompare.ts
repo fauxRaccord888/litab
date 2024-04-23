@@ -45,3 +45,8 @@ export function deepCompare(obj1: unknown, obj2: unknown) {
 function hasKey<T extends object>(obj: T, key: string | number | symbol): asserts key is (keyof T) {
     if (!(key in obj)) throw new Error()
 }
+
+export function isProperKey<T extends object>(obj: T, key: string | number | symbol): key is (keyof T) {
+    if (!(key in obj)) return false
+    return true
+}
