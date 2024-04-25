@@ -37,7 +37,7 @@ export class Cosmos implements IDynamicObject {
         seed: InventoryEntities,
         canvas: HTMLCanvasElement, 
     ) {
-        if (seed.__typename !== "Cosmos") {
+        if (seed.__typename !== Cosmos.__typename) {
             throw new CustomTypeError()
         }
         this.stars = Array
