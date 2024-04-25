@@ -152,6 +152,57 @@ export type Database = {
         }
         Relationships: []
       }
+      ocean: {
+        Row: {
+          created_at: string
+          foam_color: string
+          foam_thickness: number
+          id: string
+          mul_scale: number
+          name: string
+          random_seed: string
+          user_id: string
+          water_color: string
+        }
+        Insert: {
+          created_at?: string
+          foam_color: string
+          foam_thickness: number
+          id?: string
+          mul_scale: number
+          name: string
+          random_seed: string
+          user_id?: string
+          water_color: string
+        }
+        Update: {
+          created_at?: string
+          foam_color?: string
+          foam_thickness?: number
+          id?: string
+          mul_scale?: number
+          name?: string
+          random_seed?: string
+          user_id?: string
+          water_color?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ocean_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "feed"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ocean_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       oeuvres: {
         Row: {
           description: string | null
@@ -603,54 +654,6 @@ export type Database = {
             foreignKeyName: "users_id_fkey"
             columns: ["id"]
             isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      worley: {
-        Row: {
-          color: string
-          created_at: string
-          grid_count: number
-          id: string
-          limit: number
-          movement_param: number
-          name: string
-          user_id: string
-        }
-        Insert: {
-          color: string
-          created_at?: string
-          grid_count: number
-          id?: string
-          limit: number
-          movement_param: number
-          name: string
-          user_id: string
-        }
-        Update: {
-          color?: string
-          created_at?: string
-          grid_count?: number
-          id?: string
-          limit?: number
-          movement_param?: number
-          name?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "public_worley_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "feed"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "public_worley_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
