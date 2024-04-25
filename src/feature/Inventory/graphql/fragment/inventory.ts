@@ -4,7 +4,7 @@ graphql(/* GraphQL */ `
     fragment InventoryInfo on Users {
         id,
         ...InventoryShadowsInfo
-        ...InventoryWorleyInfo
+        ...InventoryOceanInfo
         ...InventoryCosmosInfo
     }
 `)
@@ -33,13 +33,13 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment InventoryWorleyInfo on Users {
-        worleyCollection(
+    fragment InventoryOceanInfo on Users {
+        oceanCollection(
             orderBy: {
                 createdAt: DescNullsLast
             }
-            first: $worleyLimit
-            after: $worleyCursor
+            first: $oceanLimit
+            after: $oceanCursor
         ) {
             pageInfo {
                 hasNextPage
@@ -48,7 +48,7 @@ graphql(/* GraphQL */ `
             edges {
                 cursor
                 node {
-                    ...WorleyMinimalInfo
+                    ...OceanMinimalInfo
                 }
             }
         }

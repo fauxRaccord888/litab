@@ -1,3 +1,3 @@
 export * from './cosmos'
 export * from './shadow'
-export * from './worley'
+export * from './ocean'
