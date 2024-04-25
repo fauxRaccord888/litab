@@ -9,7 +9,7 @@ import { SeedFactory } from '$feature/Inventory/function/factory'
 export function usePentagramDecorativeAnimation(
     sides: number,
     canvasRef: RefObject<HTMLCanvasElement>,
-    seeds?: InventoryEntities[],
+    seeds?: (InventoryEntities | null)[],
     ms = 50
 ) {
     const animationIntervalRef = useRef<(() => void) | null>(null)
@@ -27,6 +27,7 @@ export function usePentagramDecorativeAnimation(
             const bucket: IDynamicObject[] = []
             dynamicObjRef.current = bucket
             seeds.forEach((seed) => {
+                if (!seed) return
                 const animationInstance = SeedFactory.createAnimationInstance(seed, canvas, bucket, sides)
                 if (animationInstance) bucket.push(animationInstance)
             })
