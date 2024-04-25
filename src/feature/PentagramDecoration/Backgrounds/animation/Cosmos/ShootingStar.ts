@@ -13,6 +13,7 @@ export class ShootingStar implements IDynamicObject {
     size: number;
     waitTime: number;
     active: boolean;
+    color: string;
 
     constructor(
         options: DBCosmos, 
@@ -30,6 +31,7 @@ export class ShootingStar implements IDynamicObject {
         this.size = (Math.random() * 0.35) + 0.15
         this.waitTime = new Date().getTime() + (Math.random() * 10000) + 1000
         this.active = false
+        this.color = convertRgbaToCSS(pickRandomElementFromArray(this.colors));
     }
 
     update(canvas: HTMLCanvasElement) {
@@ -49,11 +51,10 @@ export class ShootingStar implements IDynamicObject {
 
     draw(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         if (this.active) {
-            const color = convertRgbaToCSS(pickRandomElementFromArray(this.colors));
-            ctx.strokeStyle = color;
-            ctx.fillStyle = color;
+            ctx.strokeStyle = this.color;
+            ctx.fillStyle = this.color;
             
-            ctx.fillRect(this.x-0.75, this.y-0.75, 1.5, 1.5);
+            ctx.fillRect(this.x-1, this.y-1, 2, 2);
             ctx.lineCap = "round";
             ctx.lineWidth = this.size;
             ctx.beginPath();
