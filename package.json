@@ -24,6 +24,7 @@
     "@supabase/supabase-js": "^2.39.3",
     "@tanstack/react-router": "^1.12.2",
     "@vercel/analytics": "^1.2.2",
+    "alea": "^1.0.1",
     "biome": "^0.3.3",
     "graphql": "^16.8.1",
     "hex-rgb": "^5.0.0",
@@ -33,6 +34,7 @@
     "react-redux": "^9.1.0",
     "redux-persist": "^6.0.0",
     "rgb-hex": "^4.1.0",
+    "simplex-noise": "^4.0.1",
     "typed-scss-modules": "^8.0.1",
     "usehooks-ts": "^3.0.2"
   },

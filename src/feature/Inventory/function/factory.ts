@@ -1,14 +1,14 @@
 import type { InventoryEntities, InventoryKey } from "../types";
 import type { IDynamicObject } from "$feature/PentagramDecoration";
-import { Cosmos, Shadow, Worley } from "$feature/PentagramDecoration";
+import { Cosmos, Ocean, Shadow } from "$feature/PentagramDecoration";
 
-type AnimationInstance = Cosmos | Worley | Shadow
+type AnimationInstance = Cosmos | Shadow | Ocean
 
 export class SeedFactory {
     // TODO 이후 인벤토리 아이템 추가 시, "직접" 추가해줘야 함
     static cstr = {
+        Ocean,
         Cosmos, 
-        Worley,
         Shadows: Shadow
     }
 

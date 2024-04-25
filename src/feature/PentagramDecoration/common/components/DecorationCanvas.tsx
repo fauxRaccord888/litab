@@ -4,8 +4,8 @@ import { usePentagramDecorativeAnimation } from "..//hooks";
 import "./style/decorationCanvas.scss"
 
 type DecorationCanvasProps = {
-    backgroundSeeds?: InventoryEntities[]
-    foregroundSeeds?: InventoryEntities[],
+    backgroundSeeds?: (InventoryEntities | null)[]
+    foregroundSeeds?: (InventoryEntities | null)[],
     canvasSize: number
     sides: number
 }

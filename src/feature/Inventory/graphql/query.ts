@@ -7,8 +7,8 @@ export const getUserInventoryId_QUERY = graphql(/* GraphQL */ `
         $shadowCursor: Cursor
         $cosmosLimit: Int,
         $cosmosCursor: Cursor
-        $worleyLimit: Int,
-        $worleyCursor: Cursor
+        $oceanLimit: Int,
+        $oceanCursor: Cursor
     ) {
         usersCollection(
             first: 1

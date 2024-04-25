@@ -58,7 +58,7 @@ export class Shadow implements IDynamicObject {
         shadows: IDynamicObject[], 
         sides: number,
     ) {
-        if (seed.__typename !== "Shadows") {
+        if (seed.__typename !== Shadow.__typename) {
             throw new CustomTypeError()
         }
 

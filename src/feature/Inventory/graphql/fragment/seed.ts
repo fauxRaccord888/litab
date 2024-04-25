@@ -32,14 +32,15 @@ graphql(/* GraphQL */ `
 `)
 
 graphql(/* GraphQL */ `
-    fragment WorleyMinimalInfo on Worley {
+    fragment OceanMinimalInfo on Ocean {
         id,
         userId
-        name,
-        color,
-        gridCount,
-        limit,
-        movementParam
+        name
+        randomSeed
+        waterColor
+        foamColor
+        foamThickness
+        mulScale
     }
 `)
 
