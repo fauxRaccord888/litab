@@ -27,16 +27,15 @@
             "newRecord": "새 단순한 우주"
         }
     },
-
-    "worley": {
+    "ocean": {
         "label": {
-            "color": "배경 색상",
-            "gridCount": "물방울 수량", 
-            "limit": "선명도",
-            "movementParam": "움직임"
+            "foamColor": "거품 색상",
+            "waterColor": "물 색상", 
+            "foamThickness": "거품 두께",
+            "mulScale": "배율"
         },
         "value": {
-            "newRecord": "새 월리의 연못"
+            "newRecord": "새 단순한 바다"
         }
     }
 }
