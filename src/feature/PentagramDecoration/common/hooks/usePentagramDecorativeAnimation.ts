@@ -1,6 +1,6 @@
 import type { IDynamicObject } from '../../types'
-import type { InventoryEntities } from '$feature/Inventory/types'
 import type { RefObject } from 'react'
+import type { DBDecoration } from '$feature/Inventory/types'
 import { useEffect, useRef } from 'react'
 import { animationLoop } from '../function'
 import { SeedFactory } from '$feature/Inventory/function/factory'
@@ -9,7 +9,7 @@ import { SeedFactory } from '$feature/Inventory/function/factory'
 export function usePentagramDecorativeAnimation(
     sides: number,
     canvasRef: RefObject<HTMLCanvasElement>,
-    seeds?: (InventoryEntities | null)[],
+    decorations?: (DBDecoration | null)[],
     ms = 50
 ) {
     const animationIntervalRef = useRef<(() => void) | null>(null)
@@ -21,12 +21,12 @@ export function usePentagramDecorativeAnimation(
         const obj = dynamicObjRef.current
         
         if (animationIntervalRef.current) return
-        if (!canvas || !ctx || !seeds) return
+        if (!canvas || !ctx || !decorations) return
 
         if (!obj?.length) {
             const bucket: IDynamicObject[] = []
             dynamicObjRef.current = bucket
-            seeds.forEach((seed) => {
+            decorations.forEach((seed) => {
                 if (!seed) return
                 const animationInstance = SeedFactory.createAnimationInstance(seed, canvas, bucket, sides)
                 if (animationInstance) bucket.push(animationInstance)
@@ -48,5 +48,5 @@ export function usePentagramDecorativeAnimation(
             if (animationIntervalRef.current) animationIntervalRef.current()
             animationIntervalRef.current = null
         }
-    }, [canvasRef, ms, seeds, sides])
+    }, [canvasRef, ms, decorations, sides])
 }
