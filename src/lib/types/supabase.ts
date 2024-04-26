@@ -33,50 +33,54 @@ export type Database = {
         }
         Relationships: []
       }
-      cosmos: {
+      decorations: {
         Row: {
           created_at: string
           id: string
+          is_background: boolean
           name: string
-          shooting_star_colors: string[]
-          shooting_star_count: number
-          size_param: number
-          speed_param: number
-          star_count: number
+          pentagram_id: string | null
+          seed: string
+          type: Database["public"]["Enums"]["decoration_type"]
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
+          is_background?: boolean
           name: string
-          shooting_star_colors: string[]
-          shooting_star_count: number
-          size_param: number
-          speed_param: number
-          star_count: number
-          user_id: string
+          pentagram_id?: string | null
+          seed: string
+          type: Database["public"]["Enums"]["decoration_type"]
+          user_id?: string
         }
         Update: {
           created_at?: string
           id?: string
+          is_background?: boolean
           name?: string
-          shooting_star_colors?: string[]
-          shooting_star_count?: number
-          size_param?: number
-          speed_param?: number
-          star_count?: number
+          pentagram_id?: string | null
+          seed?: string
+          type?: Database["public"]["Enums"]["decoration_type"]
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "public_Cosmos_user_id_fkey"
+            foreignKeyName: "decorations_pentagram_id_fkey"
+            columns: ["pentagram_id"]
+            isOneToOne: false
+            referencedRelation: "pentagrams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "decorations_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "feed"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "public_Cosmos_user_id_fkey"
+            foreignKeyName: "decorations_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
@@ -151,57 +155,6 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
-      }
-      ocean: {
-        Row: {
-          created_at: string
-          foam_color: string
-          foam_thickness: number
-          id: string
-          mul_scale: number
-          name: string
-          random_seed: string
-          user_id: string
-          water_color: string
-        }
-        Insert: {
-          created_at?: string
-          foam_color: string
-          foam_thickness: number
-          id?: string
-          mul_scale: number
-          name: string
-          random_seed: string
-          user_id?: string
-          water_color: string
-        }
-        Update: {
-          created_at?: string
-          foam_color?: string
-          foam_thickness?: number
-          id?: string
-          mul_scale?: number
-          name?: string
-          random_seed?: string
-          user_id?: string
-          water_color?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "ocean_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "feed"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "ocean_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       oeuvres: {
         Row: {
@@ -564,69 +517,6 @@ export type Database = {
           },
         ]
       }
-      shadows: {
-        Row: {
-          avoid_factor: number
-          body_length: number
-          centering_factor: number
-          color: string
-          created_at: string
-          id: string
-          matching_factor: number
-          min_distance: number
-          name: string
-          speed_limit: number
-          turn_factor: number
-          user_id: string
-          visual_range: number
-        }
-        Insert: {
-          avoid_factor: number
-          body_length: number
-          centering_factor: number
-          color: string
-          created_at?: string
-          id?: string
-          matching_factor: number
-          min_distance: number
-          name: string
-          speed_limit: number
-          turn_factor: number
-          user_id: string
-          visual_range: number
-        }
-        Update: {
-          avoid_factor?: number
-          body_length?: number
-          centering_factor?: number
-          color?: string
-          created_at?: string
-          id?: string
-          matching_factor?: number
-          min_distance?: number
-          name?: string
-          speed_limit?: number
-          turn_factor?: number
-          user_id?: string
-          visual_range?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "public_shadow_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "feed"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "public_shadow_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       users: {
         Row: {
           description: string | null
@@ -798,7 +688,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      decoration_type: "ocean" | "cosmos" | "shadow"
     }
     CompositeTypes: {
       pentagram_recover_changes: {
