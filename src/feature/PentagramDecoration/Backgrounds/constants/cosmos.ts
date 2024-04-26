@@ -1,10 +1,6 @@
-import type { ConstantsWithRange } from "$lib/utils/createRandomizedObject";
-import type { CosmosKey } from "../types";
-import type { ConstantOmitKey } from "../../types"
+import type { ConstantsWithRange } from "$lib/utils";
 
-type Key = Exclude<CosmosKey, ConstantOmitKey | "shootingStarColors" >
-
-export const COSMOS: Record<Key, ConstantsWithRange> = {
+export const COSMOS = {
     starCount: {
         min: 35,
         max: 45,
@@ -27,4 +23,4 @@ export const COSMOS: Record<Key, ConstantsWithRange> = {
         max: 4,
         skew: 2
     }
-} 
+} satisfies Record<string, ConstantsWithRange>

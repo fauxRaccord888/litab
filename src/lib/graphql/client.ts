@@ -114,8 +114,8 @@ const cache = new InMemoryCache({
                         return mergeCacheUtil(existing, incoming)
                     }
                 },
-                shadowsCollection: {
-                    keyArgs: false,
+                decorationsCollection: {
+                    keyArgs: ["filter"],
                     merge(existing: IConnection, incoming: IConnection){
                         return mergeCacheUtil(existing, incoming)
                     }

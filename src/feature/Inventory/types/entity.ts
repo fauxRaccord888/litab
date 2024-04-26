@@ -1,11 +1,7 @@
-import type { DBCosmos, DBShadow, DBOcean } from "$feature/PentagramDecoration"
-import type { InventoryInfoFragment } from "$lib/graphql/__generated__/graphql"
+import type { DecorationType, DecorationsMinimalInfoFragment, InventoryInfoFragment } from "$lib/graphql/__generated__/graphql"
+import type { ConstantsWithRange } from "$lib/utils"
 
-export type TInventoryFields = Record<string, 
-    string | number | (number | null)[]
->
+export type DBDecoration = DecorationsMinimalInfoFragment
+export type DBInventory = InventoryInfoFragment["decorationsCollection"]
 
-export type DBInventory = InventoryInfoFragment
-
-export type InventoryEntities = DBShadow | DBCosmos | DBOcean
-export type InventoryKey = InventoryEntities["__typename"]
+export type DecorationConstants = Record<DecorationType, Record<string, ConstantsWithRange>>

@@ -1,5 +1,5 @@
 import type { IDynamicObject } from '../../../types';
-import type { DBCosmos } from '../../types';
+import type { Cosmos } from '.';
 
 export class Star implements IDynamicObject {
     size: number
@@ -8,7 +8,7 @@ export class Star implements IDynamicObject {
     y: number
 
     constructor(
-        options: DBCosmos, 
+        options: ReturnType<typeof Cosmos["createObjectFromSeed"]>, 
         canvas: HTMLCanvasElement, 
     ) {
         this.size = Math.random() * options.sizeParam

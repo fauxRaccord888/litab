@@ -161,111 +161,6 @@ export type BooleanFilter = {
   is?: InputMaybe<FilterIs>;
 };
 
-export type Cosmos = Node & {
-  __typename?: 'Cosmos';
-  createdAt: Scalars['Datetime']['output'];
-  id: Scalars['UUID']['output'];
-  name: Scalars['String']['output'];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-  shootingStarColors: Array<Maybe<Scalars['String']['output']>>;
-  shootingStarCount: Scalars['Int']['output'];
-  sizeParam: Scalars['Float']['output'];
-  speedParam: Scalars['Float']['output'];
-  starCount: Scalars['Int']['output'];
-  user: Users;
-  userId: Scalars['UUID']['output'];
-};
-
-export type CosmosConnection = {
-  __typename?: 'CosmosConnection';
-  edges: Array<CosmosEdge>;
-  pageInfo: PageInfo;
-};
-
-export type CosmosDeleteResponse = {
-  __typename?: 'CosmosDeleteResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Cosmos>;
-};
-
-export type CosmosEdge = {
-  __typename?: 'CosmosEdge';
-  cursor: Scalars['String']['output'];
-  node: Cosmos;
-};
-
-export type CosmosFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<CosmosFilter>>;
-  createdAt?: InputMaybe<DatetimeFilter>;
-  id?: InputMaybe<UuidFilter>;
-  name?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<CosmosFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<CosmosFilter>>;
-  shootingStarCount?: InputMaybe<IntFilter>;
-  sizeParam?: InputMaybe<FloatFilter>;
-  speedParam?: InputMaybe<FloatFilter>;
-  starCount?: InputMaybe<IntFilter>;
-  userId?: InputMaybe<UuidFilter>;
-};
-
-export type CosmosInsertInput = {
-  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  shootingStarColors?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  shootingStarCount?: InputMaybe<Scalars['Int']['input']>;
-  sizeParam?: InputMaybe<Scalars['Float']['input']>;
-  speedParam?: InputMaybe<Scalars['Float']['input']>;
-  starCount?: InputMaybe<Scalars['Int']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-export type CosmosInsertResponse = {
-  __typename?: 'CosmosInsertResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Cosmos>;
-};
-
-export type CosmosOrderBy = {
-  createdAt?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  name?: InputMaybe<OrderByDirection>;
-  shootingStarCount?: InputMaybe<OrderByDirection>;
-  sizeParam?: InputMaybe<OrderByDirection>;
-  speedParam?: InputMaybe<OrderByDirection>;
-  starCount?: InputMaybe<OrderByDirection>;
-  userId?: InputMaybe<OrderByDirection>;
-};
-
-export type CosmosUpdateInput = {
-  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  shootingStarColors?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  shootingStarCount?: InputMaybe<Scalars['Int']['input']>;
-  sizeParam?: InputMaybe<Scalars['Float']['input']>;
-  speedParam?: InputMaybe<Scalars['Float']['input']>;
-  starCount?: InputMaybe<Scalars['Int']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-export type CosmosUpdateResponse = {
-  __typename?: 'CosmosUpdateResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Cosmos>;
-};
-
 /** Boolean expression comparing fields on type "Date" */
 export type DateFilter = {
   eq?: InputMaybe<Scalars['Date']['input']>;
@@ -288,6 +183,123 @@ export type DatetimeFilter = {
   lt?: InputMaybe<Scalars['Datetime']['input']>;
   lte?: InputMaybe<Scalars['Datetime']['input']>;
   neq?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export enum DecorationType {
+  Cosmos = 'cosmos',
+  Ocean = 'ocean',
+  Shadow = 'shadow'
+}
+
+/** Boolean expression comparing fields on type "DecorationType" */
+export type DecorationTypeFilter = {
+  eq?: InputMaybe<DecorationType>;
+  in?: InputMaybe<Array<DecorationType>>;
+  is?: InputMaybe<FilterIs>;
+  neq?: InputMaybe<DecorationType>;
+};
+
+export type Decorations = Node & {
+  __typename?: 'Decorations';
+  createdAt: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  isBackground: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  pentagram?: Maybe<Pentagrams>;
+  pentagramId?: Maybe<Scalars['UUID']['output']>;
+  seed: Scalars['String']['output'];
+  type: DecorationType;
+  user: Users;
+  userId: Scalars['UUID']['output'];
+};
+
+export type DecorationsConnection = {
+  __typename?: 'DecorationsConnection';
+  edges: Array<DecorationsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type DecorationsDeleteResponse = {
+  __typename?: 'DecorationsDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Decorations>;
+};
+
+export type DecorationsEdge = {
+  __typename?: 'DecorationsEdge';
+  cursor: Scalars['String']['output'];
+  node: Decorations;
+};
+
+export type DecorationsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<DecorationsFilter>>;
+  createdAt?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  isBackground?: InputMaybe<BooleanFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<DecorationsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<DecorationsFilter>>;
+  pentagramId?: InputMaybe<UuidFilter>;
+  seed?: InputMaybe<StringFilter>;
+  type?: InputMaybe<DecorationTypeFilter>;
+  userId?: InputMaybe<UuidFilter>;
+};
+
+export type DecorationsInsertInput = {
+  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  isBackground?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  pentagramId?: InputMaybe<Scalars['UUID']['input']>;
+  seed?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<DecorationType>;
+  userId?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+export type DecorationsInsertResponse = {
+  __typename?: 'DecorationsInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Decorations>;
+};
+
+export type DecorationsOrderBy = {
+  createdAt?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  isBackground?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+  pentagramId?: InputMaybe<OrderByDirection>;
+  seed?: InputMaybe<OrderByDirection>;
+  type?: InputMaybe<OrderByDirection>;
+  userId?: InputMaybe<OrderByDirection>;
+};
+
+export type DecorationsUpdateInput = {
+  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  isBackground?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  pentagramId?: InputMaybe<Scalars['UUID']['input']>;
+  seed?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<DecorationType>;
+  userId?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+export type DecorationsUpdateResponse = {
+  __typename?: 'DecorationsUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Decorations>;
 };
 
 export type Feed = Node & {
@@ -587,16 +599,14 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Deletes zero or more records from the `Artists` collection */
   deleteFromArtistsCollection: ArtistsDeleteResponse;
-  /** Deletes zero or more records from the `Cosmos` collection */
-  deleteFromCosmosCollection: CosmosDeleteResponse;
+  /** Deletes zero or more records from the `Decorations` collection */
+  deleteFromDecorationsCollection: DecorationsDeleteResponse;
   /** Deletes zero or more records from the `Feed` collection */
   deleteFromFeedCollection: FeedDeleteResponse;
   /** Deletes zero or more records from the `Followings` collection */
   deleteFromFollowingsCollection: FollowingsDeleteResponse;
   /** Deletes zero or more records from the `Genres` collection */
   deleteFromGenresCollection: GenresDeleteResponse;
-  /** Deletes zero or more records from the `Ocean` collection */
-  deleteFromOceanCollection: OceanDeleteResponse;
   /** Deletes zero or more records from the `OeuvresArtists` collection */
   deleteFromOeuvresArtistsCollection: OeuvresArtistsDeleteResponse;
   /** Deletes zero or more records from the `Oeuvres` collection */
@@ -617,22 +627,18 @@ export type Mutation = {
   deleteFromPentagramRevisionsCollection: PentagramRevisionsDeleteResponse;
   /** Deletes zero or more records from the `Pentagrams` collection */
   deleteFromPentagramsCollection: PentagramsDeleteResponse;
-  /** Deletes zero or more records from the `Shadows` collection */
-  deleteFromShadowsCollection: ShadowsDeleteResponse;
   /** Deletes zero or more records from the `Users` collection */
   deleteFromUsersCollection: UsersDeleteResponse;
   /** Adds one or more `Artists` records to the collection */
   insertIntoArtistsCollection?: Maybe<ArtistsInsertResponse>;
-  /** Adds one or more `Cosmos` records to the collection */
-  insertIntoCosmosCollection?: Maybe<CosmosInsertResponse>;
+  /** Adds one or more `Decorations` records to the collection */
+  insertIntoDecorationsCollection?: Maybe<DecorationsInsertResponse>;
   /** Adds one or more `Feed` records to the collection */
   insertIntoFeedCollection?: Maybe<FeedInsertResponse>;
   /** Adds one or more `Followings` records to the collection */
   insertIntoFollowingsCollection?: Maybe<FollowingsInsertResponse>;
   /** Adds one or more `Genres` records to the collection */
   insertIntoGenresCollection?: Maybe<GenresInsertResponse>;
-  /** Adds one or more `Ocean` records to the collection */
-  insertIntoOceanCollection?: Maybe<OceanInsertResponse>;
   /** Adds one or more `OeuvresArtists` records to the collection */
   insertIntoOeuvresArtistsCollection?: Maybe<OeuvresArtistsInsertResponse>;
   /** Adds one or more `Oeuvres` records to the collection */
@@ -653,22 +659,18 @@ export type Mutation = {
   insertIntoPentagramRevisionsCollection?: Maybe<PentagramRevisionsInsertResponse>;
   /** Adds one or more `Pentagrams` records to the collection */
   insertIntoPentagramsCollection?: Maybe<PentagramsInsertResponse>;
-  /** Adds one or more `Shadows` records to the collection */
-  insertIntoShadowsCollection?: Maybe<ShadowsInsertResponse>;
   /** Adds one or more `Users` records to the collection */
   insertIntoUsersCollection?: Maybe<UsersInsertResponse>;
   /** Updates zero or more records in the `Artists` collection */
   updateArtistsCollection: ArtistsUpdateResponse;
-  /** Updates zero or more records in the `Cosmos` collection */
-  updateCosmosCollection: CosmosUpdateResponse;
+  /** Updates zero or more records in the `Decorations` collection */
+  updateDecorationsCollection: DecorationsUpdateResponse;
   /** Updates zero or more records in the `Feed` collection */
   updateFeedCollection: FeedUpdateResponse;
   /** Updates zero or more records in the `Followings` collection */
   updateFollowingsCollection: FollowingsUpdateResponse;
   /** Updates zero or more records in the `Genres` collection */
   updateGenresCollection: GenresUpdateResponse;
-  /** Updates zero or more records in the `Ocean` collection */
-  updateOceanCollection: OceanUpdateResponse;
   /** Updates zero or more records in the `OeuvresArtists` collection */
   updateOeuvresArtistsCollection: OeuvresArtistsUpdateResponse;
   /** Updates zero or more records in the `Oeuvres` collection */
@@ -689,8 +691,6 @@ export type Mutation = {
   updatePentagramRevisionsCollection: PentagramRevisionsUpdateResponse;
   /** Updates zero or more records in the `Pentagrams` collection */
   updatePentagramsCollection: PentagramsUpdateResponse;
-  /** Updates zero or more records in the `Shadows` collection */
-  updateShadowsCollection: ShadowsUpdateResponse;
   /** Updates zero or more records in the `Users` collection */
   updateUsersCollection: UsersUpdateResponse;
 };
@@ -704,9 +704,9 @@ export type MutationDeleteFromArtistsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFromCosmosCollectionArgs = {
+export type MutationDeleteFromDecorationsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CosmosFilter>;
+  filter?: InputMaybe<DecorationsFilter>;
 };
 
 
@@ -728,13 +728,6 @@ export type MutationDeleteFromFollowingsCollectionArgs = {
 export type MutationDeleteFromGenresCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<GenresFilter>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationDeleteFromOceanCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<OceanFilter>;
 };
 
 
@@ -809,13 +802,6 @@ export type MutationDeleteFromPentagramsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFromShadowsCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<ShadowsFilter>;
-};
-
-
-/** The root type for creating and mutating data */
 export type MutationDeleteFromUsersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<UsersFilter>;
@@ -829,8 +815,8 @@ export type MutationInsertIntoArtistsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntoCosmosCollectionArgs = {
-  objects: Array<CosmosInsertInput>;
+export type MutationInsertIntoDecorationsCollectionArgs = {
+  objects: Array<DecorationsInsertInput>;
 };
 
 
@@ -849,12 +835,6 @@ export type MutationInsertIntoFollowingsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntoGenresCollectionArgs = {
   objects: Array<GenresInsertInput>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationInsertIntoOceanCollectionArgs = {
-  objects: Array<OceanInsertInput>;
 };
 
 
@@ -919,12 +899,6 @@ export type MutationInsertIntoPentagramsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntoShadowsCollectionArgs = {
-  objects: Array<ShadowsInsertInput>;
-};
-
-
-/** The root type for creating and mutating data */
 export type MutationInsertIntoUsersCollectionArgs = {
   objects: Array<UsersInsertInput>;
 };
@@ -939,10 +913,10 @@ export type MutationUpdateArtistsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationUpdateCosmosCollectionArgs = {
+export type MutationUpdateDecorationsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CosmosFilter>;
-  set: CosmosUpdateInput;
+  filter?: InputMaybe<DecorationsFilter>;
+  set: DecorationsUpdateInput;
 };
 
 
@@ -967,14 +941,6 @@ export type MutationUpdateGenresCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<GenresFilter>;
   set: GenresUpdateInput;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationUpdateOceanCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<OceanFilter>;
-  set: OceanUpdateInput;
 };
 
 
@@ -1059,14 +1025,6 @@ export type MutationUpdatePentagramsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationUpdateShadowsCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<ShadowsFilter>;
-  set: ShadowsUpdateInput;
-};
-
-
-/** The root type for creating and mutating data */
 export type MutationUpdateUsersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<UsersFilter>;
@@ -1076,113 +1034,6 @@ export type MutationUpdateUsersCollectionArgs = {
 export type Node = {
   /** Retrieves a record by `ID` */
   nodeId: Scalars['ID']['output'];
-};
-
-export type Ocean = Node & {
-  __typename?: 'Ocean';
-  createdAt: Scalars['Datetime']['output'];
-  foamColor: Scalars['String']['output'];
-  foamThickness: Scalars['Float']['output'];
-  id: Scalars['UUID']['output'];
-  mulScale: Scalars['Float']['output'];
-  name: Scalars['String']['output'];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-  randomSeed: Scalars['String']['output'];
-  user: Users;
-  userId: Scalars['UUID']['output'];
-  waterColor: Scalars['String']['output'];
-};
-
-export type OceanConnection = {
-  __typename?: 'OceanConnection';
-  edges: Array<OceanEdge>;
-  pageInfo: PageInfo;
-};
-
-export type OceanDeleteResponse = {
-  __typename?: 'OceanDeleteResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Ocean>;
-};
-
-export type OceanEdge = {
-  __typename?: 'OceanEdge';
-  cursor: Scalars['String']['output'];
-  node: Ocean;
-};
-
-export type OceanFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<OceanFilter>>;
-  createdAt?: InputMaybe<DatetimeFilter>;
-  foamColor?: InputMaybe<StringFilter>;
-  foamThickness?: InputMaybe<FloatFilter>;
-  id?: InputMaybe<UuidFilter>;
-  mulScale?: InputMaybe<FloatFilter>;
-  name?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<OceanFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<OceanFilter>>;
-  randomSeed?: InputMaybe<StringFilter>;
-  userId?: InputMaybe<UuidFilter>;
-  waterColor?: InputMaybe<StringFilter>;
-};
-
-export type OceanInsertInput = {
-  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
-  foamColor?: InputMaybe<Scalars['String']['input']>;
-  foamThickness?: InputMaybe<Scalars['Float']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  mulScale?: InputMaybe<Scalars['Float']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  randomSeed?: InputMaybe<Scalars['String']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-  waterColor?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type OceanInsertResponse = {
-  __typename?: 'OceanInsertResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Ocean>;
-};
-
-export type OceanOrderBy = {
-  createdAt?: InputMaybe<OrderByDirection>;
-  foamColor?: InputMaybe<OrderByDirection>;
-  foamThickness?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  mulScale?: InputMaybe<OrderByDirection>;
-  name?: InputMaybe<OrderByDirection>;
-  randomSeed?: InputMaybe<OrderByDirection>;
-  userId?: InputMaybe<OrderByDirection>;
-  waterColor?: InputMaybe<OrderByDirection>;
-};
-
-export type OceanUpdateInput = {
-  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
-  foamColor?: InputMaybe<Scalars['String']['input']>;
-  foamThickness?: InputMaybe<Scalars['Float']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  mulScale?: InputMaybe<Scalars['Float']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  randomSeed?: InputMaybe<Scalars['String']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-  waterColor?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type OceanUpdateResponse = {
-  __typename?: 'OceanUpdateResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Ocean>;
 };
 
 export type Oeuvres = Node & {
@@ -2103,6 +1954,7 @@ export type PentagramRevisionsUpdateResponse = {
 export type Pentagrams = Node & {
   __typename?: 'Pentagrams';
   createdAt: Scalars['Datetime']['output'];
+  decorationsCollection?: Maybe<DecorationsConnection>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
   /** Globally Unique Record Identifier */
@@ -2111,6 +1963,16 @@ export type Pentagrams = Node & {
   pentagramRevisionsCollection?: Maybe<PentagramRevisionsConnection>;
   user: Users;
   userId: Scalars['UUID']['output'];
+};
+
+
+export type PentagramsDecorationsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<DecorationsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<DecorationsOrderBy>>;
 };
 
 
@@ -2209,8 +2071,8 @@ export type Query = {
   __typename?: 'Query';
   /** A pagable collection of type `Artists` */
   artistsCollection?: Maybe<ArtistsConnection>;
-  /** A pagable collection of type `Cosmos` */
-  cosmosCollection?: Maybe<CosmosConnection>;
+  /** A pagable collection of type `Decorations` */
+  decorationsCollection?: Maybe<DecorationsConnection>;
   /** A pagable collection of type `Feed` */
   feedCollection?: Maybe<FeedConnection>;
   /** A pagable collection of type `Followings` */
@@ -2219,8 +2081,6 @@ export type Query = {
   genresCollection?: Maybe<GenresConnection>;
   /** Retrieve a record by its `ID` */
   node?: Maybe<Node>;
-  /** A pagable collection of type `Ocean` */
-  oceanCollection?: Maybe<OceanConnection>;
   /** A pagable collection of type `OeuvresArtists` */
   oeuvresArtistsCollection?: Maybe<OeuvresArtistsConnection>;
   /** A pagable collection of type `Oeuvres` */
@@ -2241,8 +2101,6 @@ export type Query = {
   pentagramRevisionsCollection?: Maybe<PentagramRevisionsConnection>;
   /** A pagable collection of type `Pentagrams` */
   pentagramsCollection?: Maybe<PentagramsConnection>;
-  /** A pagable collection of type `Shadows` */
-  shadowsCollection?: Maybe<ShadowsConnection>;
   /** A pagable collection of type `Users` */
   usersCollection?: Maybe<UsersConnection>;
 };
@@ -2260,13 +2118,13 @@ export type QueryArtistsCollectionArgs = {
 
 
 /** The root type for querying data */
-export type QueryCosmosCollectionArgs = {
+export type QueryDecorationsCollectionArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CosmosFilter>;
+  filter?: InputMaybe<DecorationsFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CosmosOrderBy>>;
+  orderBy?: InputMaybe<Array<DecorationsOrderBy>>;
 };
 
 
@@ -2306,17 +2164,6 @@ export type QueryGenresCollectionArgs = {
 /** The root type for querying data */
 export type QueryNodeArgs = {
   nodeId: Scalars['ID']['input'];
-};
-
-
-/** The root type for querying data */
-export type QueryOceanCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<OceanFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<OceanOrderBy>>;
 };
 
 
@@ -2431,17 +2278,6 @@ export type QueryPentagramsCollectionArgs = {
 
 
 /** The root type for querying data */
-export type QueryShadowsCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<ShadowsFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<ShadowsOrderBy>>;
-};
-
-
-/** The root type for querying data */
 export type QueryUsersCollectionArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -2449,133 +2285,6 @@ export type QueryUsersCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<UsersOrderBy>>;
-};
-
-export type Shadows = Node & {
-  __typename?: 'Shadows';
-  avoidFactor: Scalars['Float']['output'];
-  bodyLength: Scalars['Float']['output'];
-  centeringFactor: Scalars['Float']['output'];
-  color: Scalars['String']['output'];
-  createdAt: Scalars['Datetime']['output'];
-  id: Scalars['UUID']['output'];
-  matchingFactor: Scalars['Float']['output'];
-  minDistance: Scalars['Float']['output'];
-  name: Scalars['String']['output'];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-  speedLimit: Scalars['Float']['output'];
-  turnFactor: Scalars['Float']['output'];
-  user: Users;
-  userId: Scalars['UUID']['output'];
-  visualRange: Scalars['Float']['output'];
-};
-
-export type ShadowsConnection = {
-  __typename?: 'ShadowsConnection';
-  edges: Array<ShadowsEdge>;
-  pageInfo: PageInfo;
-};
-
-export type ShadowsDeleteResponse = {
-  __typename?: 'ShadowsDeleteResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Shadows>;
-};
-
-export type ShadowsEdge = {
-  __typename?: 'ShadowsEdge';
-  cursor: Scalars['String']['output'];
-  node: Shadows;
-};
-
-export type ShadowsFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<ShadowsFilter>>;
-  avoidFactor?: InputMaybe<FloatFilter>;
-  bodyLength?: InputMaybe<FloatFilter>;
-  centeringFactor?: InputMaybe<FloatFilter>;
-  color?: InputMaybe<StringFilter>;
-  createdAt?: InputMaybe<DatetimeFilter>;
-  id?: InputMaybe<UuidFilter>;
-  matchingFactor?: InputMaybe<FloatFilter>;
-  minDistance?: InputMaybe<FloatFilter>;
-  name?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<ShadowsFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<ShadowsFilter>>;
-  speedLimit?: InputMaybe<FloatFilter>;
-  turnFactor?: InputMaybe<FloatFilter>;
-  userId?: InputMaybe<UuidFilter>;
-  visualRange?: InputMaybe<FloatFilter>;
-};
-
-export type ShadowsInsertInput = {
-  avoidFactor?: InputMaybe<Scalars['Float']['input']>;
-  bodyLength?: InputMaybe<Scalars['Float']['input']>;
-  centeringFactor?: InputMaybe<Scalars['Float']['input']>;
-  color?: InputMaybe<Scalars['String']['input']>;
-  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  matchingFactor?: InputMaybe<Scalars['Float']['input']>;
-  minDistance?: InputMaybe<Scalars['Float']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  speedLimit?: InputMaybe<Scalars['Float']['input']>;
-  turnFactor?: InputMaybe<Scalars['Float']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-  visualRange?: InputMaybe<Scalars['Float']['input']>;
-};
-
-export type ShadowsInsertResponse = {
-  __typename?: 'ShadowsInsertResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Shadows>;
-};
-
-export type ShadowsOrderBy = {
-  avoidFactor?: InputMaybe<OrderByDirection>;
-  bodyLength?: InputMaybe<OrderByDirection>;
-  centeringFactor?: InputMaybe<OrderByDirection>;
-  color?: InputMaybe<OrderByDirection>;
-  createdAt?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  matchingFactor?: InputMaybe<OrderByDirection>;
-  minDistance?: InputMaybe<OrderByDirection>;
-  name?: InputMaybe<OrderByDirection>;
-  speedLimit?: InputMaybe<OrderByDirection>;
-  turnFactor?: InputMaybe<OrderByDirection>;
-  userId?: InputMaybe<OrderByDirection>;
-  visualRange?: InputMaybe<OrderByDirection>;
-};
-
-export type ShadowsUpdateInput = {
-  avoidFactor?: InputMaybe<Scalars['Float']['input']>;
-  bodyLength?: InputMaybe<Scalars['Float']['input']>;
-  centeringFactor?: InputMaybe<Scalars['Float']['input']>;
-  color?: InputMaybe<Scalars['String']['input']>;
-  createdAt?: InputMaybe<Scalars['Datetime']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  matchingFactor?: InputMaybe<Scalars['Float']['input']>;
-  minDistance?: InputMaybe<Scalars['Float']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  speedLimit?: InputMaybe<Scalars['Float']['input']>;
-  turnFactor?: InputMaybe<Scalars['Float']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-  visualRange?: InputMaybe<Scalars['Float']['input']>;
-};
-
-export type ShadowsUpdateResponse = {
-  __typename?: 'ShadowsUpdateResponse';
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
-  /** Array of records impacted by the mutation */
-  records: Array<Shadows>;
 };
 
 /** Boolean expression comparing fields on type "String" */
@@ -2617,7 +2326,7 @@ export type UuidFilter = {
 
 export type Users = Node & {
   __typename?: 'Users';
-  cosmosCollection?: Maybe<CosmosConnection>;
+  decorationsCollection?: Maybe<DecorationsConnection>;
   description?: Maybe<Scalars['String']['output']>;
   followersCollection?: Maybe<FollowingsConnection>;
   followingsCollection?: Maybe<FollowingsConnection>;
@@ -2626,21 +2335,19 @@ export type Users = Node & {
   nickname?: Maybe<Scalars['String']['output']>;
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
-  oceanCollection?: Maybe<OceanConnection>;
   pentagramRevisionsCollection?: Maybe<PentagramRevisionsConnection>;
   pentagramsCollection?: Maybe<PentagramsConnection>;
-  shadowsCollection?: Maybe<ShadowsConnection>;
   updatedAt?: Maybe<Scalars['Datetime']['output']>;
 };
 
 
-export type UsersCosmosCollectionArgs = {
+export type UsersDecorationsCollectionArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CosmosFilter>;
+  filter?: InputMaybe<DecorationsFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CosmosOrderBy>>;
+  orderBy?: InputMaybe<Array<DecorationsOrderBy>>;
 };
 
 
@@ -2664,16 +2371,6 @@ export type UsersFollowingsCollectionArgs = {
 };
 
 
-export type UsersOceanCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<OceanFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<OceanOrderBy>>;
-};
-
-
 export type UsersPentagramRevisionsCollectionArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -2691,16 +2388,6 @@ export type UsersPentagramsCollectionArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<PentagramsOrderBy>>;
-};
-
-
-export type UsersShadowsCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<ShadowsFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<ShadowsOrderBy>>;
 };
 
 export type UsersConnection = {
@@ -2817,120 +2504,47 @@ export type GetGenreInfoByIdQueryVariables = Exact<{
 
 export type GetGenreInfoByIdQuery = { __typename: 'Query', genresCollection?: { __typename: 'GenresConnection', edges: Array<{ __typename: 'GenresEdge', node: { __typename: 'Genres', abstract?: string | null, description?: string | null, id: string, name?: string | null, updatedAt?: string | null, oeuvresGenresCollection?: { __typename: 'OeuvresGenresConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'OeuvresGenresEdge', cursor: string, node: { __typename: 'OeuvresGenres', oeuvre: { __typename: 'Oeuvres', id: string, title: string, updatedAt?: string | null } } }> } | null } }> } | null };
 
-export type InventoryInfoFragment = { __typename: 'Users', id: string, shadowsCollection?: { __typename: 'ShadowsConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'ShadowsEdge', cursor: string, node: { __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number } }> } | null, oceanCollection?: { __typename: 'OceanConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'OceanEdge', cursor: string, node: { __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number } }> } | null, cosmosCollection?: { __typename: 'CosmosConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'CosmosEdge', cursor: string, node: { __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number } }> } | null };
+export type InventoryInfoFragment = { __typename: 'Users', id: string, decorationsCollection?: { __typename: 'DecorationsConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'DecorationsEdge', cursor: string, node: { __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean } }> } | null };
 
-export type InventoryShadowsInfoFragment = { __typename: 'Users', shadowsCollection?: { __typename: 'ShadowsConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'ShadowsEdge', cursor: string, node: { __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number } }> } | null };
+export type InventoryDecorationsInfoFragment = { __typename: 'Users', decorationsCollection?: { __typename: 'DecorationsConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'DecorationsEdge', cursor: string, node: { __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean } }> } | null };
 
-export type InventoryOceanInfoFragment = { __typename: 'Users', oceanCollection?: { __typename: 'OceanConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'OceanEdge', cursor: string, node: { __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number } }> } | null };
+export type DecorationsMinimalInfoFragment = { __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean };
 
-export type InventoryCosmosInfoFragment = { __typename: 'Users', cosmosCollection?: { __typename: 'CosmosConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'CosmosEdge', cursor: string, node: { __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number } }> } | null };
-
-export type ShadowsMinimalInfoFragment = { __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number };
-
-export type CosmosMinimalInfoFragment = { __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number };
-
-export type OceanMinimalInfoFragment = { __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number };
-
-export type InsertCosmosMutationVariables = Exact<{
+export type InsertDecorationMutationVariables = Exact<{
   userId?: InputMaybe<Scalars['UUID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  shootingStarColors?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
-  starCount?: InputMaybe<Scalars['Int']['input']>;
-  shootingStarCount?: InputMaybe<Scalars['Int']['input']>;
-  speedParam?: InputMaybe<Scalars['Float']['input']>;
-  sizeParam?: InputMaybe<Scalars['Float']['input']>;
+  seed?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<DecorationType>;
+  isBackground?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type InsertCosmosMutation = { __typename: 'Mutation', insertIntoCosmosCollection?: { __typename: 'CosmosInsertResponse', records: Array<{ __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number }> } | null };
+export type InsertDecorationMutation = { __typename: 'Mutation', insertIntoDecorationsCollection?: { __typename: 'DecorationsInsertResponse', records: Array<{ __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean }> } | null };
 
-export type DeleteCosmosMutationVariables = Exact<{
+export type DeleteDecorationMutationVariables = Exact<{
   id?: InputMaybe<Scalars['UUID']['input']>;
 }>;
 
 
-export type DeleteCosmosMutation = { __typename: 'Mutation', deleteFromCosmosCollection: { __typename: 'CosmosDeleteResponse', records: Array<{ __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number }> } };
+export type DeleteDecorationMutation = { __typename: 'Mutation', deleteFromDecorationsCollection: { __typename: 'DecorationsDeleteResponse', records: Array<{ __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean }> } };
 
-export type RenameCosmosMutationVariables = Exact<{
+export type RenameDecorationMutationVariables = Exact<{
   id?: InputMaybe<Scalars['UUID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type RenameCosmosMutation = { __typename: 'Mutation', updateCosmosCollection: { __typename: 'CosmosUpdateResponse', records: Array<{ __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number }> } };
-
-export type InsertOceanMutationVariables = Exact<{
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  foamColor?: InputMaybe<Scalars['String']['input']>;
-  waterColor?: InputMaybe<Scalars['String']['input']>;
-  randomSeed?: InputMaybe<Scalars['String']['input']>;
-  foamThickness?: InputMaybe<Scalars['Float']['input']>;
-  mulScale?: InputMaybe<Scalars['Float']['input']>;
-}>;
-
-
-export type InsertOceanMutation = { __typename: 'Mutation', insertIntoOceanCollection?: { __typename: 'OceanInsertResponse', records: Array<{ __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number }> } | null };
-
-export type DeleteOceanMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['UUID']['input']>;
-}>;
-
-
-export type DeleteOceanMutation = { __typename: 'Mutation', deleteFromOceanCollection: { __typename: 'OceanDeleteResponse', records: Array<{ __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number }> } };
-
-export type RenameOceanMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type RenameOceanMutation = { __typename: 'Mutation', updateOceanCollection: { __typename: 'OceanUpdateResponse', records: Array<{ __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number }> } };
-
-export type InsertShadowsMutationVariables = Exact<{
-  userId?: InputMaybe<Scalars['UUID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  color?: InputMaybe<Scalars['String']['input']>;
-  bodyLength?: InputMaybe<Scalars['Float']['input']>;
-  centeringFactor?: InputMaybe<Scalars['Float']['input']>;
-  matchingFactor?: InputMaybe<Scalars['Float']['input']>;
-  minDistance?: InputMaybe<Scalars['Float']['input']>;
-  avoidFactor?: InputMaybe<Scalars['Float']['input']>;
-  turnFactor?: InputMaybe<Scalars['Float']['input']>;
-  visualRange?: InputMaybe<Scalars['Float']['input']>;
-  speedLimit?: InputMaybe<Scalars['Float']['input']>;
-}>;
-
-
-export type InsertShadowsMutation = { __typename: 'Mutation', insertIntoShadowsCollection?: { __typename: 'ShadowsInsertResponse', records: Array<{ __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number }> } | null };
-
-export type DeleteShadowsMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['UUID']['input']>;
-}>;
-
-
-export type DeleteShadowsMutation = { __typename: 'Mutation', deleteFromShadowsCollection: { __typename: 'ShadowsDeleteResponse', records: Array<{ __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number }> } };
-
-export type RenameShadowsMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type RenameShadowsMutation = { __typename: 'Mutation', updateShadowsCollection: { __typename: 'ShadowsUpdateResponse', records: Array<{ __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number }> } };
+export type RenameDecorationMutation = { __typename: 'Mutation', updateDecorationsCollection: { __typename: 'DecorationsUpdateResponse', records: Array<{ __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean }> } };
 
 export type GetUserInventoryByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  shadowLimit?: InputMaybe<Scalars['Int']['input']>;
-  shadowCursor?: InputMaybe<Scalars['Cursor']['input']>;
-  cosmosLimit?: InputMaybe<Scalars['Int']['input']>;
-  cosmosCursor?: InputMaybe<Scalars['Cursor']['input']>;
-  oceanLimit?: InputMaybe<Scalars['Int']['input']>;
-  oceanCursor?: InputMaybe<Scalars['Cursor']['input']>;
+  isBackground?: InputMaybe<Scalars['Boolean']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  cursor?: InputMaybe<Scalars['Cursor']['input']>;
 }>;
 
 
-export type GetUserInventoryByIdQuery = { __typename: 'Query', usersCollection?: { __typename: 'UsersConnection', edges: Array<{ __typename: 'UsersEdge', node: { __typename: 'Users', id: string, shadowsCollection?: { __typename: 'ShadowsConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'ShadowsEdge', cursor: string, node: { __typename: 'Shadows', id: string, userId: string, name: string, color: string, bodyLength: number, centeringFactor: number, matchingFactor: number, minDistance: number, avoidFactor: number, turnFactor: number, visualRange: number, speedLimit: number } }> } | null, oceanCollection?: { __typename: 'OceanConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'OceanEdge', cursor: string, node: { __typename: 'Ocean', id: string, userId: string, name: string, randomSeed: string, waterColor: string, foamColor: string, foamThickness: number, mulScale: number } }> } | null, cosmosCollection?: { __typename: 'CosmosConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'CosmosEdge', cursor: string, node: { __typename: 'Cosmos', id: string, userId: string, name: string, shootingStarCount: number, shootingStarColors: Array<string | null>, starCount: number, speedParam: number, sizeParam: number } }> } | null } }> } | null };
+export type GetUserInventoryByIdQuery = { __typename: 'Query', usersCollection?: { __typename: 'UsersConnection', edges: Array<{ __typename: 'UsersEdge', node: { __typename: 'Users', id: string, decorationsCollection?: { __typename: 'DecorationsConnection', pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, endCursor?: string | null }, edges: Array<{ __typename: 'DecorationsEdge', cursor: string, node: { __typename: 'Decorations', id: string, userId: string, name: string, seed: string, type: DecorationType, isBackground: boolean } }> } | null } }> } | null };
 
 export type OeuvresMinimalInfoFragment = { __typename: 'Oeuvres', id: string, title: string, updatedAt?: string | null };
 
@@ -3203,13 +2817,9 @@ export const ArtistsInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":
 export const GenresMinimalInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]} as unknown as DocumentNode<GenresMinimalInfoFragment, unknown>;
 export const GenreOeuvresInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenreOeuvresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresGenresCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"oeuvreId"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]} as unknown as DocumentNode<GenreOeuvresInfoFragment, unknown>;
 export const GenresInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GenresMinimalInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GenreOeuvresInfo"}},{"kind":"Field","name":{"kind":"Name","value":"abstract"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenreOeuvresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresGenresCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"oeuvreId"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GenresInfoFragment, unknown>;
-export const ShadowsMinimalInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}}]} as unknown as DocumentNode<ShadowsMinimalInfoFragment, unknown>;
-export const InventoryShadowsInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryShadowsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"shadowsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shadowLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shadowCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShadowsMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}}]} as unknown as DocumentNode<InventoryShadowsInfoFragment, unknown>;
-export const OceanMinimalInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}}]} as unknown as DocumentNode<OceanMinimalInfoFragment, unknown>;
-export const InventoryOceanInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryOceanInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oceanCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"oceanLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"oceanCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OceanMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}}]} as unknown as DocumentNode<InventoryOceanInfoFragment, unknown>;
-export const CosmosMinimalInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}}]} as unknown as DocumentNode<CosmosMinimalInfoFragment, unknown>;
-export const InventoryCosmosInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryCosmosInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cosmosCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cosmosLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cosmosCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CosmosMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}}]} as unknown as DocumentNode<InventoryCosmosInfoFragment, unknown>;
-export const InventoryInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryShadowsInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryOceanInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryCosmosInfo"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryShadowsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"shadowsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shadowLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shadowCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShadowsMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryOceanInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oceanCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"oceanLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"oceanCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OceanMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryCosmosInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cosmosCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cosmosLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cosmosCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CosmosMinimalInfo"}}]}}]}}]}}]}}]} as unknown as DocumentNode<InventoryInfoFragment, unknown>;
+export const DecorationsMinimalInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}}]} as unknown as DocumentNode<DecorationsMinimalInfoFragment, unknown>;
+export const InventoryDecorationsInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryDecorationsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"decorationsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isBackground"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isBackground"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DecorationsMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}}]} as unknown as DocumentNode<InventoryDecorationsInfoFragment, unknown>;
+export const InventoryInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryDecorationsInfo"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryDecorationsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"decorationsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isBackground"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isBackground"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DecorationsMinimalInfo"}}]}}]}}]}}]}}]} as unknown as DocumentNode<InventoryInfoFragment, unknown>;
 export const MiniProfileInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MiniProfileInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"mutableId"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]} as unknown as DocumentNode<MiniProfileInfoFragment, unknown>;
 export const UpdateRecordInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpdateRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionUpdateRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}},{"kind":"Field","name":{"kind":"Name","value":"previousAngle"}},{"kind":"Field","name":{"kind":"Name","value":"previousDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]} as unknown as DocumentNode<UpdateRecordInfoFragment, unknown>;
 export const UpsertRecordInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpsertRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionUpsertRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]} as unknown as DocumentNode<UpsertRecordInfoFragment, unknown>;
@@ -3234,16 +2844,10 @@ export const FollowRecommendationInfoFragmentDoc = {"kind":"Document","definitio
 export const UpdateProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateProfile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"nickname"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"mutableId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"description"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"updateUsersCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"nickname"},"value":{"kind":"Variable","name":{"kind":"Name","value":"nickname"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"mutableId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"mutableId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"description"},"value":{"kind":"Variable","name":{"kind":"Name","value":"description"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"mutableId"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateProfileMutation, UpdateProfileMutationVariables>;
 export const GetArtistInfoByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getArtistInfoById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"artistsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArtistsInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArtistsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Artists"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArtistOeuvresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Artists"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresArtistsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"oeuvreId"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArtistsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Artists"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArtistsMinimalInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArtistOeuvresInfo"}},{"kind":"Field","name":{"kind":"Name","value":"abstract"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}}]}}]} as unknown as DocumentNode<GetArtistInfoByIdQuery, GetArtistInfoByIdQueryVariables>;
 export const GetGenreInfoByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getGenreInfoById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"genresCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GenresInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenreOeuvresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresGenresCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"oeuvreId"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GenresMinimalInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GenreOeuvresInfo"}},{"kind":"Field","name":{"kind":"Name","value":"abstract"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<GetGenreInfoByIdQuery, GetGenreInfoByIdQueryVariables>;
-export const InsertCosmosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertCosmos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"shootingStarColors"}},"type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"starCount"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"shootingStarCount"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"speedParam"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"sizeParam"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"insertIntoCosmosCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"shootingStarColors"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shootingStarColors"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"shootingStarCount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shootingStarCount"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"starCount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"starCount"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"speedParam"},"value":{"kind":"Variable","name":{"kind":"Name","value":"speedParam"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"sizeParam"},"value":{"kind":"Variable","name":{"kind":"Name","value":"sizeParam"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CosmosMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}}]} as unknown as DocumentNode<InsertCosmosMutation, InsertCosmosMutationVariables>;
-export const DeleteCosmosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteCosmos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"deleteFromCosmosCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CosmosMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}}]} as unknown as DocumentNode<DeleteCosmosMutation, DeleteCosmosMutationVariables>;
-export const RenameCosmosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"renameCosmos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"updateCosmosCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CosmosMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}}]} as unknown as DocumentNode<RenameCosmosMutation, RenameCosmosMutationVariables>;
-export const InsertOceanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertOcean"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"foamColor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"waterColor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"randomSeed"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"foamThickness"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"mulScale"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"insertIntoOceanCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"foamColor"},"value":{"kind":"Variable","name":{"kind":"Name","value":"foamColor"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"waterColor"},"value":{"kind":"Variable","name":{"kind":"Name","value":"waterColor"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"randomSeed"},"value":{"kind":"Variable","name":{"kind":"Name","value":"randomSeed"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"foamThickness"},"value":{"kind":"Variable","name":{"kind":"Name","value":"foamThickness"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"mulScale"},"value":{"kind":"Variable","name":{"kind":"Name","value":"mulScale"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OceanMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}}]} as unknown as DocumentNode<InsertOceanMutation, InsertOceanMutationVariables>;
-export const DeleteOceanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteOcean"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"deleteFromOceanCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OceanMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}}]} as unknown as DocumentNode<DeleteOceanMutation, DeleteOceanMutationVariables>;
-export const RenameOceanDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"renameOcean"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"updateOceanCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OceanMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}}]} as unknown as DocumentNode<RenameOceanMutation, RenameOceanMutationVariables>;
-export const InsertShadowsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertShadows"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"color"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"bodyLength"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"centeringFactor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"matchingFactor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"minDistance"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"avoidFactor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"turnFactor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"visualRange"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"speedLimit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"insertIntoShadowsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"color"},"value":{"kind":"Variable","name":{"kind":"Name","value":"color"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"bodyLength"},"value":{"kind":"Variable","name":{"kind":"Name","value":"bodyLength"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"centeringFactor"},"value":{"kind":"Variable","name":{"kind":"Name","value":"centeringFactor"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"matchingFactor"},"value":{"kind":"Variable","name":{"kind":"Name","value":"matchingFactor"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"minDistance"},"value":{"kind":"Variable","name":{"kind":"Name","value":"minDistance"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"avoidFactor"},"value":{"kind":"Variable","name":{"kind":"Name","value":"avoidFactor"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"turnFactor"},"value":{"kind":"Variable","name":{"kind":"Name","value":"turnFactor"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"visualRange"},"value":{"kind":"Variable","name":{"kind":"Name","value":"visualRange"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"speedLimit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"speedLimit"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShadowsMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}}]} as unknown as DocumentNode<InsertShadowsMutation, InsertShadowsMutationVariables>;
-export const DeleteShadowsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteShadows"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"deleteFromShadowsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShadowsMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}}]} as unknown as DocumentNode<DeleteShadowsMutation, DeleteShadowsMutationVariables>;
-export const RenameShadowsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"renameShadows"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"updateShadowsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShadowsMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}}]} as unknown as DocumentNode<RenameShadowsMutation, RenameShadowsMutationVariables>;
-export const GetUserInventoryByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserInventoryById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"shadowLimit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"shadowCursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"cosmosLimit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"cosmosCursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"oceanLimit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"oceanCursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"usersCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ShadowsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Shadows"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"bodyLength"}},{"kind":"Field","name":{"kind":"Name","value":"centeringFactor"}},{"kind":"Field","name":{"kind":"Name","value":"matchingFactor"}},{"kind":"Field","name":{"kind":"Name","value":"minDistance"}},{"kind":"Field","name":{"kind":"Name","value":"avoidFactor"}},{"kind":"Field","name":{"kind":"Name","value":"turnFactor"}},{"kind":"Field","name":{"kind":"Name","value":"visualRange"}},{"kind":"Field","name":{"kind":"Name","value":"speedLimit"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryShadowsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"shadowsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shadowLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shadowCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ShadowsMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OceanMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Ocean"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"randomSeed"}},{"kind":"Field","name":{"kind":"Name","value":"waterColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamColor"}},{"kind":"Field","name":{"kind":"Name","value":"foamThickness"}},{"kind":"Field","name":{"kind":"Name","value":"mulScale"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryOceanInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oceanCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"oceanLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"oceanCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OceanMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CosmosMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Cosmos"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarCount"}},{"kind":"Field","name":{"kind":"Name","value":"shootingStarColors"}},{"kind":"Field","name":{"kind":"Name","value":"starCount"}},{"kind":"Field","name":{"kind":"Name","value":"speedParam"}},{"kind":"Field","name":{"kind":"Name","value":"sizeParam"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryCosmosInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cosmosCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cosmosLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cosmosCursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CosmosMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryShadowsInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryOceanInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryCosmosInfo"}}]}}]} as unknown as DocumentNode<GetUserInventoryByIdQuery, GetUserInventoryByIdQueryVariables>;
+export const InsertDecorationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertDecoration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"seed"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"type"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DecorationType"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"isBackground"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"insertIntoDecorationsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"seed"},"value":{"kind":"Variable","name":{"kind":"Name","value":"seed"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"type"},"value":{"kind":"Variable","name":{"kind":"Name","value":"type"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"isBackground"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isBackground"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DecorationsMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}}]} as unknown as DocumentNode<InsertDecorationMutation, InsertDecorationMutationVariables>;
+export const DeleteDecorationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteDecoration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"deleteFromDecorationsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DecorationsMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}}]} as unknown as DocumentNode<DeleteDecorationMutation, DeleteDecorationMutationVariables>;
+export const RenameDecorationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"renameDecoration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"updateDecorationsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DecorationsMinimalInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}}]} as unknown as DocumentNode<RenameDecorationMutation, RenameDecorationMutationVariables>;
+export const GetUserInventoryByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserInventoryById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"isBackground"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"usersCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DecorationsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Decorations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"seed"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"isBackground"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryDecorationsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"decorationsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isBackground"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isBackground"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DecorationsMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"InventoryInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"InventoryDecorationsInfo"}}]}}]} as unknown as DocumentNode<GetUserInventoryByIdQuery, GetUserInventoryByIdQueryVariables>;
 export const GetOeuvreInfoByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOeuvreInfoById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MiniProfileInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"mutableId"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpdateRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionUpdateRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}},{"kind":"Field","name":{"kind":"Name","value":"previousAngle"}},{"kind":"Field","name":{"kind":"Name","value":"previousDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpsertRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionUpsertRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RemoveRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionRemoveRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"previousAngle"}},{"kind":"Field","name":{"kind":"Name","value":"previousDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RecoverRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionRecoverRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PentagramNodesInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramNodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionUpdateRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UpdateRecordInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionUpsertRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UpsertRecordInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionRemoveRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"RemoveRecordInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionRecoverRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"RecoverRecordInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PentagramRevisionsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisions"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"pentagram"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionUpdateRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionUpsertRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionRemoveRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionRecoverRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PentagramsSelectInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Pentagrams"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MiniProfileInfo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNodesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PentagramNodesInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PentagramRevisionsMinimalInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvrePentagramsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNodesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"DescNullsLast"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"cursor"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pentagram"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PentagramsSelectInfo"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArtistsMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Artists"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GenresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Genres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvrePentagramsInfo"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresArtistsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"artist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArtistsMinimalInfo"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"oeuvresGenresCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"genre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GenresMinimalInfo"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetOeuvreInfoByIdQuery, GetOeuvreInfoByIdQueryVariables>;
 export const DeletePentagramDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deletePentagram"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"deleteFromPentagramsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"records"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<DeletePentagramMutation, DeletePentagramMutationVariables>;
 export const GetPentagramUpdateInfoByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPentagramUpdateInfoById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PentagramsUpdateInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MiniProfileInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Users"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"mutableId"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OeuvresMinimalInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Oeuvres"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpdateRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionUpdateRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}},{"kind":"Field","name":{"kind":"Name","value":"previousAngle"}},{"kind":"Field","name":{"kind":"Name","value":"previousDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpsertRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionUpsertRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RemoveRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionRemoveRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"previousAngle"}},{"kind":"Field","name":{"kind":"Name","value":"previousDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RecoverRecordInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramRevisionRecoverRecords"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNode"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"revision"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"currentAngle"}},{"kind":"Field","name":{"kind":"Name","value":"currentDistance"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PentagramNodesInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PentagramNodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"oeuvre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OeuvresMinimalInfo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionUpdateRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UpdateRecordInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionUpsertRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UpsertRecordInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionRemoveRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"RemoveRecordInfo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramRevisionRecoverRecordsCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"RecoverRecordInfo"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PentagramsUpdateInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Pentagrams"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MiniProfileInfo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pentagramNodesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PentagramNodesInfo"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetPentagramUpdateInfoByIdQuery, GetPentagramUpdateInfoByIdQueryVariables>;

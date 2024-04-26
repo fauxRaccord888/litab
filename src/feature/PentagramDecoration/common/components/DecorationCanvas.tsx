@@ -1,11 +1,11 @@
-import type { InventoryEntities } from "$feature/Inventory/types";
+import type { DBDecoration } from "$feature/Inventory/types";
 import { useRef } from "react";
 import { usePentagramDecorativeAnimation } from "..//hooks";
 import "./style/decorationCanvas.scss"
 
 type DecorationCanvasProps = {
-    backgroundSeeds?: (InventoryEntities | null)[]
-    foregroundSeeds?: (InventoryEntities | null)[],
+    backgroundSeeds?: (DBDecoration | null)[]
+    foregroundSeeds?: (DBDecoration | null)[],
     canvasSize: number
     sides: number
 }

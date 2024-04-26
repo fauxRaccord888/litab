@@ -1,5 +1,5 @@
 import type { IDynamicObject } from "../../../types";
-import type { DBCosmos } from "../../types";
+import type { Cosmos } from ".";
 import type { RgbaObject } from 'hex-rgb';
 import { convertRgbaToCSS, pickRandomElementFromArray } from "../../../util";
 import hexRgb from 'hex-rgb'
@@ -16,7 +16,7 @@ export class ShootingStar implements IDynamicObject {
     color: string;
 
     constructor(
-        options: DBCosmos, 
+        options: ReturnType<typeof Cosmos["createObjectFromSeed"]>, 
         canvas: HTMLCanvasElement, 
     ) {
         this.colors =  options.shootingStarColors.map((c) => c ? hexRgb(c) : hexRgb("#aa00aa"))

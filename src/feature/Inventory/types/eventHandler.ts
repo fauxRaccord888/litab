@@ -1,28 +1,20 @@
 import type { FetchResult } from "@apollo/client"
 import type { BaseEventHandler } from "$lib/types"
-import type { InventoryKey } from "./entity"
+import type { DecorationType } from "$lib/graphql/__generated__/graphql"
 
 export type RenamePayload = {
     id: string
     name: string
+    category: DecorationType
 }
 
 export type DeletePayload = {
     id: string
+    category: DecorationType
 }
 
-type InventoryEvent = {
-    create: () => Promise<FetchResult>
+export type InventoryEventHandler = BaseEventHandler<boolean> & {
+    create: ( type: DecorationType ) => Promise<FetchResult>
     rename: ( payload: RenamePayload ) => Promise<FetchResult>,
     delete: ( payload: DeletePayload ) => Promise<FetchResult>
-}
-
-export type InventoryLoadMorePayload = {
-    shadowLimit: number,
-    oceanLimit: number,
-    cosmosLimit: number,
-}
-
-export type InventoryEventHandler = 
-    BaseEventHandler<InventoryLoadMorePayload> & 
-    Record<Lowercase<InventoryKey>, InventoryEvent>
+} 

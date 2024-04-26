@@ -3,43 +3,23 @@ import { graphql } from "$lib/graphql/__generated__"
 graphql(/* GraphQL */ `
     fragment InventoryInfo on Users {
         id,
-        ...InventoryShadowsInfo
-        ...InventoryOceanInfo
-        ...InventoryCosmosInfo
+        ...InventoryDecorationsInfo
     }
 `)
 
 graphql(/* GraphQL */ `
-    fragment InventoryShadowsInfo on Users {
-        shadowsCollection(
+    fragment InventoryDecorationsInfo on Users {
+        decorationsCollection(
             orderBy: {
                 createdAt: DescNullsLast
             }
-            first: $shadowLimit
-            after: $shadowCursor
-        ) {
-            pageInfo {
-                hasNextPage
-                endCursor
-            }
-            edges {
-                cursor
-                node {
-                    ...ShadowsMinimalInfo
+            filter: {
+                isBackground: {
+                    eq: $isBackground
                 }
             }
-        }
-    }
-`)
-
-graphql(/* GraphQL */ `
-    fragment InventoryOceanInfo on Users {
-        oceanCollection(
-            orderBy: {
-                createdAt: DescNullsLast
-            }
-            first: $oceanLimit
-            after: $oceanCursor
+            first: $limit
+            after: $cursor
         ) {
             pageInfo {
                 hasNextPage
@@ -48,30 +28,7 @@ graphql(/* GraphQL */ `
             edges {
                 cursor
                 node {
-                    ...OceanMinimalInfo
-                }
-            }
-        }
-    }
-`)
-
-graphql(/* GraphQL */ `
-    fragment InventoryCosmosInfo on Users {
-        cosmosCollection(
-            orderBy: {
-                createdAt: DescNullsLast
-            }
-            first: $cosmosLimit
-            after: $cosmosCursor
-        ) {
-            pageInfo {
-                hasNextPage
-                endCursor
-            }
-            edges {
-                cursor
-                node {
-                    ...CosmosMinimalInfo
+                    ...DecorationsMinimalInfo
                 }
             }
         }

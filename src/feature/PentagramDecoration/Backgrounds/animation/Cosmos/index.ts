@@ -1,51 +1,53 @@
-import type { InventoryEntities } from "$feature/Inventory/types";
-import type { DBCosmos } from "../../types";
+import type { DBDecoration } from "$feature/Inventory/types";
 import type { IDynamicObject } from "$feature/PentagramDecoration/types";
 import type { IDynamicObjectConstructor } from './../../../types';
 import { Star } from "./Star";
 import { ShootingStar } from "./ShootingStar";
-import { createRandomizedObject, randomColorVal, staticImplements } from "$lib/utils";
+import { boxMullerRandom, createRandomizedObject, randomColorVal, staticImplements } from "$lib/utils";
 import { COSMOS } from "../../constants";
-import { t } from "i18next";
-import { CustomTypeError } from "$lib/error/customError/TypeError";
+import { DecorationType } from "$lib/graphql/__generated__/graphql";
 import rgbHex from "rgb-hex"
+import Alea from "alea";
 
 export class Cosmos implements IDynamicObject {
-    static __typename = "Cosmos" as const
-
+    static __typename = DecorationType.Cosmos
+    static isBackground = true
     stars: Star[]
     shootingStars: ShootingStar[]
 
-    static createSeed() {
-        const colorLength = Math.floor(Math.random() * 2.3) + 1
+    // WARNING CAVEAT 순서 변경 주의(시드에서 추출된 난수에 의해 아이템의 옵션이 설정됨)
+    static createObjectFromSeed(decoration: DBDecoration) {
+        const prng = Alea(decoration.seed)
+
         const randomColor = () => rgbHex(
-            randomColorVal(0, 255, 1), 
-            randomColorVal(0, 255, 1), 
-            randomColorVal(0, 255, 1)
+            randomColorVal(0, 255, 0.5, prng),
+            randomColorVal(0, 255, 0.5, prng),
+            randomColorVal(0, 255, 0.5, prng)
         )
 
-        const obj = createRandomizedObject(COSMOS)
+        const obj = createRandomizedObject(COSMOS, prng)
+        const colorLength = Math.floor(boxMullerRandom({min: 1, max: 3.2, skew: 1, isInt: true, prng}))
+        const shootingStarColors = Array.from({length: colorLength}).map(() => randomColor())
+
         const result = Object.assign({
-            name: t('pentagramDecoration.cosmos.value.newRecord'),
-            shootingStarColors: Array.from({length: colorLength}).map(() => randomColor())
+            shootingStarColors
         }, obj)
     
         return result
     }
 
     constructor(
-        seed: InventoryEntities,
+        decoration: DBDecoration,
         canvas: HTMLCanvasElement, 
     ) {
-        if (seed.__typename !== Cosmos.__typename) {
-            throw new CustomTypeError()
-        }
+        const result = Cosmos.createObjectFromSeed(decoration)
+
         this.stars = Array
-            .from({length: seed.starCount})
-            .map(() => new Star(seed, canvas))
+            .from({length: result.starCount})
+            .map(() => new Star(result, canvas))
         this.shootingStars = Array
-            .from({length: seed.shootingStarCount})
-            .map(() => new ShootingStar(seed, canvas))
+            .from({length: result.shootingStarCount})
+            .map(() => new ShootingStar(result, canvas))
     }
 
     update(canvas: HTMLCanvasElement) {
@@ -58,4 +60,4 @@ export class Cosmos implements IDynamicObject {
         this.shootingStars.forEach((ss) => ss.draw(canvas, ctx))
     }
 }
-staticImplements<IDynamicObjectConstructor<DBCosmos, Cosmos>>(Cosmos)
+staticImplements<IDynamicObjectConstructor<Cosmos>>(Cosmos)
