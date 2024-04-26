@@ -1,26 +1,26 @@
-import type { IDynamicObjectConstructor } from "$feature/PentagramDecoration/types";
-import type { DBOcean } from "../types";
-import type { InventoryEntities } from "$feature/Inventory/types";
+import type { IDynamicObject, IDynamicObjectConstructor } from "$feature/PentagramDecoration/types";
 import type { RgbaObject } from "hex-rgb"
 import type { NoiseFunction2D } from "simplex-noise";
-import { t } from "i18next";
-import { OCEAN } from "../constants";
+import type { DBDecoration } from "$feature/Inventory/types";
 import { createNoise2D } from "simplex-noise";
-import { CustomTypeError } from "$lib/error/customError/TypeError";
 import { createRandomizedObject, randomColorVal, staticImplements } from "$lib/utils";
+import { OCEAN } from "../constants";
+import { DecorationType } from "$lib/graphql/__generated__/graphql";
 import Alea from "alea"
 import hexRgb from "hex-rgb";
 import rgbHex from "rgb-hex";
 import * as GLSL from "$lib/animation/GLSL";
 
-export class Ocean {
-    static __typename = "Ocean" as const
+export class Ocean implements IDynamicObject {
+    static __typename = DecorationType.Ocean
+    static isBackground = true
     static height = 0.15;
     static tide = 0.08;
     static frameLen = 80
     static octave = 1
     static st = 0.5
 
+    private noise: NoiseFunction2D
     private foamThickness: number
     private mulScale: number
     private foamColor: RgbaObject
@@ -28,38 +28,37 @@ export class Ocean {
     
     private frame: number
     private frameData: ImageData[]
-    private noise: NoiseFunction2D
     
-    static createSeed() {
-        const obj = createRandomizedObject(OCEAN)
+    // WARNING CAVEAT 순서 변경 주의(시드에서 추출된 난수에 의해 아이템의 옵션이 설정됨)
+    static createObjectFromSeed(decoration: DBDecoration) {
+        const prng = Alea(decoration.seed)
+
+        const obj = createRandomizedObject(OCEAN, prng)
+        const waterColor = rgbHex(randomColorVal(4, 32, 3, prng), randomColorVal(20, 148, 2, prng), randomColorVal(50, 184, 0.5, prng))
+        const foamColor = rgbHex(randomColorVal(188, 212, 1, prng), randomColorVal(212, 221, 1, prng), randomColorVal(225, 232, 1, prng))
+        const noise = createNoise2D(prng)
 
         const result = Object.assign({
-            name: t('pentagramDecoration.ocean.value.newRecord'),
-            randomSeed: String(Math.floor(Math.random()* 1000) / 1000),
-            waterColor: rgbHex(randomColorVal(4, 32, 3), randomColorVal(20, 148, 2), randomColorVal(50, 184, 0.5)),
-            foamColor: rgbHex(randomColorVal(188, 212, 1), randomColorVal(212, 221, 1), randomColorVal(225, 232, 1))
+            waterColor,
+            foamColor,
+            noise
         }, obj)
     
         return result
     }
 
     constructor(
-        seed: InventoryEntities,
+        decoration: DBDecoration
     ) {
-        if (seed.__typename !== Ocean.__typename) {
-            throw new CustomTypeError()
-        }
-
-        const prng = Alea(seed.randomSeed)
-
+        const result = Ocean.createObjectFromSeed(decoration)
         this.frame = 0
         this.frameData = []
-        this.noise = createNoise2D(prng)
 
-        this.foamThickness = seed.foamThickness
-        this.mulScale = seed.mulScale
-        this.foamColor = hexRgb(seed.foamColor)
-        this.waterColor = hexRgb(seed.waterColor)
+        this.noise = result.noise
+        this.foamThickness = result.foamThickness
+        this.mulScale = result.mulScale
+        this.foamColor = hexRgb(result.foamColor)
+        this.waterColor = hexRgb(result.waterColor)
     }
     
     update(canvas:HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
@@ -126,7 +125,7 @@ export class Ocean {
         )
     }
 }
-staticImplements<IDynamicObjectConstructor<DBOcean, Ocean>>(Ocean)
+staticImplements<IDynamicObjectConstructor<Ocean>>(Ocean)
 
 
 

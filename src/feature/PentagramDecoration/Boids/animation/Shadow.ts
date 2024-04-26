@@ -1,15 +1,14 @@
-import type { DBShadow } from "../types";
+import type { DBDecoration } from "$feature/Inventory/types";
 import type { IDynamicObject, IDynamicObjectConstructor } from "../../types";
-import type { InventoryEntities } from "$feature/Inventory/types";
 import type { RgbaObject } from 'hex-rgb';
 import { boxMullerRandom, createRandomizedObject, pickPointInside, staticImplements } from "$lib/utils";
 import { convertRgbaToCSS } from "$feature/PentagramDecoration/util";
 import { keepWithinBounds, limitSpeed } from "./common";
-import { BOIDS } from "../constants";
-import { t } from "i18next";
-import { CustomTypeError } from "$lib/error/customError/TypeError";
+import { DecorationType } from "$lib/graphql/__generated__/graphql";
+import { SHADOW } from "../constants";
 import hexRgb from 'hex-rgb'
 import rgbHex from 'rgb-hex';
+import Alea from "alea";
 
 function distance(boid1: {x: number, y: number}, boid2: {x: number, y: number}) {
     return Math.sqrt(
@@ -19,8 +18,9 @@ function distance(boid1: {x: number, y: number}, boid2: {x: number, y: number}) 
 }
 
 export class Shadow implements IDynamicObject {
-    static __typename = "Shadows" as const
-    
+    static __typename = DecorationType.Shadow
+    static isBackground = false
+
     sides: number
     private shadows: IDynamicObject[]
 
@@ -39,41 +39,42 @@ export class Shadow implements IDynamicObject {
     dx: number
     dy: number
     private body: [number, number][]
-    
-    static createSeed() {
-        const randomColorVal = () => Math.floor(boxMullerRandom({min: 0, max: 255, skew: 0.3}))
 
-        const obj = createRandomizedObject(BOIDS)
+    // WARNING CAVEAT 순서 변경 주의(시드에서 추출된 난수에 의해 아이템의 옵션이 설정됨)
+    static createObjectFromSeed(decoration: DBDecoration) {
+        const prng = Alea(decoration.seed)
+        const randomColorVal = () => Math.floor(boxMullerRandom({min: 0, max: 255, skew: 0.3, prng}))
+
+        const obj = createRandomizedObject(SHADOW, prng)
+        const color = rgbHex(randomColorVal(), randomColorVal(), randomColorVal())
+
         const result = Object.assign({
-            name: t('pentagramDecoration.shadows.value.newRecord'),
-            color: rgbHex(randomColorVal(), randomColorVal(), randomColorVal())
+            color
         }, obj)
     
         return result
     }
 
     constructor(
-        seed: InventoryEntities,
+        decoration: DBDecoration,
         canvas: HTMLCanvasElement, 
         shadows: IDynamicObject[], 
         sides: number,
     ) {
-        if (seed.__typename !== Shadow.__typename) {
-            throw new CustomTypeError()
-        }
+        const result = Shadow.createObjectFromSeed(decoration)
 
         this.shadows = shadows
         this.sides = sides
         
-        this.color = hexRgb(seed.color)
-        this.centeringFactor = seed.centeringFactor
-        this.bodyLength = seed.bodyLength
-        this.matchingFactor = seed.matchingFactor
-        this.minDistance = seed.minDistance
-        this.avoidFactor = seed.avoidFactor
-        this.visualRange = seed.visualRange
-        this.turnFactor = seed.turnFactor
-        this.speedLimit = seed.speedLimit
+        this.color = hexRgb(result.color)
+        this.centeringFactor = result.centeringFactor
+        this.bodyLength = result.bodyLength
+        this.matchingFactor = result.matchingFactor
+        this.minDistance = result.minDistance
+        this.avoidFactor = result.avoidFactor
+        this.visualRange = result.visualRange
+        this.turnFactor = result.turnFactor
+        this.speedLimit = result.speedLimit
 
         const [x, y] = pickPointInside(canvas.width, canvas.height, this.sides)
         this.x = x
@@ -126,6 +127,7 @@ export class Shadow implements IDynamicObject {
     
         for (const otherBoid of this.shadows) {
             if (!(otherBoid instanceof Shadow)) continue
+            if (otherBoid === this as Shadow)  continue
             if (distance(this, otherBoid) < this.visualRange) {
                 centerX += otherBoid.x;
                 centerY += otherBoid.y;
@@ -146,12 +148,11 @@ export class Shadow implements IDynamicObject {
         let moveX = 0;
         let moveY = 0;
         for (const otherBoid of this.shadows) {
-            if (otherBoid !== this) {
-                if (!(otherBoid instanceof Shadow)) continue
-                if (distance(this, otherBoid) < this.minDistance) {
-                    moveX += this.x - otherBoid.x;
-                    moveY += this.y - otherBoid.y;
-                }
+            if (!(otherBoid instanceof Shadow)) continue
+            if (otherBoid === this as Shadow)  continue
+            if (distance(this, otherBoid) < this.minDistance) {
+                moveX += this.x - otherBoid.x;
+                moveY += this.y - otherBoid.y;
             }
         }
     
@@ -166,6 +167,7 @@ export class Shadow implements IDynamicObject {
     
         for (const otherBoid of this.shadows) {
             if (!(otherBoid instanceof Shadow)) continue
+            if (otherBoid === this as Shadow)  continue
             if (distance(this, otherBoid) < this.visualRange) {
                 avgDX += otherBoid.dx;
                 avgDY += otherBoid.dy;
@@ -182,4 +184,4 @@ export class Shadow implements IDynamicObject {
         }
     }
 }
-staticImplements<IDynamicObjectConstructor<DBShadow, Shadow>>(Shadow)
+staticImplements<IDynamicObjectConstructor<Shadow>>(Shadow)
