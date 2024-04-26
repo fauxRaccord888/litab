@@ -1,15 +1,20 @@
-import type { InventoryEntities } from "$feature/Inventory/types"
+import type { DBDecoration } from "$feature/Inventory/types"
+import type { DecorationType } from "$lib/graphql/__generated__/graphql"
+import { Cosmos, Ocean } from "./Backgrounds"
+import { Shadow } from "./Boids"
 
 // 데코레이터용 스태틱 메서드 정의 타입
-export interface IDynamicObjectConstructor<TSeed extends InventoryEntities, TAnimation=unknown> {
+export interface IDynamicObjectConstructor<TAnimation, TObject = unknown> {
     new(
-        seed: TSeed,
+        seed: DBDecoration,
         canvas: HTMLCanvasElement, 
         group: IDynamicObject[], 
         sides: number,
-    ): TAnimation
-    __typename: TSeed["__typename"]
-    createSeed(): Omit<TSeed, SeedOmitKey>
+    ): TAnimation,
+    
+    createObjectFromSeed: (decoration: DBDecoration) => TObject
+    __typename: DecorationType
+    isBackground: boolean
 }
 
 export interface IDynamicObject {
@@ -18,7 +23,4 @@ export interface IDynamicObject {
     update: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void,
 }
 
-// Seed(DB에 Mutation값)가 잘 정의되었는지 확인하기 위한 키
-export type SeedOmitKey = "__typename" | "id" | "userId" | "pentagramId"
-// 상수에서 모든 필요 값을 정의했는지 확인하기 위한 키
-export type ConstantOmitKey = SeedOmitKey | "name"
+export type DecorationAnimationEntity = Cosmos | Ocean | Shadow
