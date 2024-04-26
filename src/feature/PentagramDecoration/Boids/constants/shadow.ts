@@ -1,10 +1,6 @@
 import type { ConstantsWithRange } from "$lib/utils/createRandomizedObject";
-import type { BoidsKey } from "../types";
-import type { ConstantOmitKey } from "../../types";
 
-type Key = Exclude<BoidsKey, ConstantOmitKey | "color">
-
-export const BOIDS: Record<Key, ConstantsWithRange> = {
+export const SHADOW = {
     bodyLength: {
         min: 6,
         max: 24,
@@ -46,4 +42,4 @@ export const BOIDS: Record<Key, ConstantsWithRange> = {
         max: 12,
         skew: 3
     }
-} 
+} satisfies Record<string, ConstantsWithRange>
