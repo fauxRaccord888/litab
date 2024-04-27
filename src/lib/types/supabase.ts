@@ -240,6 +240,39 @@ export type Database = {
           },
         ]
       }
+      pentagram_decorations: {
+        Row: {
+          created_at: string
+          decoration_id: string
+          pentagram_id: string
+        }
+        Insert: {
+          created_at?: string
+          decoration_id?: string
+          pentagram_id?: string
+        }
+        Update: {
+          created_at?: string
+          decoration_id?: string
+          pentagram_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pentagram_decoration_decoration_id_fkey"
+            columns: ["decoration_id"]
+            isOneToOne: false
+            referencedRelation: "decorations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pentagram_decoration_pentagram_id_fkey"
+            columns: ["pentagram_id"]
+            isOneToOne: false
+            referencedRelation: "pentagrams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pentagram_nodes: {
         Row: {
           created_at: string
