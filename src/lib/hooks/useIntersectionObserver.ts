@@ -3,12 +3,20 @@ import { useCallback, useEffect, useRef } from "react";
 
 export function useIntersectionObserver(
     sentinelRef: RefObject<HTMLDivElement>,
-    cb: () => void
+    onEnterCb: () => void,
+    onLeaveCb?: () => void
 ) {
 	const observerRef = useRef<IntersectionObserver | null>(null);
+
     const handleIntersect = useCallback((entries: IntersectionObserverEntry[]) => {
-        if (entries[0].isIntersecting && cb) cb()
-    }, [cb])
+        if (entries[0].isIntersecting && onEnterCb) {
+            onEnterCb()
+        }
+        if (!entries[0].isIntersecting && onLeaveCb) {
+            onLeaveCb()
+        }
+    }, [onEnterCb, onLeaveCb])
+
 
     useEffect(() => {
         observerRef.current = new IntersectionObserver(handleIntersect, {
