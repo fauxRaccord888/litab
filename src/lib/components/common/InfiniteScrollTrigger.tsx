@@ -3,16 +3,17 @@ import { useIntersectionObserver } from "$lib/hooks"
 import LoadingSpinner from "./LoadingSpinner"
 import "./style/infiniteScrollTrigger.scss"
 
-type LoadMoreProps = {
-    handleLoadMore: () => void,
+type LoadMoreProps<T> = {
+    loadKey?: T,
+    handleLoadMore: (key?: T) => void,
     hasNextPage: boolean | undefined
 }
 
-export default function InfiniteScrollTrigger(props: LoadMoreProps) {
-    const { handleLoadMore, hasNextPage } = props
+export default function InfiniteScrollTrigger<T=undefined>(props: LoadMoreProps<T>) {
+    const { loadKey, handleLoadMore, hasNextPage } = props
 
     const onIntersect = () => {
-       hasNextPage && handleLoadMore()
+       hasNextPage && handleLoadMore(loadKey)
     }
 
 	const sentinelRef = useRef<HTMLDivElement>(null);

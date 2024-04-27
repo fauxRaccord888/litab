@@ -27,7 +27,8 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
     const canvasSize = Number(STYLE.node) * Number(STYLE.pentagonCanvasComponentMultiplier)
     
     const onIntersect = () => setInView(true)
-    useIntersectionObserver(sentinelRef, onIntersect)
+    const onLeave = () => setInView(false)
+    useIntersectionObserver(sentinelRef, onIntersect, onLeave)
 
     return pentagramNodesCollection && (
         <div className="select-main-pentagon-component">
@@ -49,7 +50,7 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
                     />
                 }
             </OeuvrePentagonWrapper>
-            {!inView && <div ref={sentinelRef} className="select-main-pentagon-component__sentinel" />}
+            <div ref={sentinelRef} className="select-main-pentagon-component__sentinel" />
         </div>
     )
 }
