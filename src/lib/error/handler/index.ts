@@ -5,3 +5,5 @@ export * from './pentagramErrorHandler'
 export * from './registerErrorHandler'
 export * from './signInErrorHandlert'
 export * from './updateAccountErrorHandler'
+
+export * from './Inventory'
