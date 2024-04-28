@@ -20,7 +20,7 @@
         width: 256px;
         height: 256px;
         background-color: rgba(var(--modal-background), 1);
-        > :not(:first-child) {
+        > :last-child {
             border-top: solid rgba(var(--font-color), 0.5) 1px;
         }
 
@@ -30,15 +30,29 @@
 
         .confirm-component__body-container {
             @include w-full;
-            @include h-full;
             @include flex;
             @include flex-center;
+            flex-grow: 1;
             .confirm-component__body-inner-container {
                 @include w-full;
                 @include flex;
                 @include flex-center;
-                @include margin-(var(--base-size));
+                @include margin-(calc(var(--base-size) * 1.5));
                 line-height: 180%;
+            }
+        }
+
+        .confirm-component__input-container {
+            flex-grow: 1;
+
+            .confirm-component__input {
+                @include flex;
+                @include box-shadow-2(rgba(var(--font-color), 0.8));
+                @include rounded-lg;
+                background-color: rgba(var(--background-color), 0.9);
+                height: calc(var(--base-size) * 2.5);
+                padding: calc(var(--base-size) * 0.25);
+                border: 0;
             }
         }
 

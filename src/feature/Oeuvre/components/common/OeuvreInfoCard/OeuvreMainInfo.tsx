@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import type { DBOeuvre, OeuvreEventHandler } from "../../../types";
-import type { CustomBackgroundCSSProp } from "$lib/types/components"
+import type { CustomBackgroundCSSProps } from "$lib/types/components"
 import { calcFontColorByBG } from "$lib/utils/luminance";
 import { fromHex } from "$lib/utils/rgba";
 import "./style/oeuvreMainInfo.scss"
@@ -41,7 +41,7 @@ export default function OeuvreMainInfo(props: OeuvreMainInfoProps) {
     const genresInfo = oeuvresGenresCollection?.edges.map((edge) => {
         const bgColor = fromHex(edge.node.genre.id.slice(0, 6))
         const isLightFont = calcFontColorByBG(bgColor)
-        const style: CustomBackgroundCSSProp = {"--custom-bg" : bgColor}
+        const style: CustomBackgroundCSSProps = {"--custom-bg" : bgColor}
 
         return (
             <span 

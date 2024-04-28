@@ -16,7 +16,7 @@ export function useAccountNavigate() {
     }, [dispatch])
 
     const updateNavigator = useCallback(() => {
-        navigate({ to: '/account/update'})
+        navigate({ to: '/account/update' })
         dispatch(closeModal())
     }, [dispatch, navigate])
 
@@ -25,6 +25,11 @@ export function useAccountNavigate() {
             to: '/account/signout',
         })
     }, [navigate])
+
+    const inventoryNavigator = useCallback(() => {
+        navigate({ to: '/account/inventory' })
+        dispatch(closeModal())
+    }, [dispatch, navigate])
 
     const acocuntMenuModalNavigator = useCallback(() => {
         dispatch(setAccountMenu())
@@ -35,6 +40,7 @@ export function useAccountNavigate() {
         signIn: signInNavigator,
         update: updateNavigator,
         signOut: signOutNavigator,
+        inventory: inventoryNavigator,
 
         accountMenuModal: acocuntMenuModalNavigator
     }

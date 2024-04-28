@@ -66,10 +66,20 @@ export default function AccountMenuModal(props: AccountMenuModalProps) {
                                 "account-menu-modal-component__button--update",
                             ].join(' ')}
                             onClick={(e) => {
-                                onClickHandler(e, () => eventHandler.navigateToUpdateAccount())}
+                                onClickHandler(e, eventHandler.navigateToUpdateAccount)}
                             }
                         >
                             {t("account.modal.menu.update")}
+                        </Button>
+                        <Button 
+                            className={[
+                                "account-menu-modal-component__button--inventory",
+                            ].join(' ')}
+                            onClick={(e) => {
+                                onClickHandler(e, eventHandler.navigateToInventory)
+                            }}
+                        >
+                            {t("account.modal.menu.inventory")}
                         </Button>
                         <Button 
                             className={[

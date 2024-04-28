@@ -24,6 +24,7 @@ export default function AccountMenu(props: {
         navigateToUpdateAccount: accountNavigate.update,
         navigateToSignIn: accountNavigate.signIn,
         navigateToRegister: accountNavigate.register,
+        navigateToInventory: accountNavigate.inventory,
         signOut: handleSignOut,
         closeModal: handleClickClose
     }

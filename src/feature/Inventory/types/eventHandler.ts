@@ -14,7 +14,7 @@ export type DeletePayload = {
 }
 
 export type InventoryEventHandler = BaseEventHandler<boolean> & {
-    create: ( type: DecorationType ) => Promise<FetchResult>
-    rename: ( payload: RenamePayload ) => Promise<FetchResult>,
-    delete: ( payload: DeletePayload ) => Promise<FetchResult>
+    handleCreate?: ( type: DecorationType ) => Promise<FetchResult>
+    handleRename?: ( payload: RenamePayload ) => Promise<FetchResult>,
+    handleDelete?: ( payload: DeletePayload ) => Promise<FetchResult>
 } 

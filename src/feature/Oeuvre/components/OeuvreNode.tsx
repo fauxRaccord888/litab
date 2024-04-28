@@ -23,8 +23,8 @@ export default function OeuvreNode(props: OeuvreNodeProps) {
             <div className="oeuvre-node-component__cover-container">
                 <BucketImage 
                     bucket="oeuvres"
-                    id={item.id}
-                    timeStamp={item.updatedAt}
+                    id={item?.id}
+                    timeStamp={item?.updatedAt}
                     fallback={<FallbackIcon />}
                 />
             </div>

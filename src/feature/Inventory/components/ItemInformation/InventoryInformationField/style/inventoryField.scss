@@ -1,0 +1,45 @@
+@import "/src/lib/style/atomicMixin";
+@import "/src/lib/style/mixin";
+
+.inventory-field-component {
+    @include flex;
+    @include align-center;
+    @include child-left-m(calc(var(--base-size) * 1.2));
+    justify-content: space-between;
+
+    .inventory-field-component__label {
+        @include flex;   
+        font-size: calc(var(--base-size) * 0.8);
+    }
+
+    .inventory-field-component__color-indicator-container {
+        @include flex;
+        justify-content: flex-end;
+        @include child-left-m(calc(var(--base-size) * 0.5));
+    }
+    
+    .inventory-field-component__color-indicator {
+        @include custom-background;
+        border-radius: 4px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .inventory-field-component__progress-bar {
+        @include flex;
+        @include rounded-lg;
+        width: calc(var(--base-size) * 6);
+        height: 8px;
+        background-color: rgba(var(--true-gray), 0.8);
+
+        .inventory-field-component__progress {
+            @include flex;
+            @include rounded-full;
+            position: relative;
+            width: 8px;
+            height: 8px;
+            transform: translateX(-50%);
+            background-color: rgb(var(--secondary));
+        }
+    }
+}

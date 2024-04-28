@@ -4,10 +4,14 @@ export type Nullable<T> = Partial<T> & {
     id: string
 }
 
-export interface CustomBackgroundCSSProp extends CSSProperties {
+export interface CustomBackgroundCSSProps extends CSSProperties {
     "--custom-bg": number[],
 }
 
+export interface CustomCanvasCSSProps extends CSSProperties {
+    "--canvas-size": number,
+}
+
 export type BaseEventHandler<T = void> = {
-    handleLoadMore: (param: T) => void
+    handleLoadMore?: (...args: T[]) => void
 }

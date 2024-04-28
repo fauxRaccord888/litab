@@ -15,3 +15,39 @@ export const deletePentagram_MUTATION = graphql(/* GraphQL */ `
         }
     }
 `)
+
+export const removePentagramDecoration_MUTATION = graphql(/* GraphQL */ `
+    mutation removePentagramDecoration(
+        $pentagramId: UUID,
+        $decorationId: UUID
+    ) {
+        deleteFromPentagramDecorationsCollection(
+            filter: {
+                pentagramId: { eq: $pentagramId }
+                decorationId: { eq: $decorationId }
+            }
+        ) {
+            records {
+                ...PentagramDecorationsMinimalInfo
+            }
+        }
+    }
+`)
+
+export const insertPentagramDecoration_MUTATION = graphql(/* GraphQL */ `
+    mutation insertPentagramDecoration(
+        $pentagramId: UUID,
+        $decorationId: UUID
+    ) {
+        insertIntoPentagramDecorationsCollection(
+            objects: {
+                pentagramId: $pentagramId
+                decorationId: $decorationId
+            }
+        ) {
+            records {
+                ...PentagramDecorationsMinimalInfo
+            }
+        }
+    }
+`)

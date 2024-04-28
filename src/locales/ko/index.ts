@@ -16,6 +16,7 @@ import profile from './profile.json'
 import search from './search.json'
 import error from './error.json'
 
+import inventory from "$feature/Inventory/locales/kr.json"
 import pentagramDecoration from '$feature/PentagramDecoration/locales/kr.json'
 
 export default {
@@ -33,6 +34,7 @@ export default {
     oeuvre,
     pentagram,
     pentagramDecoration,
+    inventory,
     portal,
     profile,
     search,

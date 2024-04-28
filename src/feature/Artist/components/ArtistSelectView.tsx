@@ -56,12 +56,20 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
         )) || []
     ), [eventHandler, item?.oeuvresArtistsCollection?.edges])
 
-    const loader = useMemo(() => (
-        <InfiniteScrollTrigger
-            hasNextPage={item.oeuvresArtistsCollection?.pageInfo.hasNextPage}
-            handleLoadMore={eventHandler.handleLoadMore}
-        />
-    ), [eventHandler.handleLoadMore, item.oeuvresArtistsCollection?.pageInfo.hasNextPage])
+    const loader = useMemo(() => {
+        const handleLoadMode = () => {
+            if (eventHandler.handleLoadMore) {
+                eventHandler.handleLoadMore()
+            }
+        }
+    
+        return (
+            <InfiniteScrollTrigger
+                hasNextPage={item.oeuvresArtistsCollection?.pageInfo.hasNextPage}
+                handleLoadMore={handleLoadMode}
+            />
+        )
+    }, [eventHandler, item.oeuvresArtistsCollection?.pageInfo.hasNextPage])
 
     const tabComponent = (
         <Tab

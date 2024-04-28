@@ -1,5 +1,6 @@
 @import "src/lib/style/atomicMixin";
 @import "src/lib/style/modalMixin";
+@import "src/lib/style/animation/gradientBackground";
 
 .pentagram-menu-modal-component__inner-cotainer {
     @include menu-modal;
@@ -10,5 +11,9 @@
 
     .pentagram-menu-modal-component__button--delete {
         background-color: rgba(var(--danger), 0.5);
+    }
+
+    .pentagram-menu-modal-component__button--decoration {
+        @include gradient-background
     }
 }

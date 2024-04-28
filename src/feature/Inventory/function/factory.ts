@@ -1,6 +1,6 @@
 import type { DBDecoration } from "../types";
 import type { IDynamicObject } from "$feature/PentagramDecoration";
-import { Cosmos, Ocean, Shadow } from "$feature/PentagramDecoration";
+import { COSMOS, Cosmos, OCEAN, Ocean, SHADOW, Shadow } from "$feature/PentagramDecoration";
 import { DecorationType } from "$lib/graphql/__generated__/graphql";
 
 type AnimationInstance = Cosmos | Shadow | Ocean
@@ -11,6 +11,12 @@ export class SeedFactory {
         ocean: Ocean,
         cosmos: Cosmos, 
         shadow: Shadow
+    }
+
+    static constants = {
+        ocean: OCEAN,
+        cosmos: COSMOS, 
+        shadow: SHADOW
     }
 
     static createSeed() {
@@ -51,6 +57,18 @@ export class SeedFactory {
             const cstr = SeedFactory.cstr[category]
             if (!cstr) return null
             return cstr.isBackground
+        } catch(e) {
+            return null
+        }
+    }
+
+    static getConstant(
+        category: DecorationType,
+    ) {
+        try {
+            const constant = SeedFactory.constants[category]
+            if (!constant) return null
+            return constant
         } catch(e) {
             return null
         }

@@ -18,7 +18,7 @@ export type PentagramCardProps = {
 export default function PentagramCard(props: PentagramCardProps) {
     const { item, renderConfig, options, eventHandler } = props
     const { timestamp, isPlaying, handlePlayPentagram, handleSetTimestamp } = usePentagramPlayer(item)
-    const { id, user, createdAt, pentagramNodesCollection, pentagramRevisionsCollection } = item
+    const { id, user, createdAt, pentagramNodesCollection, pentagramRevisionsCollection, pentagramDecorationsCollection } = item
 
     const playerEventHandler: PentagramPlayerEventHandler = {
         playPentagram: handlePlayPentagram,
@@ -42,6 +42,7 @@ export default function PentagramCard(props: PentagramCardProps) {
                         options={options}
                         eventHandler={eventHandler}
                         pentagramNodesCollection={pentagramNodesCollection}
+                        pentagramDecorationsCollection={pentagramDecorationsCollection}
                     />
                 }
             </div>

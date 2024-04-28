@@ -13,7 +13,8 @@
             "signIn": "로그인",
             "profile": "내 프로필",
             "update": "회원 정보 수정",
-            "signOut": "로그아웃"
+            "signOut": "로그아웃",
+            "inventory": "인벤토리"
         }
     },
     "message": {

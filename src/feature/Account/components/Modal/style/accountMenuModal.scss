@@ -1,5 +1,6 @@
 @import "src/lib/style/atomicMixin";
 @import "src/lib/style/modalMixin";
+@import "src/lib/style/animation/gradientBackground";
 
 .account-menu-modal-component__inner-cotainer{
     @include menu-modal;
@@ -10,5 +11,9 @@
 
     .account-menu-modal-component__button--sign-out {
         background-color: rgba(var(--danger), 0.5);
+    }
+
+    .account-menu-modal-component__button--inventory {
+        @include gradient-background;
     }
 }

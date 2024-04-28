@@ -6,6 +6,7 @@ type ModalSliceState = {
     nodeUpsertId?: string | undefined
     insertNode?: boolean | undefined
     pentagramMenuId?: string | undefined
+    pentagramDecorationId?: string | undefined
     nodeViewId?: string | undefined
     revisionViewId?: string | undefined
     accountMenu?: boolean | undefined
@@ -18,6 +19,7 @@ const initialState = {
     nodeUpsertId: undefined,
     insertNode: undefined,
     pentagramMenuId: undefined,
+    pentagramDecorationId: undefined,
     nodeViewId: undefined,
     revisionViewId: undefined,
     accountMenu: undefined,
@@ -95,6 +97,13 @@ const modalSlice = createSlice({
                 ...initialState,
                 metaData: true
             }
+        },
+
+        setPentagramDecorationId(_, action: PayloadAction<string>) {
+            return {
+                ...initialState,
+                pentagramDecorationId: action.payload
+            }
         }
     },
 })
@@ -105,6 +114,7 @@ export const {
     setNodeUpsertId, 
     setInsertNode, 
     setPentagramMenuId, 
+    setPentagramDecorationId,
     setNodeViewId, 
     setRevisionViewId, 
     setAccountMenu, 

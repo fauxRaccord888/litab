@@ -1,4 +1,7 @@
+@import "/src/lib/style/mixin";
+
 .decoration-canvas-component {
+    @include canvas;
     position: absolute;
     transform: translate(-50%, -50%);
 }

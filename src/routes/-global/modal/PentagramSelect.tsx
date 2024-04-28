@@ -35,6 +35,10 @@ export default function PentagramSelect(props: {
         if (pentagramId) pentagramNavigate.select(pentagramId)
     }
 
+    const handleClickDecoration = () => {
+        if (pentagramId) pentagramNavigate.pentagramDecorationModal(pentagramId)
+    }
+
     const handleClickUpdate = () => {
         if (pentagramId) pentagramNavigate.update(pentagramId);
     };
@@ -62,6 +66,7 @@ export default function PentagramSelect(props: {
             handleClickNavigate={handleClickNavigate}
             handleClickUpdate={handleClickUpdate} 
             handleClickDelete={handleDeletePentagram}
+            handleClickDecoration={handleClickDecoration}
         />
     );
 }

@@ -1,22 +1,25 @@
 import type { MouseEvent, PropsWithChildren } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
 import './style/confirm.scss'
 
 interface ConfirmProps extends PropsWithChildren {
-    handleClickAffirmative?: () => void
+    handleClickAffirmative?: (input: string) => void
     handleClickNegative?: () => void
-    destructive?: boolean
+    destructive?: boolean,
+    withInput?: boolean
 }
 
 export default function Confirm(props: ConfirmProps) {
-    const { children, handleClickAffirmative, handleClickNegative, destructive } = props
+    const { children, handleClickAffirmative, handleClickNegative, destructive, withInput } = props
     const { t } = useTranslation()
+    const [input, setInput] = useState("")
     const rootElem = document.getElementById('portal-root')
 
     const onClickAffirmative = (e: MouseEvent) => {
         e.stopPropagation()
-        if (handleClickAffirmative) handleClickAffirmative()
+        if (handleClickAffirmative) handleClickAffirmative(input)
     }
 
     const onClickNegative = (e: MouseEvent) => {
@@ -34,6 +37,16 @@ export default function Confirm(props: ConfirmProps) {
                                 {children}
                             </div>
                         </div>
+
+                        {withInput &&
+                            <div className="confirm-component__input-container">
+                                <input 
+                                    value={input} 
+                                    onChange={(e) => setInput(e.currentTarget.value)}
+                                    className="confirm-component__input"
+                                />
+                            </div>   
+                        }
 
                         <div className="confirm-component__button-container">
                             <button 

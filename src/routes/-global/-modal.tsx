@@ -12,6 +12,7 @@ import AccountMenu from './modal/AccountMenu';
 import Register from './modal/Register';
 import SignIn from './modal/SignIn';
 import MetaData from './modal/MetaData';
+import PentagramDecoration from './modal/PentagramDecoration';
 
 export default function ModalController(props: {
     search: RootSearch
@@ -22,12 +23,13 @@ export default function ModalController(props: {
         nodeUpsertId, 
         insertNode, 
         pentagramMenuId, 
+        pentagramDecorationId,
         nodeViewId, 
         revisionViewId, 
         accountMenu, 
         register, 
         signIn,
-        metaData
+        metaData,
     } = useSelector((state: AppRootState) => state.modal)
     const dispatch = useDispatch()
 
@@ -85,6 +87,12 @@ export default function ModalController(props: {
             }
             {metaData &&
                 <MetaData
+                    handleClickClose={handleClickClose}
+                />
+            }
+            {pentagramDecorationId &&
+                <PentagramDecoration
+                    pentagramId={pentagramDecorationId}
                     handleClickClose={handleClickClose}
                 />
             }

@@ -11,13 +11,14 @@ import './style/selectMainPentagon.scss'
 
 type SelectMainPentagonProps = {
     timestamp: Date,
+    pentagramDecorationsCollection: DBPentagram_SELECT["pentagramDecorationsCollection"]
     pentagramNodesCollection: DBPentagram_SELECT["pentagramNodesCollection"],
     options: PentagramSelectOptions
     eventHandler: PentagramEventHandler
 }
 
 export default function SelectMainPentagon(props: SelectMainPentagonProps) {
-    const { timestamp, pentagramNodesCollection, options, eventHandler } = props
+    const { timestamp, pentagramDecorationsCollection, pentagramNodesCollection, options, eventHandler } = props
     const items = pentagramNodesCollection?.edges.map((edge) => edge.node)
 
     const sentinelRef = useRef<HTMLDivElement | null>(null)
@@ -29,6 +30,14 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
     const onIntersect = () => setInView(true)
     const onLeave = () => setInView(false)
     useIntersectionObserver(sentinelRef, onIntersect, onLeave)
+
+    const foregroundDecorations = pentagramDecorationsCollection?.edges
+        .filter((e) => !e.node.decoration.isBackground)
+        .map((e) => e.node.decoration)
+
+    const backgroundDecorations = pentagramDecorationsCollection?.edges
+        .filter((e) => e.node.decoration.isBackground)
+        .map((e) => e.node.decoration)
 
     return pentagramNodesCollection && (
         <div className="select-main-pentagon-component">
@@ -45,6 +54,8 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
                 ))}
                 {inView && 
                     <DecorationCanvas 
+                        foregroundSeeds={foregroundDecorations}
+                        backgroundSeeds={backgroundDecorations}
                         canvasSize={canvasSize} 
                         sides={PENTAGRAM.SIDES}
                     />
