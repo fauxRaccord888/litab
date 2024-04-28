@@ -17,6 +17,7 @@ graphql(/* GraphQL */ `
                 isBackground: {
                     eq: $isBackground
                 }
+                name: { ilike: $keyword }
             }
             first: $limit
             after: $cursor

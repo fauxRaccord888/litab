@@ -6,6 +6,7 @@ export const getUserInventoryId_QUERY = graphql(/* GraphQL */ `
         $isBackground: Boolean
         $limit: Int
         $cursor: Cursor
+        $keyword: String
     ) {
         usersCollection(
             first: 1

@@ -4,10 +4,19 @@ import { graphql } from "$lib/graphql/__generated__"
 graphql(/* GraphQL */ `
     fragment DecorationsMinimalInfo on Decorations {
         id,
-        userId
+        userId,
         name,
         seed,
         type,
-        isBackground
+        isBackground,
+        pentagramDecorationsCollection(
+            first: 1
+        ) {
+            edges {
+                node {
+                    ...PentagramDecorationsMinimalInfo
+                }
+            }
+        }
     }
 `)
