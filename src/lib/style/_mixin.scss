@@ -23,6 +23,12 @@
     }
 }
 
+@mixin canvas {
+    --canvas-size: 200;
+    width: calc(var(--canvas-size) * 1px);
+    height: calc(var(--canvas-size) * 1px);
+}
+
 @mixin wide-hovercard($size) {
     @include rounded-lg;
     position: absolute;
