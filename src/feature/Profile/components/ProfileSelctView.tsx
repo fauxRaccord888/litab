@@ -77,7 +77,8 @@ export default function ProfileSelectView(props: {
                 hasNextPage={item.pentagramsCollection?.pageInfo.hasNextPage}
                 handleLoadMore={handleLoadMore}
             />
-    ), [eventHandler, item.pentagramsCollection?.pageInfo.hasNextPage])
+        )
+    }, [eventHandler, item.pentagramsCollection?.pageInfo.hasNextPage])
 
     const revisionComponents = useMemo(() => (
         item?.pentagramRevisionsCollection?.edges.map((edge) => (
