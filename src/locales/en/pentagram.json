@@ -2,7 +2,8 @@
     "menu": {
         "navigate": "Move to this Pentagram",
         "update": "Edit Pentagram",
-        "delete": "Delete Pentagram"
+        "delete": "Delete Pentagram",
+        "decoration": "Decorate Pentagram"
     },
     "button": {
         "update": "Update"
@@ -42,6 +43,25 @@
             "discardChanges": "Discard unmerged changes",
             "loadChanges": "Load unmerged changes",
             "navigateRelated": "Navigate to the related Pentagram"
+        }
+    },
+    "decoration": {
+        "toast": {
+            "success": {
+                "create": "Pentagram decoration added successfully. Changes will be applied after refresh",
+                "remove": "Pentagram decoration removed successfully. Changes will be applied after refresh"
+            },
+            "loading": {
+                "create": "Adding pentagram decoration.",
+                "remove": "Removing pentagram decoration."
+            }
+        },
+        "modal": {
+            "button": {
+                "add": "Add decoration on this pentagram",
+                "remove": "Remove decoration from this pentagram",
+                "retrieve": "Retrieve decoration from another pentagram"
+            }
         }
     },
     "title": {
