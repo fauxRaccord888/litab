@@ -1,0 +1,103 @@
+{
+    "route": {
+        "title": "Inventory"
+    },
+    "tab": {
+        "foreground": {
+            "label": "Shadow",
+            "description": "Shadows explore the space by wandering inside and together, and sometimes apart, from the pentagram. You can meet new shadows through various activities within the pentagram. Would you like to make new friends and find new shadows?"
+        },
+        "background": {
+            "label": "Background",
+            "description": "What do you imagine the pentagram looks like? The universe? Or maybe it resembles the foam of scattered waves? It could also be the noise of a broken VHS player, or a snow-covered forest. Bring your imagination to life."
+        }
+    },
+  
+    "shadow": {
+        "button": {
+            "updateShadow": "Menu"
+        },
+        "confirm": {
+            "rename": "Enter the name of the shadow you want to change.",
+            "delete": "You won't be able to meet the released shadow again. Are you sure you want to release it?"
+        },
+        "modal": {
+            "title": "Edit Shadow",
+            "button": {
+                "rename": "Rename Shadow",
+                "delete": "Release Shadow"
+            }
+        },
+      "toast": {
+            "success": {
+                "create": "Successfully created a shadow.",
+                "delete": "Successfully released a shadow.",
+                "rename": "Successfully renamed the shadow."
+            },
+            "loading": {
+                "create": "Waiting for shadow creation",
+                "delete": "Releasing shadow.",
+                "rename": "Renaming the shadow."
+            }
+      }
+    },
+  
+    "ocean": {
+        "button": {
+            "updateShadow": "Menu"
+        },
+        "confirm": {
+            "rename": "Enter the name of the ocean you want to change.",
+            "delete": "You won't be able to meet the released ocean again. Are you sure you want to do that?"
+        },
+        "modal": {
+            "title": "Edit Ocean",
+            "button": {
+                "rename": "Rename Ocean",
+                "delete": "Release Ocean"
+            }
+        },
+        "toast": {
+            "success": {
+                "create": "Successfully created an ocean.",
+                "delete": "Successfully released an ocean.",
+                "rename": "Successfully renamed the ocean."
+            },
+            "loading": {
+                "create": "Waiting for ocean creation",
+                "delete": "Releasing ocean.",
+                "rename": "Renaming the ocean."
+            }
+        }
+    },
+  
+    "cosmos": {
+        "button": {
+            "updateShadow": "Menu"
+        },
+        "confirm": {
+            "rename": "Enter the name of the universe you want to change.",
+            "delete": "You won't be able to meet the exploded universe again. Are you sure you want to do that?"
+        },
+        "modal": {
+            "title": "Edit Universe",
+            "button": {
+                "rename": "Rename Universe",
+                "delete": "Explode Universe"
+            }
+        },
+        "toast": {
+            "success": {
+                "create": "Successfully created a universe.",
+                "delete": "Successfully exploded a universe.",
+                "rename": "Successfully renamed the universe."
+            },
+            "loading": {
+                "create": "Waiting for universe creation",
+                "delete": "Exploding universe.",
+                "rename": "Renaming the universe."
+            }
+        }
+    }
+}
+  
