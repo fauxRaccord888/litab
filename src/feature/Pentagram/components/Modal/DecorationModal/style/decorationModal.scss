@@ -1,0 +1,10 @@
+@import "src/lib/style/atomicMixin";
+
+.pentagram-decoration-modal-component__inner-container {
+    @include flex;
+    @include flex-col;
+    @include w-full;
+    @include child-top-m(calc(var(--base-size) * 1.5));
+    height: 300px;
+    --base-size: 13px;
+}

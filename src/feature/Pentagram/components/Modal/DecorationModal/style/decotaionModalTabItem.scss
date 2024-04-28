@@ -1,0 +1,20 @@
+@import "src/lib/style/atomicMixin";
+
+.decoration-modal-tab-item-component {
+    @include child-top-m(calc(var(--base-size) * 1.5));
+    .decoration-modal-tab-item-component__item-container {
+        @include rounded-lg;
+        @include flex-col;
+        border: 2px solid rgb(var(--font-color)); 
+        .decoration-modal-tab-item-component__item-inner-container {
+            @include flex-col;
+            .decoration-modal-tab-item-component__button-container {
+                @include margin-(calc(var(--base-size) * 1.5));
+                margin-top: 0;
+                .button-component {
+                    @include w-full;
+                }
+            }
+        }
+    }
+}
