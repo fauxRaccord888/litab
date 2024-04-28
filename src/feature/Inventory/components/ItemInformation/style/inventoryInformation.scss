@@ -1,0 +1,64 @@
+@import "/src/lib/style/atomicMixin";
+@import "/src/lib/style/mixin";
+@import "src/lib/style/animation/gradientBackground";
+
+.inventory-information-component {
+    .inventory-information-component__inner-container {
+        @include flex;
+        @include flex-col;
+        @include margin-(calc(var(--base-size) * 1.5));
+        @include child-top-m(calc(var(--base-size) * 1.5));
+
+        .inventory-information-component__title-container {
+            @include flex;
+            @include flex-center;
+            justify-content: space-between;
+            .inventory-information-component__name {
+                font-size: calc(var(--base-size) * 1.25);
+            }
+
+            .inventory-information-component__button--update-modal {
+                @include pointer;
+                @include gradient-background;
+                font-size: calc(var(--base-size) * 0.85);
+            }
+        }
+
+        .inventory-information-component__body-container {
+            @include flex;
+            @include flex-col;
+            @include child-top-m(calc(var(--base-size) * 1.5));
+            justify-content: space-between;
+
+            @media only screen and (min-width: 500px) {
+                @include flex-row;        
+                @include child-left-m(calc(var(--base-size) * 1.5));
+                @include child-top-m(0);
+            }
+        
+            .inventory-information-component__canvas-container{
+                @include flex;
+                @include justify-center;
+                @include rounded-lg;
+                @include canvas;
+                border: rgb(var(--font-color)) solid 2px;
+                position: relative;
+                justify-self: center;
+                align-self: center;
+        
+                .decoration-canvas-component {
+                    @include rounded-lg;
+                    left: 50%;
+                    top: 50%
+                }
+            }
+        
+            .inventory-information-component__fields-container {
+                @include flex;
+                @include flex-col;
+                @include justify-center;
+            }
+        }
+    }
+    
+}
