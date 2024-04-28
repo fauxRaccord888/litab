@@ -12,11 +12,12 @@ type PentagramMenuModalProps = {
     handleClickClose: () => void
     handleClickUpdate: () => void,
     handleClickDelete: () => void,
-    handleClickNavigate: () => void
+    handleClickNavigate: () => void,
+    handleClickDecoration: () => void
 }
 
 export default function PentagramMenuModal(props: PentagramMenuModalProps) {
-    const { title, isAuthor, handleClickClose, handleClickUpdate, handleClickDelete, handleClickNavigate } = props
+    const { title, isAuthor, handleClickClose, handleClickUpdate, handleClickDecoration, handleClickDelete, handleClickNavigate } = props
     const { t } = useTranslation()
     const [deleteConfirm, setDeleteConfirm] = useState(false)
     
@@ -28,6 +29,11 @@ export default function PentagramMenuModal(props: PentagramMenuModalProps) {
     const onClickUpdate = (e: MouseEvent) => {
         e.stopPropagation()
         handleClickUpdate()
+    }
+
+    const onClickDecoration = (e: MouseEvent) => {
+        e.stopPropagation()
+        handleClickDecoration()
     }
 
     const onClickDelete = (e: MouseEvent) => {
@@ -62,6 +68,15 @@ export default function PentagramMenuModal(props: PentagramMenuModalProps) {
                 onClick={onClickUpdate}
             >
                 {t("pentagram.menu.update")}
+            </Button>
+
+            <Button 
+                className={[
+                    "pentagram-menu-modal-component__button--decoration"
+                ].join(' ')}
+                onClick={onClickDecoration}
+            >
+                {t("pentagram.menu.decoration")}
             </Button>
 
             <Button 
