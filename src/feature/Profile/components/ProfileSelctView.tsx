@@ -65,14 +65,18 @@ export default function ProfileSelectView(props: {
         )) || []
     ), [eventHandler, item?.pentagramsCollection?.edges])
 
-    const pentagramLoader = useMemo(() => (
-        <InfiniteScrollTrigger
-            hasNextPage={item.pentagramsCollection?.pageInfo.hasNextPage}
-            handleLoadMore={() => eventHandler.handleLoadMore({
+    const pentagramLoader = useMemo(() => {
+        const handleLoadMore = () => {
+            if (eventHandler.handleLoadMore) eventHandler.handleLoadMore({
                 revisionLimit: 0, 
                 pentagramLimit: NETWORK.readLimit
-            })}
-        />
+            })
+        }
+        return (
+            <InfiniteScrollTrigger
+                hasNextPage={item.pentagramsCollection?.pageInfo.hasNextPage}
+                handleLoadMore={handleLoadMore}
+            />
     ), [eventHandler, item.pentagramsCollection?.pageInfo.hasNextPage])
 
     const revisionComponents = useMemo(() => (
@@ -92,15 +96,21 @@ export default function ProfileSelectView(props: {
         )) || []
     ), [eventHandler, item?.pentagramRevisionsCollection?.edges])
 
-    const revisionLoader = useMemo(() => (
-        <InfiniteScrollTrigger
-            hasNextPage={item.pentagramRevisionsCollection?.pageInfo.hasNextPage}
-            handleLoadMore={() => eventHandler.handleLoadMore({
+    const revisionLoader = useMemo(() => {
+        const handleLoadMore = () => {
+            if (eventHandler.handleLoadMore) eventHandler.handleLoadMore({
                 revisionLimit: NETWORK.readLimit, 
                 pentagramLimit: 0
-            })}
-        />
-    ), [eventHandler, item.pentagramRevisionsCollection?.pageInfo.hasNextPage])
+            })
+        }
+
+        return (
+            <InfiniteScrollTrigger
+                hasNextPage={item.pentagramRevisionsCollection?.pageInfo.hasNextPage}
+                handleLoadMore={handleLoadMore}
+            />
+        )
+    }, [eventHandler, item.pentagramRevisionsCollection?.pageInfo.hasNextPage])
 
     const tabComponent = (
         <Tab items={[

@@ -56,12 +56,22 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
         )) || []
     ), [eventHandler, item?.oeuvresGenresCollection?.edges])
 
-    const loader = useMemo(() => (
-        <InfiniteScrollTrigger
+
+    const loader = useMemo(() => {
+        const handleLoadMode = () => {
+            if (eventHandler.handleLoadMore) {
+                eventHandler.handleLoadMore()
+            }
+        }
+    
+        return (
+            <InfiniteScrollTrigger
             hasNextPage={item.oeuvresGenresCollection?.pageInfo.hasNextPage}
-            handleLoadMore={eventHandler.handleLoadMore}
+            handleLoadMore={handleLoadMode}
         />
-    ), [eventHandler.handleLoadMore, item.oeuvresGenresCollection?.pageInfo.hasNextPage])
+        )
+    }, [eventHandler, item.oeuvresGenresCollection?.pageInfo.hasNextPage])
+
 
     const tabComponent = (
         <Tab

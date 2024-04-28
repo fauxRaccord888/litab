@@ -53,12 +53,18 @@ export default function OeuvreSelectView(props: OeuvreSelectViewProps) {
         )) || []
     ), [eventHandler, item?.pentagramNodesCollection?.edges])
 
-    const loader = useMemo(() => (
-        <InfiniteScrollTrigger
-            hasNextPage={item.pentagramNodesCollection?.pageInfo.hasNextPage}
-            handleLoadMore={eventHandler.handleLoadMore}
-        />
-    ), [eventHandler.handleLoadMore, item.pentagramNodesCollection?.pageInfo.hasNextPage])
+    const loader = useMemo(() => {
+        const handleLoadMore = () => {
+            if (eventHandler.handleLoadMore) eventHandler.handleLoadMore()
+        }
+
+        return (
+            <InfiniteScrollTrigger
+                hasNextPage={item.pentagramNodesCollection?.pageInfo.hasNextPage}
+                handleLoadMore={handleLoadMore}
+            />
+        )
+    }, [eventHandler, item.pentagramNodesCollection?.pageInfo.hasNextPage])
 
     const tabComponent = (
         <Tab
