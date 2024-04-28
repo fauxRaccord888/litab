@@ -42,6 +42,15 @@ graphql(/* GraphQL */ `
                 }
             }
         }
+        pentagramDecorationsCollection(
+            orderBy: { createdAt: DescNullsLast }
+        ) {
+            edges {
+                node {
+                    ...PentagramDecorationsDecoInfo
+                }
+            }
+        }
     }
 `)
 
