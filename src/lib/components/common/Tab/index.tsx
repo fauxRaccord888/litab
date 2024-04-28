@@ -4,7 +4,9 @@ import "./style/tab.scss";
 
 export type TabItem = {
     label: string,
-    items: JSX.Element[]
+    items: JSX.Element[],
+    description?: string,
+    onSwitchTab?: () => void
 }
 
 type TabOptions = {
@@ -20,9 +22,14 @@ export default function Tab(props: TabProps) {
     const { items, options } = props
     const [selected, setSelected] = useState(0)
 
-    const handleClickItem = (e: MouseEvent, idx: number) => {
+    const handleClickItem = (
+        e: MouseEvent, 
+        idx: number, cb: 
+        (() => void) | undefined
+    ) => {
         e.preventDefault()
         setSelected(idx)
+        if (cb) cb()
     }
 
     return (
@@ -30,6 +37,16 @@ export default function Tab(props: TabProps) {
             "tab-component",
             options?.vertical ? "tab-component--vertical" : ""
         ].join(" ")}>
+
+            {items.map((item, idx) => {
+                if (idx !== selected) return null
+                return (item && item.description) && (
+                    <div className="tab-component__description">
+                        {item.description}
+                    </div>
+                )
+            })}
+
             <div className="tab-component__header">
                 {items.map((item, idx) => (
                     item && (
@@ -39,7 +56,7 @@ export default function Tab(props: TabProps) {
                                 "tab-component__header-label",
                                 idx === selected ? "tab-component__header-label--selected" : ""
                             ].join(" ")}
-                            onClick={(e) => handleClickItem(e, idx)}    
+                            onClick={(e) => handleClickItem(e, idx, item.onSwitchTab)}
                         >
                             {item.label}
                         </span>
