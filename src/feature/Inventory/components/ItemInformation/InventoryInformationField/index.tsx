@@ -27,7 +27,7 @@ export default function InventoryField<T extends InventoryFields>(props: Invento
     if (!hydratedItem) return null
 
     return (
-        (isColorField || percentile) && (
+        (isColorField || typeof percentile === 'number') && (
             <div className="inventory-field-component">
                 <span className="inventory-field-component__label">
                     {t(`pentagramDecoration.${category}.label.${String(entryKey)}`)}
@@ -42,7 +42,9 @@ export default function InventoryField<T extends InventoryFields>(props: Invento
                 {(isColorField && typeof entryValue === 'string') && (
                     <ColorIndicator c={entryValue} />
                 )}
-                {percentile && <FieldWithRange percentage={percentile} />}
+                {typeof percentile === 'number' && 
+                    <FieldWithRange percentage={percentile} />
+                }
             </div>
         )
     )
