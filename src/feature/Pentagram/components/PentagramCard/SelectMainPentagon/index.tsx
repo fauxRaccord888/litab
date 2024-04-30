@@ -32,12 +32,12 @@ export default function SelectMainPentagon(props: SelectMainPentagonProps) {
     useIntersectionObserver(sentinelRef, onIntersect, onLeave)
 
     const foregroundDecorations = pentagramDecorationsCollection?.edges
-        .filter((e) => !e.node.decoration.isBackground)
-        .map((e) => e.node.decoration)
+        .filter((e) => !e?.node?.decoration?.isBackground)
+        .map((e) => e?.node?.decoration)
 
     const backgroundDecorations = pentagramDecorationsCollection?.edges
-        .filter((e) => e.node.decoration.isBackground)
-        .map((e) => e.node.decoration)
+        .filter((e) => e?.node?.decoration?.isBackground)
+        .map((e) => e?.node?.decoration)
 
     return pentagramNodesCollection && (
         <div className="select-main-pentagon-component">
