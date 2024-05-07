@@ -1,11 +1,11 @@
-import type { IDynamicObject } from '../../../types';
+import type { IDynamicObject } from '../../../../Inventory/types';
 import type { Cosmos } from '.';
 
 export class Star implements IDynamicObject {
-    size: number
-    speed: number
-    x: number
-    y: number
+    private size: number
+    private speed: number
+    private x: number
+    private y: number
 
     constructor(
         options: ReturnType<typeof Cosmos["createObjectFromSeed"]>, 

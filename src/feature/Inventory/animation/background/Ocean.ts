@@ -1,10 +1,9 @@
-import type { IDynamicObject, IDynamicObjectConstructor } from "$feature/PentagramDecoration/types";
+import type { IDynamicObject, IDynamicObjectConstructor, DBDecoration } from "../../types";
 import type { RgbaObject } from "hex-rgb"
 import type { NoiseFunction2D } from "simplex-noise";
-import type { DBDecoration } from "$feature/Inventory/types";
 import { createNoise2D } from "simplex-noise";
 import { createRandomizedObject, randomColorVal, staticImplements } from "$lib/utils";
-import { OCEAN } from "../constants";
+import { OCEAN } from "../../constants";
 import { DecorationType } from "$lib/graphql/__generated__/graphql";
 import Alea from "alea"
 import hexRgb from "hex-rgb";

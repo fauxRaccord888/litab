@@ -1,10 +1,8 @@
-import type { DBDecoration } from "$feature/Inventory/types";
-import type { IDynamicObject } from "$feature/PentagramDecoration/types";
-import type { IDynamicObjectConstructor } from './../../../types';
+import type { IDynamicObject, IDynamicObjectConstructor, DBDecoration } from "../../../types";
 import { Star } from "./Star";
 import { ShootingStar } from "./ShootingStar";
 import { boxMullerRandom, createRandomizedObject, randomColorVal, staticImplements } from "$lib/utils";
-import { COSMOS } from "../../constants";
+import { COSMOS } from "../../../constants";
 import { DecorationType } from "$lib/graphql/__generated__/graphql";
 import rgbHex from "rgb-hex"
 import Alea from "alea";

@@ -1,4 +1,4 @@
-import type { IDynamicObject } from "../../../types";
+import type { IDynamicObject } from "../../../../Inventory/types";
 import type { Cosmos } from ".";
 import type { RgbaObject } from 'hex-rgb';
 import { convertRgbaToCSS, pickRandomElementFromArray } from "../../../util";
@@ -6,14 +6,14 @@ import hexRgb from 'hex-rgb'
 
 export class ShootingStar implements IDynamicObject {
     private colors: RgbaObject[]
-    x: number;
-    y: number;
-    length: number;
-    speed: number;
-    size: number;
-    waitTime: number;
-    active: boolean;
-    color: string;
+    private x: number;
+    private y: number;
+    private length: number;
+    private speed: number;
+    private size: number;
+    private nextActivateTime: number;
+    private active: boolean;
+    private color: string;
 
     constructor(
         options: ReturnType<typeof Cosmos["createObjectFromSeed"]>, 
@@ -29,9 +29,11 @@ export class ShootingStar implements IDynamicObject {
         this.length = (Math.random() * 15) + 8
         this.speed = (Math.random() * 5) + 7
         this.size = (Math.random() * 0.35) + 0.15
-        this.waitTime = new Date().getTime() + (Math.random() * 10000) + 1000
+        this.nextActivateTime = new Date().getTime() + (Math.random() * 10000) + 1000
         this.active = false
-        this.color = convertRgbaToCSS(pickRandomElementFromArray(this.colors));
+        this.color = convertRgbaToCSS(
+            pickRandomElementFromArray(this.colors)
+        );
     }
 
     update(canvas: HTMLCanvasElement) {
@@ -44,7 +46,7 @@ export class ShootingStar implements IDynamicObject {
             this.initialize(canvas)
         }
 
-        if (this.waitTime < new Date().getTime()) {
+        if (this.nextActivateTime < new Date().getTime()) {
             this.active = true;
         }
     }

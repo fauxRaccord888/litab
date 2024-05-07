@@ -1,11 +1,11 @@
-import type { DBDecoration } from "$feature/Inventory/types";
+import type { DBDecoration } from "../../types";
 import type { IDynamicObject, IDynamicObjectConstructor } from "../../types";
 import type { RgbaObject } from 'hex-rgb';
 import { boxMullerRandom, createRandomizedObject, pickPointInside, staticImplements } from "$lib/utils";
-import { convertRgbaToCSS } from "$feature/PentagramDecoration/util";
+import { convertRgbaToCSS } from "../../util";
 import { keepWithinBounds, limitSpeed } from "./common";
 import { DecorationType } from "$lib/graphql/__generated__/graphql";
-import { SHADOW } from "../constants";
+import { SHADOW } from "../../constants";
 import hexRgb from 'hex-rgb'
 import rgbHex from 'rgb-hex';
 import Alea from "alea";
