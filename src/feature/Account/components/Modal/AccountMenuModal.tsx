@@ -22,75 +22,75 @@ export default function AccountMenuModal(props: AccountMenuModalProps) {
         func()        
     }
 
+    const registerButton = (
+        <Button 
+            className="account-menu-modal-component__button--register"
+            onClick={(e) => onClickHandler(e, eventHandler.navigateToRegister)}
+        >
+            {t("account.modal.menu.register")}
+        </Button>
+    )
+
+    const signInButton = (
+        <Button 
+            className="account-menu-modal-component__button--sign-in"
+            onClick={(e) => onClickHandler(e, eventHandler.navigateToSignIn)}
+        >
+            {t("account.modal.menu.signIn")}
+        </Button>
+    )
+
+    const profileNavigateButton = (
+        <Button 
+            className="account-menu-modal-component__button--profile"
+            onClick={(e) => onClickHandler(e, () => eventHandler.navigateToProfile(currentUser?.mutableId))}
+        >
+            {t("account.modal.menu.profile")}
+        </Button>
+    )
+
+    const updateProfileButton = (
+        <Button 
+            className="account-menu-modal-component__button--update"
+            onClick={(e) => onClickHandler(e, eventHandler.navigateToUpdateAccount)}
+        >
+            {t("account.modal.menu.update")}
+        </Button>
+    )
+
+    const inventoryButton = (
+        <Button 
+            className="account-menu-modal-component__button--inventory"
+            onClick={(e) => onClickHandler(e, eventHandler.navigateToInventory)}
+        >
+            {t("account.modal.menu.inventory")}
+        </Button>
+    )
+
+    const signOutButton = (
+        <Button 
+            className="account-menu-modal-component__button--sign-out"
+            onClick={(e) => onClickHandler(e, eventHandler.signOut)}
+        >
+            {t("account.modal.menu.signOut")}
+        </Button>
+    )
+
     return (
         <Modal title={title} handleClickClose={eventHandler.closeModal}>
             <div className="account-menu-modal-component__inner-cotainer">
                 {!currentUser && 
                     <>
-                        <Button 
-                            className={[
-                                "account-menu-modal-component__button--register",
-                            ].join(' ')}
-                            onClick={(e) => {
-                                onClickHandler(e, eventHandler.navigateToRegister)
-                            }}
-                        >
-                            {t("account.modal.menu.register")}
-                        </Button>
-                        <Button 
-                            className={[
-                                "account-menu-modal-component__button--sign-in",
-                            ].join(' ')}
-                            onClick={(e) => {
-                                onClickHandler(e, eventHandler.navigateToSignIn)
-                            }}
-                        >
-                            {t("account.modal.menu.signIn")}
-                        </Button>
+                        {registerButton}
+                        {signInButton}
                     </>
                 }
                 {currentUser && 
                     <>
-                        <Button 
-                            className={[
-                                "account-menu-modal-component__button--profile",
-                            ].join(' ')}
-                            onClick={(e) => {
-                                onClickHandler(e, () => eventHandler.navigateToProfile(currentUser?.mutableId))
-                            }}
-                        >
-                            {t("account.modal.menu.profile")}
-                        </Button>
-                        <Button 
-                            className={[
-                                "account-menu-modal-component__button--update",
-                            ].join(' ')}
-                            onClick={(e) => {
-                                onClickHandler(e, eventHandler.navigateToUpdateAccount)}
-                            }
-                        >
-                            {t("account.modal.menu.update")}
-                        </Button>
-                        <Button 
-                            className={[
-                                "account-menu-modal-component__button--inventory",
-                            ].join(' ')}
-                            onClick={(e) => {
-                                onClickHandler(e, eventHandler.navigateToInventory)
-                            }}
-                        >
-                            {t("account.modal.menu.inventory")}
-                        </Button>
-                        <Button 
-                            className={[
-                                "account-menu-modal-component__button--sign-out",
-                            ].join(' ')}
-                            onClick={(e) => {
-                                onClickHandler(e, eventHandler.signOut)}
-                            }
-                        >
-                            {t("account.modal.menu.signOut")}
-                        </Button>
+                        {profileNavigateButton}
+                        {updateProfileButton}
+                        {inventoryButton}
+                        {signOutButton}
                     </>
                 }
             </div>
