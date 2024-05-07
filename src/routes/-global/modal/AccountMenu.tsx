@@ -20,7 +20,7 @@ export default function AccountMenu(props: {
     }
 
     const eventHandler: AccountMenuModalEventHandler = {
-        navigateToProfile: (mutableId: string) => profileNavigate.profileSelect(mutableId),
+        navigateToProfile: (mutableId?: string) => profileNavigate.profileSelect(mutableId),
         navigateToUpdateAccount: accountNavigate.update,
         navigateToSignIn: accountNavigate.signIn,
         navigateToRegister: accountNavigate.register,
