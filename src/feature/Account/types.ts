@@ -5,7 +5,7 @@ type IAccountModalEventHandler = {
 }
 
 export type AccountMenuModalEventHandler = IAccountModalEventHandler & {
-    navigateToProfile: (mutableId: string) => void,
+    navigateToProfile: (mutableId?: string) => void,
     navigateToUpdateAccount: () => void,
     navigateToInventory: () => void
     signOut: () => void
