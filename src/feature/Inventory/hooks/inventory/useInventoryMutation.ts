@@ -1,4 +1,4 @@
-import type { DeletePayload, RenamePayload } from "$feature/Inventory/types";
+import type { DeletePayload, RenamePayload } from "../../types";
 import type { CustomError } from "$lib/error/customError";
 import type { ApolloCache, NormalizedCache } from "@apollo/client";
 import type { DecorationType } from "$lib/graphql/__generated__/graphql";
@@ -6,12 +6,12 @@ import { useCallback } from "react";
 import { useMutation } from "@apollo/client";
 import { useCurrentUser } from "$feature/auth/hooks";
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
 import { evictCacheById } from "$lib/utils";
 import { decorationErrorHandler } from "$lib/error/handler";
 import { AccessNotGrantedError } from "$lib/error/customError";
-import { SeedFactory } from "$feature/Inventory/function/factory";
-import { deleteDecoration_MUTATION, insertDecoration_MUTATION, renameDecoration_MUTATION } from "$feature/Inventory/graphql";
+import { SeedFactory } from "../../function";
+import { deleteDecoration_MUTATION, insertDecoration_MUTATION, renameDecoration_MUTATION } from "../../graphql";
+import toast from "react-hot-toast";
 
 export function useInventoryMutation() {
     const { currentUser } = useCurrentUser();
@@ -40,7 +40,7 @@ export function useInventoryMutation() {
                     seed,
                     isBackground,
                     type: category,
-                    name: t(`pentagramDecoration.${category}.value.newRecord`),
+                    name: t(`inventory.${category}.value.newRecord`),
                     userId: currentUser?.id,
                 },
                 update(cache) {

@@ -4,7 +4,6 @@
 // k개 필요 시, k회 난수 생성 후 반복 및 중복 제외 절차 별도 구현 필요
 
 export function pickRandomElementFromArray<T>(array: T[]) {
-    // 10e-9를 빼는 것은 1이 나왔을 때 인덱스 에러 방지
-    const index = Math.floor(Math.random() * array.length - 10e-9)
+    const index = Math.floor(Math.random() * array.length - Number.EPSILON)
     return array[index]
 }

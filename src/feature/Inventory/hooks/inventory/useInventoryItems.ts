@@ -1,10 +1,10 @@
 import type { GetUserInventoryByIdQuery } from "$lib/graphql/__generated__/graphql"
+import { useCallback } from "react"
 import { useQuery } from "@apollo/client"
 import { useCurrentUser } from "$feature/auth/hooks"
 import { NETWORK } from "$lib/constants"
+import { getUserInventoryId_QUERY } from "../../graphql"
 import { getFirstNodeOfCollection } from "$lib/utils/graphql"
-import { getUserInventoryId_QUERY } from "../graphql"
-import { useCallback } from "react"
 
 export function useInventoryItems(keyword: string) {
     const { currentUser } = useCurrentUser()

@@ -46,48 +46,40 @@ export default function PentagramMenuModal(props: PentagramMenuModalProps) {
         setDeleteConfirm(false)
     }
 
-    const publicMenus = (
-        <>
-            <Button 
-                className={[
-                    "pentagram-menu-modal-component__button"
-                ].join(' ')}
-                onClick={onClickNavigate}
-            >
-                {t("pentagram.menu.navigate")}
-            </Button>
-        </>
+    const navigateButton = (
+        <Button 
+            className="pentagram-menu-modal-component__button"
+            onClick={onClickNavigate}
+        >
+            {t("pentagram.menu.navigate")}
+        </Button>
     )
 
-    const authorMenus = (
-        <>
-            <Button 
-                className={[
-                    "pentagram-menu-modal-component__button--update"
-                ].join(' ')}
-                onClick={onClickUpdate}
-            >
-                {t("pentagram.menu.update")}
-            </Button>
+    const updateButton = (
+        <Button 
+            className="pentagram-menu-modal-component__button--update"
+            onClick={onClickUpdate}
+        >
+            {t("pentagram.menu.update")}
+        </Button>
+    )
 
-            <Button 
-                className={[
-                    "pentagram-menu-modal-component__button--decoration"
-                ].join(' ')}
-                onClick={onClickDecoration}
-            >
-                {t("pentagram.menu.decoration")}
-            </Button>
+    const decorationButton = (
+        <Button 
+            className="pentagram-menu-modal-component__button--decoration"
+            onClick={onClickDecoration}
+        >
+            {t("pentagram.menu.decoration")}
+        </Button>
+    )
 
-            <Button 
-                className={[
-                    "pentagram-menu-modal-component__button--delete"
-                ].join(' ')}
-                onClick={onClickDelete}
-            >
-                {t("pentagram.menu.delete")}
-            </Button>
-        </>
+    const deleteButton = (
+        <Button 
+            className="pentagram-menu-modal-component__button--delete"
+            onClick={onClickDelete}
+        >
+            {t("pentagram.menu.delete")}
+        </Button>
     )
 
     return (
@@ -103,8 +95,10 @@ export default function PentagramMenuModal(props: PentagramMenuModalProps) {
             }
             <Modal title={title} handleClickClose={handleClickClose}>
                 <div className="pentagram-menu-modal-component__inner-cotainer">
-                    {publicMenus}
-                    {isAuthor && authorMenus}
+                    {navigateButton}
+                    {isAuthor && updateButton}
+                    {isAuthor && decorationButton}
+                    {isAuthor && deleteButton}
                 </div>
             </Modal>
         </>

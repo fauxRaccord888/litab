@@ -17,6 +17,20 @@
         "button": {
             "updateShadow": "Menu"
         },
+        "label": {
+            "color": "Color",
+            "bodyLength": "Size",
+            "centeringFactor": "Curiosity",
+            "matchingFactor": "Group tendency",
+            "minDistance": "Minimum distance",
+            "avoidFactor": "Collision avoidance tendency",
+            "turnFactor": "Rebound on collision",
+            "visualRange": "Visibility range",
+            "speedLimit": "Maximum speed"
+        },
+        "value": {
+            "newRecord": "New shadow"
+        },
         "confirm": {
             "rename": "Enter the name of the shadow you want to change.",
             "delete": "You won't be able to meet the released shadow again. Are you sure you want to release it?"
@@ -46,6 +60,15 @@
         "button": {
             "updateShadow": "Menu"
         },
+        "label": {
+            "foamColor": "Foam color",
+            "waterColor": "Water color", 
+            "foamThickness": "Foam thickness",
+            "mulScale": "Mutiplier"
+        },
+        "value": {
+            "newRecord": "New simple ocean"
+        },
         "confirm": {
             "rename": "Enter the name of the ocean you want to change.",
             "delete": "You won't be able to meet the released ocean again. Are you sure you want to do that?"
@@ -74,6 +97,16 @@
     "cosmos": {
         "button": {
             "updateShadow": "Menu"
+        },
+        "label": {
+            "shootingStarColors": "Shooting star colors",
+            "shootingStarCount": "Number of shooting stars",
+            "starCount": "Number of stars",
+            "sizeParam": "Star size",
+            "speedParam": "Star speed"
+        },
+        "value": {
+            "newRecord": "New simple universe"
         },
         "confirm": {
             "rename": "Enter the name of the universe you want to change.",

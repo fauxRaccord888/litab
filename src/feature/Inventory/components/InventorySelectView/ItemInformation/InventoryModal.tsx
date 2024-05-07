@@ -1,4 +1,4 @@
-import type { DBDecoration, InventoryEventHandler } from "$feature/Inventory/types";
+import type { InventoryEventHandler, DBDecoration } from "../../../types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 

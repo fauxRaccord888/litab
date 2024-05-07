@@ -1,17 +1,17 @@
-import type { DBInventory, InventoryEventHandler } from "../types"
+import type { DBInventory, InventoryEventHandler } from "../../types"
 import { useTranslation } from "react-i18next"
 import { useCallback, useMemo } from "react"
 import Tab from "$lib/components/common/Tab"
 import InfiniteScrollTrigger from "$lib/components/common/InfiniteScrollTrigger"
 import InventoryInformation from "./ItemInformation"
 
-type InventoryProps = {
+type InventorySelectViewProps = {
     foregroundItems: DBInventory
     backgroundItems: DBInventory
     eventHandler: InventoryEventHandler
 }
 
-export default function Inventory(props: InventoryProps) {
+export default function InventorySelectView(props: InventorySelectViewProps) {
     const { foregroundItems, backgroundItems, eventHandler } = props
     const { t } = useTranslation()
 

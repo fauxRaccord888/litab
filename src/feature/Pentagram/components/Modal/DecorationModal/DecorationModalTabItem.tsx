@@ -2,7 +2,7 @@ import type { DBDecoration, DBInventory } from "$feature/Inventory/types";
 import type { PentagramDecorationPayload } from "$feature/Pentagram/types";
 import { useTranslation } from "react-i18next";
 import { getFirstNodeOfCollection } from '$lib/utils/graphql';
-import InventoryInformation from "$feature/Inventory/components/ItemInformation";
+import InventoryInformation from "$feature/Inventory/components/InventorySelectView/ItemInformation";
 import Button from "$lib/components/common/Button";
 import InfiniteScrollTrigger from "$lib/components/common/InfiniteScrollTrigger";
 import "./style/decotaionModalTabItem.scss"
@@ -74,29 +74,22 @@ function DecorationModalTabItemButtons(props: {
     }
 
     return (
-        <>
+        <div className="decoration-modal-tab-item-component__button-container">
             {!isAllocated &&
-                <div className="decoration-modal-tab-item-component__button-container">
-                    <Button info onClick={() => handleAddDecoration(addPayload)}>
-                        {t("pentagram.decoration.modal.button.add")}
-                    </Button>
-                </div>
+                <Button info onClick={() => handleAddDecoration(addPayload)}>
+                    {t("pentagram.decoration.modal.button.add")}
+                </Button>
             }
-
             {isAllocated && isCurrentPentagram &&
-                <div className="decoration-modal-tab-item-component__button-container">
-                    <Button danger onClick={() => handleRemoveDecoration(removePayload)}>
-                        {t("pentagram.decoration.modal.button.remove")}
-                    </Button>
-                </div>
+                <Button danger onClick={() => handleRemoveDecoration(removePayload)}>
+                    {t("pentagram.decoration.modal.button.remove")}
+                </Button>
             }
             {isAllocated && !isCurrentPentagram &&
-                <div className="decoration-modal-tab-item-component__button-container">
-                    <Button primary onClick={() => handleRemoveDecoration(removePayload)}>
-                        {t("pentagram.decoration.modal.button.retrieve")}
-                    </Button>
-                </div>
+                <Button primary onClick={() => handleRemoveDecoration(removePayload)}>
+                    {t("pentagram.decoration.modal.button.retrieve")}
+                </Button>
             }
-        </>
+        </div>
     )
 }

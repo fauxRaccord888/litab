@@ -17,6 +17,20 @@
         "button": {
             "updateShadow": "메뉴"
         },
+        "label": {
+            "color": "색상",
+            "bodyLength": "크기",
+            "centeringFactor": "호기심",
+            "matchingFactor": "집단 성향",
+            "minDistance": "최소 거리",
+            "avoidFactor": "충돌 회피 성향",
+            "turnFactor": "충돌 시 반발",
+            "visualRange": "시야 거리",
+            "speedLimit": "최고 속도" 
+        },
+        "value": {
+            "newRecord": "새 그림자"
+        },
         "confirm": {
             "rename": "변경할 그림자의 이름을 입력해주세요.",
             "delete": "놓아준 그림자는 다시 만날 수 없어요. 정말 놓아주시겠어요?"
@@ -46,6 +60,15 @@
         "button": {
             "updateShadow": "메뉴"
         },
+        "label": {
+            "foamColor": "거품 색상",
+            "waterColor": "물 색상", 
+            "foamThickness": "거품 두께",
+            "mulScale": "배율"
+        },
+        "value": {
+            "newRecord": "새 단순한 바다"
+        },
         "confirm": {
             "rename": "변경할 바다의 이름을 입력해주세요.",
             "delete": "흘려보낸 바다를 다시 만날 수 없어요. 정말 그렇게 하시겠어요?"
@@ -74,6 +97,16 @@
     "cosmos": {
         "button": {
             "updateShadow": "메뉴"
+        },
+        "label": {
+            "shootingStarColors": "별똥별 색상",
+            "shootingStarCount": "별똥별 수량", 
+            "starCount": "별 수량",
+            "sizeParam": "별 크기",
+            "speedParam": "별 속도"
+        },
+        "value": {
+            "newRecord": "새 단순한 우주"
         },
         "confirm": {
             "rename": "변경할 우주의 이름을 입력해주세요.",

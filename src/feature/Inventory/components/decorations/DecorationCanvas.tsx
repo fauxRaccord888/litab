@@ -1,7 +1,7 @@
-import type { DBDecoration } from "$feature/Inventory/types";
+import type { DBDecoration } from "../../types";
 import type { CustomCanvasCSSProps } from "$lib/types";
 import { useRef } from "react";
-import { usePentagramDecorativeAnimation } from "..//hooks";
+import { usePentagramDecorativeAnimation } from "../../hooks";
 import "./style/decorationCanvas.scss"
 
 type DecorationCanvasProps = {

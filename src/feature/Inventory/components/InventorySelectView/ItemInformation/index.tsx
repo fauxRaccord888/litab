@@ -1,13 +1,12 @@
-import type { DBDecoration, InventoryEventHandler } from "../../types";
+import type { DBDecoration, InventoryEventHandler } from "../../../types";
 import type { CustomCanvasCSSProps } from "$lib/types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SeedFactory } from "$feature/Inventory/function/factory";
+import { SeedFactory } from "../../../function";
 import Button from "$lib/components/common/Button";
+import DecorationCanvas from "../../decorations/DecorationCanvas";
 import InventoryModal from "./InventoryModal";
-import DecorationCanvas from "$feature/PentagramDecoration/common/components/DecorationCanvas";
 import InventoryInformationField from "./InventoryInformationField";
-
 import "./style/inventoryInformation.scss"
 
 type InventoryInformationProps= {
@@ -23,7 +22,7 @@ export default function InventoryInformation(props: InventoryInformationProps) {
     const { t } = useTranslation()
 
     const hydratedItem = SeedFactory.getHydratedSeed(item)
-    const constant = SeedFactory.getConstant(item.type)
+    const constant = SeedFactory.getConstant(item)
     const entries = Object.entries(hydratedItem || {})
     const style: CustomCanvasCSSProps = { "--canvas-size": canvasSize }
 

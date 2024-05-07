@@ -7,8 +7,10 @@ export function useProfileNavigate() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const profileSelectNavigator = useCallback((mutableId: string) => {
-        navigate({ to: '/profile/$mutableId', params: { mutableId } })
+    const profileSelectNavigator = useCallback((mutableId?: string) => {
+        if (mutableId) {
+            navigate({ to: '/profile/$mutableId', params: { mutableId } })
+        }
         dispatch(closeModal())
     }, [dispatch, navigate])
 

@@ -1,9 +1,8 @@
-import type { IDynamicObject } from '../../types'
 import type { RefObject } from 'react'
-import type { DBDecoration } from '$feature/Inventory/types'
+import type { IDynamicObject, DBDecoration } from '../../types'
 import { useEffect, useRef } from 'react'
-import { animationLoop } from '../function'
-import { SeedFactory } from '$feature/Inventory/function/factory'
+import { animationLoop } from '../../function'
+import { SeedFactory } from '../../function'
 
 
 export function usePentagramDecorativeAnimation(
