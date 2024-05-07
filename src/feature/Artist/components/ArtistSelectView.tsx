@@ -36,7 +36,7 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
         />
     )
 
-    const oeuvreComponents = useMemo(() => (
+    const oeuvreTabComponents = useMemo(() => (
         item?.oeuvresArtistsCollection?.edges.map((edge) => (
             <OeuvreInfoCard
                 key={edge.node.oeuvre.id}
@@ -76,7 +76,7 @@ export default function ArtistSelectView(props: ArtistSelectViewProps) {
             items={[
                 {
                     label: t("genre.tab.oeuvre"),
-                    items: oeuvreComponents.concat(loader)
+                    items: oeuvreTabComponents.concat(loader)
                 },
             ]}
         />

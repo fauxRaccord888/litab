@@ -36,7 +36,7 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
         />
     )
 
-    const oeuvreComponents = useMemo(() => (
+    const oeuvreTabComponents = useMemo(() => (
         item?.oeuvresGenresCollection?.edges.map((edge) => (
             <OeuvreInfoCard
                 key={edge.node.oeuvre.id}
@@ -66,9 +66,9 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
     
         return (
             <InfiniteScrollTrigger
-            hasNextPage={item.oeuvresGenresCollection?.pageInfo.hasNextPage}
-            handleLoadMore={handleLoadMode}
-        />
+                hasNextPage={item.oeuvresGenresCollection?.pageInfo.hasNextPage}
+                handleLoadMore={handleLoadMode}
+            />
         )
     }, [eventHandler, item.oeuvresGenresCollection?.pageInfo.hasNextPage])
 
@@ -78,7 +78,7 @@ export default function GenreSelectView(props: GenreSelectViewProps) {
             items={[
                 {
                     label: t("genre.tab.oeuvre"),
-                    items: oeuvreComponents.concat(loader)
+                    items: oeuvreTabComponents.concat(loader)
                 },
             ]}
         />
