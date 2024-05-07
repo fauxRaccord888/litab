@@ -606,77 +606,41 @@ export type Database = {
       }
     }
     Functions: {
-      _insert_node:
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              upsert: Database["public"]["CompositeTypes"]["pentagrams_upsert_changes"][]
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              upsert_changes: Database["public"]["CompositeTypes"]["pentagram_upsert_changes"][]
-            }
-            Returns: undefined
-          }
-      _recover_node:
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              recover: Database["public"]["Tables"]["pentagram_revision_recover_records"]["Row"][]
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              recover_changes: Database["public"]["CompositeTypes"]["pentagram_recover_changes"][]
-            }
-            Returns: undefined
-          }
-      _remove_node:
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              remove: Database["public"]["CompositeTypes"]["pentagrams_recover_changes"][]
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              remove_changes: Database["public"]["CompositeTypes"]["pentagram_remove_changes"][]
-            }
-            Returns: undefined
-          }
-      _update_node:
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              update: Database["public"]["CompositeTypes"]["pentagrams_update_changes"][]
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              pentagram_id: string
-              revision_id: string
-              update_changes: Database["public"]["CompositeTypes"]["pentagram_update_changes"][]
-            }
-            Returns: undefined
-          }
+      _insert_node: {
+        Args: {
+          pentagram_id: string
+          revision_id: string
+          upsert_changes: Database["public"]["CompositeTypes"]["pentagram_upsert_changes"][]
+        }
+        Returns: undefined
+      }
+      _recover_node: {
+        Args: {
+          pentagram_id: string
+          revision_id: string
+          recover_changes: Database["public"]["CompositeTypes"]["pentagram_recover_changes"][]
+        }
+        Returns: undefined
+      }
+      _remove_node: {
+        Args: {
+          pentagram_id: string
+          revision_id: string
+          remove_changes: Database["public"]["CompositeTypes"]["pentagram_remove_changes"][]
+        }
+        Returns: undefined
+      }
+      _update_node: {
+        Args: {
+          pentagram_id: string
+          revision_id: string
+          update_changes: Database["public"]["CompositeTypes"]["pentagram_update_changes"][]
+        }
+        Returns: undefined
+      }
       batched_insert_pentagram: {
         Args: {
-          upsert_changes: Database["public"]["CompositeTypes"]["pentagrams_upsert_changes"][]
+          upsert_changes: Database["public"]["CompositeTypes"]["pentagram_upsert_changes"][]
         }
         Returns: string
       }
