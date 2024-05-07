@@ -4,12 +4,11 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import type { InventoryEventHandler } from "$feature/Inventory/types";
 /* hooks */
 import { useRedirectOnError } from "$feature/navigate/hooks";
+import { useInventoryItems, useInventoryMutation } from "$feature/Inventory/hooks";
 /* utils */
 import { t } from "i18next";
 /* components */
-import Inventory from "$feature/Inventory/components";
-import { useInventoryItems } from "$feature/Inventory/hooks/useInventoryItems";
-import { useInventoryMutation } from "$feature/Inventory/hooks";
+import InventorySelectView from "$feature/Inventory/components/InventorySelectView";
 
 export const Route = createFileRoute('/_auth/account/inventory/')({
     component: InventoryComponent,
@@ -51,7 +50,7 @@ function InventoryComponent() {
 
     return (
         <>
-            <Inventory 
+            <InventorySelectView 
                 foregroundItems={foregroundItems}
                 backgroundItems={backgroundItems}
                 eventHandler={eventHandler}

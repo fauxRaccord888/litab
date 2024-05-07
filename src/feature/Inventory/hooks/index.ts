@@ -1,2 +1,2 @@
-export * from './useInventoryItems'
-export * from './useInventoryMutation'
+export * from './decorations'
+export * from './inventory'

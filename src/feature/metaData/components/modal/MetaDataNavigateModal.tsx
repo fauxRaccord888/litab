@@ -23,33 +23,41 @@ export default function MetaDataNavigateModal(props: MetaDataNavigateModalProps)
         handleClickClose()
     }
 
+    const oeuvreButton = (
+        <Button
+            className="meta-data-navigate-modal-component__button"
+            onClick={(e) => onClickHandler(e, oeuvreNavigate.add)}
+        >
+            {t("portal.modal.button.navigateToAddOeuvre")}
+        </Button>
+    )
+
+    const artistButton = (
+        <Button
+            className="meta-data-navigate-modal-component__button"
+            onClick={(e) => onClickHandler(e, artistNavigate.add)}
+        >
+            {t("portal.modal.button.navigateToAddArtist")}
+        </Button>
+    )
+
+    const genreButton = (
+        <Button
+            className="meta-data-navigate-modal-component__button"
+            onClick={(e) => {
+                onClickHandler(e, genreNavigate.add)
+            }}
+        >
+            {t("portal.modal.button.navigateToAddGenre")}
+        </Button>
+    )
+
     return (
         <Modal title={title} handleClickClose={handleClickClose}>
             <div className="meta-data-navigate-modal-component__inner-cotainer">
-                <Button
-                    className="meta-data-navigate-modal-component__button"
-                    onClick={(e) => {
-                        onClickHandler(e, oeuvreNavigate.add)
-                    }}
-                >
-                    {t("portal.modal.button.navigateToAddOeuvre")}
-                </Button>
-                <Button
-                    className="meta-data-navigate-modal-component__button"
-                    onClick={(e) => {
-                        onClickHandler(e, artistNavigate.add)
-                    }}
-                >
-                    {t("portal.modal.button.navigateToAddArtist")}
-                </Button>
-                <Button
-                    className="meta-data-navigate-modal-component__button"
-                    onClick={(e) => {
-                        onClickHandler(e, genreNavigate.add)
-                    }}
-                >
-                    {t("portal.modal.button.navigateToAddGenre")}
-                </Button>
+                {oeuvreButton}
+                {artistButton}
+                {genreButton}
             </div>
         </Modal>
     )

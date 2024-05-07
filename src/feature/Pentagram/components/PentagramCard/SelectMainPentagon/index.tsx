@@ -5,7 +5,7 @@ import { useIntersectionObserver } from "$lib/hooks";
 import { PENTAGRAM } from "$feature/Pentagram/constants";
 import OeuvrePentagonWrapper from "../../common/OeuvrePentagonWrapper";
 import PentagramNode from "./PentagramNode";
-import DecorationCanvas from "$feature/PentagramDecoration/common/components/DecorationCanvas";
+import DecorationCanvas from "$feature/Inventory/components/decorations/DecorationCanvas";
 
 import './style/selectMainPentagon.scss'
 
